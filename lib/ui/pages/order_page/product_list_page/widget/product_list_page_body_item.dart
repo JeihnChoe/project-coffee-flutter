@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/mock/product.dart';
+import 'package:project_coffee/ui/pages/order_page/product_detail_page/product_detail_page.dart';
 
 class ProductListPageBodyItem extends StatelessWidget {
   Product product;
