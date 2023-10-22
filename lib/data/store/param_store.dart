@@ -4,8 +4,8 @@ import 'package:logger/logger.dart';
 import 'package:project_coffee/main.dart';
 
 class RequestParam {
-  int? postDetailId;
-  RequestParam({this.postDetailId});
+  int? productDetailId;
+  RequestParam({this.productDetailId});
 }
 
 // 2. 창고 (비지니스 로직)

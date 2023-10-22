@@ -5,10 +5,10 @@ import 'package:project_coffee/data/model/product.dart';
 import '../../_core/constants/http.dart';
 
 class ProductRepository {
-  Future<ResponseDTO> fetchProductDetail() async {
+  Future<ResponseDTO> fetchProductDetail(int id) async {
     try {
       Logger().d("레파지토리 : 통신요청");
-      final response = await dio.get("/products/10");
+      final response = await dio.get("/products/${id}");
 
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       responseDTO.response = Product.fromJson(responseDTO.response);

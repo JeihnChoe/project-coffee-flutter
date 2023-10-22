@@ -5,6 +5,7 @@ import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/repository/product_repository.dart';
 
 import '../../../../data/model/product.dart';
+import '../../../../data/store/param_store.dart';
 
 class ProductDetailModel {
   Product product;
@@ -16,9 +17,9 @@ class ProductDetailViewModel extends StateNotifier<ProductDetailModel?> {
   final Ref ref;
   ProductDetailViewModel(this.ref, super.state);
 
-  Future<void> notifyInit() async {
+  Future<void> notifyInit(int id) async {
     Logger().d("레파지토리 : 통신요청");
-    ResponseDTO responseDTO = await ProductRepository().fetchProductDetail();
+    ResponseDTO responseDTO = await ProductRepository().fetchProductDetail(id);
     state = ProductDetailModel(responseDTO.response);
   }
 }
@@ -27,5 +28,6 @@ class ProductDetailViewModel extends StateNotifier<ProductDetailModel?> {
 
 final ProductDetailProvider = StateNotifierProvider.autoDispose<
     ProductDetailViewModel, ProductDetailModel?>((ref) {
-  return ProductDetailViewModel(ref, null)..notifyInit();
+  int productId = ref.read(paramProvider).productDetailId!;
+  return ProductDetailViewModel(ref, null)..notifyInit(productId);
 });
