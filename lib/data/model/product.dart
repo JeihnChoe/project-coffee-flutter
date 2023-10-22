@@ -1,14 +1,14 @@
 class Product {
-  int id; // PK
-  String productName; // 상품명
-  String productEngName; // 상품영문명
-  int code; // 상품코드 (음료1 푸드2)
-  String description; // 상품설명
-  String image; // 상품이미지
-  int productPrice; // 가격
-  String note; // hot,new,best
-  String productInfo; // 제품영양정보
-  String productAllergy;
+  int? id; // PK
+  String? productName; // 상품명
+  String? productEngName; // 상품영문명
+  int? code; // 상품코드 (음료1 푸드2)
+  String? description; // 상품설명
+  String? image; // 상품이미지
+  int? productPrice; // 가격
+  String? note; // hot,new,best
+  String? productInfo; // 제품영양정보
+  String? productAllergy;
 
   Product(
       this.id,
