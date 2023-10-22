@@ -6,7 +6,9 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Text("바디"),
+      body: Center(
+        child: Text("바디"),
+      ),
     );
   }
 }
