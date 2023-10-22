@@ -29,7 +29,7 @@ Product product = Product(
     "Iced-Americano",
     1,
     "진한 에스프레소에 시원한 정수물과 얼음을 더하여 스타벅스의 깔끔하고 강렬한 에스프레소를 가장 부드럽고 시원하게 즐길 수 있는 커피",
-    "image",
+    "iceAmericano.png",
     4500,
     "Best",
     "칼로리: 2kcal",
