@@ -37,7 +37,7 @@ Product product = Product(
 
 List<Product> productList = [
   Product(1, "아이스아메리카노", "Iced-Americano", 1, "진한 에스프레소에 물이랑 얼음넣었슴다",
-      "assets/1.jpg", 4500, "Best", "칼로리: 2kcal", null),
+      "localhost:8080/images/1.jpg", 4500, "Best", "칼로리: 2kcal", null),
   Product(2, "카페라떼", "Caffe-Latte", 1, "우유타고얼음넣은 에스프레소입니다.", "assets/2.jpg",
       5500, "Best", "칼로리: 200kcal", "우유"),
   Product(3, "돌체라떼", "Dolche-Latte", 1, "우유타고돌체시럽넣고얼음넣은 에스프레소입니다.",
