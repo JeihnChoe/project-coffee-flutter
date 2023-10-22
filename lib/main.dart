@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_coffee/ui/pages/main_page/main_page.dart';
 
-import 'ui/pages/order_page/product_detail_page/product_detail_page.dart';
-
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
@@ -24,7 +22,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.white,
         ),
       ),
-      home: ProductDetailPage(),
+      home: MainPage(),
     );
   }
 }

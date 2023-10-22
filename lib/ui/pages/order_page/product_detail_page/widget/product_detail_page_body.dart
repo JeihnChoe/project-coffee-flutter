@@ -4,19 +4,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/mock/product.dart';
 import 'package:project_coffee/ui/pages/order_page/product_detail_page/product_detail_page_view_model.dart';
-import 'package:validators/validators.dart';
 
 class ProductDetailBody extends ConsumerWidget {
   const ProductDetailBody({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     ProductDetailModel? model = ref.watch(ProductDetailProvider);
-    if(model == null){
+    if (model == null) {
       return Center(
         child: CircularProgressIndicator(),
       );
-    }else{
+    } else {
       Product product = model.product;
       return CustomScrollView(
         slivers: [
@@ -25,7 +24,6 @@ class ProductDetailBody extends ConsumerWidget {
         ],
       );
     }
-
   }
 
   Widget _body(Product product) {
@@ -46,7 +44,6 @@ class ProductDetailBody extends ConsumerWidget {
             Row(
               children: [
                 Expanded(
-
                   child: CustomOutlineButton("ICED ONLY", Color(0XFF1D77DE)),
                 )
               ],
@@ -69,7 +66,7 @@ class ProductDetailBody extends ConsumerWidget {
               padding: const EdgeInsets.only(top: 20),
               child: Divider(
                 color: Colors.grey, // 수평선의 색상
-                thickness: 1.0,    // 수평선의 두께
+                thickness: 1.0, // 수평선의 두께
               ),
             ),
             Info(),
@@ -83,34 +80,45 @@ class ProductDetailBody extends ConsumerWidget {
   Widget Info() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [TextButton(onPressed: () {
-
-      }, child: Text("제품 영양 정보",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.black)),
-      ),
-        IconButton(onPressed: () {
-
-        },icon: Icon(Icons.arrow_forward_ios),),
+      children: [
+        TextButton(
+          onPressed: () {},
+          child: Text("제품 영양 정보",
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black)),
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.arrow_forward_ios),
+        ),
       ],
     );
   }
 
   Widget Allergy(Product product) {
-    if(product.productAllergy == null){
+    if (product.productAllergy == null) {
       return Container();
-    }else{
+    } else {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [TextButton(onPressed: () {
-
-        }, child: Text("알레르기 유발 요인",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.black)),
-        ),
-          IconButton(onPressed: () {
-
-          },icon: Icon(Icons.arrow_forward_ios),),
+        children: [
+          TextButton(
+            onPressed: () {},
+            child: Text("알레르기 유발 요인",
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black)),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.arrow_forward_ios),
+          ),
         ],
       );
     }
-
   }
 
   Widget _appBar() {
@@ -118,9 +126,11 @@ class ProductDetailBody extends ConsumerWidget {
       pinned: true,
       //고정
       elevation: 0.0,
-      leading: IconButton(onPressed:() {
-
-      },icon: Icon(Icons.arrow_back_ios)),
+      // leading: IconButton(
+      //     onPressed: () {s
+      //       Navigator.pop(mContext!);
+      //     },
+      //     icon: Icon(Icons.arrow_back_ios)),
       actions: [
         IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.share)),
         SizedBox(
@@ -138,13 +148,15 @@ class ProductDetailBody extends ConsumerWidget {
           return FlexibleSpaceBar(
             title: isCollapsed
                 ? Text(
-              '${product.productName}',
-              style: TextStyle(color: Colors.black,fontSize: 24),
-            )
+                    '${product.productName}',
+                    style: TextStyle(color: Colors.black, fontSize: 24),
+                  )
                 : null,
             background: Container(
               decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage("assets/${product.image}"),fit: BoxFit.cover),
+                image: DecorationImage(
+                    image: AssetImage("assets/${product.image}"),
+                    fit: BoxFit.cover),
               ),
             ),
           );
@@ -154,15 +166,14 @@ class ProductDetailBody extends ConsumerWidget {
   }
 }
 
-
 class CustomOutlineButton extends StatelessWidget {
   String text;
   Color mColor;
   CustomOutlineButton(
-      this.text,
-      this.mColor, {
-        super.key,
-      });
+    this.text,
+    this.mColor, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
