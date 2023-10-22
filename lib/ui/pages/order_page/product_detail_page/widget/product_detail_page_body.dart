@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/style.dart';
-import 'package:project_coffee/data/mock/product.dart';
+import 'package:project_coffee/data/model/product.dart';
 import 'package:project_coffee/ui/pages/order_page/product_detail_page/product_detail_page_view_model.dart';
 
 class ProductDetailBody extends ConsumerWidget {
-  const ProductDetailBody({super.key});
+  const ProductDetailBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -17,9 +18,10 @@ class ProductDetailBody extends ConsumerWidget {
       );
     } else {
       Product product = model.product;
+      Logger().d("이거 실행됨?-안됨");
       return CustomScrollView(
         slivers: [
-          _appBar(),
+          _appBar(product),
           _body(product),
         ],
       );
@@ -104,24 +106,17 @@ class ProductDetailBody extends ConsumerWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          TextButton(
-            onPressed: () {},
-            child: Text("알레르기 유발 요인",
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black)),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.arrow_forward_ios),
-          ),
+          Text("알레르기 유발 요인 : ${product.productAllergy}",
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black)),
         ],
       );
     }
   }
 
-  Widget _appBar() {
+  Widget _appBar(Product product) {
     return SliverAppBar(
       pinned: true,
       //고정
@@ -155,8 +150,7 @@ class ProductDetailBody extends ConsumerWidget {
             background: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/${product.image}"),
-                    fit: BoxFit.cover),
+                    image: NetworkImage("${product.image}"), fit: BoxFit.cover),
               ),
             ),
           );

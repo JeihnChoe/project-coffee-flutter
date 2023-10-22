@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/repository/product_repository.dart';
 import 'package:project_coffee/main.dart';
@@ -20,7 +19,6 @@ class ProductListViewModel extends StateNotifier<ProductListModel?> {
   ProductListViewModel(super._state, this.ref);
 
   Future<void> notifyInit() async {
-    Logger().d("뷰모델 리스트 불러오기 통신시작");
     ResponseDTO responseDTO = await ProductRepository().fetchProductList();
     // Logger().d("뷰모델 리스트 불러오기 통신끝");
     // Logger().d("${responseDTO}");
