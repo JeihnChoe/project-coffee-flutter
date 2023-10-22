@@ -4,12 +4,14 @@ import 'package:project_coffee/data/mock/product.dart';
 
 class ProductDetailModel {
   Product product;
+
   ProductDetailModel(this.product);
 }
 
 //창고
 class ProductDetailViewModel extends StateNotifier<ProductDetailModel?> {
   final Ref ref;
+
   ProductDetailViewModel(this.ref, super.state);
   //
   // Future<void> notifyInit() async {
