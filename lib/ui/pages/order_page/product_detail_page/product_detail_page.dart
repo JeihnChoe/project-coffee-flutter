@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
+import 'package:project_coffee/ui/widgets/custom_button.dart';
 
 import 'widget/product_detail_page_body.dart';
 
@@ -13,37 +14,12 @@ class ProductDetailPage extends StatelessWidget {
     return Scaffold(
       body: ProductDetailBody(),
       persistentFooterButtons: [
-        _bottomButton(),
+        CustomButton("주문하기"),
       ],
       extendBody: false,
     );
   }
 }
 
-Widget _bottomButton() {
-  return Column(
-    children: [
-      Container(
-        height: 1,
-        color: Colors.black26,
-      ),
-      SizedBox(
-        height: 10,
-      ),
-      TextButton(
-        style: TextButton.styleFrom(
-          backgroundColor: kAccentColor,
-          minimumSize: Size(double.infinity, 50),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-          ),
-        ),
-        onPressed: () {},
-        child: Text(
-          "주문하기",
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-    ],
-  );
-}
+
+
