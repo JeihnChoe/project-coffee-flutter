@@ -1,39 +1,39 @@
-class Product {
-  final int id; // PK
-  final String productName; // 상품명
-  final String productEngName; // 상품영문명
-  final int code; // 상품코드 (음료1 푸드2)
-  final String description; // 상품설명
-  final String image; // 상품이미지
-  final int productPrice; // 가격
-  String note; // hot,new,best
-  final String productInfo; // 제품영양정보
-  final String? productAllergy;
-
-  Product(
-      this.id,
-      this.productName,
-      this.productEngName,
-      this.code,
-      this.description,
-      this.image,
-      this.productPrice,
-      this.note,
-      this.productInfo,
-      this.productAllergy); // 알레르기유발요인
-}
-
-Product product = Product(
-    1,
-    "아이스아메리카노",
-    "Iced-Americano",
-    1,
-    "진한 에스프레소에 시원한 정수물과 얼음을 더하여 스타벅스의 깔끔하고 강렬한 에스프레소를 가장 부드럽고 시원하게 즐길 수 있는 커피",
-    "1.jpg",
-    4500,
-    "Best",
-    "칼로리: 2kcal",
-    null);
+// class Product {
+//   final int id; // PK
+//   final String productName; // 상품명
+//   final String productEngName; // 상품영문명
+//   final int code; // 상품코드 (음료1 푸드2)
+//   final String description; // 상품설명
+//   final String image; // 상품이미지
+//   final int productPrice; // 가격
+//   String note; // hot,new,best
+//   final String productInfo; // 제품영양정보
+//   final String? productAllergy;
+//
+//   Product(
+//       this.id,
+//       this.productName,
+//       this.productEngName,
+//       this.code,
+//       this.description,
+//       this.image,
+//       this.productPrice,
+//       this.note,
+//       this.productInfo,
+//       this.productAllergy); // 알레르기유발요인
+// }
+//
+// Product product = Product(
+//     1,
+//     "아이스아메리카노",
+//     "Iced-Americano",
+//     1,
+//     "진한 에스프레소에 시원한 정수물과 얼음을 더하여 스타벅스의 깔끔하고 강렬한 에스프레소를 가장 부드럽고 시원하게 즐길 수 있는 커피",
+//     "1.jpg",
+//     4500,
+//     "Best",
+//     "칼로리: 2kcal",
+//     null);
 //
 // List<Product> productList = [
 //   Product(1, "아이스아메리카노", "Iced-Americano", 1, "진한 에스프레소에 물이랑 얼음넣었슴다",

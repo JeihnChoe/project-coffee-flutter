@@ -20,25 +20,33 @@ class ProductListPageBodyItem extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            CircleAvatar(
-              radius: 50,
-              foregroundImage: NetworkImage(
-                "${product.image}",
-              ),
-            ),
+            _image(),
             SizedBox(width: 20),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                textTitle2("${product.productName}"),
-                SizedBox(height: 3),
-                textBody2("${product.productEngName}"),
-                SizedBox(height: 5),
-                textTitle2("${product.productPrice}원"),
-              ],
-            ),
+            _productDetail(),
           ],
         ),
+      ),
+    );
+  }
+
+  Column _productDetail() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        textTitle2("${product.productName}"),
+        SizedBox(height: 3),
+        textBody2("${product.productEngName}"),
+        SizedBox(height: 5),
+        textTitle2("${product.productPrice}원"),
+      ],
+    );
+  }
+
+  CircleAvatar _image() {
+    return CircleAvatar(
+      radius: 50,
+      foregroundImage: NetworkImage(
+        "${product.image}",
       ),
     );
   }
