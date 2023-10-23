@@ -23,6 +23,15 @@ class CustomTextForm extends StatelessWidget {
             hintText: "아이디"
         ),
       );
+    }else if(text == "UserIdJoin") {
+      return TextFormField(
+        validator: validatorFunction,
+        obscureText: false,
+        decoration: InputDecoration(
+            hintText: "아이디 (4~13자리 이내)",
+            hintStyle: TextStyle(color: Colors.grey),
+        ),
+      );
     }else if(text == "Password") {
       return TextFormField(
         validator: validatorFunction,
@@ -31,12 +40,40 @@ class CustomTextForm extends StatelessWidget {
             hintText: "비밀번호"
         ),
       );
+    }else if(text == "PasswordJoin") {
+      return TextFormField(
+        validator: validatorFunction,
+        obscureText: true,
+        decoration: InputDecoration(
+          hintText: "비밀번호 (10 - 20자리 이내)",
+          hintStyle: TextStyle(color: Colors.grey),
+        ),
+      );
+    } else if(text == "PasswordChk") {
+      return TextFormField(
+        validator: validatorFunction,
+        obscureText: true,
+        decoration: InputDecoration(
+            hintText: "비밀번호 확인",
+            hintStyle: TextStyle(color: Colors.grey)
+        ),
+      );
     }else if(text == "Email") {
       return TextFormField(
         validator: validatorFunction,
         obscureText: false,
         decoration: InputDecoration(
             hintText: "이메일"
+        ),
+      );
+    }else if(text == "EmailJoin") {
+      return TextFormField(
+        validator: validatorFunction,
+        obscureText: false,
+        decoration: InputDecoration(
+            hintText: "이메일",
+          hintStyle: TextStyle(color: Colors.grey),
+
         ),
       );
     }
