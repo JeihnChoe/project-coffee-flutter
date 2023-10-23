@@ -11,7 +11,8 @@ class ProductDetailBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ProductDetailModel? model = ref.watch(ProductDetailProvider);
+    Logger().d("productBodypage");
+    ProductDetailModel? model = ref.watch(productDetailProvider);
     if (model == null) {
       return Center(
         child: CircularProgressIndicator(),

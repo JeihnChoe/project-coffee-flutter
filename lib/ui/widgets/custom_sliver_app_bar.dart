@@ -19,7 +19,7 @@ class CustomSliverAppBar extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         title: Text(
           "${title}",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black87),
         ),
         centerTitle: true,
       ),

@@ -1,4 +1,4 @@
-import 'package:logger/logger.dart';
+import 'package:dio/dio.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/model/product.dart';
 
@@ -7,8 +7,8 @@ import '../../_core/constants/http.dart';
 class ProductRepository {
   Future<ResponseDTO> fetchProductDetail(int id) async {
     try {
-      Logger().d("레파지토리 : 통신요청");
-      final response = await dio.get("/products/${id}");
+      // Logger().d("레파지토리 : 통신요청");
+      Response response = await dio.get("/products/${id}");
 
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       responseDTO.response = Product.fromJson(responseDTO.response);
@@ -24,15 +24,18 @@ class ProductRepository {
 
   Future<ResponseDTO> fetchProductList() async {
     try {
+      // Logger().d("레파지토리 : 통신시도함?");
       final response = await dio.get("/products");
+      // Logger().d("레파지토리 : response 받음? ${response.data}");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       List<dynamic> mapProductList = responseDTO.response as List<dynamic>;
       List<Product> productList =
           mapProductList.map((e) => Product.fromJson(e)).toList();
-
+      // Logger().d("레파지토리 : 통신성공함?");
       responseDTO.response = productList;
-      return responseDTO;
+      return responseDTO; //responseDTO 를
     } catch (e) {
+      // Logger().d("레파지토리 : 통신실패함");
       return ResponseDTO(false, null, null);
     }
   }

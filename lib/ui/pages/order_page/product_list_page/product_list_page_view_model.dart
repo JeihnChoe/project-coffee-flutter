@@ -19,6 +19,7 @@ class ProductListViewModel extends StateNotifier<ProductListModel?> {
   ProductListViewModel(super._state, this.ref);
 
   Future<void> notifyInit() async {
+    // Logger().d("뷰모델 : 통신시도함?");
     ResponseDTO responseDTO = await ProductRepository().fetchProductList();
     // Logger().d("뷰모델 리스트 불러오기 통신끝");
     // Logger().d("${responseDTO}");

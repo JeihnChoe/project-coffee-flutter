@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 
 import 'widget/product_detail_page_body.dart';
@@ -8,17 +9,16 @@ class ProductDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Logger().d("productDetailpage");
     return Scaffold(
-        body: ProductDetailBody(),
+      body: ProductDetailBody(),
       persistentFooterButtons: [
         _bottomButton(),
       ],
       extendBody: false,
-    ) ;
-      
+    );
   }
 }
-
 
 Widget _bottomButton() {
   return Column(
