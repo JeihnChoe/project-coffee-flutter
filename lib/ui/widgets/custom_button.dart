@@ -9,10 +9,6 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          height: 1,
-          color: Colors.black26,
-        ),
         SizedBox(
           height: 10,
         ),
@@ -29,6 +25,9 @@ class CustomButton extends StatelessWidget {
             "${title}",
             style: TextStyle(color: Colors.white),
           ),
+        ),
+        SizedBox(
+          height: 10,
         ),
       ],
     );
