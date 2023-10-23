@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_coffee/ui/pages/home_page/join_alram_page/join_alram_page.dart';
 import 'package:project_coffee/ui/pages/home_page/join_page/join_page.dart';
 import 'package:project_coffee/ui/pages/home_page/login_page/login_page.dart';
 import 'package:project_coffee/ui/pages/main_page/main_page.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.white,
         ),
       ),
-      home: JoinPage(),
+      home: JoinAlramPage(),
     );
   }
 }
