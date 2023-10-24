@@ -21,39 +21,66 @@ class HomeMainPageBodyItem extends StatelessWidget {
               child: textBody1("스타벅스 리워드 회원\n신규가입 첫 구매 시,\n무료음료 혜택을 드려요!"),
             ),
             SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(left: 30.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => JoinPage()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      backgroundColor: kAccentColor,
-                    ),
-                    child: Text("회원가입"),
-                  ),
-                ),
-                SizedBox(width: 10),
-                OutlinedButton(onPressed: () {
-
-                },style: OutlinedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  side: BorderSide(color: kAccentColor,)
-                ),
-                  child: Text("로그인",style: TextStyle(color: kAccentColor),),),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  HomeMainAccentButton(),
+                  SizedBox(width: 10),
+                  HomeMainWhiteButton(),
+                ],
+              ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class HomeMainAccentButton extends StatelessWidget {
+  const HomeMainAccentButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => JoinPage()));
+      },
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        backgroundColor: kAccentColor,
+      ),
+      child: Text("회원가입"),
+    );
+  }
+}
+
+class HomeMainWhiteButton extends StatelessWidget {
+  const HomeMainWhiteButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      onPressed: () {},
+      style: OutlinedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          side: BorderSide(
+            color: kAccentColor,
+          )),
+      child: Text(
+        "로그인",
+        style: TextStyle(color: kAccentColor),
       ),
     );
   }
