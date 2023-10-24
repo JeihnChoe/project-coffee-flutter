@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/ui/pages/home_page/join_page/widget/join_page_body.dart';
+import 'package:project_coffee/ui/pages/home_page/join_scucess_page/join_scucess_page.dart';
 import 'package:project_coffee/ui/widgets/custom_button.dart';
 
 class JoinPage extends StatelessWidget {
@@ -11,7 +12,7 @@ class JoinPage extends StatelessWidget {
       body: JoinPageBody(),
       persistentFooterButtons: [
         // if(JoinPageBody)
-          CustomButton("회원가입"),
+          CustomButton("회원가입",JoinSucessPage()),
       ],
     );
   }

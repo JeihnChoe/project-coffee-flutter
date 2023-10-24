@@ -14,7 +14,7 @@ class ProductDetailPage extends StatelessWidget {
     return Scaffold(
       body: ProductDetailBody(),
       persistentFooterButtons: [
-        CustomButton("주문하기"),
+        // CustomButton("주문하기",),
       ],
       extendBody: false,
     );
