@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/ui/pages/home_page/join_page/join_page.dart';
 import 'package:project_coffee/ui/pages/home_page/login_page/login_page.dart';
@@ -34,23 +35,21 @@ class HomeMainPageBodyItem extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
+                      backgroundColor: kAccentColor,
                     ),
                     child: Text("회원가입"),
                   ),
                 ),
                 SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginPage()));
-                  },
-                  style: ElevatedButton.styleFrom(
+                OutlinedButton(onPressed: () {
+
+                },style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                  ),
-                  child: Text("로그인"),
+                  side: BorderSide(color: kAccentColor,)
                 ),
+                  child: Text("로그인",style: TextStyle(color: kAccentColor),),),
               ],
             ),
           ],

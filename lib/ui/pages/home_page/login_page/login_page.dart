@@ -11,7 +11,7 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       body: LoginPageBody(),
       persistentFooterButtons: [
-        CustomButton("로그인하기",MainPage()),
+        CustomButton("로그인하기",double.infinity,50,MainPage()),
       ],
     );
   }

@@ -11,7 +11,7 @@ class JoinSucessPage extends StatelessWidget {
     return Scaffold(
       body: JoinSucessBody(),
       persistentFooterButtons: [
-        CustomButton("스타벅스 카드등록 바로가기",JoinSucessPage()),
+        CustomButton("스타벅스 카드등록 바로가기",double.infinity,50,JoinSucessPage()),
       ],
     ) ;
   }
