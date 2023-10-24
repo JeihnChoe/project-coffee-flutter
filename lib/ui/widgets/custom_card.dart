@@ -1,27 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
+import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/ui/pages/home_page/join_page/join_page.dart';
 
-class HomeMainPageBodyItem extends StatelessWidget {
+class CustomCard extends StatelessWidget {
+  final String content;
+  final double width;
+  final double height;
+
+  const CustomCard(
+      {required this.content,
+      required this.width,
+      required this.height,
+      super.key});
+
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 10, // 붕 떠 보이게 하는 효과(그림자 같은)
       child: Container(
-        width: 600,
-        height: 170,
+        width: width,
+        height: height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(left: 30.0),
-              child: textBody1("스타벅스 리워드 회원\n신규가입 첫 구매 시,\n무료음료 혜택을 드려요!"),
+              child: textBody1("${content}"),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: gap_m),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.only(left: 30.0),
