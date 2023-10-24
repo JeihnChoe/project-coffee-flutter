@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_coffee/ui/pages/home_page/home_main_page/home_main_page.dart';
 import 'package:project_coffee/ui/pages/order_page/product_list_page/product_list_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -17,7 +18,7 @@ class _MainPageState extends State<MainPage> {
       body: IndexedStack(
         index: _selectedIndex,
         children: [
-          Center(child: Text("HomePage")),
+          HomeMainPage(),
           Center(child: Text("PayPage")),
           ProductListPage(),
           Center(child: Text("Shop")),
