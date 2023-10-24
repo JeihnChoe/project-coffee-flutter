@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/ui/widgets/custom_button.dart';
 
-import 'widget/join_scucess_body.dart';
+import 'widget/join_sucess_body.dart';
 
 class JoinSucessPage extends StatelessWidget {
   const JoinSucessPage({super.key});
