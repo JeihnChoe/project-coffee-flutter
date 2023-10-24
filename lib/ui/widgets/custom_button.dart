@@ -3,7 +3,8 @@ import 'package:project_coffee/_core/constants/color.dart';
 
 class CustomButton extends StatelessWidget {
   final String title;
-  const CustomButton(this.title,{super.key});
+  final move;
+  const CustomButton(this.title,this.move,{super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,9 @@ class CustomButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(25),
             ),
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => move),);
+          },
           child: Text(
             "${title}",
             style: TextStyle(color: Colors.white),
