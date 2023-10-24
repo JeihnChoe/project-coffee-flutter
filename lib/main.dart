@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.white,
         ),
       ),
-      home: JoinPage(),
+      home: MainPage(),
     );
   }
 }
