@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/ui/pages/home_page/join_page/join_page.dart';
+import 'package:project_coffee/ui/pages/home_page/login_page/login_page.dart';
+import 'package:project_coffee/ui/widgets/custom_button.dart';
+import 'package:project_coffee/ui/widgets/custom_white_button.dart';
 
 class HomeMainPageBodyItem extends StatelessWidget {
   @override
@@ -15,6 +18,10 @@ class HomeMainPageBodyItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+        // final double width;
+        // final double height;
+        // final String title;
+        // final move;
             Padding(
               padding: EdgeInsets.only(left: 30.0),
               child: textBody1("스타벅스 리워드 회원\n신규가입 첫 구매 시,\n무료음료 혜택을 드려요!"),
@@ -25,19 +32,7 @@ class HomeMainPageBodyItem extends StatelessWidget {
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.only(left: 30.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => JoinPage()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      backgroundColor: kAccentColor,
-                    ),
-                    child: Text("회원가입"),
-                  ),
+                  child:CustomButton("회원가입",100,25,JoinPage())
                 ),
                 SizedBox(width: 10),
                 OutlinedButton(
@@ -54,6 +49,7 @@ class HomeMainPageBodyItem extends StatelessWidget {
                     style: TextStyle(color: kAccentColor),
                   ),
                 ),
+                CustomWhiteButton("로그인",LoginPage()),
               ],
             ),
           ],
@@ -62,3 +58,5 @@ class HomeMainPageBodyItem extends StatelessWidget {
     );
   }
 }
+
+
