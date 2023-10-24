@@ -1,7 +1,7 @@
 class ResponseDTO {
   final bool success;
   dynamic response;
-  dynamic error; // 서버에서 응답한 데이터를 담아두는 변수
+  dynamic error;
 
   ResponseDTO(this.success, this.response, this.error);
 

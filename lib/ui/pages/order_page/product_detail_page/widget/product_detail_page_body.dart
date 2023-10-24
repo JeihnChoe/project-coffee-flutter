@@ -151,7 +151,8 @@ class ProductDetailBody extends ConsumerWidget {
             background: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage("${product.image}"), fit: BoxFit.cover),
+                    image: NetworkImage("${product.productPicUrl}"),
+                    fit: BoxFit.cover),
               ),
             ),
           );

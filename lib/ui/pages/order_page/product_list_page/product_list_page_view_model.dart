@@ -1,9 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
+import 'package:project_coffee/data/model/product.dart';
 import 'package:project_coffee/data/repository/product_repository.dart';
 import 'package:project_coffee/main.dart';
-
-import '../../../../data/model/product.dart';
 
 //1. 창고데이터
 class ProductListModel {

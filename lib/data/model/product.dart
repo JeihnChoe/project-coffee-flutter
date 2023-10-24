@@ -1,14 +1,14 @@
 class Product {
-  int? id; // PK
-  String? productName; // 상품명
-  String? productEngName; // 상품영문명
-  int? code; // 상품코드 (음료1 푸드2)
-  String? description; // 상품설명
-  String? image; // 상품이미지
-  int? productPrice; // 가격
-  String? note; // hot,new,best
-  String? productInfo; // 제품영양정보
-  String? productAllergy;
+  final int id; // PK
+  final String productName; // 상품명
+  final String productEngName; // 상품영문명
+  final int code; // 상품코드 (음료1 푸드2)
+  final String description; // 상품설명
+  final String productPicUrl; // 상품이미지
+  final int productPrice; // 가격
+  final String note; // hot,new,best
+  final String productInfo; // 제품영양정보
+  final String? productAllergy;
 
   Product(
       this.id,
@@ -16,34 +16,9 @@ class Product {
       this.productEngName,
       this.code,
       this.description,
-      this.image,
+      this.productPicUrl,
       this.productPrice,
       this.note,
       this.productInfo,
       this.productAllergy); // 알레르기유발요인
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "productName": productName,
-        "productEngName": productEngName,
-        "code": code,
-        "description": description,
-        "image": image,
-        "productPrice": productPrice,
-        "note": note,
-        "productInfo": productInfo,
-        "productAllergy": productAllergy
-      };
-
-  Product.fromJson(Map<String, dynamic> json)
-      : id = json["id"],
-        productName = json["productName"],
-        productEngName = json["productEngName"],
-        code = json["code"],
-        description = json["description"],
-        image = json["image"],
-        productPrice = json["productPrice"],
-        note = json["note"],
-        productInfo = json["productInfo"],
-        productAllergy = json["productAllergy"];
 }
