@@ -11,14 +11,15 @@ class Product {
   final String? productAllergy;
 
   Product(
-      this.id,
-      this.productName,
-      this.productEngName,
-      this.code,
-      this.description,
-      this.productPicUrl,
-      this.productPrice,
-      this.note,
-      this.productInfo,
-      this.productAllergy); // 알레르기유발요인
+    this.id,
+    this.productName,
+    this.productEngName,
+    this.code,
+    this.description,
+    this.productPicUrl,
+    this.productPrice,
+    this.note,
+    this.productInfo,
+    this.productAllergy,
+  ); // 알레르기유발요인
 }
