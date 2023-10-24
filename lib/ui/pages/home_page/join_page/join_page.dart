@@ -12,7 +12,7 @@ class JoinPage extends StatelessWidget {
       body: JoinPageBody(),
       persistentFooterButtons: [
         // if(JoinPageBody)
-          CustomButton("회원가입",JoinSucessPage()),
+          CustomButton("회원가입",double.infinity,50,JoinSucessPage()),
       ],
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_coffee/ui/pages/main_page/main_page.dart';
 
 class XmarkAppBar extends StatelessWidget {
   const XmarkAppBar({
@@ -13,7 +14,8 @@ class XmarkAppBar extends StatelessWidget {
       pinned: true,
       leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()),);
+
           },
           icon: Icon(CupertinoIcons.xmark),
           color: Colors.black),
