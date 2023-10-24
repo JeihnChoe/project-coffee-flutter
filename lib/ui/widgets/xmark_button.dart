@@ -12,7 +12,9 @@ class XmarkAppBar extends StatelessWidget {
       floating: true,
       pinned: true,
       leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: Icon(CupertinoIcons.xmark),
           color: Colors.black),
       snap: false,
