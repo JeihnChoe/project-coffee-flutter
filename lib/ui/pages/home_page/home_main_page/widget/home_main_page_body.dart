@@ -18,8 +18,7 @@ class HomeMainPageBody extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  SizedBox(height: gap_l),
-                  SizedBox(height: gap_l),
+                  SizedBox(height: gap_xl),
                   SizedBox(height: gap_l),
                   Align(
                     alignment: Alignment.centerLeft, // 왼쪽 정렬
