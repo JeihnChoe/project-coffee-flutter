@@ -6,7 +6,8 @@ class CustomButton extends StatelessWidget {
   final double height;
   final String title;
   final move;
-  const CustomButton(this.title,this.width,this.height,this.move,{super.key});
+  const CustomButton(this.title, this.width, this.height, this.move,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,10 @@ class CustomButton extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => move),);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => move),
+            );
           },
           child: Text(
             "${title}",

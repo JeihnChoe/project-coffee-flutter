@@ -2,17 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
-import 'package:project_coffee/ui/pages/home_page/join_page/join_page.dart';
 
 class CustomCard extends StatelessWidget {
   final String content;
   final double width;
   final double height;
+  final String buttonname1;
+  final String buttonname2;
+  final move1;
+  final move2;
 
   const CustomCard(
       {required this.content,
       required this.width,
       required this.height,
+      required this.buttonname1,
+      required this.buttonname2,
+      this.move1,
+      this.move2,
       super.key});
 
   @override
@@ -38,7 +45,7 @@ class CustomCard extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => JoinPage()));
+                          MaterialPageRoute(builder: (context) => move1));
                     },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -46,12 +53,15 @@ class CustomCard extends StatelessWidget {
                       ),
                       backgroundColor: kAccentColor,
                     ),
-                    child: Text("회원가입"),
+                    child: Text("$buttonname1"),
                   ),
                 ),
                 SizedBox(width: 10),
                 OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => move2));
+                  },
                   style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -60,7 +70,7 @@ class CustomCard extends StatelessWidget {
                         color: kAccentColor,
                       )),
                   child: Text(
-                    "로그인",
+                    "$buttonname2",
                     style: TextStyle(color: kAccentColor),
                   ),
                 ),
