@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/ui/pages/home_page/home_main_page/widget/home_main_event_page_body.dart';
 
 class HomeMainPageAppBar extends StatelessWidget {
   @override
@@ -14,8 +15,10 @@ class HomeMainPageAppBar extends StatelessWidget {
         alignment: Alignment.centerLeft,
         child: TextButton(
           onPressed: () {
-            // Navigator.push(context,
-            //     MaterialPageRoute(builder: (context) => 이벤트/공지사항  패이지));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomeMainEventPageBody()));
           },
           child: Row(
             children: [
