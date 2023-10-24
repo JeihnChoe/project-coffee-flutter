@@ -42,3 +42,6 @@ Text textBody2(String text, {int maxLine = 2}) {
     maxLines: maxLine,
   );
 }
+Text textBody4(String text){
+  return Text("$text",style: TextStyle(color: Colors.grey,fontSize: 13),);
+}

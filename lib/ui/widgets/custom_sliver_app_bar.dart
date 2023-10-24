@@ -21,7 +21,8 @@ class CustomSliverAppBar extends StatelessWidget {
           "${title}",
           style: TextStyle(color: Colors.black87),
         ),
-        centerTitle: true,
+        centerTitle: false,
+        titlePadding: EdgeInsets.only(left: 16.0),
       ),
     );
   }
