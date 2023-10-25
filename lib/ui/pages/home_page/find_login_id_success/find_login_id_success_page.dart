@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_coffee/_core/constants/move.dart';
+import 'package:project_coffee/ui/pages/home_page/login_page/login_page.dart';
 import 'package:project_coffee/ui/widgets/custom_green_button.dart';
 
 import 'widget/find_login_id_success_body.dart';
@@ -12,7 +12,7 @@ class FindLoginIdSuccessPage extends StatelessWidget {
     return Scaffold(
       body: FindLoginIdSuccessBody(),
       persistentFooterButtons: [
-        CustomGreenButton("로그인하기", double.infinity, 50, Move.LoginPage)
+        CustomGreenButton("로그인하기", double.infinity, 50, LoginPage())
       ],
     );
   }
