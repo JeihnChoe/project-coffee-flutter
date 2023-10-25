@@ -1,32 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/data/model/promotion.dart';
+import 'package:project_coffee/ui/pages/home_page/promotion_detail_page/promotion_detail_page_view_model.dart';
 
-import 'promotion_detail_body_item.dart';
-
-class PromotionDetailBody extends StatelessWidget {
-  const PromotionDetailBody({super.key});
+class PromotionDetailBody extends ConsumerWidget {
+  PromotionDetailBody({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    PromotionDetailModel? model = ref.watch(productDetailProvider);
+
+    if (model == null) {
+      return Center(child: CircularProgressIndicator());
+    }
+    Promotion promotion = model.promotion;
+
     return CustomScrollView(
       slivers: [
-        PromotionAppBar(),
+        SliverAppBar(
+            expandedHeight: 10.0, // 높이 설정
+            centerTitle: true,
+            title: textBody1("이벤트 & 뉴스")),
         SliverToBoxAdapter(
-          child: Card(
-            child: Container(
-              width: double.infinity,
-              height: 100,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(left: 30.0),
-                    child: textBody1("10월 24일, AUTOUMN PICNIC PICK!"),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              children: [
+                Card(
+                  child: Container(
+                    width: 400,
+                    height: 100,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        textTitle2("${promotion.title}"),
+                        SizedBox(height: gap_m),
+                        textBody1(
+                            "${promotion.startDate} ~ ${promotion.endDate}"),
+                      ],
+                    ),
                   ),
-                  SizedBox(height: gap_m),
-                ],
-              ),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Image.network(
+                      "${promotion.productPicUrl}", // 이미지의 URL을 promotion 객체에서 가져옵니다.
+                      fit: BoxFit.cover, // 이미지 크기를 조절하여 카드에 맞게 표시
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         )
