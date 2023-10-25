@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/_core/utils/validator_util.dart';
 import 'package:project_coffee/data/dto/user_request.dart';
-import 'package:project_coffee/data/repository/user_repository.dart';
+import 'package:project_coffee/ui/pages/home_page/join_page/join_page_view_model.dart';
+import 'package:project_coffee/ui/pages/home_page/join_sucess_page/join_sucess_page.dart';
+import 'package:project_coffee/ui/widgets/custom_green_button.dart';
 import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
 
-class JoinPageBodyItem extends StatelessWidget {
+class JoinPageBodyItem extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
-
   final _userid = TextEditingController();
   final _password = TextEditingController();
   final _passwordchk = TextEditingController();
   final _email = TextEditingController();
+  final _phonenumber = TextEditingController();
   JoinPageBodyItem({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.only(top: 16, left: 30, right: 30),
@@ -29,23 +32,40 @@ class JoinPageBodyItem extends StatelessWidget {
             textTitle1("회원가입 정보를"),
             textTitle1("입력해주세요."),
 
-            const SizedBox(height: gap_l),
+            const SizedBox(
+              height: gap_l,
+            ),
             Form(
               key: _formKey,
               child: Column(
                 children: [
-                  CustomTextForm("UserIdJoin",
-                      validatorFunction: validateUserId, controller: _userid),
-                  CustomTextForm("PasswordJoin",
-                      validatorFunction: validatePassword,
-                      controller: _password),
-                  CustomTextForm("PasswordChk",
-                      validatorFunction: validatePassword,
-                      controller: _passwordchk),
-                  CustomTextForm("EmailJoin",
-                      validatorFunction: validateEmail, controller: _email),
+                  CustomTextForm(
+                    "UserIdJoin",
+                    validatorFunction: validateUserId,
+                    controller: _userid,
+                  ),
+                  CustomTextForm(
+                    "PasswordJoin",
+                    validatorFunction: validatePassword,
+                    controller: _password,
+                  ),
+                  CustomTextForm(
+                    "PasswordChk",
+                    validatorFunction: validatePassword,
+                    controller: _passwordchk,
+                  ),
+                  CustomTextForm(
+                    "EmailJoin",
+                    validatorFunction: validateEmail,
+                    controller: _email,
+                  ),
+                  CustomTextForm(
+                    "PhoneNumber",
+                    validatorFunction: validatePhoneNumber,
+                    controller: _phonenumber,
+                  ),
                   SizedBox(
-                    height: gap_l,
+                    height: gap_xl,
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
@@ -57,18 +77,18 @@ class JoinPageBodyItem extends StatelessWidget {
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        UserRepository userRepository = UserRepository();
-
                         JoinReqDTO joinReqDTO = JoinReqDTO(
-                            userId: _userid.value.text,
-                            password: _password.value.text,
-                            email: _email.value.text);
-
-                        Logger().d("${joinReqDTO.userId}");
-                        Logger().d("${joinReqDTO.email}");
-                        Logger().d("${joinReqDTO.password}");
-
-                        Navigator.pushNamed(context, "/login");
+                          userId: _userid.text,
+                          password: _password.text,
+                          email: _email.text,
+                          phonenumber: _phonenumber.text,
+                        );
+                        // ref.read(sessionProvider)?.join(joinReqDTO);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => JoinSucessPage()),
+                        );
                       }
                     },
                     child: Text(
