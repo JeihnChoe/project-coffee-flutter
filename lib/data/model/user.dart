@@ -2,6 +2,7 @@ class User {
   final int id;
   final String email; // 인증시 필요한 필드
   final String username;
+  // final String password;
   final String phonenumber;
   final int manager; // 1 : 유저 / 2 : 관리자
   final String createdAt; // 가입일시

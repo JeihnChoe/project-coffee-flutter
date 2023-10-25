@@ -19,6 +19,7 @@ class JoinPageBodyItem extends ConsumerWidget{
   final _password = TextEditingController();
   final _passwordchk = TextEditingController();
   final _email = TextEditingController();
+  final created = DateTime.now();
   JoinPageBodyItem({Key? key
   }) :super(key: key);
 
@@ -60,12 +61,14 @@ class JoinPageBodyItem extends ConsumerWidget{
                         JoinReqDTO joinReqDTO = JoinReqDTO(
                             userId: _userid.text,
                             password: _password.text,
-                            email: _email.text);
-                        Logger().d(joinReqDTO.userId);
-                        Logger().d(joinReqDTO.password);
-                        Logger().d(joinReqDTO.email);
-                        ref.read(sessionProvider).join(joinReqDTO);
-                        // Navigator.push(context);
+                            email: _email.text
+
+                        );
+                        // ref.read(sessionProvider)?.join(joinReqDTO);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => JoinSucessPage()),
+                        );
 
                       }
                     },
