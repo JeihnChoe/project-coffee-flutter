@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/data/model/promotion.dart';
-import 'package:project_coffee/ui/pages/home_page/promotion_list_page/promotion_list_page.dart';
+import 'package:project_coffee/ui/pages/home_page/promotion_detail_page/promotion_detail_page.dart';
 
 class HomeMainPageBanner extends StatelessWidget {
   Promotion promotion;
@@ -12,7 +12,7 @@ class HomeMainPageBanner extends StatelessWidget {
     return InkWell(
         onTap: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => PromotionListPage()));
+              MaterialPageRoute(builder: (context) => PromotionDetailPage()));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,

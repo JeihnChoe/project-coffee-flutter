@@ -7,7 +7,7 @@ const kActiveColor1 = Color(0XFF1D77DE);
 const kAccentColor = Color(0XFF03A963);
 
 const MaterialColor kPrimaryColor = MaterialColor(
-  0XFF2D403A,
+  0XFFFFFF,
   <int, Color>{
     50: Color(0XFF2D403A),
     100: Color(0XFF2D403A),

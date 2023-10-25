@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/promotion.dart';
+import 'package:project_coffee/ui/pages/home_page/promotion_detail_page/promotion_detail_page.dart';
 
 class PromotionListBodyItem extends StatelessWidget {
   Promotion promotion;
@@ -10,47 +10,59 @@ class PromotionListBodyItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        // Navigator.push(context,
-        //     MaterialPageRoute(builder: (context) => PromotionDetailPage()));
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            _image(),
-            SizedBox(width: gap_m),
-            _promotionDetail(),
-          ],
+    return Container(
+      color: Colors.white,
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => PromotionDetailPage())); /* */
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(top: 5, left: 16, right: 16),
+          child: Container(
+            height: 100,
+            color: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _image(),
+                SizedBox(width: gap_m),
+                _promotion(),
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
 
-  _promotionDetail() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        textTitle2("${promotion.title}"),
-        SizedBox(height: gap_m),
-        textBody3("${promotion.startDate} ~ ${promotion.endDate}")
-      ],
+  _promotion() {
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          textTitle2(
+            "${promotion.title}",
+          ),
+          SizedBox(height: gap_m),
+          textBody3("${promotion.startDate} ~ ${promotion.endDate}")
+        ],
+      ),
     );
   }
 
   _image() {
     return Container(
-      height: 50,
-      width: 70,
+      width: 100,
+      height: 70,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: kAccentColor,
-        image:
-            DecorationImage(image: NetworkImage("${promotion.productPicUrl}")),
-        // image: NetworkImage("${promotion.productPicUrl}"),
-        // image: DecorationImage(image: AssetImage("}")),
+        image: DecorationImage(
+            image: NetworkImage("${promotion.productPicUrl}"),
+            fit: BoxFit.cover),
       ),
     );
   }

@@ -18,16 +18,20 @@ class PromotionListPageBody extends ConsumerWidget {
     }
 
     return Scaffold(
+        backgroundColor: Colors.white, // 배경 색상 설정
         body: CustomScrollView(
-      slivers: [
-        CustomSliverAppBar(title: "What's New"),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            childCount: promotionList.length,
-            (context, index) => PromotionListBodyItem(promotionList[index]),
-          ),
-        ),
-      ],
-    ));
+          slivers: [
+            CustomSliverAppBar(title: "What's New"),
+            SliverPadding(
+              padding: const EdgeInsets.all(16.0),
+              sliver: SliverList.separated(
+                separatorBuilder: (context, index) => Divider(),
+                itemBuilder: (context, index) =>
+                    PromotionListBodyItem(promotionList[index]),
+                itemCount: promotionList.length,
+              ),
+            ),
+          ],
+        ));
   }
 }
