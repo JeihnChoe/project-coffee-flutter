@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
-import 'package:project_coffee/ui/pages/home_page/promotion_list_page/widget/promotion_list_body.dart';
+import 'package:project_coffee/ui/pages/home_page/promotion_list_page/promotion_list_page.dart';
 
 class HomeMainPageAppBar extends StatelessWidget {
   @override
@@ -15,10 +15,8 @@ class HomeMainPageAppBar extends StatelessWidget {
         alignment: Alignment.centerLeft,
         child: TextButton(
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => HomeMainEventPageBody()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PromotionListPage()));
           },
           child: Row(
             children: [
@@ -27,7 +25,7 @@ class HomeMainPageAppBar extends StatelessWidget {
                 color: Colors.black,
               ),
               SizedBox(width: gap_m), // 아이콘과 라벨 사이의 간격 조절
-              textTitle2("what's New"),
+              textTitle2("What's New"),
             ],
           ),
         ),

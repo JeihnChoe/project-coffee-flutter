@@ -1,27 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:project_coffee/_core/constants/color.dart';
+import 'package:project_coffee/data/model/promotion.dart';
+import 'package:project_coffee/ui/pages/home_page/promotion_list_page/promotion_list_page.dart';
 
 class HomeMainPageBanner extends StatelessWidget {
-  final int itemCount;
-
-  HomeMainPageBanner(this.itemCount);
+  Promotion promotion;
+  HomeMainPageBanner(this.promotion, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 5, left: 16, right: 16),
-            child: Container(
-              child: Column(
-                children: <Widget>[
-                  Image.asset('assets/HomeMain-${index + 1}.png'),
-                ],
-              ),
-            ),
-          );
+    return InkWell(
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => PromotionListPage()));
         },
-        childCount: 4, // 이미지 개수에 맞게 조정
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            image(),
+          ],
+        ));
+  }
+
+  image() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 5, right: 16, left: 16),
+      child: Container(
+        height: 150,
+        width: 350,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: kAccentColor,
+          image:
+              DecorationImage(image: AssetImage("${promotion.productPicUrl}")),
+        ),
       ),
     );
   }
