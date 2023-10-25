@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/ui/pages/home_page/find_login_id/find_login_id_page.dart';
 import 'package:project_coffee/ui/pages/home_page/find_login_id_success/find_login_id_success_page.dart';
 import 'package:project_coffee/ui/pages/home_page/find_password/find_password_page.dart';
+import 'package:project_coffee/ui/pages/home_page/find_password_new_set/find_password_new_set_page.dart';
 import 'package:project_coffee/ui/pages/home_page/join_page/join_page.dart';
 import 'package:project_coffee/ui/pages/home_page/join_sucess_page/join_sucess_page.dart';
 import 'package:project_coffee/ui/pages/home_page/login_page/login_page.dart';
@@ -18,6 +19,7 @@ class Move {
   static String FindLoginIdPage = "/find/loginid";
   static String FindLoginIdSuccessPage = "/find/loginid/success";
   static String FindPasswordPage = "/find/password";
+  static String FindPasswordNewSetPage = "/find/password/set";
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -30,5 +32,6 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.FindLoginIdPage: (context) => const FindLoginIdPage(),
     Move.FindLoginIdSuccessPage: (context) => const FindLoginIdSuccessPage(),
     Move.FindPasswordPage: (context) => const FindPasswordPage(),
+    Move.FindPasswordNewSetPage: (context) => const FindPasswordNewSetPage(),
   };
 }

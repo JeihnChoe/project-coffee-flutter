@@ -41,3 +41,15 @@ class FindLoginIdReqDTO{
     "email" : email
   };
 }
+
+class FindPasswordReqDTO{
+  final String email;
+  FindPasswordReqDTO({
+    required this.email,
+
+});
+  Map<String, dynamic> toJson() => {
+    "email" : email,
+  };
+
+}
