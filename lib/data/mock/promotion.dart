@@ -32,7 +32,7 @@ List<Promotion> _mPromotionList = [
   ),
   Promotion(
     2,
-    "10월 24일, AUTUMN PICNIC PICK!",
+    "디지니 + 특별 혜택 이벤트",
     "더 강력한 혜택과 함께 쇼핑라이브에서 만나보세요.",
     "23-10-24",
     "23-10-31",
@@ -43,7 +43,7 @@ List<Promotion> _mPromotionList = [
   ),
   Promotion(
     3,
-    "10월 24일, AUTUMN PICNIC PICK!",
+    "디지니 | 스타벅스 콜라보레이션",
     "더 강력한 혜택과 함께 쇼핑라이브에서 만나보세요.",
     "23-10-24",
     "23-10-31",
@@ -54,7 +54,7 @@ List<Promotion> _mPromotionList = [
   ),
   Promotion(
     4,
-    "10월 24일, AUTUMN PICNIC PICK!",
+    "2024년 1월 1일 스타벅스가 쏜다!",
     "더 강력한 혜택과 함께 쇼핑라이브에서 만나보세요.",
     "23-10-24",
     "23-10-31",
