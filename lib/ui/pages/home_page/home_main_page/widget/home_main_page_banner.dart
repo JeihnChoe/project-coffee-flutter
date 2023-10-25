@@ -11,8 +11,11 @@ class HomeMainPageBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => PromotionDetailPage()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      PromotionDetailPage(promotion: promotion)));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
