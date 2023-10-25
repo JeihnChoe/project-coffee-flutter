@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/data/model/promotion.dart';
 import 'package:project_coffee/ui/pages/home_page/home_main_page/widget/home_main_page_appbar.dart';
 import 'package:project_coffee/ui/pages/home_page/home_main_page/widget/home_main_page_banner.dart';
 import 'package:project_coffee/ui/pages/home_page/home_main_page/widget/home_main_page_body_item.dart';
+import 'package:project_coffee/ui/pages/home_page/promotion_list_page/promotion_list_page_view_model.dart';
 
-class HomeMainPageBody extends StatelessWidget {
+class HomeMainPageBody extends ConsumerWidget {
   const HomeMainPageBody({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    PromotionListModel? model = ref.watch(promotionListProvider);
+    List<Promotion> promotionList = [];
+
+    if (model != null) {
+      promotionList = model.promotionList;
+    }
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -31,7 +41,11 @@ class HomeMainPageBody extends StatelessWidget {
             ),
           ),
           HomeMainPageAppBar(),
-          HomeMainPageBanner(4),
+          SliverList(
+              delegate: SliverChildBuilderDelegate(
+            childCount: promotionList.length,
+            (context, index) => HomeMainPageBanner(promotionList[index]),
+          ))
         ],
       ),
     );
