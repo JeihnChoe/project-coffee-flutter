@@ -4,6 +4,7 @@ import 'package:project_coffee/ui/pages/home_page/join_page/widget/join_page_bod
 import 'package:project_coffee/ui/widgets/xmark_button.dart';
 
 class JoinPageBody extends StatelessWidget {
+
   const JoinPageBody({super.key});
 
   @override
