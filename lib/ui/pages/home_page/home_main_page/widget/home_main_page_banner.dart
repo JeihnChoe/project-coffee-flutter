@@ -31,8 +31,8 @@ class HomeMainPageBanner extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: kAccentColor,
-          image:
-              DecorationImage(image: AssetImage("${promotion.productPicUrl}")),
+          image: DecorationImage(
+              image: NetworkImage("${promotion.productPicUrl}")),
         ),
       ),
     );
