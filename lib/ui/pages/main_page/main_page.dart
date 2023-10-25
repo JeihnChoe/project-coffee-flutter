@@ -32,6 +32,7 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: Colors.white,
         selectedItemColor: Colors.lightGreen,
         unselectedItemColor: Colors.grey,
+        type: BottomNavigationBarType.fixed,
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
