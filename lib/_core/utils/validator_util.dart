@@ -51,3 +51,12 @@ String? validateContent(String? value) {
   }
   return null; // 유효성 검사 통과
 }
+
+String? validatePhoneNumber(String? value) {
+  // if (value == null || value.isEmpty) {
+  //   return "내용은 공백이 들어갈 수 없습니다.";
+  // } else if (value.length > 500) {
+  //   return "내용의 길이를 초과하였습니다.";
+  // }
+  return null; // 유효성 검사 통과
+}

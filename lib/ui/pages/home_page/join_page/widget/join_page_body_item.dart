@@ -6,26 +6,22 @@ import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/_core/utils/validator_util.dart';
 import 'package:project_coffee/data/dto/user_request.dart';
-import 'package:project_coffee/data/store/sessionStore.dart';
 import 'package:project_coffee/ui/pages/home_page/join_page/join_page_view_model.dart';
 import 'package:project_coffee/ui/pages/home_page/join_sucess_page/join_sucess_page.dart';
 import 'package:project_coffee/ui/widgets/custom_green_button.dart';
 import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
 
-
-class JoinPageBodyItem extends ConsumerWidget{
+class JoinPageBodyItem extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
   final _userid = TextEditingController();
   final _password = TextEditingController();
   final _passwordchk = TextEditingController();
   final _email = TextEditingController();
-  JoinPageBodyItem({Key? key
-  }) :super(key: key);
-
-
+  final _phonenumber = TextEditingController();
+  JoinPageBodyItem({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.only(top: 16, left: 30, right: 30),
@@ -36,16 +32,41 @@ class JoinPageBodyItem extends ConsumerWidget{
             textTitle1("회원가입 정보를"),
             textTitle1("입력해주세요."),
 
-            const SizedBox(height: gap_l,),
+            const SizedBox(
+              height: gap_l,
+            ),
             Form(
               key: _formKey,
               child: Column(
                 children: [
-                  CustomTextForm("UserIdJoin",validatorFunction: validateUserId,controller: _userid,),
-                  CustomTextForm("PasswordJoin",validatorFunction: validatePassword,controller: _password,),
-                  CustomTextForm("PasswordChk",validatorFunction: validatePassword,controller: _passwordchk,),
-                  CustomTextForm("EmailJoin",validatorFunction: validateEmail,controller: _email,),
-                  SizedBox(height: gap_l,),
+                  CustomTextForm(
+                    "UserIdJoin",
+                    validatorFunction: validateUserId,
+                    controller: _userid,
+                  ),
+                  CustomTextForm(
+                    "PasswordJoin",
+                    validatorFunction: validatePassword,
+                    controller: _password,
+                  ),
+                  CustomTextForm(
+                    "PasswordChk",
+                    validatorFunction: validatePassword,
+                    controller: _passwordchk,
+                  ),
+                  CustomTextForm(
+                    "EmailJoin",
+                    validatorFunction: validateEmail,
+                    controller: _email,
+                  ),
+                  CustomTextForm(
+                    "PhoneNumber",
+                    validatorFunction: validatePhoneNumber,
+                    controller: _phonenumber,
+                  ),
+                  SizedBox(
+                    height: gap_xl,
+                  ),
                   TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: kAccentColor,
@@ -56,17 +77,18 @@ class JoinPageBodyItem extends ConsumerWidget{
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-
                         JoinReqDTO joinReqDTO = JoinReqDTO(
-                            userId: _userid.text,
-                            password: _password.text,
-                            email: _email.text);
-                        Logger().d(joinReqDTO.userId);
-                        Logger().d(joinReqDTO.password);
-                        Logger().d(joinReqDTO.email);
-                        ref.read(sessionProvider).join(joinReqDTO);
-                        // Navigator.push(context);
-
+                          userId: _userid.text,
+                          password: _password.text,
+                          email: _email.text,
+                          phonenumber: _phonenumber.text,
+                        );
+                        // ref.read(sessionProvider)?.join(joinReqDTO);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => JoinSucessPage()),
+                        );
                       }
                     },
                     child: Text(
@@ -77,8 +99,6 @@ class JoinPageBodyItem extends ConsumerWidget{
                 ],
               ),
             ),
-
-
           ],
         ),
       ),
