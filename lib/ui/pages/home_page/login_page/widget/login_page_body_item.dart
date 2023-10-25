@@ -5,7 +5,11 @@ import 'package:project_coffee/_core/utils/validator_util.dart';
 import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
 
 class LoginPageBodyItem extends StatelessWidget {
-  const LoginPageBodyItem({
+  final userId = TextEditingController();
+  final password = TextEditingController();
+  final passwordchk = TextEditingController();
+  final email = TextEditingController();
+  LoginPageBodyItem({
     super.key,
   });
 
@@ -28,9 +32,9 @@ class LoginPageBodyItem extends StatelessWidget {
             SizedBox(height: gap_m,),
             Text("회원 서비스 이용을 위해 로그인 해주세요."),
             SizedBox(height: gap_xl+5,),
-            CustomTextForm("UserId",validatorFunction: validateUserId),
+            // CustomTextForm("UserId",validatorFunction: validateUserId),
             SizedBox(height: gap_l,),
-            CustomTextForm("Password",validatorFunction: validatePassword),
+            // CustomTextForm("Password",validatorFunction: validatePassword),
 
             SizedBox(height:gap_l,),
             FindAndJoin()

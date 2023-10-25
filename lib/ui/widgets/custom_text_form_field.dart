@@ -5,26 +5,26 @@ import 'package:flutter/material.dart';
 class CustomTextForm extends StatelessWidget {
   final String? Function(String?)? validatorFunction; // 유효성 검사 함수 추가
   final String text;
+  final TextEditingController controller;
   const CustomTextForm(this.text,{
-    super.key,this.validatorFunction
+    super.key,this.validatorFunction,required this.controller
   });
 
   @override
   Widget build(BuildContext context) {
 
-
-
     if(text=="UserId") {
-
       return TextFormField(
+        controller: controller,
         validator: validatorFunction,
-        obscureText: text=="Password",
+        obscureText: false,
         decoration: InputDecoration(
             hintText: "아이디"
         ),
       );
     }else if(text == "UserIdJoin") {
       return TextFormField(
+        controller: controller,
         validator: validatorFunction,
         obscureText: false,
         decoration: InputDecoration(
@@ -34,6 +34,7 @@ class CustomTextForm extends StatelessWidget {
       );
     }else if(text == "Password") {
       return TextFormField(
+        controller: controller,
         validator: validatorFunction,
         obscureText: true,
         decoration: InputDecoration(
@@ -42,6 +43,7 @@ class CustomTextForm extends StatelessWidget {
       );
     }else if(text == "PasswordJoin") {
       return TextFormField(
+        controller: controller,
         validator: validatorFunction,
         obscureText: true,
         decoration: InputDecoration(
@@ -51,6 +53,7 @@ class CustomTextForm extends StatelessWidget {
       );
     } else if(text == "PasswordChk") {
       return TextFormField(
+        controller: controller,
         validator: validatorFunction,
         obscureText: true,
         decoration: InputDecoration(
@@ -60,6 +63,7 @@ class CustomTextForm extends StatelessWidget {
       );
     }else if(text == "Email") {
       return TextFormField(
+        controller: controller,
         validator: validatorFunction,
         obscureText: false,
         decoration: InputDecoration(
@@ -68,6 +72,7 @@ class CustomTextForm extends StatelessWidget {
       );
     }else if(text == "EmailJoin") {
       return TextFormField(
+      controller: controller,
         validator: validatorFunction,
         obscureText: false,
         decoration: InputDecoration(
@@ -79,6 +84,7 @@ class CustomTextForm extends StatelessWidget {
     }
     else if(text == "Title") {
       return TextFormField(
+      controller: controller,
         validator: validatorFunction,
         obscureText: false,
         decoration: InputDecoration(
@@ -88,6 +94,7 @@ class CustomTextForm extends StatelessWidget {
     }
     else if(text == "Content") {
       return TextFormField(
+      controller: controller,
         validator: validatorFunction,
         obscureText: false,
         decoration: InputDecoration(

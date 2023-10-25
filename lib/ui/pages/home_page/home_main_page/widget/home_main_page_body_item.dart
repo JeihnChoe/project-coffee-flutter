@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/ui/pages/home_page/join_page/join_page.dart';
 import 'package:project_coffee/ui/pages/home_page/login_page/login_page.dart';
-import 'package:project_coffee/ui/widgets/custom_button.dart';
+import 'package:project_coffee/ui/widgets/custom_green_button.dart';
 import 'package:project_coffee/ui/widgets/custom_white_button.dart';
 
 class HomeMainPageBodyItem extends StatelessWidget {
@@ -31,7 +31,7 @@ class HomeMainPageBodyItem extends StatelessWidget {
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.only(left: 30.0),
-                  child: CustomButton("회원가입", 100, 25, JoinPage()),
+                  child: CustomGreenButton("회원가입", 100, 25, JoinPage()),
                 ),
                 SizedBox(width: 10),
                 CustomWhiteButton("로그인", LoginPage()),

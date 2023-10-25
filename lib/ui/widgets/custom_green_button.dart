@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 
-class CustomButton extends StatelessWidget {
+class CustomGreenButton extends StatelessWidget {
   final double width;
   final double height;
   final String title;
   final move;
-  const CustomButton(this.title, this.width, this.height, this.move,
+  const CustomGreenButton(this.title, this.width, this.height, this.move,
       {super.key});
 
   @override
@@ -25,10 +25,14 @@ class CustomButton extends StatelessWidget {
             ),
           ),
           onPressed: () {
+            if(title != "회원가입"){
+
+            }
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => move),
             );
+
           },
           child: Text(
             "${title}",
