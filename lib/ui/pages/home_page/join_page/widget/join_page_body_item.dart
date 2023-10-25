@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
@@ -12,7 +11,6 @@ import 'package:project_coffee/ui/pages/home_page/join_page/join_page_view_model
 import 'package:project_coffee/ui/pages/home_page/join_sucess_page/join_sucess_page.dart';
 import 'package:project_coffee/ui/widgets/custom_green_button.dart';
 import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
-
 
 
 class JoinPageBodyItem extends ConsumerWidget{
@@ -30,13 +28,14 @@ class JoinPageBodyItem extends ConsumerWidget{
   Widget build(BuildContext context,WidgetRef ref) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.only(top: 16, left: 30,right: 30),
+        padding: const EdgeInsets.only(top: 16, left: 30, right: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Text("아이디와 비밀번호를",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
             textTitle1("회원가입 정보를"),
             textTitle1("입력해주세요."),
+
             const SizedBox(height: gap_l,),
             Form(
               key: _formKey,
@@ -79,10 +78,10 @@ class JoinPageBodyItem extends ConsumerWidget{
               ),
             ),
 
+
           ],
         ),
       ),
     );
   }
 }
-

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_coffee/ui/pages/main_page/main_page.dart';
 
-import 'ui/pages/home_page/join_page/join_page.dart';
-
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
@@ -28,4 +26,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
