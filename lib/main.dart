@@ -24,8 +24,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.white,
         ),
       ),
-      home: MainPage(),
-      initialRoute: "/main",
+      initialRoute: Move.MainPage,
       routes: getRouters(),
     );
   }
