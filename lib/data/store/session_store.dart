@@ -21,11 +21,8 @@ class SessionStore extends SessionUser{
   final mContext = navigatorKey.currentContext;
 
   Future<void> join(JoinReqDTO joinReqDTO) async{
-     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
 
-     Logger().d("찾아봐라 이시끼야 왜 널 찾지 못하니!~~~~ : ${mContext}");
-     Logger().d("리스폰스 석세스찾아라 : ${responseDTO.success}");
-     Logger().d("리스폰스 찾아라 : ${responseDTO.response}");
+     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
     if (responseDTO.success == true) {
 
       Navigator.pushNamed(mContext!,Move.JoinSucessPage);
@@ -41,6 +38,6 @@ class SessionStore extends SessionUser{
 }
 
 //창고 관리자
-final sessionProvider = Provider<SessionStore>((ref) {
+final sessionProvider = Provider<SessionStore?>((ref) {
   return SessionStore();
 });
