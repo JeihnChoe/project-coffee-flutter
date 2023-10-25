@@ -16,3 +16,18 @@ class JoinReqDTO {
         "phonenumber": phonenumber
       };
 }
+
+class LoginReqDTO {
+  final String userId;
+  final String password;
+
+  LoginReqDTO({
+    required this.userId,
+    required this.password
+  });
+
+  Map<String, dynamic> toJson() => {
+    "username": userId,
+    "password": password
+  };
+}
