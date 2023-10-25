@@ -17,28 +17,13 @@ class JoinPageBodyItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Text("아이디와 비밀번호를",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
             textTitle1("회원가입 정보를"),
             textTitle1("입력해주세요."),
-            SizedBox(
-              height: gap_l,
-            ),
-            CustomTextForm(
-              "UserIdJoin",
-              validatorFunction: validateUserId,
-            ),
-            CustomTextForm(
-              "PasswordJoin",
-              validatorFunction: validatePassword,
-            ),
-            CustomTextForm(
-              "PasswordChk",
-              validatorFunction: validatePassword,
-            ),
-            CustomTextForm(
-              "EmailJoin",
-              validatorFunction: validateEmail,
-            ),
+            SizedBox(height: gap_l),
+            CustomTextForm("UserIdJoin", validatorFunction: validateUserId),
+            CustomTextForm("PasswordJoin", validatorFunction: validatePassword),
+            CustomTextForm("PasswordChk", validatorFunction: validatePassword),
+            CustomTextForm("EmailJoin", validatorFunction: validateEmail),
           ],
         ),
       ),
