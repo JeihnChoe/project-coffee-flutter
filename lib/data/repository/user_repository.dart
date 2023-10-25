@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/http.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/dto/user_request.dart';
@@ -7,9 +8,17 @@ import 'package:project_coffee/data/mock/user.dart';
 class UserRepository {
   Future<ResponseDTO> fetchJoin(JoinReqDTO joinReqDTO) async{
     try {
+
+
     // dynamic -> http body
     Response<dynamic> response = await dio.post("/join", data: joinReqDTO.toJson());
-    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+    ResponseDTO responseDTO = ResponseDTO.fromJson(respone);
+      Logger().d("이거는 찾아주나 ${responseDTO.success}");
+      Logger().d("이거는 찾아주나 ${responseDTO.response}");
+
+
+
     //responseDTO.data = User.fromJson(responseDTO.data);
 
     return responseDTO;
