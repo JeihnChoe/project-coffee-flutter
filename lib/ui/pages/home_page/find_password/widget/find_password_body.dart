@@ -10,7 +10,6 @@ import 'package:project_coffee/ui/widgets/xmark_button.dart';
 
 class FindPasswordBody extends StatelessWidget {
   final email = TextEditingController();
-  final userId = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   FindPasswordBody({super.key});
@@ -28,8 +27,6 @@ class FindPasswordBody extends StatelessWidget {
                 textTitle1("본인확인을 위해\n이메일과 아이디를 입력해주세요."),
                 CustomTextForm("Email",
                     validatorFunction: validateEmail, controller: email),
-                CustomTextForm("UserId",
-                    validatorFunction: validateEmail, controller: userId),
                 SizedBox(
                   height: gap_xl,
                 ),
@@ -42,14 +39,14 @@ class FindPasswordBody extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, Move.FindLoginIdSuccessPage);
+                    Navigator.pushNamed(context, Move.FindPasswordNewSetPage);
                     if (_formKey.currentState!.validate()) {
                       FindPasswordReqDTO findPasswordReqDTO = FindPasswordReqDTO(email: email.text);
-                      // ref.read(sessionProvider)?.join(joinReqDTO);
+                      // ref.read(sessionProvider)?.jqoin(joinReqDTO);
                     }
                   },
                   child: Text(
-                    "아이디 찾기",
+                    "비밀번호 찾기",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

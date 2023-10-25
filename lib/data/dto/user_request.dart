@@ -53,3 +53,11 @@ class FindPasswordReqDTO{
   };
 
 }
+class FindPasswordNewSetReqDTO{
+  final String password;
+  FindPasswordNewSetReqDTO({required this.password});
+
+  Map<String , dynamic> toJson() =>{
+    "password" : password,
+  };
+}
