@@ -19,7 +19,7 @@ class JoinPageBodyItem extends ConsumerWidget{
   final _password = TextEditingController();
   final _passwordchk = TextEditingController();
   final _email = TextEditingController();
-  final created = DateTime.now();
+  final _phonenumber = TextEditingController();
   JoinPageBodyItem({Key? key
   }) :super(key: key);
 
@@ -46,7 +46,8 @@ class JoinPageBodyItem extends ConsumerWidget{
                   CustomTextForm("PasswordJoin",validatorFunction: validatePassword,controller: _password,),
                   CustomTextForm("PasswordChk",validatorFunction: validatePassword,controller: _passwordchk,),
                   CustomTextForm("EmailJoin",validatorFunction: validateEmail,controller: _email,),
-                  SizedBox(height: gap_l,),
+                  CustomTextForm("PhoneNumber",validatorFunction: validatePhoneNumber,controller: _phonenumber,),
+                  SizedBox(height: gap_xl,),
                   TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: kAccentColor,
@@ -59,9 +60,10 @@ class JoinPageBodyItem extends ConsumerWidget{
                       if (_formKey.currentState!.validate()) {
 
                         JoinReqDTO joinReqDTO = JoinReqDTO(
-                            userId: _userid.text,
-                            password: _password.text,
-                            email: _email.text
+                          userId: _userid.text,
+                          password: _password.text,
+                          email: _email.text,
+                          phonenumber: _phonenumber.text,
 
                         );
                         // ref.read(sessionProvider)?.join(joinReqDTO);

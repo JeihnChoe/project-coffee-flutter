@@ -94,11 +94,21 @@ class CustomTextForm extends StatelessWidget {
     }
     else if(text == "Content") {
       return TextFormField(
-      controller: controller,
+        controller: controller,
         validator: validatorFunction,
         obscureText: false,
         decoration: InputDecoration(
             hintText: "내용"
+        ),
+      );
+    }
+    else if(text == "PhoneNumber") {
+      return TextFormField(
+        controller: controller,
+        validator: validatorFunction,
+        obscureText: false,
+        decoration: InputDecoration(
+            hintText: "휴대폰 번호"
         ),
       );
     }

@@ -25,7 +25,7 @@ class SessionStore extends SessionUser{
      ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
     if (responseDTO.success == true) {
 
-      Navigator.pushNamed(mContext!,Move.JoinSucessPage);
+      // Navigator.pushNamed(mContext!,Move.JoinSucessPage);
     } else {
       print("저기 왔다");
       ScaffoldMessenger.of(mContext!)
