@@ -13,7 +13,7 @@ class UserRepository {
     // dynamic -> http body
     Response<dynamic> response = await dio.post("/join", data: joinReqDTO.toJson());
 
-    ResponseDTO responseDTO = ResponseDTO.fromJson(respone);
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       Logger().d("이거는 찾아주나 ${responseDTO.success}");
       Logger().d("이거는 찾아주나 ${responseDTO.response}");
 

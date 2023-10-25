@@ -64,8 +64,11 @@ class JoinPageBodyItem extends ConsumerWidget{
                             email: _email.text
 
                         );
-                        ref.read(sessionProvider)?.join(joinReqDTO);
-                        // Navigator.push(context);
+                        // ref.read(sessionProvider)?.join(joinReqDTO);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => JoinSucessPage()),
+                        );
 
                       }
                     },
