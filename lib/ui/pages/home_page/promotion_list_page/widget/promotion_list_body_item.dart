@@ -17,7 +17,8 @@ class PromotionListBodyItem extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => PromotionDetailPage())); /* */
+                  builder: (context) =>
+                      PromotionDetailPage(promotion: promotion))); /* */
         },
         child: Padding(
           padding: const EdgeInsets.only(top: 5, left: 16, right: 16),
