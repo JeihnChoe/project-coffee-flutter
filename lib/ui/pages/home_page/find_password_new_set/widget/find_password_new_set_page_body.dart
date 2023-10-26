@@ -8,12 +8,12 @@ import 'package:project_coffee/data/dto/user_request.dart';
 import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
 import 'package:project_coffee/ui/widgets/xmark_button.dart';
 
-class FindPasswordNewSetBody extends StatelessWidget {
+class FindPasswordNewSetPageBody extends StatelessWidget {
   final password = TextEditingController();
   final passwordchk = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  FindPasswordNewSetBody({super.key});
+  FindPasswordNewSetPageBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,32 +25,39 @@ class FindPasswordNewSetBody extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                CustomTextForm("Password", validatorFunction: validatePassword,controller:  password),
-                SizedBox(height: gap_l,),
-                CustomTextForm("PasswordChk", validatorFunction: validatePassword,controller:  passwordchk),
-                SizedBox(height: gap_xl,),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: kAccentColor,
-                    minimumSize: Size(double.infinity, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                Form(key: _formKey,
+                    child: Column(
+                  children: [
+                    CustomTextForm("Password", validatorFunction: validatePassword,controller:  password),
+                    SizedBox(height: gap_l,),
+                    CustomTextForm("PasswordChk", validatorFunction: validatePassword,controller:  passwordchk),
+                    SizedBox(height: gap_xl,),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: kAccentColor,
+                        minimumSize: Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, Move.LoginPage);
+                        if (_formKey.currentState!.validate()) {
+                          FindPasswordNewSetReqDTO findPasswordNewSetReqDTO = FindPasswordNewSetReqDTO(password: password.text);
+
+                          // ref.read(sessionProvider)?.join(joinReqDTO);
+                        }
+
+                      },
+                      child: Text(
+                        "확인",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, Move.LoginPage);
-                    if (_formKey.currentState!.validate()) {
-                       FindPasswordNewSetReqDTO findPasswordNewSetReqDTO = FindPasswordNewSetReqDTO(password: password.text);
-
-                      // ref.read(sessionProvider)?.join(joinReqDTO);
-                    }
-
-                  },
-                  child: Text(
-                    "확인",
-                    style: TextStyle(color: Colors.white),
-                  ),
+                  ],
+                )
                 ),
+
                 SizedBox(height: gap_xxl,),
                 SizedBox(height: gap_xxl,),
                 SizedBox(height: gap_xxl,),
