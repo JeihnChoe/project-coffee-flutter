@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/data/model/paycard.dart';
 import 'package:project_coffee/ui/pages/pay_page/pay_card_detail_page/pay_card_detail_page.dart';
 
 class PayCardListPageBodyItem extends StatelessWidget {
-  const PayCardListPageBodyItem({
-    super.key,
-  });
+  final List<PayCard> cardList;
+  PayCardListPageBodyItem({required this.cardList, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class PayCardListPageBodyItem extends StatelessWidget {
           expandedHeight: 90,
           flexibleSpace: FlexibleSpaceBar(
             title: Text(
-              "카드(몇개일까여?ㅎ)",
+              "카드(${cardList.length})",
               style: TextStyle(color: Colors.black87),
             ),
             centerTitle: false,
@@ -46,67 +46,62 @@ class PayCardListPageBodyItem extends StatelessWidget {
         SliverPadding(
           padding: const EdgeInsets.all(16.0),
           sliver: SliverList.separated(
-            separatorBuilder: (context, index) => Divider(),
-            itemBuilder: (context, index) => Container(
-              color: Colors.white,
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PayCardDetailPage()));
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 5, left: 16, right: 16),
-                  child: Container(
-                    height: 100,
-                    color: Colors.white,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        _image(),
-                        SizedBox(width: gap_m),
-                        _paycard(),
-                      ],
+              separatorBuilder: (context, index) => Divider(),
+              itemBuilder: (context, index) {
+                itemCount:
+                cardList.length;
+                final card = cardList[index];
+                return Container(
+                  color: Colors.white,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  PayCardDetailPage(card))); //카드 상세보기 페이지로 가여
+                    },
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(top: 5, left: 16, right: 16),
+                      child: Container(
+                        height: 100,
+                        color: Colors.white,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 100,
+                              height: 70,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  image: NetworkImage("${card.cardPicUrl}"),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: gap_m),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                textTitle2(
+                                  "${card.cardName}",
+                                ),
+                                SizedBox(height: gap_m),
+                                textBody3("${card.cardMoney}")
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-            ),
-            itemCount: 7,
-          ),
+                );
+              }),
         ),
       ],
-    );
-  }
-
-  _paycard() {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          textTitle2(
-            "스타벅스 100만원권",
-          ),
-          SizedBox(height: gap_m),
-          textBody3("100만원")
-        ],
-      ),
-    );
-  }
-
-  _image() {
-    return Container(
-      width: 100,
-      height: 70,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        image: DecorationImage(
-          image: NetworkImage("https://picsum.photos/7"),
-          fit: BoxFit.cover,
-        ),
-      ),
     );
   }
 }
