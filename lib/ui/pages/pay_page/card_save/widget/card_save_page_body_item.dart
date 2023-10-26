@@ -42,7 +42,6 @@ class GreyBoxHeight extends StatelessWidget {
     return Column(
       children: [
         SizedBox(height: gap_xxl,),
-        SizedBox(height: gap_xl,),
         SizedBox(height: gap_m,),
       ],
     );
