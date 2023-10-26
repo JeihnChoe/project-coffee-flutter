@@ -6,7 +6,8 @@ import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/_core/utils/validator_util.dart';
 import 'package:project_coffee/data/dto/user_request.dart';
-import 'package:project_coffee/ui/pages/home_page/join_sucess_page/join_sucess_page.dart';
+import 'package:project_coffee/ui/pages/home_page/join_success_page/join_sucess_page.dart';
+
 import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
 
 class JoinPageBodyItem extends ConsumerWidget {
@@ -90,7 +91,7 @@ class JoinPageBodyItem extends ConsumerWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => JoinSucessPage()),
+                              builder: (context) => JoinSuccessPage()),
                         );
                       }
                     },

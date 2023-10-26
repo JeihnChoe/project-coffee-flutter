@@ -9,7 +9,7 @@ import 'package:project_coffee/ui/widgets/custom_sliver_app_bar.dart';
 import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
 import 'package:project_coffee/ui/widgets/xmark_button.dart';
 
-import 'find_login_id_body_item.dart';
+import 'find_login_id_page_body_item.dart';
 
 class FindLoginIdBody extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
