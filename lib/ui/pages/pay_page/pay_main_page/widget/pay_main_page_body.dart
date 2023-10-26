@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_coffee/_core/constants/move.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/ui/widgets/custom_sliver_app_bar.dart';
@@ -32,7 +33,7 @@ class PayPageBody extends StatelessWidget {
                           padding: EdgeInsets.only(left: 4,right: 4,top: 16),
                           child: ElevatedButton(
                             onPressed: () {
-                              
+                              Navigator.pushNamed(context, Move.CardSavePage);
                             },child: Image.asset("assets/card.jpg",fit: BoxFit.cover,),style: ElevatedButton.styleFrom(primary: Colors.white, elevation: 0.0)
                           )
                         ),

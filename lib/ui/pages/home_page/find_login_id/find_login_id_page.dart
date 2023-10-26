@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'widget/find_login_id_body.dart';
+import 'widget/find_login_id_page_body.dart';
 
 class FindLoginIdPage extends StatelessWidget {
   const FindLoginIdPage({super.key});
@@ -8,7 +8,7 @@ class FindLoginIdPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FindLoginIdBody(),
+      body: FindLoginIdPageBody(),
     );
   }
 }

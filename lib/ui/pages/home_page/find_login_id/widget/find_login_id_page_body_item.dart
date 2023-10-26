@@ -9,10 +9,10 @@ import 'package:project_coffee/data/dto/user_request.dart';
 import 'package:project_coffee/ui/pages/home_page/find_login_id_success/find_login_id_success_page.dart';
 import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
 
-class FindLoginIdBodyItem extends StatelessWidget {
+class FindLoginIdPageBodyItem extends StatelessWidget {
   final email = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  FindLoginIdBodyItem({super.key,});
+  FindLoginIdPageBodyItem({super.key,});
 
 
   @override
