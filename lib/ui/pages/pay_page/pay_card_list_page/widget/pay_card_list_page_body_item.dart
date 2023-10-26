@@ -47,9 +47,8 @@ class PayCardListPageBodyItem extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           sliver: SliverList.separated(
               separatorBuilder: (context, index) => Divider(),
+              itemCount: cardList.length,
               itemBuilder: (context, index) {
-                itemCount:
-                cardList.length;
                 final card = cardList[index];
                 return Container(
                   color: Colors.white,
@@ -75,6 +74,7 @@ class PayCardListPageBodyItem extends StatelessWidget {
                               height: 70,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: Colors.black12),
                                 image: DecorationImage(
                                   image: NetworkImage("${card.cardPicUrl}"),
                                   fit: BoxFit.cover,

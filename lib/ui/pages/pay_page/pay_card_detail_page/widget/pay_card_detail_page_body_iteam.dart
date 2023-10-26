@@ -31,7 +31,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "카드",
+                  "${card.cardName}",
                   style: TextStyle(color: Colors.black87),
                 ),
                 IconButton(
@@ -245,8 +245,11 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
       height: 70,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.black12),
         image: DecorationImage(
-            image: NetworkImage("${card.cardPicUrl}"), fit: BoxFit.cover),
+          image: NetworkImage("${card.cardPicUrl}"),
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
@@ -262,12 +265,12 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
             title: textTitle2("카드 이름을 입력해주세요."),
             content: TextFormField(
               obscureText: false,
-              decoration: InputDecoration(hintText: "원래카드 이름 받아올 자리..ㅎ까끙"),
+              decoration: InputDecoration(hintText: "${card.cardName}"),
             ),
             actions: <Widget>[
               CustomWhitePopButton(),
-              CustomGreenButton("확인", 70, 30,
-                  HomeMainPage()), //TODO[서영] : 확인버튼시 save 저장되게...!
+              CustomGreenButton(
+                  "확인", 70, 30, HomeMainPage()), //TODO : 확인버튼시 save 저장되게...!
             ],
           ),
         );
