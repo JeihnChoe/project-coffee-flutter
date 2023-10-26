@@ -25,31 +25,39 @@ class FindPasswordBody extends StatelessWidget {
             child: Column(
               children: [
                 textTitle1("본인확인을 위해\n이메일과 아이디를 입력해주세요."),
-                CustomTextForm("Email",
-                    validatorFunction: validateEmail, controller: email),
-                SizedBox(
-                  height: gap_xl,
-                ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: kAccentColor,
-                    minimumSize: Size(double.infinity, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                Form(
+                  key: _formKey,
+                    child: Column(
+                  children: [
+                    CustomTextForm("Email",
+                        validatorFunction: validateEmail, controller: email),
+                    SizedBox(
+                      height: gap_xl,
                     ),
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, Move.FindPasswordNewSetPage);
-                    if (_formKey.currentState!.validate()) {
-                      FindPasswordReqDTO findPasswordReqDTO = FindPasswordReqDTO(email: email.text);
-                      // ref.read(sessionProvider)?.jqoin(joinReqDTO);
-                    }
-                  },
-                  child: Text(
-                    "비밀번호 찾기",
-                    style: TextStyle(color: Colors.white),
-                  ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: kAccentColor,
+                        minimumSize: Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, Move.FindPasswordNewSetPage);
+                        if (_formKey.currentState!.validate()) {
+                          FindPasswordReqDTO findPasswordReqDTO = FindPasswordReqDTO(email: email.text);
+                          // ref.read(sessionProvider)?.jqoin(joinReqDTO);
+                        }
+                      },
+                      child: Text(
+                        "비밀번호 찾기",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
                 ),
+                ),
+
               ],
             ),
           ),
