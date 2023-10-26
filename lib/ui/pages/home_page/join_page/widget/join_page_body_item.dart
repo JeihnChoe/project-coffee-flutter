@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
@@ -79,6 +80,12 @@ class JoinPageBodyItem extends ConsumerWidget {
                           email: _email.text,
                           phonenumber: _phonenumber.text,
                         );
+
+                        Logger().d("joinDTO :  ${joinReqDTO.toJson()}");
+                        // Logger().d("userId :  ${joinReqDTO.userId}");
+                        // Logger().d("password :  ${joinReqDTO.password}");
+                        // Logger().d("email :  ${joinReqDTO.email}");
+                        // Logger().d("phone :  ${joinReqDTO.phonenumber}");
                         // ref.read(sessionProvider)?.join(joinReqDTO);
                         Navigator.push(
                           context,
