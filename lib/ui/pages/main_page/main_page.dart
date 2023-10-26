@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/ui/pages/home_page/home_main_page/home_main_page.dart';
-import 'package:project_coffee/ui/pages/order_page/product_list_page/product_list_page.dart';
+import 'package:project_coffee/ui/pages/order_page/category_list_page/category_list_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -20,7 +20,7 @@ class _MainPageState extends State<MainPage> {
         children: [
           HomeMainPage(),
           Center(child: Text("PayPage")),
-          ProductListPage(),
+          CategoryListPage(),
           Center(child: Text("Shop")),
           Center(child: Text("Other")),
         ],
