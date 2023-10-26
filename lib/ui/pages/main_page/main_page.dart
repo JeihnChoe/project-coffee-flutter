@@ -21,7 +21,7 @@ class _MainPageState extends State<MainPage> {
         index: _selectedIndex,
         children: [
           HomeMainPage(),
-          PayCardListPage(),
+          PayMainPage(),
           CategoryListPage(),
           Center(child: Text("Shop")),
           Center(child: Text("Other")),
