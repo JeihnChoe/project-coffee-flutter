@@ -11,7 +11,7 @@ class FindLoginIdSuccessPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: FindLoginIdSuccessBody(),
+      body: FindLoginIdSuccessPageBody(),
       persistentFooterButtons: [
 
         CustomGreenButton("로그인하기", double.infinity, 50, LoginPage())

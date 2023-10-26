@@ -8,7 +8,7 @@ class FindLoginIdPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FindLoginIdBody(),
+      body: FindLoginIdPageBody(),
     );
   }
 }

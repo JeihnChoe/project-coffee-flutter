@@ -8,11 +8,11 @@ import 'package:project_coffee/data/dto/user_request.dart';
 import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
 import 'package:project_coffee/ui/widgets/xmark_button.dart';
 
-class FindPasswordBody extends StatelessWidget {
+class FindPasswordPageBody extends StatelessWidget {
   final email = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  FindPasswordBody({super.key});
+  FindPasswordPageBody({super.key});
 
   @override
   Widget build(BuildContext context) {

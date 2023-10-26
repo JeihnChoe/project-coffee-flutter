@@ -4,7 +4,7 @@ import 'package:project_coffee/ui/pages/home_page/find_login_id_success/find_log
 import 'package:project_coffee/ui/pages/home_page/find_password/find_password_page.dart';
 import 'package:project_coffee/ui/pages/home_page/find_password_new_set/find_password_new_set_page.dart';
 import 'package:project_coffee/ui/pages/home_page/join_page/join_page.dart';
-import 'package:project_coffee/ui/pages/home_page/join_success_page/join_sucess_page.dart';
+import 'package:project_coffee/ui/pages/home_page/join_success_page/join_success_page.dart';
 import 'package:project_coffee/ui/pages/home_page/login_page/login_page.dart';
 import 'package:project_coffee/ui/pages/main_page/main_page.dart';
 import 'package:project_coffee/ui/pages/order_page/category_detail_page/category_detail_page.dart';

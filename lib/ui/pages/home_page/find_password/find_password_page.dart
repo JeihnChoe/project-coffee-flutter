@@ -7,7 +7,7 @@ class FindPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FindPasswordBody(),
+      body: FindPasswordPageBody(),
     );
   }
 }

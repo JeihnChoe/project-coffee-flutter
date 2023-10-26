@@ -7,9 +7,11 @@ class CardSavePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: CardSaveBodyPage(),
-    );
+    return DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: CardSaveBodyPage(),
+        ));
   }
 }
