@@ -8,6 +8,7 @@ import 'package:project_coffee/ui/pages/home_page/join_success_page/join_success
 import 'package:project_coffee/ui/pages/home_page/login_page/login_page.dart';
 import 'package:project_coffee/ui/pages/main_page/main_page.dart';
 import 'package:project_coffee/ui/pages/pay_page/card_save/card_save_page.dart';
+import 'package:project_coffee/ui/pages/pay_page/pay_main_page/pay_main_page.dart';
 
 class Move {
   static String MainPage = "/main";
@@ -20,6 +21,7 @@ class Move {
   static String FindPasswordPage = "/find/password";
   static String FindPasswordNewSetPage = "/find/password/set";
   static String CardSavePage = "/card/save";
+  static String PayMainPage = "/card";
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -28,10 +30,12 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.LoginPage: (context) => const LoginPage(),
     Move.JoinPage: (context) => const JoinPage(),
     Move.JoinSuccessPage: (context) => const JoinSuccessPage(),
+    // Move.CategoryDetailPage: (context) => const CategoryDetailPage(),
     Move.FindLoginIdPage: (context) => const FindLoginIdPage(),
     Move.FindLoginIdSuccessPage: (context) => const FindLoginIdSuccessPage(),
     Move.FindPasswordPage: (context) => const FindPasswordPage(),
     Move.FindPasswordNewSetPage: (context) => const FindPasswordNewSetPage(),
     Move.CardSavePage: (context) => const CardSavePage(),
+    Move.PayMainPage: (context) => const PayMainPage(),
   };
 }

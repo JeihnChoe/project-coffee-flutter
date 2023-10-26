@@ -11,6 +11,7 @@ class CardSavePage extends StatelessWidget {
         length: 2,
         child: Scaffold(
           backgroundColor: Colors.white,
+          resizeToAvoidBottomInset: false,
           body: CardSaveBodyPage(),
         ));
   }
