@@ -4,8 +4,8 @@ import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/ui/widgets/xmark_button.dart';
 
-class FindLoginIdSuccessBody extends StatelessWidget {
-  const FindLoginIdSuccessBody({super.key});
+class FindLoginIdSuccessPageBody extends StatelessWidget {
+  const FindLoginIdSuccessPageBody({super.key});
 
   @override
   Widget build(BuildContext context) {

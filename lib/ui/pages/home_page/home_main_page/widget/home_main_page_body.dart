@@ -21,6 +21,7 @@ class HomeMainPageBody extends ConsumerWidget {
     }
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -30,9 +31,12 @@ class HomeMainPageBody extends ConsumerWidget {
                 children: [
                   SizedBox(height: gap_xl),
                   SizedBox(height: gap_l),
-                  Align(
-                    alignment: Alignment.centerLeft, // 왼쪽 정렬
-                    child: textTitle1("안녕하세요, \n스타벅스 입니다."),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft, // 왼쪽 정렬
+                      child: textTitle1("안녕하세요,\n스타벅스 입니다."),
+                    ),
                   ),
                   SizedBox(height: gap_l),
                   HomeMainPageBodyItem(),

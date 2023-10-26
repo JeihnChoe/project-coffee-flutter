@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/data/model/promotion.dart';
 
-import 'widget/promotion_detail_body.dart';
+import 'widget/promotion_detail_page_body.dart';
 
 class PromotionDetailPage extends StatelessWidget {
   final Promotion promotion;
@@ -11,7 +11,7 @@ class PromotionDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PromotionDetailBody(promotion),
+      body: PromotionDetailPageBody(promotion),
     );
   }
 }

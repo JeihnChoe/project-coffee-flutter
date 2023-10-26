@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 
-class JoinSucessBodyItem extends StatelessWidget {
-  const JoinSucessBodyItem({
+class JoinSuccessPageBodyItem extends StatelessWidget {
+  const JoinSuccessPageBodyItem({
     super.key,
   });
 
