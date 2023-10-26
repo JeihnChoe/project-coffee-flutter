@@ -1,6 +1,6 @@
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 
-import '../model/promotion.dart';
+import '../model/Promotion.dart';
 
 ResponseDTO mPromotionResponseDTO = ResponseDTO(true, _mPromotion, null);
 ResponseDTO mPromotionListResponseDTO =

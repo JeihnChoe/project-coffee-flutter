@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/_core/utils/validator_util.dart';
 import 'package:project_coffee/data/dto/user_request.dart';
-import 'package:project_coffee/ui/pages/home_page/join_page/join_page_view_model.dart';
 import 'package:project_coffee/ui/pages/home_page/join_sucess_page/join_sucess_page.dart';
-import 'package:project_coffee/ui/widgets/custom_green_button.dart';
 import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
 
 class JoinPageBodyItem extends ConsumerWidget {
@@ -61,7 +58,6 @@ class JoinPageBodyItem extends ConsumerWidget {
                   ),
                   CustomTextForm(
                     "PhoneNumber",
-                    validatorFunction: validatePhoneNumber,
                     controller: _phonenumber,
                   ),
                   SizedBox(
