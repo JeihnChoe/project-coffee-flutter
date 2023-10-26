@@ -7,14 +7,14 @@ import 'package:project_coffee/ui/pages/home_page/join_page/join_page.dart';
 import 'package:project_coffee/ui/pages/home_page/join_sucess_page/join_sucess_page.dart';
 import 'package:project_coffee/ui/pages/home_page/login_page/login_page.dart';
 import 'package:project_coffee/ui/pages/main_page/main_page.dart';
-import 'package:project_coffee/ui/pages/order_page/category_detail_page/category_detail_page.dart';
+import 'package:project_coffee/ui/pages/order_page/category_list_page/category_list_page.dart';
 
 class Move {
   static String MainPage = "/main";
   static String LoginPage = "/login";
   static String JoinPage = "/join";
   static String JoinSucessPage = "/join/sucess";
-  static String CategoryDetailPage = "/category/detail";
+  static String CategoryListPage = "/category/list";
   static String FindLoginIdPage = "/find/loginid";
   static String FindLoginIdSuccessPage = "/find/loginid/success";
   static String FindPasswordPage = "/find/password";
@@ -27,7 +27,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.LoginPage: (context) => const LoginPage(),
     Move.JoinPage: (context) => const JoinPage(),
     Move.JoinSucessPage: (context) => const JoinSucessPage(),
-    Move.CategoryDetailPage: (context) => const CategoryDetailPage(),
+    Move.CategoryListPage: (context) => const CategoryListPage(),
     Move.FindLoginIdPage: (context) => const FindLoginIdPage(),
     Move.FindLoginIdSuccessPage: (context) => const FindLoginIdSuccessPage(),
     Move.FindPasswordPage: (context) => const FindPasswordPage(),

@@ -4,9 +4,9 @@ import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/promotion.dart';
 import 'package:project_coffee/ui/pages/home_page/promotion_detail_page/promotion_detail_page.dart';
 
-class PromotionListBodyItem extends StatelessWidget {
+class PromotionListPageBodyItem extends StatelessWidget {
   Promotion promotion;
-  PromotionListBodyItem(this.promotion, {super.key});
+  PromotionListPageBodyItem(this.promotion, {super.key});
 
   @override
   Widget build(BuildContext context) {
