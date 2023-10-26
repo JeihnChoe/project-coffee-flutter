@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 Text textTitle0(String text) {
   return Text(
-    "$text", maxLines: 1, // 텍스트의 최대 줄 수
+    "$text",
     overflow: TextOverflow.ellipsis,
     style: TextStyle(
         color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold),
@@ -11,7 +11,7 @@ Text textTitle0(String text) {
 
 Text textTitle1(String text) {
   return Text(
-    "$text", maxLines: 1, // 텍스트의 최대 줄 수
+    "$text",
     overflow: TextOverflow.ellipsis,
     style: TextStyle(
       color: Colors.black,
