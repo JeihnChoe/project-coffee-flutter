@@ -100,6 +100,8 @@ class CustomTextForm extends StatelessWidget {
       );
     }else if (text == "CardNumber") {
       return TextFormField(
+        keyboardType: TextInputType.number,
+        maxLength: 16,
         controller: controller,
         validator: validatorFunction,
         obscureText: false,
@@ -107,6 +109,8 @@ class CustomTextForm extends StatelessWidget {
       );
     }else if (text == "PinNumber") {
       return TextFormField(
+        keyboardType: TextInputType.number,
+        maxLength: 8,
         controller: controller,
         validator: validatorFunction,
         obscureText: false,

@@ -6,6 +6,7 @@ import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/dto/card_request.dart';
 import 'package:project_coffee/ui/pages/pay_page/card_save/widget/card_save_page_body_item.dart';
 import 'package:project_coffee/ui/pages/pay_page/pay_main_page/pay_main_page.dart';
+import 'package:project_coffee/ui/widgets/custom_tab_bar.dart';
 
 
 class CardSaveBodyPage extends StatelessWidget {
@@ -41,17 +42,7 @@ class CardSaveBodyPage extends StatelessWidget {
           ),
         ),
         SliverToBoxAdapter(
-          child: TabBar(
-            padding: EdgeInsets.only(right: 130,top: 15),
-            indicatorColor: kAccentColor,// 선택된 탭의 표시선 색깔을 초록색으로 설정
-            labelColor: Colors.black, // 선택된 탭의 텍스트 색깔을 검은색으로 설정
-            unselectedLabelColor: Colors.grey, // 선택되지 않은 탭의 텍스트 색깔을 회색으로 설정
-            tabs: [
-              Tab(child: Text("스타벅스 카드",style: TextStyle(fontSize: 17),)),
-              Tab(child: Text("카드 교환권",style: TextStyle(fontSize: 17),)),
-            ],
-
-          ),
+          child: CustomTabBar(contentTitle1: "스타벅스 카드",contentTitle2: "카드 교환권"),
         ),
         SliverFillRemaining(
           child: TabBarView(
@@ -139,3 +130,4 @@ class CardSaveBodyPage extends StatelessWidget {
     );
   }
 }
+

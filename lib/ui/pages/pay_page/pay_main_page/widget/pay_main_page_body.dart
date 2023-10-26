@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/move.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/ui/pages/pay_page/coupon/coupon_page.dart';
+import 'package:project_coffee/ui/pages/pay_page/pay_card_list_page/pay_card_list_page.dart';
 import 'package:project_coffee/ui/widgets/custom_sliver_app_bar.dart';
 
 class PayPageBody extends StatelessWidget {
@@ -11,7 +13,7 @@ class PayPageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        PayMainPageAppbar(),
+        PayMainPageAppbar(context),
         SliverToBoxAdapter(
           child: Column(
             children: [
@@ -54,7 +56,10 @@ class PayPageBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TextButton(onPressed: () {
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CouponPage()),
+                    );
                   }, child: Text("Coupon",style: TextStyle(color: Colors.black)),),
                   Container(
                     width: 1,
@@ -73,13 +78,17 @@ class PayPageBody extends StatelessWidget {
     );
   }
 
-  SliverAppBar PayMainPageAppbar() {
+  SliverAppBar PayMainPageAppbar(context) {
     return SliverAppBar(
       floating: true,
       pinned: true,
       actions: [
         IconButton(
-            onPressed: () {}, icon: Icon(Icons.list), color: Colors.black),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PayCardListPage()));
+            }, icon: Icon(Icons.list), color: Colors.black),
         SizedBox(
           width: 16,
         )

@@ -69,11 +69,14 @@ String? validateCardName(String? value) {
   return null; // 유효성 검사 통과
 }
 String? validateCardNumber(String? value) {
-  // if (value == null || value.isEmpty) {
-  //   return "내용은 공백이 들어갈 수 없습니다.";
-  // } else if (value.length > 500) {
-  //   return "내용의 길이를 초과하였습니다.";
-  // }
+  if (value == null || value.isEmpty) {
+    return "내용은 공백이 들어갈 수 없습니다.";
+  } else if (value.length > 17) {
+    return "내용의 길이를 초과하였습니다.";
+  }else if(!isNumeric(value)){
+    return "숫자만 입력해주세요";
+  }
+
   return null; // 유효성 검사 통과
 }
 
