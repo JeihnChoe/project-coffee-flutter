@@ -61,7 +61,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  height: 50,
+                  height: 70, //카드정보와 클릭 컨테이너 사이 높이
                   color: Colors.white,
                 ),
                 Container(
@@ -241,8 +241,8 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
 
   _image() {
     return Container(
-      width: 100,
-      height: 70,
+      width: 120,
+      height: 80,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.black12),
