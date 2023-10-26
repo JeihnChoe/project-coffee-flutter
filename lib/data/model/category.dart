@@ -2,7 +2,9 @@ class Category {
   final int id;
   final String categoryName;
   final String categoryEngName;
-  final int code; // 음료 1, 푸드 2
+  final int code;
+  final String categoryPicUrl;
 
-  Category(this.id, this.categoryName, this.categoryEngName, this.code);
+  Category(this.id, this.categoryName, this.categoryEngName, this.code,
+      this.categoryPicUrl);
 }

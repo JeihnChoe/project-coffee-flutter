@@ -7,7 +7,6 @@ import 'package:project_coffee/main.dart';
 
 class PromotionListModel {
   List<Promotion> promotionList;
-
   PromotionListModel(this.promotionList);
 }
 
