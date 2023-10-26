@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
-import 'package:project_coffee/_core/utils/validator_util.dart';
-import 'package:project_coffee/ui/widgets/custom_sliver_app_bar.dart';
-import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
+import 'package:project_coffee/data/dto/card_request.dart';
+import 'package:project_coffee/ui/pages/pay_page/card_save/widget/card_save_page_body_item.dart';
+import 'package:project_coffee/ui/pages/pay_page/pay_main_page/pay_main_page.dart';
+
 
 class CardSaveBodyPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -61,61 +63,13 @@ class CardSaveBodyPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomTextForm("CardName",validatorFunction:validateCardName, controller: _cardName),
-                      SizedBox(height: gap_m,),
-                      Text("카드명은 미입력 시 자동으로 부여됩니다.",style: TextStyle(color: Colors.grey,fontSize: 13),),
-                      SizedBox(height: gap_l,),
-                      CustomTextForm("CardNumber",validatorFunction:validateCardNumber, controller: _cardNumber),
-                      SizedBox(height: gap_m,),
-                      SizedBox(height: gap_l,),
-                      CustomTextForm("PinNumber",validatorFunction:validatePinNumber, controller: _pinNumber),
-                      SizedBox(height: gap_xxl,),
-                      SizedBox(height: gap_xl,),
-                      SizedBox(height: gap_m,),
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        width: double.infinity,
-                        color: Colors.grey[100],
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            textBody3("스타벅스 카드 등록 시, 실물 카드와 카드 바코드 모두 사용 가능합\n니다."),
-                            Row(
-                              children: [
-                                textBody3("카드가 없다면 e-Gift Card의"),
-                                TextButton(onPressed: () {
-
-                                }, child: Text("나에게 선물하기",style: TextStyle(fontSize: 11,color: kAccentColor),)),
-                                textBody3("를 이용해보세요.")
-                              ],
-                            ),
-                            textBody3("카드명은 미입력 시 자동으로 부여됩니다."),
-                          ],
-                        ),
-                      ),
+                      CardSaveTextFormFeild(cardName: _cardName,cardNumber: _cardNumber,pinNumber: _pinNumber),
+                      GreyBoxHeight(),
+                      CardSaveGreyTextFeild(),
                       SizedBox(
                         height: gap_l,
                       ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: kAccentColor,
-                          minimumSize: Size(double.infinity, 50),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                        ),
-                        onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => ),
-                          // );
-
-                        },
-                        child: Text(
-                          "등록하기",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
+                      CardSaveTextButton(context),
                       SizedBox(
                         height: 10,
                       ),
@@ -131,6 +85,57 @@ class CardSaveBodyPage extends StatelessWidget {
         )
       ],
 
+    );
+  }
+
+  TextButton CardSaveTextButton(BuildContext context) {
+    return TextButton(
+      style: TextButton.styleFrom(
+        backgroundColor: kAccentColor,
+        minimumSize: Size(double.infinity, 50),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25),
+        ),
+      ),
+      onPressed: () {
+        CardSaveReqDTO cardSaveReqDTO = CardSaveReqDTO(cardName: _cardName.text, cardNumber: _cardNumber.text, pinNumber: _pinNumber.text);
+        Logger().d("CardSaveReqDTO : ${cardSaveReqDTO.toJson()}");
+
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => PayMainPage()),
+        );
+
+      },
+      child: Text(
+        "등록하기",
+        style: TextStyle(color: Colors.white),
+      ),
+    );
+  }
+
+  Container CardSaveGreyTextFeild() {
+    return Container(
+      padding: EdgeInsets.all(10),
+      width: double.infinity,
+      color: Colors.grey[100],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          textBody3("스타벅스 카드 등록 시, 실물 카드와 카드 바코드 모두 사용 가능합\n니다."),
+          Row(
+            children: [
+              textBody3("카드가 없다면 e-Gift Card의"),
+              TextButton(onPressed: () {
+
+              }, child: Text("나에게 선물하기",style: TextStyle(fontSize: 11,color: kAccentColor),)),
+              textBody3("를 이용해보세요.")
+            ],
+          ),
+          textBody3("카드명은 미입력 시 자동으로 부여됩니다."),
+        ],
+      ),
     );
   }
 }
