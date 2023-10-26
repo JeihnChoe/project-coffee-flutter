@@ -91,6 +91,27 @@ class CustomTextForm extends StatelessWidget {
         obscureText: false,
         decoration: InputDecoration(hintText: "휴대폰 번호"),
       );
+    }else if (text == "CardName") {
+      return TextFormField(
+        controller: controller,
+        validator: validatorFunction,
+        obscureText: false,
+        decoration: InputDecoration(hintText: "카드명 최대 20자 (선택)"),
+      );
+    }else if (text == "CardNumber") {
+      return TextFormField(
+        controller: controller,
+        validator: validatorFunction,
+        obscureText: false,
+        decoration: InputDecoration(hintText: "스타벅스 카드 번호 16자리(필수)"),
+      );
+    }else if (text == "PinNumber") {
+      return TextFormField(
+        controller: controller,
+        validator: validatorFunction,
+        obscureText: false,
+        decoration: InputDecoration(hintText: "Pin번호 8자리 (필수)"),
+      );
     } else {
       return Center(
         child: Text("알 수 없는 입력항목입니다."),
