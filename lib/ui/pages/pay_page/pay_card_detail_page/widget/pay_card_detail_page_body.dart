@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:project_coffee/data/model/paycard.dart';
 import 'package:project_coffee/ui/pages/pay_page/pay_card_detail_page/widget/pay_card_detail_page_body_iteam.dart';
 
 class PayCadDetailPageBody extends StatelessWidget {
-  const PayCadDetailPageBody({super.key});
+  final PayCard card;
+  const PayCadDetailPageBody(this.card, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: PayCardDetailPageBodyItem(),
+      body: PayCardDetailPageBodyItem(card),
     );
   }
 }

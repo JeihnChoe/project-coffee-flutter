@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/data/model/paycard.dart';
 import 'package:project_coffee/ui/pages/home_page/home_main_page/home_main_page.dart';
 import 'package:project_coffee/ui/widgets/custom_green_button.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
-import 'pay_card_detail_page_body.dart';
-
 class PayCardDetailPageBodyItem extends StatelessWidget {
-  const PayCardDetailPageBodyItem({
-    super.key,
-  });
+  final PayCard card;
+  const PayCardDetailPageBodyItem(this.card, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -236,7 +234,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
       children: [
         textBody1("카드잔액"),
         SizedBox(width: gap_s),
-        textTitle1("4만원"),
+        textTitle1("${card.cardMoney}"),
       ],
     );
   }
@@ -248,7 +246,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         image: DecorationImage(
-            image: NetworkImage("https://picsum.photos/7"), fit: BoxFit.cover),
+            image: NetworkImage("${card.cardPicUrl}"), fit: BoxFit.cover),
       ),
     );
   }
@@ -269,7 +267,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
             actions: <Widget>[
               CustomWhitePopButton(),
               CustomGreenButton("확인", 70, 30,
-                  PayCadDetailPageBody()), //TODO[서영] : 확인버튼시 save 저장되게...!
+                  HomeMainPage()), //TODO[서영] : 확인버튼시 save 저장되게...!
             ],
           ),
         );

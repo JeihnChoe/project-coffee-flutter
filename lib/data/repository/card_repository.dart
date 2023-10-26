@@ -1,5 +1,5 @@
 import 'package:project_coffee/data/dto/reponse_dto.dart';
-import 'package:project_coffee/data/mock/card.dart';
+import 'package:project_coffee/data/mock/paycard.dart';
 
 class CardRepository {
   Future<ResponseDTO> fetchCardDetail() {
