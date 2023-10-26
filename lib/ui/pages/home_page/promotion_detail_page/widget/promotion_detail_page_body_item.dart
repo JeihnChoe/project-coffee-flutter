@@ -3,8 +3,8 @@ import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/promotion.dart';
 
-class PromotionDetailBodyIteam extends StatelessWidget {
-  const PromotionDetailBodyIteam({
+class PromotionDetailPageBodyIteam extends StatelessWidget {
+  const PromotionDetailPageBodyIteam({
     super.key,
     required this.promotion,
   });

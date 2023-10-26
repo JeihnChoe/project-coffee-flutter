@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_coffee/data/model/promotion.dart';
 import 'package:project_coffee/ui/pages/home_page/promotion_list_page/promotion_list_page_view_model.dart';
-import 'package:project_coffee/ui/pages/home_page/promotion_list_page/widget/promotion_list_body_item.dart';
+import 'package:project_coffee/ui/pages/home_page/promotion_list_page/widget/promotion_list_page_body_item.dart';
 import 'package:project_coffee/ui/widgets/custom_sliver_app_bar.dart';
 
 class PromotionListPageBody extends ConsumerWidget {
@@ -27,7 +27,7 @@ class PromotionListPageBody extends ConsumerWidget {
               sliver: SliverList.separated(
                 separatorBuilder: (context, index) => Divider(),
                 itemBuilder: (context, index) =>
-                    PromotionListBodyItem(promotionList[index]),
+                    PromotionListPageBodyItem(promotionList[index]),
                 itemCount: promotionList.length,
               ),
             ),

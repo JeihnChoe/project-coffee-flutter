@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/ui/pages/home_page/home_main_page/home_main_page.dart';
 import 'package:project_coffee/ui/pages/order_page/category_list_page/category_list_page.dart';
-import 'package:project_coffee/ui/pages/pay_page/pay_page.dart';
+import 'package:project_coffee/ui/pages/pay_page/pay_card_list_page/pay_card_list_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -20,7 +20,7 @@ class _MainPageState extends State<MainPage> {
         index: _selectedIndex,
         children: [
           HomeMainPage(),
-          PayPage(),
+          PayCardListPage(),
           CategoryListPage(),
           Center(child: Text("Shop")),
           Center(child: Text("Other")),
