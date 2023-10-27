@@ -1,35 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/utils/validator_util.dart';
+import 'package:project_coffee/data/dto/user_request.dart';
+import 'package:project_coffee/data/store/session_store.dart';
 import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
 
 class LoginPageFormField extends StatelessWidget {
-  const LoginPageFormField({
-    super.key,
-    required GlobalKey<FormState> formKey,
-    required this.userId,
-    required this.password,
-  }) : _formKey = formKey;
+  final _formKey = GlobalKey<FormState>();
+  final userId = TextEditingController();
+  final password = TextEditingController();
 
-  final GlobalKey<FormState> _formKey;
-  final TextEditingController userId;
-  final TextEditingController password;
+  LoginPageFormField({
+    Key? key,
+  });
+
+  void submit(WidgetRef ref) {
+    if (_formKey.currentState!.validate()) {
+      LoginReqDTO loginReqDTO = LoginReqDTO(
+        userId: userId.text,
+        password: password.text,
+      );
+      Logger().d("${loginReqDTO.toJson()}");
+      ref.read(sessionProvider).login(loginReqDTO);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-        key: _formKey,
-        child:
-        Column(
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
           children: [
-            CustomTextForm("UserId", validatorFunction: validateUserId,
-              controller: userId,),
-            SizedBox(height: gap_l,),
-            CustomTextForm("Password", validatorFunction: validatePassword,
-              controller: password,),
-            SizedBox(height: gap_xl,),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  CustomTextForm("UserId", validatorFunction: validateUserId, controller: userId,),
+                  SizedBox(height: gap_l,),
+                  CustomTextForm("Password", validatorFunction: validatePassword, controller: password,),
+                ],
+              ),
+            ),
           ],
-        )
+        ),
+      ),
     );
   }
 }

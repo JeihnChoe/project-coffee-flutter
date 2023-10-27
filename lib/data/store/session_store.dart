@@ -34,6 +34,10 @@ class SessionStore extends SessionUser {
   Future<void> login(LoginReqDTO loginReqDTO) async {
     Navigator.pushNamed(mContext!,Move.MainPage);
   }
+
+  Future<void> findLoginId(FindLoginIdReqDTO findLoginIdReqDTO) async {
+    Navigator.pushNamed(mContext!,Move.MainPage);
+  }
 }
 
 //창고 관리자

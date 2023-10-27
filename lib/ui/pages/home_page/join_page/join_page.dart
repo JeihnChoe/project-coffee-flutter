@@ -4,6 +4,8 @@ import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/ui/pages/home_page/join_page/widget/join_page_body.dart';
 import 'package:project_coffee/ui/pages/home_page/join_page/widget/join_page_form_field.dart';
 
+import '../../../widgets/submit_bottom_button.dart';
+
 
 class JoinPage extends StatelessWidget {
   JoinPage({super.key});
@@ -14,27 +16,9 @@ class JoinPage extends StatelessWidget {
     return Scaffold(
       body: JoinPageBody(formFeild),
       persistentFooterButtons: [
-        Consumer(
-          builder: (context, ref, child) {
-            return TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: kAccentColor,
-                minimumSize: Size(double.infinity, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-              ),
-              onPressed: () {
-                formFeild.submit(ref);
-              },
-              child: Text(
-                "회원가입",
-                style: TextStyle(color: Colors.white),
-              ),
-            );
-          },
-        )
+        SubmitBottomButton(text: "회원가입",formField: formFeild)
       ],
     );
   }
 }
+
