@@ -23,44 +23,11 @@ class FindLoginIdPageBodyItem extends StatelessWidget {
         child: Column(
           children: [
             textTitle1("본인확인을 위해\n이메일을 입력해주세요."),
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  CustomTextForm(
-                    "Email", validatorFunction: validateEmail, controller: email),
-                  SizedBox(height: gap_xl,),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: kAccentColor,
-                      minimumSize: Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, Move.FindLoginIdSuccessPage);
-                      if (_formKey.currentState!.validate()) {
-                        FindLoginIdReqDTO findLoginIdReqDTO = FindLoginIdReqDTO(
-                            email: email.text
-                        );
-                        Logger().d("${findLoginIdReqDTO.toJson()}");
-                        // ref.read(sessionProvider)?.join(joinReqDTO);
-                      }
-
-                    },
-                    child: Text(
-                      "아이디 찾기",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),)
-
-
           ],
         ),
       ),
     );
   }
 }
+
+

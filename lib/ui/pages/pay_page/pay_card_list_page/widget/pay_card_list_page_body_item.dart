@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/paycard.dart';
-import 'package:project_coffee/ui/pages/pay_page/card_save/card_save_page.dart';
+import 'package:project_coffee/ui/pages/pay_page/card_save/pay_card_save_page.dart';
 import 'package:project_coffee/ui/pages/pay_page/pay_card_detail_page/pay_card_detail_page.dart';
 
 class PayCardListPageBodyItem extends StatelessWidget {
@@ -30,7 +30,7 @@ class PayCardListPageBodyItem extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            CardSavePage())); //카드 /*카드등록 화면으로 가요!*/
+                            PayCardSavePage())); //카드 /*카드등록 화면으로 가요!*/
               },
               icon: Icon(Icons.add_circle_outline),
               color: Colors.black54,

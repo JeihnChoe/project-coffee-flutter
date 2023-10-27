@@ -217,7 +217,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
             actionsPadding:
                 EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
             actions: [
-              CustomWhitePopButton(),
+              CustomWhitePopButton(text: "취소"),
               TextButton(
                 style: TextButton.styleFrom(
                   backgroundColor: kAccentColor,

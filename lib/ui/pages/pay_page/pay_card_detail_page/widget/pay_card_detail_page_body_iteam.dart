@@ -4,6 +4,7 @@ import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/paycard.dart';
 import 'package:project_coffee/ui/pages/home_page/home_main_page/home_main_page.dart';
 import 'package:project_coffee/ui/pages/pay_page/pay_card_charge_page/pay_card_charge_page.dart';
+import 'package:project_coffee/ui/pages/pay_page/pay_card_lost/pay_card_lost_page.dart';
 import 'package:project_coffee/ui/widgets/custom_green_button.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
@@ -166,7 +167,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomeMainPage()));
+                                    builder: (context) => PayCardLost()));
                           },
                           child: Container(
                             height: 50,
@@ -271,6 +272,8 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
               obscureText: false,
               decoration: InputDecoration(hintText: "${card.cardName}"),
             ),
+            actions: <Widget>[
+              CustomWhitePopButton(text: "취소"),
             actionsPadding:
                 EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
             actions: [
