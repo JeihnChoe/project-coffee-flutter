@@ -3,8 +3,8 @@ import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/utils/validator_util.dart';
 import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
 
-class CardSaveTextFormFeild extends StatelessWidget {
-  const CardSaveTextFormFeild({
+class PayCardSaveTextFormFeild extends StatelessWidget {
+  const PayCardSaveTextFormFeild({
     super.key,
     required TextEditingController cardName,
     required TextEditingController cardNumber,
