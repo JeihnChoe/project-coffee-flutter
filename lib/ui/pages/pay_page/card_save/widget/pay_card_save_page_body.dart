@@ -4,18 +4,18 @@ import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/dto/card_request.dart';
-import 'package:project_coffee/ui/pages/pay_page/card_save/widget/card_save_page_body_item.dart';
+import 'package:project_coffee/ui/pages/pay_page/card_save/widget/pay_card_save_page_body_item.dart';
 import 'package:project_coffee/ui/pages/pay_page/pay_main_page/pay_main_page.dart';
 import 'package:project_coffee/ui/widgets/custom_tab_bar.dart';
 
 
-class CardSaveBodyPage extends StatelessWidget {
+class PayCardSaveBodyPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final _cardName = TextEditingController();
   final _cardNumber = TextEditingController();
   final _pinNumber = TextEditingController();
 
-  CardSaveBodyPage({super.key});
+  PayCardSaveBodyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class CardSaveBodyPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CardSaveTextFormFeild(cardName: _cardName,cardNumber: _cardNumber,pinNumber: _pinNumber),
+                      PayCardSaveTextFormFeild(cardName: _cardName,cardNumber: _cardNumber,pinNumber: _pinNumber),
                       GreyBoxHeight(),
                       CardSaveGreyTextFeild(),
                       SizedBox(
