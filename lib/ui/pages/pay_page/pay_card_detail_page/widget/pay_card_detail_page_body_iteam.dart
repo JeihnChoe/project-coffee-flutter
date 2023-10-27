@@ -272,12 +272,10 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
               obscureText: false,
               decoration: InputDecoration(hintText: "${card.cardName}"),
             ),
-            actions: <Widget>[
-              CustomWhitePopButton(text: "취소"),
             actionsPadding:
                 EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
-            actions: [
-              CustomWhitePopButton(),
+            actions: <Widget>[
+              CustomWhitePopButton(text: "취소"),
               CustomGreenButton(
                   "확인", 70, 30, HomeMainPage()), //TODO : 확인버튼시 save 저장되게...!
             ],
