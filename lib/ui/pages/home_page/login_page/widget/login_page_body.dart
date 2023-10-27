@@ -4,14 +4,17 @@ import 'package:project_coffee/ui/widgets/custom_sliver_app_bar.dart';
 
 
 class LoginPageBody extends StatelessWidget {
-  const LoginPageBody({super.key});
+  LoginPageBodyItem form;
+  LoginPageBody(this.form, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
         CustomSliverAppBar(title: "로그인",),
-        LoginPageBodyItem()
+
+        form,
+
       ],
     );
   }
