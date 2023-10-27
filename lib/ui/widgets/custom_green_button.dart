@@ -36,8 +36,6 @@ class CustomGreenButton extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => move),
               );
             }
-
-
           },
           child: Text(
             "${title}",
