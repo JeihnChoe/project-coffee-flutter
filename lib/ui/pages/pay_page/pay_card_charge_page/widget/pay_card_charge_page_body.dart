@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
 class PayCardChargePageBody extends StatefulWidget {
   PayCardChargePageBody({super.key});
@@ -158,7 +159,11 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
       onTap: () {
         setState(() {
           selectedBlock = text; // 클릭한 블록을 선택
-          selectedBlockAmount = text; // 클릭한 블록의 금액을 업데이트
+          if (text == "다른 금액") {
+            showCustomAmountDialog(); // 다른 금액 클릭시 Dialog 표시
+          } else {
+            selectedBlockAmount = text; // 클릭한 블록의 금액을 업데이트
+          }
         });
       },
       child: Container(
@@ -178,6 +183,63 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
           ),
         ),
       ),
+    );
+  }
+
+  // 다른 금액을 입력하는 Custom Dialog 표시 함수
+  void showCustomAmountDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        String customAmount = ""; // 사용자가 입력한 금액을 저장할 변수
+
+        return IntrinsicWidth(
+          child: AlertDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            contentPadding:
+                EdgeInsets.symmetric(vertical: 40, horizontal: 20), // 세로 여백 조절
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                textTitle2("충전 할 금액을 입력 해주세요."),
+                TextField(
+                  onChanged: (value) {
+                    customAmount = value;
+                  },
+                  decoration: InputDecoration(
+                    hintText: "충전금액(1만원 단위)",
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+              ],
+            ),
+            actionsPadding:
+                EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
+            actions: [
+              CustomWhitePopButton(),
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: kAccentColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
+                onPressed: () {
+                  setState(() {
+                    selectedBlockAmount = customAmount; // 입력한 금액으로 업데이트
+                    Navigator.of(context).pop(); // Dialog 닫기
+                  });
+                },
+                child: Text(
+                  "확인",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
