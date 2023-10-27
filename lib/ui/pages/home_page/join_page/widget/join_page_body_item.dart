@@ -34,73 +34,86 @@ class JoinPageBodyItem extends ConsumerWidget {
             const SizedBox(
               height: gap_l,
             ),
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  CustomTextForm(
-                    "UserIdJoin",
-                    validatorFunction: validateUserId,
-                    controller: _userid,
-                  ),
-                  CustomTextForm(
-                    "PasswordJoin",
-                    validatorFunction: validatePassword,
-                    controller: _password,
-                  ),
-                  CustomTextForm(
-                    "PasswordChk",
-                    validatorFunction: validatePassword,
-                    controller: _passwordchk,
-                  ),
-                  CustomTextForm(
-                    "EmailJoin",
-                    validatorFunction: validateEmail,
-                    controller: _email,
-                  ),
-                  CustomTextForm(
-                    "PhoneNumber",
-                    controller: _phonenumber,
-                  ),
-                  SizedBox(
-                    height: gap_xl,
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: kAccentColor,
-                      minimumSize: Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          CustomTextForm(
+                            "UserIdJoin",
+                            validatorFunction: validateUserId,
+                            controller: _userid,
+                          ),
+                          CustomTextForm(
+                            "PasswordJoin",
+                            validatorFunction: validatePassword,
+                            controller: _password,
+                          ),
+                          CustomTextForm(
+                            "PasswordChk",
+                            validatorFunction: validatePassword,
+                            controller: _passwordchk,
+                          ),
+                          CustomTextForm(
+                            "EmailJoin",
+                            validatorFunction: validateEmail,
+                            controller: _email,
+                          ),
+                          CustomTextForm(
+                            "PhoneNumber",
+                            controller: _phonenumber,
+                          ),
+                          SizedBox(
+                            height: gap_xl,
+                          ),
+                          Column(
+                            children: [
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  backgroundColor: kAccentColor,
+                                  minimumSize: Size(double.infinity, 50),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    JoinReqDTO joinReqDTO = JoinReqDTO(
+                                      userId: _userid.text,
+                                      password: _password.text,
+                                      email: _email.text,
+                                      phonenumber: _phonenumber.text,
+                                    );
+
+                                    Logger().d("joinDTO :  ${joinReqDTO.toJson()}");
+                                    // Logger().d("userId :  ${joinReqDTO.userId}");
+                                    // Logger().d("password :  ${joinReqDTO.password}");
+                                    // Logger().d("email :  ${joinReqDTO.email}");
+                                    // Logger().d("phone :  ${joinReqDTO.phonenumber}");
+                                    // ref.read(sessionProvider)?.join(joinReqDTO);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => JoinSuccessPage()),
+                                    );
+                                  }
+                                },
+                                child: Text(
+                                  "회원가입",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        JoinReqDTO joinReqDTO = JoinReqDTO(
-                          userId: _userid.text,
-                          password: _password.text,
-                          email: _email.text,
-                          phonenumber: _phonenumber.text,
-                        );
-
-                        Logger().d("joinDTO :  ${joinReqDTO.toJson()}");
-                        // Logger().d("userId :  ${joinReqDTO.userId}");
-                        // Logger().d("password :  ${joinReqDTO.password}");
-                        // Logger().d("email :  ${joinReqDTO.email}");
-                        // Logger().d("phone :  ${joinReqDTO.phonenumber}");
-                        // ref.read(sessionProvider)?.join(joinReqDTO);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => JoinSuccessPage()),
-                        );
-                      }
-                    },
-                    child: Text(
-                      "회원가입",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
