@@ -15,6 +15,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
   int selectedPaymentMethod = 1;
   List<String> blockItems = ["1만원", "3만원", "5만원", "7만원", "10만원", "다른 금액"];
   String selectedBlock = ""; // 선택된 블록
+  String selectedBlockAmount = "";
 
   @override
   Widget build(BuildContext context) {
@@ -22,32 +23,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            floating: true,
-            pinned: true,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back_ios_new),
-              color: Colors.black,
-            ),
-            snap: false,
-            expandedHeight: 90,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text(
-                "일반 충전",
-                style: TextStyle(
-                  color: Colors.black87,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              centerTitle: false,
-              titlePadding: EdgeInsets.only(left: 16.0),
-            ),
-            centerTitle: false,
-          ),
-
+          PayCardChargeAppBar(),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -88,7 +64,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
                       SizedBox(height: gap_xl),
                       textTitle1("충전 금액"),
                       Spacer(),
-                      textTitle1("sss"),
+                      textTitle1(selectedBlockAmount), // 클릭한 블록의 금액을 표시
                     ],
                   ),
 
@@ -182,6 +158,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
       onTap: () {
         setState(() {
           selectedBlock = text; // 클릭한 블록을 선택
+          selectedBlockAmount = text; // 클릭한 블록의 금액을 업데이트
         });
       },
       child: Container(
@@ -201,6 +178,41 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class PayCardChargeAppBar extends StatelessWidget {
+  const PayCardChargeAppBar({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      floating: true,
+      pinned: true,
+      leading: IconButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        icon: Icon(Icons.arrow_back_ios_new),
+        color: Colors.black,
+      ),
+      snap: false,
+      expandedHeight: 90,
+      flexibleSpace: FlexibleSpaceBar(
+        title: Text(
+          "일반 충전",
+          style: TextStyle(
+            color: Colors.black87,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: false,
+        titlePadding: EdgeInsets.only(left: 16.0),
+      ),
+      centerTitle: false,
     );
   }
 }
