@@ -46,10 +46,10 @@ class CategoryListPageBodyItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           textTitle2(
-            "${category.id}",
+            "${category.categoryName}",
           ),
           SizedBox(height: gap_m),
-          textBody3("${category.categoryName} ~ ${category.categoryEngName}")
+          textBody3("${category.categoryEngName}")
         ],
       ),
     );
@@ -62,7 +62,8 @@ class CategoryListPageBodyItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         image: DecorationImage(
-            image: NetworkImage("${category.categoryName}"), fit: BoxFit.cover),
+            image: NetworkImage("${category.categoryPicUrl}"),
+            fit: BoxFit.cover),
       ),
     );
   }

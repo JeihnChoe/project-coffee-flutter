@@ -25,14 +25,11 @@ class CustomGreenButton extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            if(title != "회원가입"){
-
-            }
+            if (title != "박서영") {}
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => move),
             );
-
           },
           child: Text(
             "${title}",
