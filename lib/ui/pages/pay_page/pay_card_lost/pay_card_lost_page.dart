@@ -30,11 +30,7 @@ class PayCardLost extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                // Navigator.push(
-                // context,
-                // MaterialPageRoute(builder: (context) => move),
-                // );
-                // }
+                _CardLostAlertDialog(context);
               },
               child: Text(
                 "신청하기",
@@ -61,7 +57,7 @@ _CardLostAlertDialog(BuildContext context) {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           title: textTitle2("분실 신고를 하시겠어요 ?"),
           actions: <Widget>[
-            CustomWhitePopButton(),
+            CustomWhitePopButton(text: "아니오",),
             CustomGreenButton(
                 "예", 70, 30, MainPage()), //TODO : 확인버튼시 save 저장되게...!
           ],

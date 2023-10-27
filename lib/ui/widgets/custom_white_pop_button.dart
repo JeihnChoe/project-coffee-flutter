@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 
 class CustomWhitePopButton extends StatelessWidget {
-  const CustomWhitePopButton({super.key});
+  final String text;
+  const CustomWhitePopButton({required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class CustomWhitePopButton extends StatelessWidget {
             color: kAccentColor,
           )),
       child: Text(
-        "취소",
+        "${text}",
         style: TextStyle(color: kAccentColor),
       ),
     );
