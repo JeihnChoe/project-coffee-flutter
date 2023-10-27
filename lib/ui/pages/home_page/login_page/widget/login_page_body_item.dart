@@ -7,6 +7,7 @@ import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/_core/utils/validator_util.dart';
 import 'package:project_coffee/data/dto/user_request.dart';
+import 'package:project_coffee/data/store/session_store.dart';
 import 'package:project_coffee/ui/pages/main_page/main_page.dart';
 import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
 
@@ -18,6 +19,19 @@ class LoginPageBodyItem extends ConsumerWidget {
   LoginPageBodyItem({
     super.key,
   });
+
+  void submit(WidgetRef ref) {
+    print("여기봐라~~ ${_formKey.currentState}");
+    if (_formKey.currentState!.validate()) {
+      LoginReqDTO loginReqDTO = LoginReqDTO(
+        userId: userId.text,
+        password: password.text,
+      );
+      Logger().d("${loginReqDTO.toJson()}");
+      ref.read(sessionProvider).login(loginReqDTO);
+
+    }
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -50,35 +64,6 @@ class LoginPageBodyItem extends ConsumerWidget {
                 CustomTextForm("Password", validatorFunction: validatePassword,
                   controller: password,),
                 SizedBox(height: gap_xl,),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: kAccentColor,
-                    minimumSize: Size(double.infinity, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                  ),
-                  onPressed: () {
-                    print("여기봐라~~ ${_formKey.currentState}");
-                    if (_formKey.currentState!.validate()) {
-                      LoginReqDTO loginReqDTO = LoginReqDTO(
-                        userId: userId.text,
-                        password: password.text,
-                      );
-                      Logger().d("${loginReqDTO.toJson()}");
-                      // ref.read(sessionProvider)?.join(joinReqDTO);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MainPage()),
-                      );
-                    }
-                  },
-                  child: Text(
-                    "로그인",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
               ],
             )
             ),

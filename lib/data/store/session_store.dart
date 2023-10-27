@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_coffee/_core/constants/move.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/dto/user_request.dart';
 import 'package:project_coffee/data/repository/user_repository.dart';
@@ -29,9 +30,13 @@ class SessionStore extends SessionUser {
 
     // Navigator.push(mContext, JoinSucessPage())
   }
+
+  Future<void> login(LoginReqDTO loginReqDTO) async {
+    Navigator.pushNamed(mContext!,Move.MainPage);
+  }
 }
 
 //창고 관리자
-final sessionProvider = Provider<SessionStore?>((ref) {
+final sessionProvider = Provider<SessionStore>((ref) {
   return SessionStore();
 });
