@@ -3,6 +3,7 @@ import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/paycard.dart';
 import 'package:project_coffee/ui/pages/home_page/home_main_page/home_main_page.dart';
+import 'package:project_coffee/ui/pages/pay_page/pay_card_charge_page/pay_card_charge_page.dart';
 import 'package:project_coffee/ui/pages/pay_page/pay_card_lost/pay_card_lost_page.dart';
 import 'package:project_coffee/ui/widgets/custom_green_button.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
@@ -33,7 +34,10 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
               children: [
                 Text(
                   "${card.cardName}",
-                  style: TextStyle(color: Colors.black87),
+                  style: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 IconButton(
                   icon: Icon(Icons.mode_edit_outlined),
@@ -133,7 +137,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomeMainPage()));
+                                    builder: (context) => PayCardChargePage()));
                           },
                           child: Container(
                             height: 50,
@@ -235,7 +239,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
       children: [
         textBody1("카드잔액"),
         SizedBox(width: gap_s),
-        textTitle1("${card.cardMoney}"),
+        textTitle0("${card.cardMoney}원"),
       ],
     );
   }
