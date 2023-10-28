@@ -272,6 +272,8 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
               obscureText: false,
               decoration: InputDecoration(hintText: "${card.cardName}"),
             ),
+            actionsPadding:
+                EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
             actions: <Widget>[
               CustomWhitePopButton(text: "취소"),
               CustomGreenButton(

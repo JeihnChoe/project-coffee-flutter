@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
 class PayCardChargePageBody extends StatefulWidget {
   PayCardChargePageBody({super.key});
@@ -15,6 +16,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
   int selectedPaymentMethod = 1;
   List<String> blockItems = ["1만원", "3만원", "5만원", "7만원", "10만원", "다른 금액"];
   String selectedBlock = ""; // 선택된 블록
+  String selectedBlockAmount = "";
 
   @override
   Widget build(BuildContext context) {
@@ -22,32 +24,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            floating: true,
-            pinned: true,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back_ios_new),
-              color: Colors.black,
-            ),
-            snap: false,
-            expandedHeight: 90,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text(
-                "일반 충전",
-                style: TextStyle(
-                  color: Colors.black87,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              centerTitle: false,
-              titlePadding: EdgeInsets.only(left: 16.0),
-            ),
-            centerTitle: false,
-          ),
-
+          PayCardChargeAppBar(),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -88,7 +65,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
                       SizedBox(height: gap_xl),
                       textTitle1("충전 금액"),
                       Spacer(),
-                      textTitle1("sss"),
+                      textTitle1(selectedBlockAmount), // 클릭한 블록의 금액을 표시
                     ],
                   ),
 
@@ -182,6 +159,11 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
       onTap: () {
         setState(() {
           selectedBlock = text; // 클릭한 블록을 선택
+          if (text == "다른 금액") {
+            showCustomAmountDialog(); // 다른 금액 클릭시 Dialog 표시
+          } else {
+            selectedBlockAmount = text; // 클릭한 블록의 금액을 업데이트
+          }
         });
       },
       child: Container(
@@ -201,6 +183,98 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
           ),
         ),
       ),
+    );
+  }
+
+  // 다른 금액을 입력하는 Custom Dialog 표시 함수
+  void showCustomAmountDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        String customAmount = ""; // 사용자가 입력한 금액을 저장할 변수
+
+        return IntrinsicWidth(
+          child: AlertDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            contentPadding:
+                EdgeInsets.symmetric(vertical: 40, horizontal: 20), // 세로 여백 조절
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                textTitle2("충전 할 금액을 입력 해주세요."),
+                TextField(
+                  onChanged: (value) {
+                    customAmount = value;
+                  },
+                  decoration: InputDecoration(
+                    hintText: "충전금액(1만원 단위)",
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+              ],
+            ),
+            actionsPadding:
+                EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
+            actions: [
+              CustomWhitePopButton(text: "취소"),
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: kAccentColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
+                onPressed: () {
+                  setState(() {
+                    selectedBlockAmount = customAmount; // 입력한 금액으로 업데이트
+                    Navigator.of(context).pop(); // Dialog 닫기
+                  });
+                },
+                child: Text(
+                  "확인",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class PayCardChargeAppBar extends StatelessWidget {
+  const PayCardChargeAppBar({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      floating: true,
+      pinned: true,
+      leading: IconButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        icon: Icon(Icons.arrow_back_ios_new),
+        color: Colors.black,
+      ),
+      snap: false,
+      expandedHeight: 90,
+      flexibleSpace: FlexibleSpaceBar(
+        title: Text(
+          "일반 충전",
+          style: TextStyle(
+            color: Colors.black87,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: false,
+        titlePadding: EdgeInsets.only(left: 16.0),
+      ),
+      centerTitle: false,
     );
   }
 }
