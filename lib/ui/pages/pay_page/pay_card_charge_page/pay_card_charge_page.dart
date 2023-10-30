@@ -4,8 +4,7 @@ import 'package:project_coffee/ui/pages/pay_page/pay_card_charge_page/widget/pay
 
 class PayCardChargePage extends StatelessWidget {
   final PayCard payCard;
-  final PayCard card;
-  const PayCardChargePage(this.card, {Key? key}) : super(key: key);
+
   const PayCardChargePage(this.payCard, {super.key});
 
   @override
@@ -13,9 +12,8 @@ class PayCardChargePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: PayCardChargePageBody(payCard),
-      persistentFooterButtons: [],
+      persistentFooterButtons: [
+      ],
     );
-    print("어떤 값이 있냐${card.id}");
-    return PayCardChargePageBody(card);
   }
 }

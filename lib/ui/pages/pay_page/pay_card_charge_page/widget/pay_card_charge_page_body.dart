@@ -8,8 +8,7 @@ import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 class PayCardChargePageBody extends StatefulWidget {
   final PayCard payCard;
   PayCardChargePageBody(this.payCard, {super.key});
-  final PayCard card;
-  PayCardChargePageBody(this.card, {super.key});
+
 
   @override
   _PayCardChargePageBodyState createState() => _PayCardChargePageBodyState();
