@@ -6,6 +6,9 @@ class PromotionListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PromotionListPageBody();
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: PromotionListPageBody(),
+    );
   }
 }

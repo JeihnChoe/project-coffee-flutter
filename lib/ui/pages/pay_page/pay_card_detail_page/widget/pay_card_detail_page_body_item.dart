@@ -6,6 +6,7 @@ import 'package:project_coffee/data/model/paycard.dart';
 import 'package:project_coffee/ui/pages/home_page/home_main_page/home_main_page.dart';
 import 'package:project_coffee/ui/pages/pay_page/pay_card_charge_page/pay_card_charge_page.dart';
 import 'package:project_coffee/ui/pages/pay_page/pay_card_lost/pay_card_lost_page.dart';
+import 'package:project_coffee/ui/pages/pay_page/pay_card_usage_details_page/pay_card_usage_details_page.dart';
 import 'package:project_coffee/ui/widgets/custom_green_button.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
@@ -78,7 +79,8 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomeMainPage()));
+                                    builder: (context) =>
+                                        PayCardUsageDetailsPage()));
                           },
                           child: Container(
                             height: 50,
@@ -306,7 +308,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                   ),
                   TextSpan(
                     text: paycard.cardMoney > 0
-                        ? '현재 카드에 잔액이 있습니다.\n카드 해지 시 잔액이 소멸됩니다.'
+                        ? '현재 카드에 잔액이 있습니다.\n해지 하겠습니까?'
                         : '카드를 정말 해지하시겠습니까?',
                   ),
                 ],
