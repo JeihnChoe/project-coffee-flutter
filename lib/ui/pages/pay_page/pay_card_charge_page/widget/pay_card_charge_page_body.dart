@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/data/model/paycard.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 import 'package:project_coffee/ui/widgets/submit_bottom_button.dart';
 
 class PayCardChargePageBody extends StatefulWidget {
-  PayCardChargePageBody({super.key});
+  final PayCard card;
+  PayCardChargePageBody(this.card, {super.key});
 
   @override
   _PayCardChargePageBodyState createState() => _PayCardChargePageBodyState();
@@ -50,7 +52,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          textBody1("카드이름자리"),
+                          textBody1(""),
                           SizedBox(width: gap_s),
                           textTitle2("??원"),
                         ],
