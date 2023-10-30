@@ -22,7 +22,7 @@ List<PayCard> _mCardList = [
   PayCard(3, "https://image.istarbucks.co.kr/cardImg/20230519/010286_WEB.png",
       "블랙핑크 스타벅스 카드", 40000, 12312678, 1444, "2023-10-24 14:20:36.077"),
   PayCard(4, "https://image.istarbucks.co.kr/cardImg/20230320/010146_WEB.png",
-      "서머 샤인 카드", 10000, 12312678, 1444, "2023-10-24 14:20:36.077"),
+      "서머 샤인 카드", 0, 12312678, 1444, "2023-10-24 14:20:36.077"),
   PayCard(5, "https://image.istarbucks.co.kr/cardImg/20230316/010126_WEB.png",
       "서머 베케이션 카드", 20000, 12312678, 1444, "2023-10-24 14:20:36.077"),
   PayCard(6, "https://image.istarbucks.co.kr/cardImg/20230315/010107_WEB.png",

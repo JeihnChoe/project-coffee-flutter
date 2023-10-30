@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/paycard.dart';
@@ -137,7 +138,8 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => PayCardChargePage()));
+                                    builder: (context) =>
+                                        PayCardChargePage(card)));
                           },
                           child: Container(
                             height: 50,
@@ -194,10 +196,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                       SizedBox(height: gap_m),
                       InkWell(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomeMainPage()));
+                            _cancelCardRegistration(context);
                           },
                           child: Container(
                             height: 50,
@@ -278,6 +277,49 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
               CustomWhitePopButton(text: "취소"),
               CustomGreenButton(
                   "확인", 70, 30, HomeMainPage()), //TODO : 확인버튼시 save 저장되게...!
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  _cancelCardRegistration(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return IntrinsicWidth(
+          child: AlertDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            title: textTitle2("잔액이 남아 있는 카드 입니다."),
+            content: RichText(
+              text: TextSpan(
+                style: DefaultTextStyle.of(context).style,
+                children: <TextSpan>[
+                  TextSpan(
+                    text: "카드 잔액:${card.cardMoney}원\n\n",
+                    style: TextStyle(
+                        color: card.cardMoney > 0
+                            ? kAccentColor
+                            : Colors.black), // 잔액이 있을 때는 초록색, 없을 때는 검정색
+                  ),
+                  TextSpan(
+                    text: card.cardMoney > 0
+                        ? '현재 카드에 잔액이 있습니다.\n카드 해지 시 잔액이 소멸됩니다.'
+                        : '카드를 정말 해지하시겠습니까?',
+                  ),
+                ],
+              ),
+            ),
+            actionsPadding:
+                EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
+            actions: <Widget>[
+              CustomWhitePopButton(text: "아니오"),
+              CustomGreenButton("예", 70, 30, () {
+                // TODO: 확인 버튼 처리 로직
+                Navigator.of(context).pop();
+              }),
             ],
           ),
         );
