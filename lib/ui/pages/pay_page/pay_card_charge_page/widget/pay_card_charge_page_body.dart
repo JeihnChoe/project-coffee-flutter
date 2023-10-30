@@ -21,7 +21,6 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
   String selectedBlock = ""; // 선택된 블록
   String selectedBlockAmount = "";
 
-  @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
@@ -92,15 +91,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
                   }).toList(),
                 ),
 
-                SizedBox(height: gap_l),
-                Divider(thickness: 1, color: Colors.black12), // 구분선
-                SizedBox(height: gap_m),
-                Wrap(
-                  spacing: 12.0, // 블록 간 간격
-                  runSpacing: 10.0, // 줄 간 간격
-                  alignment: WrapAlignment.start,
-                  children: blockItems.map((item) => buildBlock(item)).toList(),
-                ),
+
                 SizedBox(height: gap_l),
                 Divider(thickness: 1, color: Colors.black12), // 구분선
 
