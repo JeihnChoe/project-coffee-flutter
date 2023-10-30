@@ -3,6 +3,7 @@ import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
+import 'package:project_coffee/ui/widgets/submit_bottom_button.dart';
 
 class PayCardChargePageBody extends StatefulWidget {
   PayCardChargePageBody({super.key});
@@ -75,7 +76,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
                     runSpacing: 10.0, // 줄 간 간격
                     alignment: WrapAlignment.start,
                     children:
-                        blockItems.map((item) => buildBlock(item)).toList(),
+                    blockItems.map((item) => buildBlock(item)).toList(),
                   ),
                   SizedBox(height: gap_l),
                   Divider(thickness: 1, color: Colors.black12), // 구분선
@@ -196,9 +197,9 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
         return IntrinsicWidth(
           child: AlertDialog(
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             contentPadding:
-                EdgeInsets.symmetric(vertical: 40, horizontal: 20), // 세로 여백 조절
+            EdgeInsets.symmetric(vertical: 40, horizontal: 20), // 세로 여백 조절
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -215,7 +216,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
               ],
             ),
             actionsPadding:
-                EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
+            EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
             actions: [
               CustomWhitePopButton(text: "취소"),
               TextButton(
