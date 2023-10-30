@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
@@ -140,6 +141,9 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
+                                    builder: (context) => PayCardChargePage(card)));
+
+
                                     builder: (context) =>
                                         PayCardChargePage(card)));
                           },
