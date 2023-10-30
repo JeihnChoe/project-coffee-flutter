@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
@@ -6,8 +7,8 @@ import 'package:project_coffee/data/model/paycard.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
 class PayCardChargePageBody extends StatefulWidget {
-  final PayCard payCard;
-  PayCardChargePageBody(this.payCard, {super.key});
+  final PayCard paycard;
+  PayCardChargePageBody(this.paycard, {super.key});
 
   @override
   _PayCardChargePageBodyState createState() => _PayCardChargePageBodyState();
@@ -19,6 +20,20 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
   List<String> blockItems = ["1만원", "3만원", "5만원", "7만원", "10만원", "다른 금액"];
   String selectedBlock = ""; // 선택된 블록
   String selectedBlockAmount = "";
+  int total = 0;
+  void sum(String text) {
+    if (text == "1만원") {
+      total = 10000;
+    } else if (text == "3만원") {
+      total = 30000;
+    } else if (text == "5만원") {
+      total = 50000;
+    } else if (text == "7만원") {
+      total = 70000;
+    } else if (text == "10만원") {
+      total = 100000;
+    } else if (text == "다른 금액") {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +54,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: Colors.black12),
                         image: DecorationImage(
-                          image: NetworkImage("https://picsum.photos/5"),
+                          image: NetworkImage("${widget.paycard.cardPicUrl}"),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -50,9 +65,9 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         textBody1(""),
-                        textBody1("${widget.payCard.cardName}"),
+                        textBody1("${widget.paycard.cardName}"),
                         SizedBox(width: gap_s),
-                        textTitle2("${widget.payCard.cardMoney}원"),
+                        textTitle2("${widget.paycard.cardMoney}원"),
                       ],
                     ),
                   ],
@@ -176,6 +191,8 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
             showCustomAmountDialog(); // 다른 금액 클릭시 Dialog 표시
           } else {
             selectedBlockAmount = text; // 클릭한 블록의 금액을 업데이트
+            sum(text);
+            Logger().d(total);
           }
         });
       },
@@ -219,6 +236,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
                 TextField(
                   onChanged: (value) {
                     customAmount = value + "만원";
+                    total = int.parse(value + "0000");
                   },
                   decoration: InputDecoration(
                     hintText: "충전금액(1만원 단위)",
@@ -241,6 +259,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
                 onPressed: () {
                   setState(() {
                     selectedBlockAmount = customAmount; // 입력한 금액으로 업데이트
+                    Logger().d(total);
                     Navigator.of(context).pop(); // Dialog 닫기
                   });
                 },
