@@ -10,8 +10,8 @@ import 'package:project_coffee/ui/widgets/custom_green_button.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
 class PayCardDetailPageBodyItem extends StatelessWidget {
-  final PayCard card;
-  const PayCardDetailPageBodyItem(this.card, {super.key});
+  final PayCard paycard;
+  const PayCardDetailPageBodyItem(this.paycard, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "${card.cardName}",
+                  "${paycard.cardName}",
                   style: TextStyle(
                     color: Colors.black87,
                     fontWeight: FontWeight.bold,
@@ -139,7 +139,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        PayCardChargePage(card)));
+                                        PayCardChargePage(paycard)));
                           },
                           child: Container(
                             height: 50,
@@ -182,7 +182,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                                       color: Colors.black,
                                     ),
                                     SizedBox(width: gap_s),
-                                    textBody1("분실신고및잔액조회"),
+                                    textBody1("분실신고및잔액이전"),
                                   ],
                                 ),
                                 Spacer(), // 혹은 빈 Container(width: 8) 등으로 간격을 추가할 수 있습니다.
@@ -238,7 +238,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
       children: [
         textBody1("카드잔액"),
         SizedBox(width: gap_s),
-        textTitle0("${card.cardMoney}원"),
+        textTitle0("${paycard.cardMoney}원"),
       ],
     );
   }
@@ -251,7 +251,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.black12),
         image: DecorationImage(
-          image: NetworkImage("${card.cardPicUrl}"),
+          image: NetworkImage("${paycard.cardPicUrl}"),
           fit: BoxFit.cover,
         ),
       ),
@@ -265,14 +265,14 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
         return IntrinsicWidth(
           child: AlertDialog(
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             title: textTitle2("카드 이름을 입력해주세요."),
             content: TextFormField(
               obscureText: false,
-              decoration: InputDecoration(hintText: "${card.cardName}"),
+              decoration: InputDecoration(hintText: "${paycard.cardName}"),
             ),
             actionsPadding:
-            EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
+                EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
             actions: <Widget>[
               CustomWhitePopButton(text: "취소"),
               CustomGreenButton(
@@ -291,21 +291,21 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
         return IntrinsicWidth(
           child: AlertDialog(
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             title: textTitle2("잔액이 남아 있는 카드 입니다."),
             content: RichText(
               text: TextSpan(
                 style: DefaultTextStyle.of(context).style,
                 children: <TextSpan>[
                   TextSpan(
-                    text: "카드 잔액:${card.cardMoney}원\n\n",
+                    text: "카드 잔액:${paycard.cardMoney}원\n\n",
                     style: TextStyle(
-                        color: card.cardMoney > 0
+                        color: paycard.cardMoney > 0
                             ? kAccentColor
                             : Colors.black), // 잔액이 있을 때는 초록색, 없을 때는 검정색
                   ),
                   TextSpan(
-                    text: card.cardMoney > 0
+                    text: paycard.cardMoney > 0
                         ? '현재 카드에 잔액이 있습니다.\n카드 해지 시 잔액이 소멸됩니다.'
                         : '카드를 정말 해지하시겠습니까?',
                   ),
@@ -313,7 +313,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
               ),
             ),
             actionsPadding:
-            EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
+                EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
             actions: <Widget>[
               CustomWhitePopButton(text: "아니오"),
               CustomGreenButton("예", 70, 30, () {

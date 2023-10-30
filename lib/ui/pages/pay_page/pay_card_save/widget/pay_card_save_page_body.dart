@@ -4,12 +4,10 @@ import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/dto/card_request.dart';
-
 import 'package:project_coffee/ui/pages/pay_page/pay_main_page/pay_main_page.dart';
 import 'package:project_coffee/ui/widgets/custom_tab_bar.dart';
 
 import 'pay_card_save_page_body_item.dart';
-
 
 class PayCardSaveBodyPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -44,7 +42,8 @@ class PayCardSaveBodyPage extends StatelessWidget {
           ),
         ),
         SliverToBoxAdapter(
-          child: CustomTabBar(contentTitle1: "스타벅스 카드",contentTitle2: "카드 교환권"),
+          child:
+              CustomTabBar(contentTitle1: "스타벅스 카드", contentTitle2: "카드 교환권"),
         ),
         SliverFillRemaining(
           child: TabBarView(
@@ -56,7 +55,10 @@ class PayCardSaveBodyPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      PayCardSaveTextFormFeild(cardName: _cardName,cardNumber: _cardNumber,pinNumber: _pinNumber),
+                      PayCardSaveTextFormFeild(
+                          cardName: _cardName,
+                          cardNumber: _cardNumber,
+                          pinNumber: _pinNumber),
                       GreyBoxHeight(),
                       CardSaveGreyTextFeild(),
                       SizedBox(
@@ -68,16 +70,15 @@ class PayCardSaveBodyPage extends StatelessWidget {
                       ),
                     ],
                   ),
-
                 ),
               ),
-              Center(child: Text("카드 교환권"),)
-
+              Center(
+                child: Text("카드 교환권"),
+              )
             ],
           ),
         )
       ],
-
     );
   }
 
@@ -91,15 +92,16 @@ class PayCardSaveBodyPage extends StatelessWidget {
         ),
       ),
       onPressed: () {
-        CardSaveReqDTO cardSaveReqDTO = CardSaveReqDTO(cardName: _cardName.text, cardNumber: _cardNumber.text, pinNumber: _pinNumber.text);
+        CardSaveReqDTO cardSaveReqDTO = CardSaveReqDTO(
+            cardName: _cardName.text,
+            cardNumber: _cardNumber.text,
+            pinNumber: _pinNumber.text);
         Logger().d("CardSaveReqDTO : ${cardSaveReqDTO.toJson()}");
-
 
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => PayMainPage()),
         );
-
       },
       child: Text(
         "등록하기",
@@ -120,9 +122,12 @@ class PayCardSaveBodyPage extends StatelessWidget {
           Row(
             children: [
               textBody3("카드가 없다면 e-Gift Card의"),
-              TextButton(onPressed: () {
-
-              }, child: Text("나에게 선물하기",style: TextStyle(fontSize: 11,color: kAccentColor),)),
+              TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "나에게 선물하기",
+                    style: TextStyle(fontSize: 11, color: kAccentColor),
+                  )),
               textBody3("를 이용해보세요.")
             ],
           ),
@@ -132,4 +137,3 @@ class PayCardSaveBodyPage extends StatelessWidget {
     );
   }
 }
-
