@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/data/model/paycard.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 import 'package:project_coffee/ui/widgets/submit_bottom_button.dart';
 
+import 'pay_card_charge_appbar.dart';
+
 class PayCardChargePageBody extends StatefulWidget {
-  PayCardChargePageBody({super.key});
+  final PayCard payCard;
+  PayCardChargePageBody(this.payCard,{super.key});
 
   @override
   _PayCardChargePageBodyState createState() => _PayCardChargePageBodyState();
@@ -19,11 +24,11 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
   String selectedBlock = ""; // 선택된 블록
   String selectedBlockAmount = "";
 
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: CustomScrollView(
+
+    return  CustomScrollView(
         slivers: [
           PayCardChargeAppBar(),
           SliverToBoxAdapter(
@@ -50,9 +55,9 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          textBody1("카드이름자리"),
+                          textBody1("${widget.payCard.cardName}"),
                           SizedBox(width: gap_s),
-                          textTitle2("??원"),
+                          textTitle2("${widget.payCard.cardMoney}원"),
                         ],
                       ),
                     ],
@@ -150,7 +155,6 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
           ),
           // SliverList(delegate: delegate)
         ],
-      ),
     );
   }
 
@@ -245,37 +249,3 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
   }
 }
 
-class PayCardChargeAppBar extends StatelessWidget {
-  const PayCardChargeAppBar({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverAppBar(
-      floating: true,
-      pinned: true,
-      leading: IconButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        icon: Icon(Icons.arrow_back_ios_new),
-        color: Colors.black,
-      ),
-      snap: false,
-      expandedHeight: 90,
-      flexibleSpace: FlexibleSpaceBar(
-        title: Text(
-          "일반 충전",
-          style: TextStyle(
-            color: Colors.black87,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: false,
-        titlePadding: EdgeInsets.only(left: 16.0),
-      ),
-      centerTitle: false,
-    );
-  }
-}
