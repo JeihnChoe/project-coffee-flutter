@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 class CardSaveReqDTO {
   final String cardName;
   final String cardNumber;
@@ -37,14 +35,15 @@ class CardChargeReqDTO {
     required this.pinNumber,
     required this.chargeMoney,
     required this.totalMoney,
-});
-  Map<String , dynamic> toJson() => {
-    "cardId" : cardId,
-    "cardName": cardName,
-    "cardNumber": cardNumber,
-    "cardMoney": cardMoney,
-    "pinNumber": pinNumber,
-    "chargeMoney": chargeMoney,
-    "totalMoney": totalMoney,
-  };
+  });
+  Map<String, dynamic> toJson() => {
+        "cardId": cardId,
+        "cardPicUrl": cardPicUrl,
+        "cardName": cardName,
+        "cardNumber": cardNumber,
+        "cardMoney": cardMoney,
+        "pinNumber": pinNumber,
+        "chargeMoney": chargeMoney,
+        "totalMoney": totalMoney,
+      };
 }
