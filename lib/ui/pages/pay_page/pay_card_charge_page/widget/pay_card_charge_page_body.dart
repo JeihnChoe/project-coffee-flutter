@@ -97,13 +97,15 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
                       return Row(
                         children: blockItems
                             .sublist(start, end)
-                            .map((item) => buildBlock(item))
+                            .map((item) => Container(
+                                  margin: EdgeInsets.only(
+                                      right: 12.0), // 각 블록 간의 간격 조절
+                                  child: buildBlock(item),
+                                ))
                             .toList(),
                       );
                     },
-                  ).expand((widget) {
-                    return [widget]; // 각 줄의 간격 조절
-                  }).toList(),
+                  ),
                 ),
 
                 SizedBox(height: gap_l),
