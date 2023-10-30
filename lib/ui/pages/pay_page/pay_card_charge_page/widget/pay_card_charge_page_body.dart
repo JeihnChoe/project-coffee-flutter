@@ -4,7 +4,6 @@ import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/paycard.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
-import 'package:project_coffee/ui/widgets/submit_bottom_button.dart';
 
 class PayCardChargePageBody extends StatefulWidget {
   final PayCard card;
@@ -74,12 +73,25 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
 
                   SizedBox(height: gap_m),
                   Wrap(
-                    spacing: 12.0, // 블록 간 간격
                     runSpacing: 10.0, // 줄 간 간격
                     alignment: WrapAlignment.start,
-                    children:
-                    blockItems.map((item) => buildBlock(item)).toList(),
+                    children: List<Widget>.generate(
+                      (blockItems.length / 3).ceil(), // 3개씩 묶기
+                      (int index) {
+                        final start = index * 3;
+                        final end = (index + 1) * 3;
+                        return Row(
+                          children: blockItems
+                              .sublist(start, end)
+                              .map((item) => buildBlock(item))
+                              .toList(),
+                        );
+                      },
+                    ).expand((widget) {
+                      return [widget]; // 각 줄의 간격 조절
+                    }).toList(),
                   ),
+
                   SizedBox(height: gap_l),
                   Divider(thickness: 1, color: Colors.black12), // 구분선
 
@@ -199,16 +211,16 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
         return IntrinsicWidth(
           child: AlertDialog(
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             contentPadding:
-            EdgeInsets.symmetric(vertical: 40, horizontal: 20), // 세로 여백 조절
+                EdgeInsets.symmetric(vertical: 40, horizontal: 20), // 세로 여백 조절
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 textTitle2("충전 할 금액을 입력 해주세요."),
                 TextField(
                   onChanged: (value) {
-                    customAmount = value;
+                    customAmount = value + "만원";
                   },
                   decoration: InputDecoration(
                     hintText: "충전금액(1만원 단위)",
@@ -218,7 +230,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
               ],
             ),
             actionsPadding:
-            EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
+                EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
             actions: [
               CustomWhitePopButton(text: "취소"),
               TextButton(

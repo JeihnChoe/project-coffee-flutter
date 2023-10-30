@@ -109,7 +109,8 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => PayCardAutoChargePage()));
+                                    builder: (context) =>
+                                        PayCardAutoChargePage()));
                           },
                           child: Container(
                             height: 50,
@@ -183,7 +184,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                                       color: Colors.black,
                                     ),
                                     SizedBox(width: gap_s),
-                                    textBody1("분실신고및잔액조회"),
+                                    textBody1("분실신고및잔액이전"),
                                   ],
                                 ),
                                 Spacer(), // 혹은 빈 Container(width: 8) 등으로 간격을 추가할 수 있습니다.
@@ -307,7 +308,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                   ),
                   TextSpan(
                     text: card.cardMoney > 0
-                        ? '현재 카드에 잔액이 있습니다.\n카드 해지 시 잔액이 소멸됩니다.'
+                        ? '현재 카드에 잔액이 있습니다.\n카드 해지를 하겠습니까?'
                         : '카드를 정말 해지하시겠습니까?',
                   ),
                 ],
