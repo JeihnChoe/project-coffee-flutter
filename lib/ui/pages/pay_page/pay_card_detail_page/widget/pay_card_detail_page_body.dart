@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/data/model/paycard.dart';
-import 'package:project_coffee/ui/pages/pay_page/pay_card_detail_page/widget/pay_card_detail_page_body_iteam.dart';
+import 'package:project_coffee/ui/pages/pay_page/pay_card_detail_page/widget/pay_card_detail_page_body_item.dart';
 
 class PayCadDetailPageBody extends StatelessWidget {
   final PayCard card;

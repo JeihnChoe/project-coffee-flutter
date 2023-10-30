@@ -4,9 +4,12 @@ import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/paycard.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
-import 'package:project_coffee/ui/widgets/submit_bottom_button.dart';
+
+import 'pay_card_charge_appbar.dart';
 
 class PayCardChargePageBody extends StatefulWidget {
+  final PayCard payCard;
+  PayCardChargePageBody(this.payCard, {super.key});
   final PayCard card;
   PayCardChargePageBody(this.card, {super.key});
 
@@ -23,136 +26,133 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: CustomScrollView(
-        slivers: [
-          PayCardChargeAppBar(),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.black12),
-                          image: DecorationImage(
-                            image: NetworkImage("https://picsum.photos/5"),
-                            fit: BoxFit.cover,
-                          ),
+    return CustomScrollView(
+      slivers: [
+        PayCardChargeAppBar(),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 100,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.black12),
+                        image: DecorationImage(
+                          image: NetworkImage("https://picsum.photos/5"),
+                          fit: BoxFit.cover,
                         ),
                       ),
-                      SizedBox(width: gap_l),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          textBody1(""),
-                          SizedBox(width: gap_s),
-                          textTitle2("??원"),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: gap_m),
-
-                  Divider(thickness: 1, color: Colors.black12), // 구분선
-
-                  Row(
-                    children: [
-                      SizedBox(height: gap_xl),
-                      textTitle1("충전 금액"),
-                      Spacer(),
-                      textTitle1(selectedBlockAmount), // 클릭한 블록의 금액을 표시
-                    ],
-                  ),
-
-                  SizedBox(height: gap_m),
-                  Wrap(
-                    spacing: 12.0, // 블록 간 간격
-                    runSpacing: 10.0, // 줄 간 간격
-                    alignment: WrapAlignment.start,
-                    children:
-                    blockItems.map((item) => buildBlock(item)).toList(),
-                  ),
-                  SizedBox(height: gap_l),
-                  Divider(thickness: 1, color: Colors.black12), // 구분선
-
-                  Row(
-                    children: [
-                      SizedBox(height: gap_xl),
-                      textTitle1("결제 수단"),
-                    ],
-                  ),
-
-                  // 라디오 버튼 목록
-                  RadioListTile(
-                    value: 1,
-                    groupValue: selectedPaymentMethod,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedPaymentMethod = value!;
-                      });
-                    },
-                    title: textTitle2('신용카드'),
-                  ),
-                  RadioListTile(
-                    value: 2,
-                    groupValue: selectedPaymentMethod,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedPaymentMethod = value!;
-                      });
-                    },
-                    title: textTitle2('SSGPAY'),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(
-                        left: 20, top: 10, right: 10, bottom: 10),
-                    width: double.infinity,
-                    color: Colors.grey[100],
-                    child: Column(
+                    ),
+                    SizedBox(width: gap_l),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        textBody3(
-                            "재충전 이후 거래 이력이 없는 경우, 충전일로부터 최대 7일내 온라인에서 충전 취소가 가능합니다."),
+                        textBody1(""),
+                        textBody1("${widget.payCard.cardName}"),
+                        SizedBox(width: gap_s),
+                        textTitle2("${widget.payCard.cardMoney}원"),
                       ],
                     ),
-                  ),
-                  SizedBox(height: gap_l),
-                  Divider(thickness: 1, color: Colors.black12), // 구분선
-                  ExpansionTile(
-                    title: textTitle1(
-                      '온라인 충전 시 유의사항',
-                    ),
-                    children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.only(
-                            left: 20, top: 10, right: 10, bottom: 10),
-                        width: double.infinity,
-                        color: Colors.grey[100],
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            textBody3(
-                                "스타벅스카드 충전은 1회 1만원부터 55만원까지 가능하며, 충전 후 총액이 55만원을 초과할 수 없습니다."),
-                          ],
-                        ),
-                      ),
+                  ],
+                ),
+                SizedBox(height: gap_m),
+
+                Divider(thickness: 1, color: Colors.black12), // 구분선
+
+                Row(
+                  children: [
+                    SizedBox(height: gap_xl),
+                    textTitle1("충전 금액"),
+                    Spacer(),
+                    textTitle1(selectedBlockAmount), // 클릭한 블록의 금액을 표시
+                  ],
+                ),
+
+                SizedBox(height: gap_m),
+                Wrap(
+                  spacing: 12.0, // 블록 간 간격
+                  runSpacing: 10.0, // 줄 간 간격
+                  alignment: WrapAlignment.start,
+                  children: blockItems.map((item) => buildBlock(item)).toList(),
+                ),
+                SizedBox(height: gap_l),
+                Divider(thickness: 1, color: Colors.black12), // 구분선
+
+                Row(
+                  children: [
+                    SizedBox(height: gap_xl),
+                    textTitle1("결제 수단"),
+                  ],
+                ),
+
+                // 라디오 버튼 목록
+                RadioListTile(
+                  value: 1,
+                  groupValue: selectedPaymentMethod,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedPaymentMethod = value!;
+                    });
+                  },
+                  title: textTitle2('신용카드'),
+                ),
+                RadioListTile(
+                  value: 2,
+                  groupValue: selectedPaymentMethod,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedPaymentMethod = value!;
+                    });
+                  },
+                  title: textTitle2('SSGPAY'),
+                ),
+                Container(
+                  padding:
+                      EdgeInsets.only(left: 20, top: 10, right: 10, bottom: 10),
+                  width: double.infinity,
+                  color: Colors.grey[100],
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      textBody3(
+                          "재충전 이후 거래 이력이 없는 경우, 충전일로부터 최대 7일내 온라인에서 충전 취소가 가능합니다."),
                     ],
-                  )
-                ],
-              ),
+                  ),
+                ),
+                SizedBox(height: gap_l),
+                Divider(thickness: 1, color: Colors.black12), // 구분선
+                ExpansionTile(
+                  title: textTitle1(
+                    '온라인 충전 시 유의사항',
+                  ),
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(
+                          left: 20, top: 10, right: 10, bottom: 10),
+                      width: double.infinity,
+                      color: Colors.grey[100],
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          textBody3(
+                              "스타벅스카드 충전은 1회 1만원부터 55만원까지 가능하며, 충전 후 총액이 55만원을 초과할 수 없습니다."),
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+              ],
             ),
           ),
-          // SliverList(delegate: delegate)
-        ],
-      ),
+        ),
+        // SliverList(delegate: delegate)
+      ],
     );
   }
 
@@ -199,9 +199,9 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
         return IntrinsicWidth(
           child: AlertDialog(
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             contentPadding:
-            EdgeInsets.symmetric(vertical: 40, horizontal: 20), // 세로 여백 조절
+                EdgeInsets.symmetric(vertical: 40, horizontal: 20), // 세로 여백 조절
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -218,7 +218,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
               ],
             ),
             actionsPadding:
-            EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
+                EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
             actions: [
               CustomWhitePopButton(text: "취소"),
               TextButton(
@@ -243,41 +243,6 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
           ),
         );
       },
-    );
-  }
-}
-
-class PayCardChargeAppBar extends StatelessWidget {
-  const PayCardChargeAppBar({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverAppBar(
-      floating: true,
-      pinned: true,
-      leading: IconButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        icon: Icon(Icons.arrow_back_ios_new),
-        color: Colors.black,
-      ),
-      snap: false,
-      expandedHeight: 90,
-      flexibleSpace: FlexibleSpaceBar(
-        title: Text(
-          "일반 충전",
-          style: TextStyle(
-            color: Colors.black87,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: false,
-        titlePadding: EdgeInsets.only(left: 16.0),
-      ),
-      centerTitle: false,
     );
   }
 }
