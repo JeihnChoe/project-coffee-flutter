@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/paycard.dart';
 import 'package:project_coffee/ui/pages/home_page/home_main_page/home_main_page.dart';
-import 'package:project_coffee/ui/pages/pay_page/pay_card_auto_charge_page/pay_card_auto_charge_page.dart';
 import 'package:project_coffee/ui/pages/pay_page/pay_card_charge_page/pay_card_charge_page.dart';
 import 'package:project_coffee/ui/pages/pay_page/pay_card_lost/pay_card_lost_page.dart';
 import 'package:project_coffee/ui/widgets/custom_green_button.dart';
@@ -110,8 +108,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        PayCardAutoChargePage()));
+                                    builder: (context) => HomeMainPage()));
                           },
                           child: Container(
                             height: 50,
@@ -141,9 +138,6 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => PayCardChargePage(card)));
-
-
                                     builder: (context) =>
                                         PayCardChargePage(card)));
                           },
@@ -188,7 +182,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                                       color: Colors.black,
                                     ),
                                     SizedBox(width: gap_s),
-                                    textBody1("분실신고및잔액이전"),
+                                    textBody1("분실신고및잔액조회"),
                                   ],
                                 ),
                                 Spacer(), // 혹은 빈 Container(width: 8) 등으로 간격을 추가할 수 있습니다.
@@ -271,14 +265,14 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
         return IntrinsicWidth(
           child: AlertDialog(
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             title: textTitle2("카드 이름을 입력해주세요."),
             content: TextFormField(
               obscureText: false,
               decoration: InputDecoration(hintText: "${card.cardName}"),
             ),
             actionsPadding:
-                EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
+            EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
             actions: <Widget>[
               CustomWhitePopButton(text: "취소"),
               CustomGreenButton(
@@ -297,7 +291,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
         return IntrinsicWidth(
           child: AlertDialog(
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             title: textTitle2("잔액이 남아 있는 카드 입니다."),
             content: RichText(
               text: TextSpan(
@@ -312,14 +306,14 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                   ),
                   TextSpan(
                     text: card.cardMoney > 0
-                        ? '현재 카드에 잔액이 있습니다.\n카드 해지를 하겠습니까?'
+                        ? '현재 카드에 잔액이 있습니다.\n카드 해지 시 잔액이 소멸됩니다.'
                         : '카드를 정말 해지하시겠습니까?',
                   ),
                 ],
               ),
             ),
             actionsPadding:
-                EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
+            EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
             actions: <Widget>[
               CustomWhitePopButton(text: "아니오"),
               CustomGreenButton("예", 70, 30, () {
