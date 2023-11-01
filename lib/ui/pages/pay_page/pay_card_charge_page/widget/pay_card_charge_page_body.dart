@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
@@ -21,7 +20,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
   // 선언된 라디오 버튼의 초기값
   int selectedPaymentMethod = 1;
   List<String> blockItems = ["1만원", "3만원", "5만원", "7만원", "10만원", "다른 금액"];
-  String selectedBlock = ""; // 선택된 블록
+  String selectedBlock = "1만원"; // 선택된 블록
   String selectedBlockAmount = "";
   int total = 0;
 
@@ -29,23 +28,18 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
     if (text == "1만원") {
       total = 10000 + widget.paycard.cardMoney;
       print(total);
-      widget.updateTotal(total);
     } else if (text == "3만원") {
       total = 30000 + widget.paycard.cardMoney;
       print(widget.paycard.cardMoney);
-      widget.updateTotal(total);
     } else if (text == "5만원") {
       total = 50000 + widget.paycard.cardMoney;
       print(widget.paycard.cardMoney);
-      widget.updateTotal(total);
     } else if (text == "7만원") {
       total = 70000 + widget.paycard.cardMoney;
       print(widget.paycard.cardMoney);
-      widget.updateTotal(total);
     } else if (text == "10만원") {
       total = 100000 + widget.paycard.cardMoney;
       print(widget.paycard.cardMoney);
-      widget.updateTotal(total);
     } else if (text == "다른 금액") {
       showCustomAmountDialog();
     }
@@ -210,7 +204,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
           } else {
             selectedBlockAmount = text; // 클릭한 블록의 금액을 업데이트
             sum(text);
-            Logger().d(total);
+            widget.updateTotal(total);
           }
         });
       },
