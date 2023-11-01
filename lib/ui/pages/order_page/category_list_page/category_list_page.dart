@@ -10,3 +10,7 @@ class CategoryListPage extends StatelessWidget {
     return const CardListPageBody();
   }
 }
+
+
+
+

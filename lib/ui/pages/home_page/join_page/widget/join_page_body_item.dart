@@ -1,22 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
-import 'package:project_coffee/_core/constants/color.dart';
+
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
-import 'package:project_coffee/_core/utils/validator_util.dart';
-import 'package:project_coffee/data/dto/user_request.dart';
-import 'package:project_coffee/ui/pages/home_page/join_success_page/join_success_page.dart';
 
-import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
 
 class JoinPageBodyItem extends ConsumerWidget {
-  final _formKey = GlobalKey<FormState>();
-  final _userid = TextEditingController();
-  final _password = TextEditingController();
-  final _passwordchk = TextEditingController();
-  final _email = TextEditingController();
-  final _phonenumber = TextEditingController();
   JoinPageBodyItem({Key? key}) : super(key: key);
 
   @override

@@ -1,0 +1,32 @@
+import 'package:flutter/material.dart';
+
+class CategoryListPageAppBar extends StatelessWidget {
+  String title;
+
+  CategoryListPageAppBar({required this.title, super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      floating: true,
+      pinned: true,
+      leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios_new),
+          color: Colors.black),
+      snap: false,
+      expandedHeight: 90,
+      flexibleSpace: FlexibleSpaceBar(
+        title: Text(
+          "${title}",
+          style: TextStyle(color: Colors.black87),
+        ),
+        centerTitle: false,
+        titlePadding: EdgeInsets.only(left: 16.0),
+      ),
+    );
+  }
+}

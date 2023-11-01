@@ -18,13 +18,13 @@ class CategoryListViewModel extends StateNotifier<CategoryListModel?> {
 
   Future<void> notifyInit() async {
     ResponseDTO responseDTO =
-        await CategoryRepository().fetchCategoryDetailList();
+    await CategoryRepository().fetchCategoryDetailList();
     state = CategoryListModel(responseDTO.response);
   }
 }
 
 //창고관리자
 final CategoryListProvider =
-    StateNotifierProvider<CategoryListViewModel, CategoryListModel?>((ref) {
+StateNotifierProvider<CategoryListViewModel, CategoryListModel?>((ref) {
   return CategoryListViewModel(null, ref)..notifyInit();
 });

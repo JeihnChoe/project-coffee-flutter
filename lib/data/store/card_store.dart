@@ -9,21 +9,25 @@ import 'package:project_coffee/main.dart';
 
 import '../dto/reponse_dto.dart';
 
-class PayCardChargeModel{
+class PayCardModel{
   PayCard? card;
-  PayCardChargeModel({this.card});
+  PayCardModel({this.card});
 }
 
-class PayCardChargeStore extends PayCardChargeModel {
+class PayCardStore extends PayCardModel {
   final mContext = navigatorKey.currentContext;
 
   Future<void> charge(CardChargeReqDTO cardChargeReqDTO) async {
     Navigator.pushNamed(mContext!, Move.MainPage);
     // Navigator.push(mContext, JoinSucessPage())
   }
+
+  Future<void> save(CardSaveReqDTO cardSaveReqDTO) async{
+    Navigator.pushNamed(mContext!, Move.PayMainPage);
+  }
 }
 
 //창고 관리자
-final cardChargeProvider = Provider<PayCardChargeStore>((ref) {
-  return PayCardChargeStore();
+final cardProvider = Provider<PayCardStore>((ref) {
+  return PayCardStore();
 });
