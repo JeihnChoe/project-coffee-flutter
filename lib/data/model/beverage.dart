@@ -4,7 +4,7 @@ class Beverage {
   final String beverageEngName;
   final String beverageDescription;
   final String beverageTip;
-  final String hotIce;
+  final String hotIce;  //
   final String beveragePicUrl;
   final int category;
 

@@ -36,7 +36,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.FindLoginIdSuccessPage: (context) => const FindLoginIdSuccessPage(),
     Move.FindPasswordPage: (context) => FindPasswordPage(),
     Move.FindPasswordNewSetPage: (context) => FindPasswordNewSetPage(),
-    Move.CardSavePage: (context) => const PayCardSavePage(),
+    Move.CardSavePage: (context) => PayCardSavePage(),
     Move.PayMainPage: (context) => const PayMainPage(),
   };
 }

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 
-class CustomTabBar extends StatelessWidget {
+class CustomTabBar extends StatelessWidget{
   final String contentTitle1;
   final String contentTitle2;
   const CustomTabBar(
       {required this.contentTitle1,required this.contentTitle2
       });
+
 
   @override
   Widget build(BuildContext context) {

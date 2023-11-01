@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
+import 'package:project_coffee/_core/constants/move.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/paycard.dart';
@@ -55,6 +56,7 @@ class _PayCardChargePageState extends State<PayCardChargePage> {
               ),
               onPressed: () {
                 // 여기에 충전하기 버튼을 눌렀을 때 실행할 코드를 추가하세요.
+                Navigator.pushNamed(context, Move.PayMainPage);
               },
               child: Text(
                 "충전하기",

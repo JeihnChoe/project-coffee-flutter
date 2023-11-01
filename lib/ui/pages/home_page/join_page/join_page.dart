@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/ui/pages/home_page/join_page/widget/join_page_body.dart';
 import 'package:project_coffee/ui/pages/home_page/join_page/widget/join_page_form_field.dart';
 

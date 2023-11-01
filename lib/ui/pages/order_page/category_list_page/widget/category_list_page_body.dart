@@ -4,6 +4,10 @@ import 'package:project_coffee/data/model/category.dart';
 import 'package:project_coffee/ui/pages/order_page/category_list_page/category_list_page_view_model.dart';
 import 'package:project_coffee/ui/pages/order_page/category_list_page/widget/category_list_page_body_item.dart';
 import 'package:project_coffee/ui/widgets/custom_sliver_app_bar.dart';
+import 'package:project_coffee/ui/widgets/custom_tab_bar.dart';
+
+import 'category_list_page_app_bar.dart';
+import 'category_list_page_custom_nested_tab_bar.dart';
 
 class CardListPageBody extends ConsumerWidget {
   const CardListPageBody({super.key});
@@ -17,21 +21,33 @@ class CardListPageBody extends ConsumerWidget {
       categoryList = model.categoryList;
     }
 
-    return Scaffold(
-        backgroundColor: Colors.white, // 배경 색상 설정
-        body: CustomScrollView(
-          slivers: [
-            CustomSliverAppBar(title: "Pay"),
-            SliverPadding(
-              padding: const EdgeInsets.all(16.0),
-              sliver: SliverList.separated(
-                separatorBuilder: (context, index) => Divider(),
-                itemBuilder: (context, index) =>
-                    CategoryListPageBodyItem(categoryList[index]),
-                itemCount: categoryList.length,
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+          backgroundColor: Colors.white, // 배경 색상 설정
+          body: CustomScrollView(
+            slivers: [
+              CategoryListPageAppBar(title: "Order"),
+
+              SliverToBoxAdapter(
+                child:CustomTabBar(contentTitle1: "전체 메뉴", contentTitle2: "나만의 메뉴")
+                ,
               ),
-            ),
-          ],
-        ));
+              SliverFillRemaining(
+                child: TabBarView(
+                    children: [
+                      CustomNestedTabBar("푸드"),
+                      Center(child: Text("푸드"),)
+
+                    ]),
+              )
+
+            ],
+          )),
+    );
   }
 }
+
+
+
+
