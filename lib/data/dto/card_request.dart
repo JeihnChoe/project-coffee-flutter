@@ -10,10 +10,10 @@ class CardSaveReqDTO {
   });
 
   Map<String, dynamic> toJson() => {
-        "cardName": cardName,
-        "cardNumber": cardNumber,
-        "pinNumber": pinNumber,
-      };
+    "cardName": cardName,
+    "cardNumber": cardNumber,
+    "pinNumber": pinNumber,
+  };
 }
 
 class CardChargeReqDTO {
