@@ -20,6 +20,8 @@ class CategoryListViewModel extends StateNotifier<CategoryListModel?> {
     ResponseDTO responseDTO =
     await CategoryRepository().fetchCategoryDetailList();
     state = CategoryListModel(responseDTO.response);
+
+
   }
 }
 

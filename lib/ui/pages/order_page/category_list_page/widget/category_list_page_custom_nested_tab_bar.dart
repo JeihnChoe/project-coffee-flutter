@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/data/model/category.dart';
 import 'package:project_coffee/ui/pages/order_page/category_list_page/category_list_page_view_model.dart';
 import 'package:project_coffee/ui/pages/order_page/category_list_page/widget/category_list_page_body_item.dart';
@@ -59,6 +60,29 @@ class _NestedTabBarState extends State<CustomNestedTabBar>
                 builder: (context, ref, child) {
                   CategoryListModel? model = ref.watch(CategoryListProvider);
                   List<Category> categoryList = model?.categoryList ?? [];
+                  final code1Items = categoryList.where((item) => item.code == 1).toList();
+                  final code2Items = categoryList.where((item) => item.code == 2).toList();
+                  return CustomScrollView(
+                    slivers: [
+                      SliverPadding(
+                        padding: const EdgeInsets.all(16),
+                        sliver: SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                                (context, index) =>
+                                CategoryListPageBodyItem(code1Items[index]),
+                            childCount: code1Items.length,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),Consumer(
+                builder: (context, ref, child) {
+                  CategoryListModel? model = ref.watch(CategoryListProvider);
+                  List<Category> categoryList = model?.categoryList ?? [];
+                  final code1Items = categoryList.where((item) => item.code == 1).toList();
+                  final code2Items = categoryList.where((item) => item.code == 2).toList();
 
                   return CustomScrollView(
                     slivers: [
@@ -67,8 +91,8 @@ class _NestedTabBarState extends State<CustomNestedTabBar>
                         sliver: SliverList(
                           delegate: SliverChildBuilderDelegate(
                                 (context, index) =>
-                                CategoryListPageBodyItem(categoryList[index]),
-                            childCount: categoryList.length,
+                                CategoryListPageBodyItem(code2Items[index]),
+                            childCount: code2Items.length,
                           ),
                         ),
                       ),
@@ -76,11 +100,7 @@ class _NestedTabBarState extends State<CustomNestedTabBar>
                   );
                 },
               ),
-              Card(
-                margin: const EdgeInsets.all(16.0),
-                child: Center(
-                    child: Text('${widget.outerTab}: Specifications tab')),
-              ),
+
             ],
           ),
         ),

@@ -24,6 +24,6 @@ class PayCardListViewModel extends StateNotifier<PayCardListModel?> {
 
 //창고관리자
 final paycardListProvider =
-    StateNotifierProvider<PayCardListViewModel, PayCardListModel?>((ref) {
+StateNotifierProvider<PayCardListViewModel, PayCardListModel?>((ref) {
   return PayCardListViewModel(null, ref)..notifyInit();
 });
