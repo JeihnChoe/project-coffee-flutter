@@ -6,9 +6,12 @@ import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/paycard.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
+typedef void TotalUpdateCallback(int updatedTotal);
+
 class PayCardChargePageBody extends StatefulWidget {
   final PayCard paycard;
-  PayCardChargePageBody(this.paycard, {super.key});
+  final TotalUpdateCallback updateTotal; // 추가: 콜백 함수
+  PayCardChargePageBody(this.paycard, {super.key, required this.updateTotal});
 
   @override
   _PayCardChargePageBodyState createState() => _PayCardChargePageBodyState();
@@ -21,18 +24,31 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
   String selectedBlock = ""; // 선택된 블록
   String selectedBlockAmount = "";
   int total = 0;
+
   void sum(String text) {
     if (text == "1만원") {
-      total = 10000;
+      total = 10000 + widget.paycard.cardMoney;
+      print(total);
+      widget.updateTotal(total);
     } else if (text == "3만원") {
-      total = 30000;
+      total = 30000 + widget.paycard.cardMoney;
+      print(widget.paycard.cardMoney);
+      widget.updateTotal(total);
     } else if (text == "5만원") {
-      total = 50000;
+      total = 50000 + widget.paycard.cardMoney;
+      print(widget.paycard.cardMoney);
+      widget.updateTotal(total);
     } else if (text == "7만원") {
-      total = 70000;
+      total = 70000 + widget.paycard.cardMoney;
+      print(widget.paycard.cardMoney);
+      widget.updateTotal(total);
     } else if (text == "10만원") {
-      total = 100000;
-    } else if (text == "다른 금액") {}
+      total = 100000 + widget.paycard.cardMoney;
+      print(widget.paycard.cardMoney);
+      widget.updateTotal(total);
+    } else if (text == "다른 금액") {
+      showCustomAmountDialog();
+    }
   }
 
   @override
@@ -261,7 +277,9 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
                 onPressed: () {
                   setState(() {
                     selectedBlockAmount = customAmount; // 입력한 금액으로 업데이트
-                    Logger().d(total);
+                    sum(customAmount); // sum 함수를 호출하여 total 값을 업데이트
+                    //Logger().d(total);
+                    widget.updateTotal(total); // total 값을 상위 페이지로 전달
                     Navigator.of(context).pop(); // Dialog 닫기
                   });
                 },
