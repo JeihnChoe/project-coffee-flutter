@@ -110,7 +110,8 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomeMainPage()));
+                                    builder: (context) =>
+                                        PayCardChargePage(paycard)));
                           },
                           child: Container(
                             height: 50,
