@@ -8,6 +8,6 @@ class PayCardDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PayCadDetailPageBody(card);
+    return PayCardDetailPageBody(card);
   }
 }
