@@ -18,10 +18,11 @@ class JoinPageFormField extends StatelessWidget {
   JoinPageFormField({Key? key});
 
   void submit(WidgetRef ref) {
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()&&arePasswordsEqual(_password.text, _passwordchk.text)==true) {
       JoinReqDTO joinReqDTO = JoinReqDTO(
         userId: _userId.text,
         password: _password.text,
+        passwordChk : _passwordchk.text,
         email: _email.text,
         phonenumber: _phoneNumber.text,
       );
@@ -53,7 +54,7 @@ class JoinPageFormField extends StatelessWidget {
                   ),
                   CustomTextForm(
                     "PasswordChk",
-                    validatorFunction: validatePassword,
+                    validatorFunction: validatePasswordChk,
                     controller: _passwordchk,
                   ),
                   CustomTextForm(
