@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/data/model/promotion.dart';
 import 'package:project_coffee/ui/pages/home_page/promotion_detail_page/promotion_detail_page.dart';
 
@@ -32,8 +31,8 @@ class HomeMainPageBanner extends StatelessWidget {
         height: 150,
         width: 350,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: kAccentColor,
+          // borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
           image: DecorationImage(
             image: NetworkImage("${promotion.productPicUrl}"),
             fit: BoxFit.cover,

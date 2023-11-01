@@ -40,7 +40,7 @@ class HomeMainPageBodyItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 30),
               child: Image.asset('assets/MainPic.png'),
-            ), // 실제 이미지 경로로 'assets/starbucks_logo.png'를 대체하세요.
+            ),
           ],
         ),
       ),
