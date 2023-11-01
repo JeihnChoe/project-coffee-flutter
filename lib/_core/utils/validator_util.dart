@@ -1,3 +1,4 @@
+import 'package:logger/logger.dart';
 import 'package:validators/validators.dart';
 
 String? validateUserId(String? value) {
@@ -23,6 +24,25 @@ String? validatePassword(String? value) {
     return "패스워드의 최소 길이는 4자입니다.";
   }
   return null; // 유효성 검사 통과
+}
+
+String? validatePasswordChk(String? value) {
+  if (value == null || value.isEmpty) {
+    return "패스워드 공백이 들어갈 수 없습니다.";
+  } else if (value.length > 12) {
+    return "패스워드의 길이를 초과하였습니다.";
+  } else if (value.length < 4) {
+    return "패스워드의 최소 길이는 4자입니다.";
+  }
+  Logger().d(value);
+  return null; // 유효성 검사 통과
+}
+bool arePasswordsEqual(String? password, String? passwordChk) {
+  // 두 값이 모두 유효하고 서로 같은지 확인
+
+  return validatePassword(password) == null &&
+      validatePasswordChk(passwordChk) == null &&
+      password == passwordChk;
 }
 
 String? validateEmail(String? value) {
