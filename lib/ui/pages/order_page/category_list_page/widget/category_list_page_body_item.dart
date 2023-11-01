@@ -58,9 +58,9 @@ class CategoryListPageBodyItem extends StatelessWidget {
   _image() {
     return Container(
       width: 100,
-      height: 70,
+      height: 90,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        shape: BoxShape.circle,
         image: DecorationImage(
             image: NetworkImage("${category.categoryPicUrl}"),
             fit: BoxFit.cover),
