@@ -17,6 +17,12 @@ class PayCardChargePage extends StatefulWidget {
 class _PayCardChargePageState extends State<PayCardChargePage> {
   int total = 0; // 상위 페이지에서 total을 정의
 
+  @override
+  void initState() {
+    super.initState();
+    total = widget.paycard.cardMoney + 10000; // 초기값을 paycard.money + 10000으로 설정
+  }
+
   void updateTotal(int updatedTotal) {
     setState(() {
       total = updatedTotal; // total 갱신
