@@ -5,6 +5,8 @@ import 'package:project_coffee/data/model/category.dart';
 import 'package:project_coffee/ui/pages/order_page/category_list_page/category_list_page_view_model.dart';
 import 'package:project_coffee/ui/pages/order_page/category_list_page/widget/category_list_page_body_item.dart';
 
+import 'category_consumer.dart';
+
 class CustomNestedTabBar extends StatefulWidget {
   const CustomNestedTabBar(this.outerTab, {super.key});
 
@@ -56,51 +58,8 @@ class _NestedTabBarState extends State<CustomNestedTabBar>
           child: TabBarView(
             controller: _tabController,
             children: <Widget>[
-              Consumer(
-                builder: (context, ref, child) {
-                  CategoryListModel? model = ref.watch(CategoryListProvider);
-                  List<Category> categoryList = model?.categoryList ?? [];
-                  final code1Items = categoryList.where((item) => item.code == 1).toList();
-                  final code2Items = categoryList.where((item) => item.code == 2).toList();
-                  return CustomScrollView(
-                    slivers: [
-                      SliverPadding(
-                        padding: const EdgeInsets.all(16),
-                        sliver: SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                                (context, index) =>
-                                CategoryListPageBodyItem(code1Items[index]),
-                            childCount: code1Items.length,
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),Consumer(
-                builder: (context, ref, child) {
-                  CategoryListModel? model = ref.watch(CategoryListProvider);
-                  List<Category> categoryList = model?.categoryList ?? [];
-                  final code1Items = categoryList.where((item) => item.code == 1).toList();
-                  final code2Items = categoryList.where((item) => item.code == 2).toList();
-
-                  return CustomScrollView(
-                    slivers: [
-                      SliverPadding(
-                        padding: const EdgeInsets.all(16),
-                        sliver: SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                                (context, index) =>
-                                CategoryListPageBodyItem(code2Items[index]),
-                            childCount: code2Items.length,
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
-
+              CategoryConsumer(code: 1),
+              CategoryConsumer(code: 2),
             ],
           ),
         ),
@@ -108,3 +67,4 @@ class _NestedTabBarState extends State<CustomNestedTabBar>
     );
   }
 }
+

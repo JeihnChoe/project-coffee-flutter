@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/move.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/dto/user_request.dart';
@@ -21,7 +22,7 @@ class SessionStore extends SessionUser {
   Future<void> join(JoinReqDTO joinReqDTO) async {
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
     if (responseDTO.success == true) {
-      Navigator.pushNamed(mContext!,Move.JoinSuccessPage);
+      Navigator.pushNamed(mContext!,Move.JoinSuccessPage,arguments: responseDTO);
     } else {
 
       ScaffoldMessenger.of(mContext!)
