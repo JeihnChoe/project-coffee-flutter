@@ -9,24 +9,26 @@ import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
 
 class JoinPageFormField extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final _userId = TextEditingController();
+  final _loginId = TextEditingController();
   final _password = TextEditingController();
   final _passwordchk = TextEditingController();
   final _email = TextEditingController();
   final _phoneNumber = TextEditingController();
+  final _userName = TextEditingController();
 
   JoinPageFormField({Key? key});
 
   void submit(WidgetRef ref) {
-    if (_formKey.currentState!.validate()&&arePasswordsEqual(_password.text, _passwordchk.text)==true) {
+    // &&arePasswordsEqual(_password.text, _passwordchk.text)==true
+    if (_formKey.currentState!.validate()) {
       JoinReqDTO joinReqDTO = JoinReqDTO(
-        userId: _userId.text,
+        loginId: _loginId.text,
         password: _password.text,
-        passwordChk : _passwordchk.text,
+        userName: _userName.text,
         email: _email.text,
-        phonenumber: _phoneNumber.text,
+        phoneNumber: _phoneNumber.text,
+        // passwordChk : _passwordchk.text,
       );
-      Logger().d("${joinReqDTO.toJson()}");
       ref.read(sessionProvider).join(joinReqDTO);
     }
   }
@@ -45,18 +47,18 @@ class JoinPageFormField extends StatelessWidget {
                   CustomTextForm(
                     "UserIdJoin",
                     validatorFunction: validateUserId,
-                    controller: _userId,
+                    controller: _loginId,
                   ),
                   CustomTextForm(
                     "PasswordJoin",
                     validatorFunction: validatePassword,
                     controller: _password,
                   ),
-                  CustomTextForm(
-                    "PasswordChk",
-                    validatorFunction: validatePasswordChk,
-                    controller: _passwordchk,
-                  ),
+                  // CustomTextForm(
+                  //   "PasswordChk",
+                  //   validatorFunction: validatePasswordChk,
+                  //   controller: _passwordchk,
+                  // ),
                   CustomTextForm(
                     "EmailJoin",
                     validatorFunction: validateEmail,
@@ -64,7 +66,13 @@ class JoinPageFormField extends StatelessWidget {
                   ),
                   CustomTextForm(
                     "PhoneNumber",
+                    validatorFunction: validatePhoneNumber,
                     controller: _phoneNumber,
+                  ),
+                  CustomTextForm(
+                    "UserName",
+                    validatorFunction: validateUserName,
+                    controller: _userName,
                   ),
                   SizedBox(
                     height: gap_xl,

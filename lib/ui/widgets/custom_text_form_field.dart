@@ -116,6 +116,13 @@ class CustomTextForm extends StatelessWidget {
         obscureText: false,
         decoration: InputDecoration(hintText: "Pin번호 8자리 (필수)"),
       );
+    }else if (text == "UserName") {
+      return TextFormField(
+        controller: controller,
+        validator: validatorFunction,
+        obscureText: false,
+        decoration: InputDecoration(hintText: "이름"),
+      );
     } else {
       return Center(
         child: Text("알 수 없는 입력항목입니다."),

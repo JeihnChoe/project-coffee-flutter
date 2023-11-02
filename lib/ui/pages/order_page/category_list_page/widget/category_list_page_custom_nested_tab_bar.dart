@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/data/model/category.dart';
 import 'package:project_coffee/ui/pages/order_page/category_list_page/category_list_page_view_model.dart';
 import 'package:project_coffee/ui/pages/order_page/category_list_page/widget/category_list_page_body_item.dart';
+
+import 'category_consumer.dart';
 
 class CustomNestedTabBar extends StatefulWidget {
   const CustomNestedTabBar(this.outerTab, {super.key});
@@ -55,32 +58,8 @@ class _NestedTabBarState extends State<CustomNestedTabBar>
           child: TabBarView(
             controller: _tabController,
             children: <Widget>[
-              Consumer(
-                builder: (context, ref, child) {
-                  CategoryListModel? model = ref.watch(CategoryListProvider);
-                  List<Category> categoryList = model?.categoryList ?? [];
-
-                  return CustomScrollView(
-                    slivers: [
-                      SliverPadding(
-                        padding: const EdgeInsets.all(16),
-                        sliver: SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                                (context, index) =>
-                                CategoryListPageBodyItem(categoryList[index]),
-                            childCount: categoryList.length,
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
-              Card(
-                margin: const EdgeInsets.all(16.0),
-                child: Center(
-                    child: Text('${widget.outerTab}: Specifications tab')),
-              ),
+              CategoryConsumer(code: 1),
+              CategoryConsumer(code: 2),
             ],
           ),
         ),
@@ -88,3 +67,4 @@ class _NestedTabBarState extends State<CustomNestedTabBar>
     );
   }
 }
+

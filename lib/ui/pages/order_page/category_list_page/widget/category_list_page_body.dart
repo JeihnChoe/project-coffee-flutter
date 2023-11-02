@@ -1,7 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_coffee/_core/constants/move.dart';
 import 'package:project_coffee/data/model/category.dart';
 import 'package:project_coffee/ui/pages/order_page/category_list_page/category_list_page_view_model.dart';
+import 'package:project_coffee/ui/pages/order_page/category_list_page/widget/category_list_page_body_item.dart';
+import 'package:project_coffee/ui/widgets/custom_green_button.dart';
+import 'package:project_coffee/ui/widgets/custom_sliver_app_bar.dart';
+
 import 'package:project_coffee/ui/widgets/custom_tab_bar.dart';
 
 import 'category_list_page_app_bar.dart';
@@ -36,10 +42,28 @@ class CardListPageBody extends ConsumerWidget {
                   Center(
                     child: Text("푸드"),
                   )
-                ]),
+                ]
+                ),
               )
             ],
-          )),
+          ),
+          persistentFooterButtons: [
+
+            Row(
+              children: [
+                ElevatedButton(onPressed: () {
+
+                }, child: Text("매장 내 직접 수령"),style: ElevatedButton.styleFrom(
+                  primary: Colors.black,
+                  minimumSize: Size(200, double.infinity)
+                ),),
+                IconButton(onPressed: () {
+
+                }, icon: Icon(CupertinoIcons.bag))
+              ],
+            )
+        ],
+      ),
     );
   }
 }

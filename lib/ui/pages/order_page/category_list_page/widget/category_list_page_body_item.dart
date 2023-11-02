@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/category.dart';
@@ -13,12 +14,13 @@ class CategoryListPageBodyItem extends StatelessWidget {
       color: Colors.white,
       child: InkWell(
         onTap: () {
+
           // Navigator.push(
           //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => CategoryBeverageListPage(
-          //               category: category,
-          //             ))); /* */
+              // MaterialPageRoute(
+                  // builder: (context) => CategoryBeverageListPage(
+                  //       category: category,
+                  //     ))); /* */
         },
         child: Padding(
           padding: const EdgeInsets.only(top: 5, left: 16, right: 16),
