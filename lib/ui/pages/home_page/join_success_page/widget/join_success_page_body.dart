@@ -8,15 +8,15 @@ import 'package:project_coffee/ui/widgets/xmark_button.dart';
 import 'join_success_page_body_item.dart';
 
 class JoinSuccessPageBody extends StatelessWidget {
-  User user;
-  JoinSuccessPageBody(this.user);
+  final joinReqDTO;
+  JoinSuccessPageBody(this.joinReqDTO);
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
         XmarkAppBar(),
-        JoinSuccessPageBodyItem(user)
+        JoinSuccessPageBodyItem(joinReqDTO)
       ],
     );
   }
