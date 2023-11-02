@@ -11,4 +11,15 @@ class Promotion {
 
   Promotion(this.id, this.title, this.subContent, this.startDate, this.endDate,
       this.isOpen, this.productPicUrl, this.thumbnail, this.homeThumbnail);
+
+  Promotion.fromJson(Map<String, dynamic> json)
+      : id = json["id"],
+        title = json["title"],
+        subContent = json["subContent"],
+        startDate = json["startDate"],
+        endDate = json["endDate"],
+        isOpen = json["isOpen"],
+        productPicUrl = json["productPicUrl"],
+        thumbnail = json["thumbnail"],
+        homeThumbnail = json["homeThumbnail"];
 }

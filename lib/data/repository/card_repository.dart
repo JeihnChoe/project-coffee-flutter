@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:project_coffee/data/dto/card_request.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/mock/paycard.dart';
 
@@ -11,6 +9,4 @@ class CardRepository {
   Future<ResponseDTO> fetchCardDetailList() {
     return Future.delayed(Duration(seconds: 3), () => mCardListResponseDTO);
   }
-
-
 }
