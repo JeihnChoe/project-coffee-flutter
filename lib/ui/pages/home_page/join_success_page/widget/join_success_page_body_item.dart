@@ -6,8 +6,8 @@ import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/model/user.dart';
 
 class JoinSuccessPageBodyItem extends StatelessWidget {
-  User user;
-  JoinSuccessPageBodyItem(this.user);
+  final joinReqDTO;
+  JoinSuccessPageBodyItem(this.joinReqDTO);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class JoinSuccessPageBodyItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            textTitle1("${user.userName}"),
+            textTitle1("${joinReqDTO.userName}"),
             SizedBox(height: gap_l,),
             textTitle1("회원가입이 완료되었습니다."),
             SizedBox(height: gap_xl,),

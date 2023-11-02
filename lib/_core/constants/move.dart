@@ -30,7 +30,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.MainPage: (context) => const MainPage(),
     Move.LoginPage: (context) => LoginPage(),
     Move.JoinPage: (context) => JoinPage(),
-    Move.JoinSuccessPage: (context) => const JoinSuccessPage(),
+    Move.JoinSuccessPage: (context) => JoinSuccessPage(),
     // Move.CategoryDetailPage: (context) => const CategoryDetailPage(),
     Move.FindLoginIdPage: (context) => FindLoginIdPage(),
     Move.FindLoginIdSuccessPage: (context) => const FindLoginIdSuccessPage(),

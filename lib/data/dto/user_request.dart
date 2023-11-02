@@ -12,7 +12,7 @@ class JoinReqDTO {
         required this.userName,
         required this.phoneNumber,
         // required this.passwordChk
-        });
+      });
 
   Map<String, dynamic> toJson() => {
     "loginId": loginId,
