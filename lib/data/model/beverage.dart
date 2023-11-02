@@ -8,6 +8,7 @@ class Beverage {
   final String beveragePicUrl;
   final int category;
 
+
   Beverage(
     this.id,
     this.beverageName,

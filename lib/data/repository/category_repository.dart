@@ -12,5 +12,5 @@ class CategoryRepository {
     return Future.delayed(Duration(seconds: 3), () => mCategoryListResponseDTO);
   }
 
-  }
+}
 

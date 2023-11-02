@@ -29,3 +29,5 @@ final BeverageListProvider =
 StateNotifierProvider<BeverageListViewModel, BeverageListModel?>((ref) {
   return BeverageListViewModel(null, ref)..notifyInit();
 });
+
+

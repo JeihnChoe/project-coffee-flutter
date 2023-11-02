@@ -18,7 +18,7 @@ class PromotionListViewModel extends StateNotifier<PromotionListModel?> {
 
   Future<void> notifyInit() async {
     List<Promotion> responseDTO =
-        await PromotionRepository().fetchPromotionDetailList();
+    await PromotionRepository().fetchPromotionDetailList();
     //Logger().d("통신?2");
     state = PromotionListModel(responseDTO); // 수정된 부분
     //Logger().d("통신?4");
@@ -27,7 +27,7 @@ class PromotionListViewModel extends StateNotifier<PromotionListModel?> {
 
 //창고관리자
 final promotionListProvider =
-    StateNotifierProvider<PromotionListViewModel, PromotionListModel?>((ref) {
+StateNotifierProvider<PromotionListViewModel, PromotionListModel?>((ref) {
   //Logger().d("통신?33333333");
   return PromotionListViewModel(PromotionListModel([]), ref)..notifyInit();
 });
