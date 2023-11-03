@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/beverage.dart';
+import 'package:project_coffee/ui/pages/order_page/beverage_detail_page/beverage_detail_page.dart';
 
 import '../../../../../_core/constants/size.dart';
 
@@ -13,12 +14,12 @@ class CategoryBeverageListPageBodyItem extends StatelessWidget {
     return Container(
       color: Colors.white,
       child: InkWell(
-        // onTap: () {
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => BeverageListPage(category)));
-        // },
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => BeverageDetailPage(beverage)));
+        },
         child: Padding(
           padding: const EdgeInsets.only(top: 5,bottom: 15, right: 16),
           child: Container(
@@ -48,8 +49,10 @@ _Beverage(Beverage beverage) {
         textTitle2(
           "${beverage.beverageName}",
         ),
+        SizedBox(height: gap_s),
+        textBody3("${beverage.beverageEngName}"),
         SizedBox(height: gap_m),
-        textBody3("${beverage.beverageEngName}")
+        textBody3("${beverage.price}원")
       ],
     ),
   );
