@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
 class ShoppingBasketPageBody extends StatefulWidget {
   const ShoppingBasketPageBody({super.key});
@@ -46,7 +47,7 @@ class _ShoppingBasketPageBodyState extends State<ShoppingBasketPageBody> {
                       Container(
                         padding: EdgeInsets.only(top: 16.0),
                         height: 110,
-                        color: Colors.grey, // 음료/푸드 페이지 배경색
+                        color: Colors.white, // 음료/푸드 페이지 배경색
                         child: Column(
                           children: [
                             Padding(
@@ -83,21 +84,41 @@ class _ShoppingBasketPageBodyState extends State<ShoppingBasketPageBody> {
                                         MainAxisAlignment.center, // 가운데 정렬
                                     children: [
                                       TextButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          // 선택삭제 클릭 시 알림창 표시
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.all(16.0),
+                                                child: AlertDialog(
+                                                  content: Text(
+                                                      "장바구니에서 삭제하실 메뉴를\n선택해주세요."),
+                                                  actions: [
+                                                    CustomWhitePopButton(
+                                                      text: "확인",
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        },
                                         child: Text("선택삭제",
-                                            style: TextStyle(
-                                                color: kAccentColor)), // 글자색 변경
+                                            style:
+                                                TextStyle(color: kAccentColor)),
                                       ),
                                       Container(
                                         width: 1, // 수직선의 너비 (두께)
                                         height: 15, // 수직선의 높이를 원하는 크기로 설정
-                                        color: Colors.white, // 수직선의 색상
+                                        color: Colors.grey, // 수직선의 색상
                                       ),
                                       TextButton(
                                         onPressed: () {},
                                         child: Text("전체삭제",
                                             style:
-                                                TextStyle(color: Colors.white)),
+                                                TextStyle(color: Colors.grey)),
                                       ),
                                     ],
                                   )
@@ -109,8 +130,8 @@ class _ShoppingBasketPageBodyState extends State<ShoppingBasketPageBody> {
                       ),
                       SizedBox(height: gap_m),
                       Container(
-                        padding: EdgeInsets.all(16.0),
-                        height: 250,
+                        padding: EdgeInsets.only(top: 16.0),
+                        height: 230,
                         color: Colors.grey, // 배경색
                         child: Column(
                           children: [
