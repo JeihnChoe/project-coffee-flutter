@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_coffee/data/model/category.dart';
+import 'package:project_coffee/ui/pages/order_page/%20select_order_store_page/select_order_store_page.dart';
 import 'package:project_coffee/ui/pages/order_page/category_list_page/category_list_page_view_model.dart';
 import 'package:project_coffee/ui/widgets/custom_tab_bar.dart';
 
+import '../../shopping_basket_page/shopping_basket_page.dart';
 import 'category_list_page_app_bar.dart';
 import 'category_list_page_custom_nested_tab_bar.dart';
 
@@ -45,7 +47,13 @@ class CategoryListPageBody extends ConsumerWidget {
           Row(
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SelectOrderStorePage()),
+                  );
+                },
                 child: Text("매장 내 직접 수령"),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.black,
@@ -63,7 +71,11 @@ class CategoryListPageBody extends ConsumerWidget {
                   icon: Icon(CupertinoIcons.bag),
                   color: Colors.white, // 아이콘 색상 설정
                   onPressed: () {
-                    // 아이콘 버튼이 클릭되었을 때 수행할 작업
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ShoppingBasketPage()),
+                    );
                   },
                 ),
               )
