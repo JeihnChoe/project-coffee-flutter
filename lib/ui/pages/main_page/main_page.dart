@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_coffee/ui/pages/home_page/home_login_change_main_page/home_login_change_main_page.dart';
 import 'package:project_coffee/ui/pages/home_page/home_main_page/home_main_page.dart';
 import 'package:project_coffee/ui/pages/order_page/category_list_page/category_list_page.dart';
 import 'package:project_coffee/ui/pages/pay_page/pay_main_page/pay_main_page.dart';
@@ -24,7 +25,7 @@ class _MainPageState extends State<MainPage> {
           PayMainPage(),
           CategoryListPage(),
           ShopPage(),
-          Center(child: Text("Other")),
+          HomeLoginChangeMainPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
