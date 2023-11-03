@@ -8,48 +8,33 @@ import 'package:project_coffee/ui/widgets/custom_sliver_app_bar.dart';
 import 'beverage_list_page_body_item.dart';
 
 class BeverageListPageBody extends ConsumerWidget {
-  Category category;
+  final Category category;
+
   BeverageListPageBody(this.category);
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-    BeverageListModel? model = ref.watch(BeverageListProvider);
-    List<Beverage> beverageList = model?.BeverageList ?? [];
+  Widget build(BuildContext context, WidgetRef ref) {
+    final model = ref.watch(BeverageListProvider);
+    final beverageList = model?.BeverageList ?? [];
 
-    return Scaffold(
-      body: CustomScrollView(
-        shrinkWrap: true,
-        slivers: [
-          CustomSliverAppBar(title: "${category.categoryName}",),
-          SliverPadding(
-            padding: EdgeInsets.all(16),
-            sliver: SliverToBoxAdapter(
-              child: Consumer(
-                builder: (context, ref, child) {
-                  BeverageListModel? model = ref.watch(BeverageListProvider);
-                  List<Beverage> beverageList = model?.BeverageList ?? [];
-                  final indexItems = beverageList.where((item) => item.category == category.id).toList();
-                  return CustomScrollView(
-                    slivers: [
-                      SliverPadding(
-                        padding: const EdgeInsets.all(16),
-                        sliver: SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                                (context, index) =>
-                                CategoryBeverageListPageBodyItem(indexItems[index]),
-                            childCount: indexItems.length,
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
+    final indexItems =
+    beverageList.where((item) => item.category == category.id).toList();
+
+    return CustomScrollView(
+      shrinkWrap: true,
+      slivers: [
+        CustomSliverAppBar(title: "${category.categoryName}"),
+        SliverPadding(
+          padding: EdgeInsets.all(16),
+          sliver: SliverList(
+            delegate: SliverChildBuilderDelegate(
+                  (context, index) =>
+                  CategoryBeverageListPageBodyItem(beverageList[index]),
+              childCount: beverageList.length,
             ),
           ),
-
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
