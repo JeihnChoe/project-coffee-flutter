@@ -29,8 +29,8 @@ class BeverageListPageBody extends ConsumerWidget {
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
                   (context, index) =>
-                  CategoryBeverageListPageBodyItem(beverageList[index]),
-              childCount: beverageList.length,
+                  CategoryBeverageListPageBodyItem(indexItems[index]),
+              childCount: indexItems.length,
             ),
           ),
         ),

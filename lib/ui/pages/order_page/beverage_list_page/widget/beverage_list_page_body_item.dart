@@ -20,9 +20,9 @@ class CategoryBeverageListPageBodyItem extends StatelessWidget {
           //         builder: (context) => BeverageListPage(category)));
         // },
         child: Padding(
-          padding: const EdgeInsets.only(top: 5, left: 16, right: 16),
+          padding: const EdgeInsets.only(top: 5,bottom: 15, right: 16),
           child: Container(
-            height: 100,
+            height: 80,
             color: Colors.white,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
