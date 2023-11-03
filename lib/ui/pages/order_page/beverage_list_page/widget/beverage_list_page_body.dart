@@ -1,15 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_coffee/data/model/beverage.dart';
+import 'package:project_coffee/data/model/category.dart';
+import 'package:project_coffee/ui/pages/order_page/beverage_list_page/beverage_list_page_view_model.dart';
 import 'package:project_coffee/ui/widgets/custom_sliver_app_bar.dart';
 
-class BeverageListPageBody extends StatelessWidget {
-  const BeverageListPageBody({super.key});
+import 'beverage_list_page_body_item.dart';
+
+class BeverageListPageBody extends ConsumerWidget {
+  Category category;
+  BeverageListPageBody(this.category);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    BeverageListModel? model = ref.watch(BeverageListProvider);
+    List<Beverage> beverageList = model?.BeverageList ?? [];
+
     return Scaffold(
       body: CustomScrollView(
+        shrinkWrap: true,
         slivers: [
-          CustomSliverAppBar(title: "pay",),
+          CustomSliverAppBar(title: "${category.categoryName}",),
+          SliverPadding(
+            padding: EdgeInsets.all(16),
+            sliver: SliverToBoxAdapter(
+              child: Consumer(
+                builder: (context, ref, child) {
+                  BeverageListModel? model = ref.watch(BeverageListProvider);
+                  List<Beverage> beverageList = model?.BeverageList ?? [];
+                  final indexItems = beverageList.where((item) => item.category == category.id).toList();
+                  return CustomScrollView(
+                    slivers: [
+                      SliverPadding(
+                        padding: const EdgeInsets.all(16),
+                        sliver: SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                                (context, index) =>
+                                CategoryBeverageListPageBodyItem(indexItems[index]),
+                            childCount: indexItems.length,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ),
+
         ],
       ),
     );

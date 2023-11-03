@@ -26,7 +26,23 @@ class UserRepository {
 
 
 
-  // Future<ResponseDTO> fetchLogin() {
-  //   return Future.delayed(Duration(seconds: 3), () => mUserListResponseDTO);
-  // }
+  Future<ResponseDTO> fetchLogin(LoginReqDTO requestDTO) async {
+    try{
+      // 1. 통신 시작
+      Response response = await dio.post("/api/login", data: requestDTO.toJson());
+
+      // 2. DTO 파싱
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      responseDTO.response = User.fromJson(responseDTO.response);
+
+      // 3. 토큰 받기
+      final authorization = response.headers["authorization"];
+      if(authorization != null){
+        // responseDTO.token = authorization.first;
+      }
+      return responseDTO;
+    }catch(e){
+      return ResponseDTO(false, null,"아이디 혹은 비번이 틀렸습니다");
+    }
+  }
 }

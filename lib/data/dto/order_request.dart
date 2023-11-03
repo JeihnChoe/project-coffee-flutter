@@ -29,3 +29,48 @@ class CategoryReqDTO{
         categoryPicUrl = json["categoryPicUrl"];
 
 }
+
+class BeverageReqDTO{
+
+  final int id;
+  final String beverageName;
+  final String beverageEngName;
+  final String beverageDescription;
+  final String beverageTip;
+  final String hotIce;  //
+  final String beveragePicUrl;
+  final int category;
+  BeverageReqDTO({
+    required this.id,
+    required this.beverageName,
+    required this.beverageEngName,
+    required this.beverageDescription,
+    required this.beverageTip,
+    required this.hotIce,
+    required this.beveragePicUrl,
+    required this.category
+  });
+
+  Map<String, dynamic> toJson() => {
+    "id" : id,
+    "beverageName" : beverageName,
+    "beverageEngName" : beverageEngName,
+    "beverageDescription" : beverageDescription,
+    "beverageTip" : beverageTip,
+    "hotIce" : hotIce,
+    "beveragePicUrl" : beveragePicUrl,
+    "category" : category,
+
+  };
+
+  BeverageReqDTO.fromJson(Map<String, dynamic> json)
+      : id = json["id"],
+        beverageName = json["beverageName"],
+        beverageEngName = json["beverageEngName"],
+        beverageDescription = json["beverageDescription"],
+        beverageTip = json["beverageTip"],
+        hotIce = json["hotIce"],
+        beveragePicUrl = json["beveragePicUrl"],
+        category = json["category"];
+}
+

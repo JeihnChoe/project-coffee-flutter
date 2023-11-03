@@ -13,8 +13,8 @@ import 'package:project_coffee/ui/widgets/custom_tab_bar.dart';
 import 'category_list_page_app_bar.dart';
 import 'category_list_page_custom_nested_tab_bar.dart';
 
-class CardListPageBody extends ConsumerWidget {
-  const CardListPageBody({super.key});
+class CategoryListPageBody extends ConsumerWidget {
+  const CategoryListPageBody({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -55,11 +55,22 @@ class CardListPageBody extends ConsumerWidget {
 
                 }, child: Text("매장 내 직접 수령"),style: ElevatedButton.styleFrom(
                   primary: Colors.black,
-                  minimumSize: Size(200, double.infinity)
+                  minimumSize: Size(328, double.infinity),
+                  shape: RoundedRectangleBorder(),
                 ),),
-                IconButton(onPressed: () {
-
-                }, icon: Icon(CupertinoIcons.bag))
+                Ink(
+                  decoration: ShapeDecoration(
+                    color: Colors.black, // 배경색 설정
+                    shape: RoundedRectangleBorder(), // 원 모양의 배경을 만듭니다. 원 모양이 아니라면 다른 모양을 선택할 수 있습니다.
+                  ),
+                  child: IconButton(
+                    icon: Icon(CupertinoIcons.bag),
+                    color: Colors.white, // 아이콘 색상 설정
+                    onPressed: () {
+                      // 아이콘 버튼이 클릭되었을 때 수행할 작업
+                    },
+                  ),
+                )
               ],
             )
         ],

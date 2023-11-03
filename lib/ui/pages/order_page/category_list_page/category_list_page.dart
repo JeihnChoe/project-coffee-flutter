@@ -7,7 +7,7 @@ class CategoryListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CardListPageBody();
+    return const CategoryListPageBody();
   }
 }
 

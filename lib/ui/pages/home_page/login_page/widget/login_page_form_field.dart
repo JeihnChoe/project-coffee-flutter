@@ -9,7 +9,7 @@ import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
 
 class LoginPageFormField extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final userId = TextEditingController();
+  final loginId = TextEditingController();
   final password = TextEditingController();
 
   LoginPageFormField({
@@ -19,7 +19,7 @@ class LoginPageFormField extends StatelessWidget {
   void submit(WidgetRef ref) {
     if (_formKey.currentState!.validate()) {
       LoginReqDTO loginReqDTO = LoginReqDTO(
-        userId: userId.text,
+        loginId: loginId.text,
         password: password.text,
       );
       Logger().d("${loginReqDTO.toJson()}");
@@ -38,7 +38,7 @@ class LoginPageFormField extends StatelessWidget {
               key: _formKey,
               child: Column(
                 children: [
-                  CustomTextForm("UserId", validatorFunction: validateUserId, controller: userId,),
+                  CustomTextForm("UserId", validatorFunction: validateUserId, controller: loginId,),
                   SizedBox(height: gap_l,),
                   CustomTextForm("Password", validatorFunction: validatePassword, controller: password,),
                 ],

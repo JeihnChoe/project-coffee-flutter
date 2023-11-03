@@ -1,8 +1,8 @@
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/model/beverage.dart';
 
-ResponseDTO mCategoryResponseDTO = ResponseDTO(true, _mBeverage, null);
-ResponseDTO mCategoryListResponseDTO = ResponseDTO(true, _mBeverageList, null);
+ResponseDTO mBeverageResponseDTO = ResponseDTO(true, _mBeverage, null,);
+ResponseDTO mBeverageListResponseDTO = ResponseDTO(true, _mBeverageList, null);
 
 Beverage _mBeverage = Beverage(
     1,

@@ -26,16 +26,16 @@ class JoinReqDTO {
 
 
 class LoginReqDTO {
-  final String userId;
+  final String loginId;
   final String password;
 
   LoginReqDTO({
-    required this.userId,
+    required this.loginId,
     required this.password
   });
 
   Map<String, dynamic> toJson() => {
-    "username": userId,
+    "loginId": loginId,
     "password": password
   };
 }

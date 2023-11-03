@@ -4,6 +4,8 @@ import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/category.dart';
 
+import '../../beverage_list_page/beverage_list_page.dart';
+
 class CategoryListPageBodyItem extends StatelessWidget {
   Category category;
   CategoryListPageBodyItem(this.category, {super.key});
@@ -14,13 +16,10 @@ class CategoryListPageBodyItem extends StatelessWidget {
       color: Colors.white,
       child: InkWell(
         onTap: () {
-
-          // Navigator.push(
-          //     context,
-              // MaterialPageRoute(
-                  // builder: (context) => CategoryBeverageListPage(
-                  //       category: category,
-                  //     ))); /* */
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => BeverageListPage(category)));
         },
         child: Padding(
           padding: const EdgeInsets.only(top: 5, left: 16, right: 16),
