@@ -6,6 +6,8 @@ import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/beverage.dart';
 
+import 'beverage_outline_button.dart';
+
 class BeverageDetailPageBody extends StatelessWidget {
   Beverage beverage;
   BeverageDetailPageBody(this.beverage);
@@ -46,20 +48,20 @@ class BeverageDetailPageBody extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                      child:CustomOutlineButton ("HOT", kActiveColor1)),
+                      child:BeverageOutlineButton ("HOT", kActiveColor2)),
                 ],
               )
             else if(beverage.hotIce == 1)
               Row(
                 children: [
-                  Expanded(child: CustomOutlineButton("ICED ONLY", kActiveColor1)),
+                  Expanded(child: BeverageOutlineButton("ICED ONLY", kActiveColor1)),
                 ],
               )
             else
               Row(
                 children: [
-                  Expanded(child: CustomOutlineButton("ICE", kActiveColor1)),
-                  Expanded(child: CustomOutlineButton("HOT", kActiveColor2)),
+                  Expanded(child: BeverageOutlineButton("ICE", kActiveColor1)),
+                  Expanded(child: BeverageOutlineButton("HOT", kActiveColor2)),
                 ],
               ),
             SizedBox(height: 10),
@@ -117,28 +119,3 @@ class BeverageDetailPageBody extends StatelessWidget {
 
 
 
-class CustomOutlineButton extends StatelessWidget {
-  String text;
-  Color mColor;
-  CustomOutlineButton(
-      this.text,
-      this.mColor, {
-        super.key,
-      });
-
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: () {},
-      child: Text(
-        "${text}",
-        style: TextStyle(color: mColor),
-      ),
-      style: OutlinedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-      ),
-    );
-  }
-}
