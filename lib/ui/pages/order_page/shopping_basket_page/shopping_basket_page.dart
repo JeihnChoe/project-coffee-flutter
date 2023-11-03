@@ -7,6 +7,11 @@ class ShoppingBasketPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ShoppingBasketPageBody();
+    return Scaffold(
+      body: ShoppingBasketPageBody(),
+      // persistentFooterButtons: [
+      //   SubmitBottomButton(text: "로그인", formField: formField)
+      // ],
+    );
   }
 }
