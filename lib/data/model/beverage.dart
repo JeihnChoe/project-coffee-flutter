@@ -10,14 +10,14 @@ class Beverage {
   final int price;
 
   Beverage(
-    this.id,
-    this.beverageName,
-    this.beverageEngName,
-    this.beverageDescription,
-    this.beverageTip,
-    this.hotIce,
-    this.beveragePicUrl,
-    this.category,
+      this.id,
+      this.beverageName,
+      this.beverageEngName,
+      this.beverageDescription,
+      this.beverageTip,
+      this.hotIce,
+      this.beveragePicUrl,
+      this.category,
       this.price
-  );
+      );
 }
