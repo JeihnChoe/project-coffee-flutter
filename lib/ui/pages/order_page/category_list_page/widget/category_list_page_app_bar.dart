@@ -11,12 +11,15 @@ class CategoryListPageAppBar extends StatelessWidget {
     return SliverAppBar(
       floating: true,
       pinned: true,
-      leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back_ios_new),
-          color: Colors.black),
+      actions:[Padding(
+        padding: const EdgeInsets.only(right: 16.0),
+        child: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.search),
+            color: Colors.black),
+      ),],
       snap: false,
       expandedHeight: 90,
       flexibleSpace: FlexibleSpaceBar(

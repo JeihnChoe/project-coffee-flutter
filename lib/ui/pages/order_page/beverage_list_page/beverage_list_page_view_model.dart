@@ -2,7 +2,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/model/beverage.dart';
-import 'package:project_coffee/data/repository/category_repository.dart';
+import 'package:project_coffee/data/repository/beverage_repostory.dart';
+
 import 'package:project_coffee/main.dart';
 
 class BeverageListModel {
@@ -19,7 +20,7 @@ class BeverageListViewModel extends StateNotifier<BeverageListModel?> {
 
   Future<void> notifyInit() async {
     ResponseDTO responseDTO =
-    await CategoryRepository().fetchCategoryDetailList();
+    await BeverageRepository().fetchBeverageDetailList();
     state = BeverageListModel(responseDTO.response);
   }
 }
