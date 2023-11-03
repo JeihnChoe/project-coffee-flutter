@@ -1,13 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project_coffee/_core/constants/move.dart';
 import 'package:project_coffee/data/model/category.dart';
 import 'package:project_coffee/ui/pages/order_page/category_list_page/category_list_page_view_model.dart';
-import 'package:project_coffee/ui/pages/order_page/category_list_page/widget/category_list_page_body_item.dart';
-import 'package:project_coffee/ui/widgets/custom_green_button.dart';
-import 'package:project_coffee/ui/widgets/custom_sliver_app_bar.dart';
-
 import 'package:project_coffee/ui/widgets/custom_tab_bar.dart';
 
 import 'category_list_page_app_bar.dart';
@@ -28,51 +23,52 @@ class CategoryListPageBody extends ConsumerWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-          backgroundColor: Colors.white, // 배경 색상 설정
-          body: CustomScrollView(
-            slivers: [
-              CategoryListPageAppBar(title: "Order"),
-              SliverToBoxAdapter(
-                child: CustomTabBar(
-                    contentTitle1: "전체 메뉴", contentTitle2: "나만의 메뉴"),
-              ),
-              SliverFillRemaining(
-                child: TabBarView(children: [
-                  CustomNestedTabBar("푸드"),
-                  Center(
-                    child: Text("푸드"),
-                  )
-                ]
-                ),
-              )
-            ],
-          ),
-          persistentFooterButtons: [
-
-            Row(
-              children: [
-                ElevatedButton(onPressed: () {
-
-                }, child: Text("매장 내 직접 수령"),style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white, // 배경 색상 설정
+        body: CustomScrollView(
+          slivers: [
+            CategoryListPageAppBar(title: "Order"),
+            SliverToBoxAdapter(
+              child:
+                  CustomTabBar(contentTitle1: "전체 메뉴", contentTitle2: "나만의 메뉴"),
+            ),
+            SliverFillRemaining(
+              child: TabBarView(children: [
+                CustomNestedTabBar("푸드"),
+                Center(
+                  child: Text("푸드"),
+                )
+              ]),
+            )
+          ],
+        ),
+        persistentFooterButtons: [
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {},
+                child: Text("매장 내 직접 수령"),
+                style: ElevatedButton.styleFrom(
                   primary: Colors.black,
                   minimumSize: Size(328, double.infinity),
                   shape: RoundedRectangleBorder(),
-                ),),
-                Ink(
-                  decoration: ShapeDecoration(
-                    color: Colors.black, // 배경색 설정
-                    shape: RoundedRectangleBorder(), // 원 모양의 배경을 만듭니다. 원 모양이 아니라면 다른 모양을 선택할 수 있습니다.
-                  ),
-                  child: IconButton(
-                    icon: Icon(CupertinoIcons.bag),
-                    color: Colors.white, // 아이콘 색상 설정
-                    onPressed: () {
-                      // 아이콘 버튼이 클릭되었을 때 수행할 작업
-                    },
-                  ),
-                )
-              ],
-            )
+                ),
+              ),
+              Ink(
+                decoration: ShapeDecoration(
+                  color: Colors.black, // 배경색 설정
+                  shape:
+                      RoundedRectangleBorder(), // 원 모양의 배경을 만듭니다. 원 모양이 아니라면 다른 모양을 선택할 수 있습니다.
+                ),
+                child: IconButton(
+                  icon: Icon(CupertinoIcons.bag),
+                  color: Colors.white, // 아이콘 색상 설정
+                  onPressed: () {
+                    // 아이콘 버튼이 클릭되었을 때 수행할 작업
+                  },
+                ),
+              )
+            ],
+          )
         ],
       ),
     );
