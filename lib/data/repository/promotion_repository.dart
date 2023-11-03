@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/http.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/mock/promotion.dart';
@@ -12,7 +13,7 @@ class PromotionRepository {
   Future<List<Promotion>> fetchPromotionDetailList() async {
     try {
       Response<dynamic> response = await dio.get("/api/promotion/viewListPage");
-      //Logger().d("통신?${response.data}");
+      Logger().d("통신?${response.data}");
 
       if (response.data != null && response.data is List) {
         List<dynamic> bodyList = response.data as List<dynamic>;
