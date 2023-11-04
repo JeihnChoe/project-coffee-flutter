@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'widget/shopping_basket_page_body.dart';
+import 'widget/shopping_cart_page_body.dart';
 
-class ShoppingBasketPage extends StatelessWidget {
-  const ShoppingBasketPage({super.key});
+class ShoppingCartPage extends StatelessWidget {
+  const ShoppingCartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ShoppingBasketPageBody(),
+      body: ShoppingCartPageBody(),
       // persistentFooterButtons: [
       //   SubmitBottomButton(text: "로그인", formField: formField)
       // ],

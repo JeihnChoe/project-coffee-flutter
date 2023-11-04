@@ -4,16 +4,15 @@ import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
-class ShoppingBasketBeveragePage extends StatefulWidget {
-  const ShoppingBasketBeveragePage({super.key});
+class ShoppingCartBeveragePage extends StatefulWidget {
+  const ShoppingCartBeveragePage({super.key});
 
   @override
-  State<ShoppingBasketBeveragePage> createState() =>
+  State<ShoppingCartBeveragePage> createState() =>
       _ShoppingBasketBeveragePageState();
 }
 
-class _ShoppingBasketBeveragePageState
-    extends State<ShoppingBasketBeveragePage> {
+class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
   bool isSelectAll = false;
   bool showSecondContainer = true; // 두 번째 컨테이너를 보이거나 숨길 상태
   bool checkBoxValue = false; // 두 번째 컨테이너의 체크박스 상태
@@ -66,23 +65,29 @@ class _ShoppingBasketBeveragePageState
                       children: [
                         TextButton(
                           onPressed: () {
-                            // 선택삭제 클릭 시 알림창 표시
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: AlertDialog(
-                                    content: Text("장바구니에서 삭제하실 메뉴를\n선택해주세요."),
-                                    actions: [
-                                      CustomWhitePopButton(
-                                        text: "확인",
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            );
+                            if (isSelectAll || checkBoxValue) {
+                              setState(() {
+                                showSecondContainer = false;
+                              });
+                            } else {
+                              // 선택된 체크박스가 없는 경우 알림창 표시
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: AlertDialog(
+                                      content: Text("장바구니에서 삭제하실 메뉴를\n선택해주세요."),
+                                      actions: [
+                                        CustomWhitePopButton(
+                                          text: "확인",
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
+                            }
                           },
                           child: Text("선택삭제",
                               style: TextStyle(color: kAccentColor)),
@@ -93,7 +98,12 @@ class _ShoppingBasketBeveragePageState
                           color: Colors.grey, // 수직선의 색상
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              // showSecondContainer를 false로 설정하여 모든 컨테이너가 삭제되도록 합니다.
+                              showSecondContainer = false;
+                            });
+                          },
                           child: Text("전체삭제",
                               style: TextStyle(color: Colors.grey)),
                         ),
