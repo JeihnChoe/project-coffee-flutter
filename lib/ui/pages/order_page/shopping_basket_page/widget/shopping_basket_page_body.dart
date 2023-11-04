@@ -2,17 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/ui/pages/order_page/shopping_basket_page/shopping_basket_beverage_page.dart';
+import 'package:project_coffee/ui/pages/order_page/shopping_basket_page/shopping_basket_product_page.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
-class ShoppingBasketPageBody extends StatefulWidget {
+class ShoppingBasketPageBody extends StatelessWidget {
   const ShoppingBasketPageBody({super.key});
-
-  @override
-  _ShoppingBasketPageBodyState createState() => _ShoppingBasketPageBodyState();
-}
-
-class _ShoppingBasketPageBodyState extends State<ShoppingBasketPageBody> {
-  bool checkBoxValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,151 +37,9 @@ class _ShoppingBasketPageBodyState extends State<ShoppingBasketPageBody> {
               child: TabBarView(
                 children: [
                   // 첫 번째 탭 페이지: 음료/푸드
-                  Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(top: 16.0),
-                        height: 110,
-                        color: Colors.white, // 음료/푸드 페이지 배경색
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 16.0, right: 16),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  textTitle2("주문 메뉴"),
-                                  Text("총 주문 기능 수량 20개"),
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: gap_s),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 5),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Checkbox(
-                                    // 체크박스
-                                    value: checkBoxValue,
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        checkBoxValue = value ?? false;
-                                      });
-                                    },
-                                    activeColor: kAccentColor,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center, // 가운데 정렬
-                                    children: [
-                                      TextButton(
-                                        onPressed: () {
-                                          // 선택삭제 클릭 시 알림창 표시
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return Padding(
-                                                padding:
-                                                    const EdgeInsets.all(16.0),
-                                                child: AlertDialog(
-                                                  content: Text(
-                                                      "장바구니에서 삭제하실 메뉴를\n선택해주세요."),
-                                                  actions: [
-                                                    CustomWhitePopButton(
-                                                      text: "확인",
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                        child: Text("선택삭제",
-                                            style:
-                                                TextStyle(color: kAccentColor)),
-                                      ),
-                                      Container(
-                                        width: 1, // 수직선의 너비 (두께)
-                                        height: 15, // 수직선의 높이를 원하는 크기로 설정
-                                        color: Colors.grey, // 수직선의 색상
-                                      ),
-                                      TextButton(
-                                        onPressed: () {},
-                                        child: Text("전체삭제",
-                                            style:
-                                                TextStyle(color: Colors.grey)),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: gap_m),
-                      Container(
-                        padding: EdgeInsets.only(top: 16.0),
-                        height: 230,
-                        color: Colors.grey, // 배경색
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Checkbox(
-                                  // 체크박스
-                                  value: checkBoxValue,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      checkBoxValue = value ?? false;
-                                    });
-                                  },
-                                  activeColor: kAccentColor,
-                                ),
-                                IconButton(
-                                  // 삭제 아이콘
-                                  onPressed: () {
-                                    // TODO: 삭제 로직을 구현
-                                  },
-                                  icon: Icon(Icons.cancel_outlined),
-                                  color: Colors.white,
-                                ),
-                                // 이미지와 텍스트 부분 (아직 더미 데이터)
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16.0),
-                              child: Row(children: [
-                                ClipOval(
-                                  child: Image.network(
-                                    'https://picsum.photos/id/237/100/100', // 이미지 URL
-                                    width: 100,
-                                    height: 100,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                SizedBox(width: gap_l),
-                                Text(
-                                  '주문 정보 들어올자리', // 여기에 텍스트 추가
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                              ]),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                  ShoppingBasketBeveragePage(),
                   // 두 번째 탭 페이지: 상품
-                  Container(
-                    color: Colors.white, // 상품 페이지 배경색
-                    child: Center(),
-                  ),
+                  ShoppingBasketProductPage(),
                 ],
               ),
             ),
