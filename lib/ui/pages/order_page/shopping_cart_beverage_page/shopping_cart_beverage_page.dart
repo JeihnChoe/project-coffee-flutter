@@ -4,16 +4,15 @@ import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
-class ShoppingBasketBeveragePage extends StatefulWidget {
-  const ShoppingBasketBeveragePage({super.key});
+class ShoppingCartBeveragePage extends StatefulWidget {
+  const ShoppingCartBeveragePage({super.key});
 
   @override
-  State<ShoppingBasketBeveragePage> createState() =>
+  State<ShoppingCartBeveragePage> createState() =>
       _ShoppingBasketBeveragePageState();
 }
 
-class _ShoppingBasketBeveragePageState
-    extends State<ShoppingBasketBeveragePage> {
+class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
   bool isSelectAll = false;
   bool showSecondContainer = true; // 두 번째 컨테이너를 보이거나 숨길 상태
   bool checkBoxValue = false; // 두 번째 컨테이너의 체크박스 상태
