@@ -99,7 +99,12 @@ class _ShoppingBasketBeveragePageState
                           color: Colors.grey, // 수직선의 색상
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              // showSecondContainer를 false로 설정하여 모든 컨테이너가 삭제되도록 합니다.
+                              showSecondContainer = false;
+                            });
+                          },
                           child: Text("전체삭제",
                               style: TextStyle(color: Colors.grey)),
                         ),
