@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
-import 'package:project_coffee/_core/constants/size.dart';
-import 'package:project_coffee/_core/constants/style.dart';
-import 'package:project_coffee/ui/pages/order_page/shopping_basket_page/shopping_basket_beverage_page.dart';
-import 'package:project_coffee/ui/pages/order_page/shopping_basket_page/shopping_basket_product_page.dart';
-import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
+import 'package:project_coffee/ui/pages/order_page/shopping_basket_beverage_page/shopping_basket_beverage_page.dart';
+import 'package:project_coffee/ui/pages/order_page/shopping_basket_product_page/shopping_basket_product_page.dart';
 
 class ShoppingBasketPageBody extends StatelessWidget {
   const ShoppingBasketPageBody({super.key});
