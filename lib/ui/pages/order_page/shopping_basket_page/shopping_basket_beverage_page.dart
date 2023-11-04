@@ -66,23 +66,29 @@ class _ShoppingBasketBeveragePageState
                       children: [
                         TextButton(
                           onPressed: () {
-                            // 선택삭제 클릭 시 알림창 표시
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: AlertDialog(
-                                    content: Text("장바구니에서 삭제하실 메뉴를\n선택해주세요."),
-                                    actions: [
-                                      CustomWhitePopButton(
-                                        text: "확인",
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            );
+                            if (isSelectAll || checkBoxValue) {
+                              setState(() {
+                                showSecondContainer = false;
+                              });
+                            } else {
+                              // 선택된 체크박스가 없는 경우 알림창 표시
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: AlertDialog(
+                                      content: Text("장바구니에서 삭제하실 메뉴를\n선택해주세요."),
+                                      actions: [
+                                        CustomWhitePopButton(
+                                          text: "확인",
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
+                            }
                           },
                           child: Text("선택삭제",
                               style: TextStyle(color: kAccentColor)),
