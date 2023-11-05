@@ -64,3 +64,7 @@ Text textBody4(String text) {
     style: TextStyle(color: Colors.grey, fontSize: 13),
   );
 }
+Text orderText(String text) => Text("$text ",style: TextStyle(fontSize: 11,fontWeight: FontWeight.bold),);
+// Text orderText(String text){
+//   return Text orderText() => Text("",style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),);
+// }
