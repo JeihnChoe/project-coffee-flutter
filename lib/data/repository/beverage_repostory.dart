@@ -12,5 +12,9 @@ class BeverageRepository {
     return Future.delayed(Duration(seconds: 3), () => mBeverageListResponseDTO);
   }
 
+  Future<ResponseDTO> fetchBeverageDetailAndOrder() {
+    return Future.delayed(Duration(seconds: 3), () => mBeverageOrderResponseDTO);
+  }
+
 }
 

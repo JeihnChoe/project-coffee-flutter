@@ -5,7 +5,7 @@ import 'package:project_coffee/data/model/beverage.dart';
 import 'package:project_coffee/data/repository/beverage_repostory.dart';
 
 import 'package:project_coffee/main.dart';
-
+//창고 데이터
 class BeverageListModel {
   List<Beverage> BeverageList;
 
