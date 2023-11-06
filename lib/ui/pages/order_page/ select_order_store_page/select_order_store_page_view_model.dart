@@ -1,34 +1,34 @@
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:logger/logger.dart';
-// import 'package:project_coffee/data/model/promotion.dart';
-// import 'package:project_coffee/data/repository/promotion_repository.dart';
-// import 'package:project_coffee/main.dart';
-//
-// //창고데이터
-// class PromotionListModel {
-//   List<Promotion> promotionList;
-//   PromotionListModel(this.promotionList);
-// }
-//
-// //창고
-// class PromotionListViewModel extends StateNotifier<PromotionListModel?> {
-//   final mContext = navigatorKey.currentContext;
-//   final Ref ref;
-//
-//   PromotionListViewModel(PromotionListModel? state, this.ref) : super(state);
-//
-//   Future<void> notifyInit() async {
-//     List<Promotion> responseDTO =
-//         await PromotionRepository().fetchPromotionDetailList();
-//     Logger().d("프로모션 통신1");
-//     state = PromotionListModel(responseDTO); // 수정된 부분
-//     Logger().d("프로모션 통신2");
-//   }
-// }
-//
-// //창고관리자
-// final promotionListProvider =
-//     StateNotifierProvider<PromotionListViewModel, PromotionListModel?>((ref) {
-//   //Logger().d("통신?33333333");
-//   return PromotionListViewModel(PromotionListModel([]), ref)..notifyInit();
-// });
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_coffee/data/dto/reponse_dto.dart';
+import 'package:project_coffee/data/model/category.dart';
+import 'package:project_coffee/data/model/stroes.dart';
+import 'package:project_coffee/data/repository/category_repository.dart';
+import 'package:project_coffee/data/repository/stores_repository.dart';
+import 'package:project_coffee/main.dart';
+
+class StoresListModel {
+  List<Stores> storesList;
+
+  StoresListModel(this.storesList);
+}
+
+//창고
+class StoresListViewModel extends StateNotifier<StoresListModel?> {
+  final mContext = navigatorKey.currentContext;
+  final Ref ref;
+  StoresListViewModel(super.state, this.ref);
+
+  Future<void> notifyInit() async {
+    ResponseDTO responseDTO =
+    await StoresRepository().fetchStoresDetailList();
+    state = StoresListModel(responseDTO.response);
+
+
+  }
+}
+
+//창고관리자
+final StoresListProvider =
+StateNotifierProvider<StoresListViewModel, StoresListModel?>((ref) {
+  return StoresListViewModel(null, ref)..notifyInit();
+});

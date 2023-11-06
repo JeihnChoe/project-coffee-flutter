@@ -35,7 +35,7 @@ List<Beverage> _mBeverageList = [
       "Vanilla Cream Cold Brew",
       "콜드 브루에 더해진 바닐라 크림으로 깔끔하면서 달콤한 콜드 브루를 새롭게 즐길 수 있는 음료입니다.",
       "디카페인결제시 300원 추가됩니다.",
-      1,
+      0,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
       1,8888),
   Beverage(
@@ -44,7 +44,7 @@ List<Beverage> _mBeverageList = [
       "Vanilla Cream Cold Brew",
       "콜드 브루에 더해진 바닐라 크림으로 깔끔하면서 달콤한 콜드 브루를 새롭게 즐길 수 있는 음료입니다.",
       "디카페인결제시 300원 추가됩니다.",
-      1,
+      0,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
       1,9999),
   Beverage(
