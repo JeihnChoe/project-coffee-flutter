@@ -23,185 +23,185 @@ class _ShopPageBodyState extends State<ShopPageBody> {
           ShopAppBar(),
           ScreenPromotion(),
           AllProducts(),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 16, top: 16),
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => MainPage()),
-                        );
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          textTitle1("Best Items"),
-                          Icon(Icons.arrow_forward_ios_outlined,
-                              color: Colors.black),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: gap_s),
-                    Container(
-                      height: 340, // 이미지 높이 조절
-                      child: PageView(
-                        controller: _pageController, // 페이지 컨트롤러 지정
-                        onPageChanged: (int page) {
-                          // 페이지 변경 시 호출되며 현재 페이지 업데이트
-                          setState(() {
-                            _currentPage = page;
-                          });
-                        },
-                        children: List.generate(2, (pageIndex) {
-                          return Column(
-                            children: List.generate(2, (rowIndex) {
-                              return Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: List.generate(2, (columnIndex) {
-                                  final imageIndex = pageIndex * 4 +
-                                      rowIndex * 2 +
-                                      columnIndex;
-                                  return Column(
-                                    children: [
-                                      Image(
-                                        image: NetworkImage(
-                                            "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002950]_20210426150654756.jpg"),
-                                        width: 150,
-                                        height: 130,
-                                        fit: BoxFit.cover,
-                                      ),
-                                      SizedBox(height: gap_s),
-                                      Text("Item $imageIndex"),
-                                      SizedBox(height: gap_m),
-                                    ],
-                                  );
-                                }),
-                              );
-                            }),
-                          );
-                        }),
-                      ),
-                    ),
-                    // 페이지 인디케이터 표시
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(2, (index) {
-                        return AnimatedContainer(
-                          duration: Duration(milliseconds: 300),
-                          width: _currentPage == index ? 12.0 : 8.0,
-                          height: 8.0,
-                          margin: EdgeInsets.symmetric(horizontal: 4.0),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.black, width: 0.8),
-                            color: _currentPage == index
-                                ? Colors.black87
-                                : Colors.white,
-                          ),
-                        );
-                      }),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 16, top: 16),
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => MainPage()),
-                        );
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          textTitle1("New Products"),
-                          Icon(Icons.arrow_forward_ios_outlined,
-                              color: Colors.black),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: gap_s),
-                    Container(
-                      height: 340, // 이미지 높이 조절
-                      child: PageView(
-                        controller: _pageController, // 페이지 컨트롤러 지정
-                        onPageChanged: (int page) {
-                          // 페이지 변경 시 호출되며 현재 페이지 업데이트
-                          setState(() {
-                            _currentPage = page;
-                          });
-                        },
-                        children: List.generate(2, (pageIndex) {
-                          return Column(
-                            children: List.generate(2, (rowIndex) {
-                              return Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: List.generate(2, (columnIndex) {
-                                  final imageIndex = pageIndex * 4 +
-                                      rowIndex * 2 +
-                                      columnIndex;
-                                  return Column(
-                                    children: [
-                                      Image(
-                                        image: NetworkImage(
-                                            "https://image.istarbucks.co.kr/upload/store/skuimg/2022/09/[9300000004348]_20220921102420365.jpg"),
-                                        width: 150,
-                                        height: 130,
-                                        fit: BoxFit.cover,
-                                      ),
-                                      SizedBox(height: gap_s),
-                                      Text("Item $imageIndex"),
-                                      SizedBox(height: gap_m),
-                                    ],
-                                  );
-                                }),
-                              );
-                            }),
-                          );
-                        }),
-                      ),
-                    ),
-                    // 페이지 인디케이터 표시
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(2, (index) {
-                        return AnimatedContainer(
-                          duration: Duration(milliseconds: 300),
-                          width: _currentPage == index ? 12.0 : 8.0,
-                          height: 8.0,
-                          margin: EdgeInsets.symmetric(horizontal: 4.0),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.black, width: 0.8),
-                            color: _currentPage == index
-                                ? Colors.black87
-                                : Colors.white,
-                          ),
-                        );
-                      }),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          bestItems(context),
+          newProducts(context),
         ],
+      ),
+    );
+  }
+
+  SliverToBoxAdapter newProducts(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16.0, right: 16, top: 16),
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MainPage()),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    textTitle1("New Products"),
+                    Icon(Icons.arrow_forward_ios_outlined, color: Colors.black),
+                  ],
+                ),
+              ),
+              SizedBox(height: gap_s),
+              Container(
+                height: 340, // 이미지 높이 조절
+                child: PageView(
+                  controller: _pageController, // 페이지 컨트롤러 지정
+                  onPageChanged: (int page) {
+                    // 페이지 변경 시 호출되며 현재 페이지 업데이트
+                    setState(() {
+                      _currentPage = page;
+                    });
+                  },
+                  children: List.generate(2, (pageIndex) {
+                    return Column(
+                      children: List.generate(2, (rowIndex) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: List.generate(2, (columnIndex) {
+                            final imageIndex =
+                                pageIndex * 4 + rowIndex * 2 + columnIndex;
+                            return Column(
+                              children: [
+                                Image(
+                                  image: NetworkImage(
+                                      "https://image.istarbucks.co.kr/upload/store/skuimg/2022/09/[9300000004348]_20220921102420365.jpg"),
+                                  width: 150,
+                                  height: 130,
+                                  fit: BoxFit.cover,
+                                ),
+                                SizedBox(height: gap_s),
+                                Text("Item $imageIndex"),
+                                SizedBox(height: gap_m),
+                              ],
+                            );
+                          }),
+                        );
+                      }),
+                    );
+                  }),
+                ),
+              ),
+              // 페이지 인디케이터 표시
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(2, (index) {
+                  return AnimatedContainer(
+                    duration: Duration(milliseconds: 300),
+                    width: _currentPage == index ? 12.0 : 8.0,
+                    height: 8.0,
+                    margin: EdgeInsets.symmetric(horizontal: 4.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.black, width: 0.8),
+                      color:
+                          _currentPage == index ? Colors.black87 : Colors.white,
+                    ),
+                  );
+                }),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  SliverToBoxAdapter bestItems(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16.0, right: 16, top: 16),
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MainPage()),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    textTitle1("Best Items"),
+                    Icon(Icons.arrow_forward_ios_outlined, color: Colors.black),
+                  ],
+                ),
+              ),
+              SizedBox(height: gap_s),
+              Container(
+                height: 340, // 이미지 높이 조절
+                child: PageView(
+                  controller: _pageController, // 페이지 컨트롤러 지정
+                  onPageChanged: (int page) {
+                    // 페이지 변경 시 호출되며 현재 페이지 업데이트
+                    setState(() {
+                      _currentPage = page;
+                    });
+                  },
+                  children: List.generate(2, (pageIndex) {
+                    return Column(
+                      children: List.generate(2, (rowIndex) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: List.generate(2, (columnIndex) {
+                            final imageIndex =
+                                pageIndex * 4 + rowIndex * 2 + columnIndex;
+                            return Column(
+                              children: [
+                                Image(
+                                  image: NetworkImage(
+                                      "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002950]_20210426150654756.jpg"),
+                                  width: 150,
+                                  height: 130,
+                                  fit: BoxFit.cover,
+                                ),
+                                SizedBox(height: gap_s),
+                                Text("Item $imageIndex"),
+                                SizedBox(height: gap_m),
+                              ],
+                            );
+                          }),
+                        );
+                      }),
+                    );
+                  }),
+                ),
+              ),
+              // 페이지 인디케이터 표시
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(2, (index) {
+                  return AnimatedContainer(
+                    duration: Duration(milliseconds: 300),
+                    width: _currentPage == index ? 12.0 : 8.0,
+                    height: 8.0,
+                    margin: EdgeInsets.symmetric(horizontal: 4.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.black, width: 0.8),
+                      color:
+                          _currentPage == index ? Colors.black87 : Colors.white,
+                    ),
+                  );
+                }),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
