@@ -17,8 +17,8 @@ class CustomTabBar extends StatelessWidget{
       labelColor: Colors.black, // 선택된 탭의 텍스트 색깔을 검은색으로 설정
       unselectedLabelColor: Colors.grey, // 선택되지 않은 탭의 텍스트 색깔을 회색으로 설정
       tabs: [
-        Tab(child: Text("${contentTitle1}",style: TextStyle(fontSize: 17),)),
-        Tab(child: Text("${contentTitle2}",style: TextStyle(fontSize: 17),)),
+        Tab(child: Text("${contentTitle1}",style: TextStyle(fontSize: 16),)),
+        Tab(child: Text("${contentTitle2}",style: TextStyle(fontSize: 16),)),
       ],
 
     );

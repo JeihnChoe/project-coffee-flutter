@@ -35,12 +35,12 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
   final _formKey = GlobalKey<State>();
 
   // void submit(WidgetRef ref) {
-    // &&arePasswordsEqual(_password.text, _passwordchk.text)==true
-    // if (_formKey.currentState!.validate()) {
+  // &&arePasswordsEqual(_password.text, _passwordchk.text)==true
+  // if (_formKey.currentState!.validate()) {
 
-    // passwordChk : _passwordchk.text,
-    // );
-    // ref.read(sessionProvider).join(joinReqDTO);
+  // passwordChk : _passwordchk.text,
+  // );
+  // ref.read(sessionProvider).join(joinReqDTO);
   // }
 // }
 
@@ -164,59 +164,59 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                           ),
                         ),
                         onPressed: () => showDialog<String>(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                content: Container(
-                                  width: 400,
-                                  height: 100,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text("주문할 매장을 선택해주세요"),
-                                      Text("매장을 먼저 선택하신 후 주문해주세요. 판매 완료된 메뉴는 주문하실 수 없습니다."),
-                                    ],
-                                  ),
-                                ),
-                                actions: [
-                                  TextButton(
-                                    style: OutlinedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(25),
-                                        ),
-                                        side: BorderSide(
-                                          color: kAccentColor,
-                                        )),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text(
-                                      "취소",
-                                      style: TextStyle(color: kAccentColor),
-                                    ),
-                                  ),
-                                  TextButton(
-                                    style: TextButton.styleFrom(
-                                      backgroundColor: kAccentColor,
-                                      minimumSize: Size(150, 25),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(25),
-                                      ),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                      // Navigator.push(context,
-                                      //     MaterialPageRoute(builder: (context) => move1)); //이동할 페이지1
-                                    },
-                                    child: Text(
-                                      "매장 선택하기",
-                                      style: TextStyle(color: Colors.white),
-                                    ), //버튼이름1
-                                  ),
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            content: Container(
+                              width: 400,
+                              height: 100,
+                              child: Column(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                children: [
+                                  Text("주문할 매장을 선택해주세요"),
+                                  Text("매장을 먼저 선택하신 후 주문해주세요. 판매 완료된 메뉴는 주문하실 수 없습니다."),
                                 ],
                               ),
                             ),
+                            actions: [
+                              TextButton(
+                                style: OutlinedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius.circular(25),
+                                    ),
+                                    side: BorderSide(
+                                      color: kAccentColor,
+                                    )),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  "취소",
+                                  style: TextStyle(color: kAccentColor),
+                                ),
+                              ),
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  backgroundColor: kAccentColor,
+                                  minimumSize: Size(150, 25),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  // Navigator.push(context,
+                                  //     MaterialPageRoute(builder: (context) => move1)); //이동할 페이지1
+                                },
+                                child: Text(
+                                  "매장 선택하기",
+                                  style: TextStyle(color: Colors.white),
+                                ), //버튼이름1
+                              ),
+                            ],
+                          ),
+                        ),
                         child: Text("주문하기",style: TextStyle(color: Colors.white),)),
                     SizedBox(
                       width: gap_m,
