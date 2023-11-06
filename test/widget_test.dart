@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProductListPageBody extends StatelessWidget {
+
   const ProductListPageBody({super.key});
 
   @override
@@ -8,6 +9,7 @@ class ProductListPageBody extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         SliverAppBar(
+
           snap: true,
           floating: true,
           title: Text("SliverAppBar"),

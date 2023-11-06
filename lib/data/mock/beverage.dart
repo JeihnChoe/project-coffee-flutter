@@ -1,8 +1,10 @@
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/model/beverage.dart';
+import 'package:project_coffee/data/model/beverage_order.dart';
 
 ResponseDTO mBeverageResponseDTO = ResponseDTO(true, _mBeverage, null,);
 ResponseDTO mBeverageListResponseDTO = ResponseDTO(true, _mBeverageList, null);
+ResponseDTO mBeverageOrderResponseDTO = ResponseDTO(true, _beverageOrder, null);
 
 Beverage _mBeverage = Beverage(
     1,
@@ -14,6 +16,9 @@ Beverage _mBeverage = Beverage(
     "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
     1,7777);
 
+BeverageOrder _beverageOrder = BeverageOrder(_mBeverage, 1, 2, 1, 1);
+
+
 List<Beverage> _mBeverageList = [
   Beverage(
       1,
@@ -21,7 +26,7 @@ List<Beverage> _mBeverageList = [
       "Nitro Vanilla Cream",
       "부드러운 목넘김의 나이트로 커피와 바닐라 크림의 매력을 한번에 느껴보세요!",
       "디카페인결제시 300원 추가됩니다.",
-      0,
+      2,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
       1,8888),
   Beverage(
