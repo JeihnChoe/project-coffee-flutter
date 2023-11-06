@@ -27,10 +27,10 @@ class SubmitBottomButton extends StatelessWidget {
           ),
           onPressed: () {
             formField.submit(ref);
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => HomeLoginChangeMainPage()));
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (context) => HomeLoginChangeMainPage()));
           },
           child: Text(
             "${text}",
