@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
-import 'package:project_coffee/data/model/beverage_order.dart';
+import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_beverage_page/shopping_cart_beverage_empty_page.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_beverage_page/shopping_cart_beverage_page.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/shopping_cart_page_view_model.dart';
@@ -14,7 +14,7 @@ class ShoppingCartPageBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ShoppingCartListModel? model = ref.watch(shoppingCartListProvider);
-    List<BeverageOrder> beverageOrderList = [];
+    List<BeverageOrderReqDTO> beverageOrderList = [];
     Logger().d("뭐가 들어왔니 $beverageOrderList");
 
     return DefaultTabController(

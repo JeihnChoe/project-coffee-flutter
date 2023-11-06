@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
-import 'package:project_coffee/data/model/beverage_order.dart';
+import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_beverage_page/shopping_cart_beverage_empty_page.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
 class ShoppingCartBeveragePage extends StatefulWidget {
-  final List<BeverageOrder> beverageOrderList;
+  final List<BeverageOrderReqDTO> beverageOrderList;
   const ShoppingCartBeveragePage(this.beverageOrderList, {super.key});
 
   @override
@@ -168,8 +168,8 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                           children: [
                             ClipOval(
                               child: Image.network(
-                                beverageOrder.beverage.beveragePicUrl,
-                                // 'https://picsum.photos/id/237/100/100',
+                                // beverageOrder.beverage.beveragePicUrl,
+                                'https://picsum.photos/id/237/100/100',
                                 width: 100,
                                 height: 100,
                                 fit: BoxFit.cover,
@@ -189,34 +189,34 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                     style: TextStyle(color: Colors.black45),
                                   ),
                                   SizedBox(height: gap_m),
-                                  // Row(
-                                  //   mainAxisAlignment:
-                                  //       MainAxisAlignment.spaceBetween,
-                                  //   children: [
-                                  //     Text(
-                                  //       "아이스",
-                                  //       // beverageOrder.isIced
-                                  //       //     .toString(), //음료 일땐 (아이스,사이즈,컵), 푸드 일땐 (제품이름)
-                                  //       style: TextStyle(color: Colors.black45),
-                                  //     ),
-                                  //     // Text(
-                                  //     //   beverageOrder.size
-                                  //     //       .toString(), //음료 일땐 (아이스,사이즈,컵), 푸드 일땐 (제품이름)
-                                  //     //   style:
-                                  //     //       TextStyle(color: Colors.black45),
-                                  //     // ),
-                                  //     // Text(
-                                  //     //   beverageOrder.cup
-                                  //     //       .toString(), //음료 일땐 (아이스,사이즈,컵), 푸드 일땐 (제품이름)
-                                  //     //   style:
-                                  //     //       TextStyle(color: Colors.black45),
-                                  //     // ),
-                                  //     Text(
-                                  //       "가격",
-                                  //       style: TextStyle(color: Colors.black45),
-                                  //     ),
-                                  //   ],
-                                  // ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "아이스",
+                                        // beverageOrder.isIced
+                                        //     .toString(), //음료 일땐 (아이스,사이즈,컵), 푸드 일땐 (제품이름)
+                                        style: TextStyle(color: Colors.black45),
+                                      ),
+                                      // Text(
+                                      //   beverageOrder.size
+                                      //       .toString(), //음료 일땐 (아이스,사이즈,컵), 푸드 일땐 (제품이름)
+                                      //   style:
+                                      //       TextStyle(color: Colors.black45),
+                                      // ),
+                                      // Text(
+                                      //   beverageOrder.cup
+                                      //       .toString(), //음료 일땐 (아이스,사이즈,컵), 푸드 일땐 (제품이름)
+                                      //   style:
+                                      //       TextStyle(color: Colors.black45),
+                                      // ),
+                                      Text(
+                                        beverageOrder.beverage.price.toString(),
+                                        style: TextStyle(color: Colors.black45),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
