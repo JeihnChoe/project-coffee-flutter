@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/stroes.dart';
+import 'package:project_coffee/ui/pages/order_page/%20select_order_store_page/widget/stores_detail_bottom_sheet.dart';
 
 class NearStoresListPageItem extends StatelessWidget {
   Stores stores;
@@ -13,10 +14,16 @@ class NearStoresListPageItem extends StatelessWidget {
       color: Colors.white,
       child: InkWell(
         onTap: () {
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => BeverageListPage(category)));
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
+            builder: (context) {
+              return FractionallySizedBox(
+                heightFactor: 0.95, // 높이를 90%로 설정
+                child: StoresDetailBottomSheet(stores: stores),
+              );
+            },
+          );
         },
         child: Padding(
           padding: const EdgeInsets.only(top: 5,bottom: 15, right: 16),
@@ -58,7 +65,7 @@ class NearStoresListPageItem extends StatelessWidget {
       width: 100,
       height: 90,
       decoration: BoxDecoration(
-        shape: BoxShape.circle,
+        shape: BoxShape.rectangle,
         image: DecorationImage(
             image: NetworkImage("${stores.storePicUrl}"),
             fit: BoxFit.cover),

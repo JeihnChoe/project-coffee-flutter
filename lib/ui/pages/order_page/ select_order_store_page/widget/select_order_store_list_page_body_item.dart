@@ -1,71 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:logger/logger.dart';
-import 'package:project_coffee/_core/constants/size.dart';
-import 'package:project_coffee/_core/constants/style.dart';
-import 'package:project_coffee/data/model/category.dart';
+import 'package:project_coffee/data/model/stroes.dart';
+import 'package:project_coffee/ui/pages/order_page/%20select_order_store_page/select_order_store_page_view_model.dart';
+import 'package:project_coffee/ui/pages/order_page/%20select_order_store_page/widget/near_stores_list_page_item.dart';
 
-import '../../beverage_list_page/beverage_list_page.dart';
+class FrequentStoresPage extends StatelessWidget {
+  const FrequentStoresPage({super.key});
 
-class CategoryListPageBodyItem extends StatelessWidget {
-  Category category;
-  CategoryListPageBodyItem(this.category, {super.key});
+
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: InkWell(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => BeverageListPage(category)));
-        },
-        child: Padding(
-          padding: const EdgeInsets.only(top: 5,bottom: 15, right: 16),
-          child: Container(
-            height: 75,
-            color: Colors.white,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                _image(),
-                SizedBox(width: gap_m),
-                _Category(),
-              ],
+    return Consumer(
+      builder: (context, ref, child) {
+        StoresListModel? model = ref.watch(StoresListProvider);
+        List<Stores> storesList = model?.storesList ?? [];
+        // final code1Items = categoryList.where((item) => item.code == code).toList();  //이거는 가까운곳 조건문 하려고 주석처리한거임 지우지마셈
+
+        return CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.all(16),
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate(
+                      (context, index) =>
+                      NearStoresListPageItem(stores: storesList[index]),
+                  childCount: storesList.length,
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  _Category() {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          textTitle2(
-            "${category.categoryName}",
-          ),
-          SizedBox(height: gap_m),
-          textBody3("${category.categoryEngName}")
-        ],
-      ),
-    );
-  }
-
-  _image() {
-    return Container(
-      width: 100,
-      height: 90,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        image: DecorationImage(
-            image: NetworkImage("${category.categoryPicUrl}"),
-            fit: BoxFit.cover),
-      ),
+          ],
+        );
+      },
     );
   }
 }

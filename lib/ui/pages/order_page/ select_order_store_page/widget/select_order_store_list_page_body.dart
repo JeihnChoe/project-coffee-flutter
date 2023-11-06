@@ -6,6 +6,8 @@ import 'package:project_coffee/ui/pages/order_page/%20select_order_store_page/wi
 import 'package:project_coffee/ui/pages/order_page/category_list_page/category_list_page.dart';
 import 'package:project_coffee/ui/widgets/custom_tab_bar.dart';
 
+import 'select_order_store_list_page_body_item.dart';
+
 class SelectOrderStorePageBody extends StatelessWidget {
   const SelectOrderStorePageBody({super.key});
 
@@ -30,7 +32,7 @@ class SelectOrderStorePageBody extends StatelessWidget {
                   // 첫 번째 탭 페이지: 가까운 매장
                   NearStoresPage(),
                   // 두 번째 탭 페이지: 자주 가는 매장
-                  Center(child: Text("자주 가는 매장은 아직 단계 아님")),
+                  FrequentStoresPage(),
                   //FavoriteStoresPage(),
                 ],
               ),
@@ -55,7 +57,8 @@ class StoreAppBar extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CategoryListPage()),
+            MaterialPageRoute(builder: (context) => MainPage(selectedIndex: 2)),
+            // MaterialPageRoute(builder: (context) => CategoryListPage()),
           );
         },
         icon: Icon(CupertinoIcons.back),
