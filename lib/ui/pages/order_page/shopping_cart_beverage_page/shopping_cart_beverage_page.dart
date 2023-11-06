@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/data/model/beverage_order.dart';
+import 'package:project_coffee/ui/pages/order_page/shopping_cart_beverage_page/shopping_cart_beverage_empty_page.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
 class ShoppingCartBeveragePage extends StatefulWidget {
-  const ShoppingCartBeveragePage({super.key});
+  final List<BeverageOrder> beverageOrderList;
+  const ShoppingCartBeveragePage(this.beverageOrderList, {super.key});
 
   @override
   State<ShoppingCartBeveragePage> createState() =>
@@ -103,6 +106,14 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                               // showSecondContainer를 false로 설정하여 모든 컨테이너가 삭제되도록 합니다.
                               showSecondContainer = false;
                             });
+
+                            // 현재 페이지 종료 및 이동
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ShoppingCartBeverageEmptyPage(),
+                              ),
+                            );
                           },
                           child: Text("전체삭제",
                               style: TextStyle(color: Colors.grey)),
@@ -118,81 +129,105 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
         Container(height: gap_m, color: Colors.grey[200]),
 
         // 두 번째 컨테이너를 조건부로 표시
-        if (showSecondContainer)
-          Container(
-            height: 200,
-            color: Colors.white,
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Checkbox(
-                      value: checkBoxValue,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          checkBoxValue = value ?? false;
-                        });
-                      },
-                      activeColor: kAccentColor,
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          showSecondContainer = false;
-                        });
-                      },
-                      icon: Icon(Icons.cancel_outlined),
-                      color: Colors.grey,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16.0, right: 16),
-                  child: Row(
+        Expanded(
+          child: ListView.builder(
+              itemCount: widget.beverageOrderList.length,
+              itemBuilder: (context, index) {
+                final beverageOrder = widget.beverageOrderList[index];
+                return Container(
+                  height: 200,
+                  color: Colors.white,
+                  child: Column(
                     children: [
-                      ClipOval(
-                        child: Image.network(
-                          'https://picsum.photos/id/237/100/100',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.cover,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Checkbox(
+                            value: checkBoxValue,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                checkBoxValue = value ?? false;
+                              });
+                            },
+                            activeColor: kAccentColor,
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                showSecondContainer = false;
+                              });
+                            },
+                            icon: Icon(Icons.cancel_outlined),
+                            color: Colors.grey,
+                          ),
+                        ],
                       ),
-                      SizedBox(width: gap_xl),
-                      SizedBox(
-                        width: 220,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0, right: 16),
+                        child: Row(
                           children: [
-                            textTitle2("제품이름 자리"),
-                            Text(
-                              "제품이름 영어 자리",
-                              style: TextStyle(color: Colors.black45),
+                            ClipOval(
+                              child: Image.network(
+                                beverageOrder.beverage.beveragePicUrl,
+                                // 'https://picsum.photos/id/237/100/100',
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                            SizedBox(height: gap_m),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "제품이름 자리",
-                                  style: TextStyle(color: Colors.black45),
-                                ),
-                                Text(
-                                  "가격",
-                                  style: TextStyle(color: Colors.black45),
-                                ),
-                              ],
+                            SizedBox(width: gap_xl),
+                            SizedBox(
+                              width: 220,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  textTitle2(beverageOrder
+                                      .beverage.beverageName), //제품 한글 이름 자리
+                                  Text(
+                                    beverageOrder
+                                        .beverage.beverageEngName, //영어이름 자리
+                                    style: TextStyle(color: Colors.black45),
+                                  ),
+                                  SizedBox(height: gap_m),
+                                  // Row(
+                                  //   mainAxisAlignment:
+                                  //       MainAxisAlignment.spaceBetween,
+                                  //   children: [
+                                  //     Text(
+                                  //       "아이스",
+                                  //       // beverageOrder.isIced
+                                  //       //     .toString(), //음료 일땐 (아이스,사이즈,컵), 푸드 일땐 (제품이름)
+                                  //       style: TextStyle(color: Colors.black45),
+                                  //     ),
+                                  //     // Text(
+                                  //     //   beverageOrder.size
+                                  //     //       .toString(), //음료 일땐 (아이스,사이즈,컵), 푸드 일땐 (제품이름)
+                                  //     //   style:
+                                  //     //       TextStyle(color: Colors.black45),
+                                  //     // ),
+                                  //     // Text(
+                                  //     //   beverageOrder.cup
+                                  //     //       .toString(), //음료 일땐 (아이스,사이즈,컵), 푸드 일땐 (제품이름)
+                                  //     //   style:
+                                  //     //       TextStyle(color: Colors.black45),
+                                  //     // ),
+                                  //     Text(
+                                  //       "가격",
+                                  //       style: TextStyle(color: Colors.black45),
+                                  //     ),
+                                  //   ],
+                                  // ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          ),
+                );
+              }),
+        ),
         Divider(
           color: Colors.grey[300], // 구분선의 색상 설정
           height: 3.0, // 구분선의 높이 설정
