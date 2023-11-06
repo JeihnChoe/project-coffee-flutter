@@ -2,23 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
+import 'package:project_coffee/data/dto/order_request.dart';
 
 class BottomSheetOutlineButton extends StatefulWidget {
-  final int hotice;
+  final BeverageOrderReqDTO beverageOrderReqDTO;
   final int selectedPaymentMethod;
-  BottomSheetOutlineButton({required this.selectedPaymentMethod,required this.hotice});
 
-  int submit(int selectedPayment){
+  BottomSheetOutlineButton(
+      {required this.selectedPaymentMethod, required this.beverageOrderReqDTO});
+
+  int submit(int selectedPayment) {
     int selectedPaymentMethod = selectedPayment;
     return selectedPaymentMethod;
   }
 
   @override
-  State<BottomSheetOutlineButton> createState() => _BottomSheetOutlineButtonState();
+  State<BottomSheetOutlineButton> createState() =>
+      _BottomSheetOutlineButtonState();
 }
 
 class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
   int selectedPayment = 0;
+
   @override
   void initState() {
     selectedPayment = widget.selectedPaymentMethod;
@@ -27,66 +32,63 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
 
   @override
   Widget build(BuildContext context) {
-
     return Row(
       children: [
-        Expanded(
-          child: OutlinedButton(
-            onPressed: () {
-              setState(() {
-                selectedPayment = 0;
-
-              });
-            },
-            style: OutlinedButton.styleFrom(
-              primary: selectedPayment == 0 ? kAccentColor : Colors
-                  .black,
-              side: BorderSide(
-                color: selectedPayment == 0 ? kAccentColor : Colors
-                    .grey,
-                width: 1.0,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-            ),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Column(
-                  children: [
-                    SizedBox(height: 16),
-                    Container(
-                      width: 40,
-                      child: Image.asset(
-                        "assets/tall.jpg",
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    SizedBox(height: gap_m),
-                    Text("short"),
-                    SizedBox(height: gap_s),
-                    Text("237ml"),
-                    SizedBox(height: gap_l),
-                  ],
+        if (widget.beverageOrderReqDTO.isIced == 1)
+          Expanded(
+            child: OutlinedButton(
+              onPressed: () {
+                setState(() {
+                  selectedPayment = 0;
+                });
+              },
+              style: OutlinedButton.styleFrom(
+                primary: selectedPayment == 0 ? kAccentColor : Colors.black,
+                side: BorderSide(
+                  color: selectedPayment == 0 ? kAccentColor : Colors.grey,
+                  width: 1.0,
                 ),
-                if (selectedPayment == 0)
-                  Positioned(
-                    top: 25, // 위로 올릴 값
-                    left: 10,
-                    child: Container(
-                      width: 16,
-                      height: 16,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.green,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Column(
+                    children: [
+                      SizedBox(height: 16),
+                      Container(
+                        width: 40,
+                        child: Image.asset(
+                          "assets/tall.jpg",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      SizedBox(height: gap_m),
+                      Text("short"),
+                      SizedBox(height: gap_s),
+                      Text("237ml"),
+                      SizedBox(height: gap_l),
+                    ],
+                  ),
+                  if (selectedPayment == 0)
+                    Positioned(
+                      top: 25, // 위로 올릴 값
+                      left: 10,
+                      child: Container(
+                        width: 16,
+                        height: 16,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.green,
+                        ),
                       ),
                     ),
-                  ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
         SizedBox(
           width: 10,
         ),
@@ -95,15 +97,12 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
             onPressed: () {
               setState(() {
                 selectedPayment = 1;
-
               });
             },
             style: OutlinedButton.styleFrom(
-              primary: selectedPayment == 1 ? kAccentColor : Colors
-                  .black,
+              primary: selectedPayment == 1 ? kAccentColor : Colors.black,
               side: BorderSide(
-                color: selectedPayment == 1 ? kAccentColor : Colors
-                    .grey,
+                color: selectedPayment == 1 ? kAccentColor : Colors.grey,
                 width: 1.0,
               ),
               shape: RoundedRectangleBorder(
@@ -155,15 +154,12 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
             onPressed: () {
               setState(() {
                 selectedPayment = 2;
-
               });
             },
             style: OutlinedButton.styleFrom(
-              primary: selectedPayment == 2 ? kAccentColor : Colors
-                  .black,
+              primary: selectedPayment == 2 ? kAccentColor : Colors.black,
               side: BorderSide(
-                color: selectedPayment == 2 ? kAccentColor : Colors
-                    .grey,
+                color: selectedPayment == 2 ? kAccentColor : Colors.grey,
                 width: 1.0,
               ),
               shape: RoundedRectangleBorder(
@@ -215,15 +211,12 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
             onPressed: () {
               setState(() {
                 selectedPayment = 3;
-
               });
             },
             style: OutlinedButton.styleFrom(
-              primary: selectedPayment == 3 ? kAccentColor : Colors
-                  .black,
+              primary: selectedPayment == 3 ? kAccentColor : Colors.black,
               side: BorderSide(
-                color: selectedPayment == 3 ? kAccentColor : Colors
-                    .grey,
+                color: selectedPayment == 3 ? kAccentColor : Colors.grey,
                 width: 1.0,
               ),
               shape: RoundedRectangleBorder(

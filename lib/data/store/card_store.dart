@@ -1,7 +1,6 @@
 //창고 데이터
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/move.dart';
 import 'package:project_coffee/data/dto/card_request.dart';
 import 'package:project_coffee/data/model/paycard.dart';
