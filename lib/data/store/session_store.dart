@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
-import 'package:project_coffee/_core/constants/http.dart';
 import 'package:project_coffee/_core/constants/move.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/dto/user_request.dart';
@@ -28,9 +26,9 @@ class SessionStore extends SessionUser {
     Logger().d("나오냐??222222222222222");
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
     if (responseDTO.success == true) {
-      Navigator.pushNamed(mContext!,Move.JoinSuccessPage,arguments: joinReqDTO);
+      Navigator.pushNamed(mContext!, Move.JoinSuccessPage,
+          arguments: joinReqDTO);
     } else {
-
       ScaffoldMessenger.of(mContext!)
           .showSnackBar(SnackBar(content: Text(responseDTO.error)));
     }
@@ -62,18 +60,17 @@ class SessionStore extends SessionUser {
   }
 
   Future<void> findLoginId(FindLoginIdReqDTO findLoginIdReqDTO) async {
-    Navigator.pushNamed(mContext!,Move.MainPage);
-
+    Navigator.pushNamed(mContext!, Move.MainPage);
   }
 
   Future<void> findPassword(FindPasswordReqDTO findPasswordReqDTO) async {
-    Navigator.pushNamed(mContext!,Move.FindPasswordNewSetPage);
+    Navigator.pushNamed(mContext!, Move.FindPasswordNewSetPage);
   }
 
-  Future<void> findPasswordNewSet(FindPasswordNewSetReqDTO findPasswordNewSetReqDTO) async {
-    Navigator.pushNamed(mContext!,Move.LoginPage);
+  Future<void> findPasswordNewSet(
+      FindPasswordNewSetReqDTO findPasswordNewSetReqDTO) async {
+    Navigator.pushNamed(mContext!, Move.LoginPage);
   }
-
 }
 
 //창고 관리자
