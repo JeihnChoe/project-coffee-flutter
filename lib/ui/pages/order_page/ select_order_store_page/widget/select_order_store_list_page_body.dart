@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/ui/pages/main_page/main_page.dart';
-import 'package:project_coffee/ui/pages/order_page/%20select_order_store_page/near_stores_page.dart';
+import 'package:project_coffee/ui/pages/order_page/%20select_order_store_page/widget/near_stores_list_page.dart';
 import 'package:project_coffee/ui/pages/order_page/category_list_page/category_list_page.dart';
 import 'package:project_coffee/ui/widgets/custom_tab_bar.dart';
 

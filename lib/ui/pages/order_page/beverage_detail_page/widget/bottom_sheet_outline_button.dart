@@ -34,7 +34,7 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        if (widget.beverageOrderReqDTO.isIced == 1)
+        if (widget.beverageOrderReqDTO.isIced == 0)
           Expanded(
             child: OutlinedButton(
               onPressed: () {
