@@ -4,67 +4,73 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/data/model/beverage.dart';
 
 import 'beverage_outline_button.dart';
 
 class BeverageDetailPageBody extends StatelessWidget {
-  Beverage beverage;
-  bool isIced;
-  BeverageDetailPageBody(this.beverage,this.isIced);
+  BeverageOrderReqDTO beverageOrderReqDTO;
+  BeverageDetailPageBody(this.beverageOrderReqDTO);
 
   @override
   Widget build(BuildContext context) {
+    if(beverageOrderReqDTO.beverage.hotIce == 0){
+      beverageOrderReqDTO.isIced = 0;
+    }else if(beverageOrderReqDTO.beverage.hotIce == 1){
+      beverageOrderReqDTO.isIced = 1;
+    }
+
     // ProductDetailModel? model = ref.watch(productDetailProvider);
     // if (model == null) {
     //   return Center(child: CircularProgressIndicator());
     // } else {
     //   Product product = model.product;
 
-
     return CustomScrollView(
       slivers: [
-        _appbar(beverage),
-        _body(beverage,isIced),
+        _appbar(beverageOrderReqDTO.beverage),
+        _body(beverageOrderReqDTO),
       ],
     );
   }
 }
 
-SliverPadding _body(Beverage beverage,bool isIced) {
+SliverPadding _body(BeverageOrderReqDTO beverageOrderReqDTO) {
   return SliverPadding(
     padding: EdgeInsets.all(16.0), // 패딩 설정
     sliver: SliverToBoxAdapter(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          textTitle1("${beverage.beverageName}"),
-          textBody2("${beverage.beverageEngName}"),
+          textTitle1("${beverageOrderReqDTO.beverage.beverageName}"),
+          textBody2("${beverageOrderReqDTO.beverage.beverageEngName}"),
           SizedBox(height: 10),
           textBody1(
-            "${beverage.beverageDescription}",
+            "${beverageOrderReqDTO.beverage.beverageDescription}",
           ),
           SizedBox(height: 10),
-          textTitle1("${beverage.price}원"),
+          textTitle1("${beverageOrderReqDTO.beverage.price}원"),
           SizedBox(height: 10),
-          if (beverage.hotIce==0)
+          if (beverageOrderReqDTO.beverage.hotIce==0)
             Row(
               children: [
                 Expanded(
-                    child:BeverageOutlineButton ("HOT", kActiveColor2,false)),
+                    child:BeverageOutlineButton ("HOT", kActiveColor2,beverageOrderReqDTO,false)),
+
               ],
             )
-          else if(beverage.hotIce == 1)
+          else if(beverageOrderReqDTO.beverage.hotIce == 1)
             Row(
               children: [
-                Expanded(child: BeverageOutlineButton("ICED ONLY", kActiveColor1,true)),
+                Expanded(child: BeverageOutlineButton("ICED ONLY", kActiveColor1,beverageOrderReqDTO,true)),
               ],
             )
           else
             Row(
               children: [
-                Expanded(child: BeverageOutlineButton("ICE", kActiveColor1,true)),
-                Expanded(child: BeverageOutlineButton("HOT", kActiveColor2,false)),
+                Expanded(child: BeverageOutlineButton("ICE", kActiveColor1,beverageOrderReqDTO,true)),
+                Expanded(child: BeverageOutlineButton("HOT", kActiveColor2,beverageOrderReqDTO,false)),
               ],
             ),
           SizedBox(height: 10),
@@ -72,7 +78,7 @@ SliverPadding _body(Beverage beverage,bool isIced) {
             padding: EdgeInsets.all(10),
             width: double.infinity,
             color: Colors.grey[100],
-            child: textBody3("${beverage.beverageTip}"),
+            child: textBody3("${beverageOrderReqDTO.beverage.beverageTip}"),
           ),
           // SizedBox(height: 1000),
         ],

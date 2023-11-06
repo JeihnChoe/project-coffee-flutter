@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 
 import 'package:project_coffee/_core/constants/color.dart';
+import 'package:project_coffee/data/dto/order_request.dart';
 
 import 'package:project_coffee/data/model/beverage.dart';
 
@@ -18,9 +19,9 @@ class BeverageDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isIced = true;
+    BeverageOrderReqDTO beverageOrderReqDTO = BeverageOrderReqDTO(beverage: beverage,);
     return Scaffold(
-      body: BeverageDetailPageBody(beverage,isIced),
+      body: BeverageDetailPageBody(beverageOrderReqDTO),
       persistentFooterButtons: [
         TextButton(
           style: TextButton.styleFrom(
@@ -37,7 +38,7 @@ class BeverageDetailPage extends StatelessWidget {
               builder: (context) {
                 return FractionallySizedBox(
                   heightFactor: 0.95, // 높이를 90%로 설정
-                  child: BeverageDetailBottomSheet(beverage: beverage,isIced: isIced),
+                  child: BeverageDetailBottomSheet(beverageOrderReqDTO: beverageOrderReqDTO),
                 );
               },
             );

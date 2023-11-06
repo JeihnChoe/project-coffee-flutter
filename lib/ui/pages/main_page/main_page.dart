@@ -6,15 +6,17 @@ import 'package:project_coffee/ui/pages/pay_page/pay_main_page/pay_main_page.dar
 import 'package:project_coffee/ui/pages/shop_page/shop_page.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  final int? selectedIndex;
+  MainPage({this.selectedIndex});
+
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<MainPage> createState() => _MainPageState(selectedIndex: selectedIndex);
 }
 
 class _MainPageState extends State<MainPage> {
-  int _selectedIndex = 0;
-
+  int _selectedIndex ;
+  _MainPageState({int? selectedIndex}) : _selectedIndex = selectedIndex ?? 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
