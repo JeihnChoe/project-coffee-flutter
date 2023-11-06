@@ -23,6 +23,7 @@ class SessionStore extends SessionUser {
   final mContext = navigatorKey.currentContext;
 
   Future<void> join(JoinReqDTO joinReqDTO) async {
+    Logger().d("나오냐??222222222222222");
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
     if (responseDTO.success == true) {
       Navigator.pushNamed(mContext!,Move.JoinSuccessPage,arguments: joinReqDTO);

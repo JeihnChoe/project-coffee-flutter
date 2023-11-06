@@ -9,9 +9,12 @@ import 'package:project_coffee/data/model/user.dart';
 class UserRepository {
   Future<ResponseDTO> fetchJoin(JoinReqDTO joinReqDTO) async {
     try {
+
       // dynamic -> http body
+
       Response<dynamic> response =
       await dio.post("/api/join", data: joinReqDTO.toJson());
+
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
       // responseDTO.response = User.fromJson(responseDTO.response);

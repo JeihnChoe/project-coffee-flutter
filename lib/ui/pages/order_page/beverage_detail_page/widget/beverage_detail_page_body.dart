@@ -66,14 +66,16 @@ SliverPadding _body(BeverageOrderReqDTO beverageOrderReqDTO) {
                 Expanded(child: BeverageOutlineButton("ICED ONLY", kActiveColor1,beverageOrderReqDTO,true)),
               ],
             )
-          else
-            Row(
-              children: [
-                Expanded(child: BeverageOutlineButton("ICE", kActiveColor1,beverageOrderReqDTO,true)),
-                Expanded(child: BeverageOutlineButton("HOT", kActiveColor2,beverageOrderReqDTO,false)),
-              ],
-            ),
+          else if(beverageOrderReqDTO.beverage.hotIce == 2)
+              Row(
+                children: [
+                  Expanded(child: BeverageOutlineButton("ICE", kActiveColor1,beverageOrderReqDTO,true)),
+                  Expanded(child: BeverageOutlineButton("HOT", kActiveColor2,beverageOrderReqDTO,false)),
+                ],
+              ),
+
           SizedBox(height: 10),
+          if(beverageOrderReqDTO.beverage.hotIce != 3)
           Container(
             padding: EdgeInsets.all(10),
             width: double.infinity,

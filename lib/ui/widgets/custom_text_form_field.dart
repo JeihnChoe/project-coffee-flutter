@@ -41,7 +41,7 @@ class CustomTextForm extends StatelessWidget {
         validator: validatorFunction,
         obscureText: true,
         decoration: InputDecoration(
-          hintText: "비밀번호 (10 - 20자리 이내)",
+          hintText: "비밀번호 (8 - 20자리 이내 영어 및 특수문자 포함)",
           hintStyle: TextStyle(color: Colors.grey),
         ),
       );
