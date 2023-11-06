@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
+import 'package:project_coffee/data/model/beverage_order.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_beverage_page/shopping_cart_beverage_empty_page.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_beverage_page/shopping_cart_beverage_page.dart';
+import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/shopping_cart_page_view_model.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_product_page/shopping_cart_product_empty_page.dart';
-import 'package:project_coffee/ui/pages/order_page/shopping_cart_product_page/shopping_cart_product_page.dart';
 
-class ShoppingCartPageBody extends StatelessWidget {
+class ShoppingCartPageBody extends ConsumerWidget {
   const ShoppingCartPageBody({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ShoppingCartListModel? model = ref.watch(shoppingCartListProvider);
+    List<BeverageOrder> beverageOrderList = [];
+    Logger().d("뭐가 들어왔니 $beverageOrderList");
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -36,9 +43,11 @@ class ShoppingCartPageBody extends StatelessWidget {
               child: TabBarView(
                 children: [
                   // 첫 번째 탭 페이지: 음료/푸드
-                  //조건문으로 어떤 페이지 줄지 정해주기
+
+                  beverageOrderList.isEmpty
+                      ? ShoppingCartBeverageEmptyPage()
+                      : ShoppingCartBeveragePage(beverageOrderList),
                   //ShoppingCartBeveragePage(),
-                  ShoppingCartBeverageEmptyPage(),
 
                   // 두 번째 탭 페이지: 상품
                   //ShoppingCartProductPage(),

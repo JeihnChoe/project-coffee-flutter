@@ -4,7 +4,7 @@ class Beverage {
   final String beverageEngName;
   final String beverageDescription;
   final String beverageTip;
-  final int hotIce;  // 0 : hot ,1 : iceonly , 2: hot iced
+  final int hotIce; // 0 : hot ,1 : iceonly , 2: hot iced
   final String beveragePicUrl;
   final int category;
   final int price;
@@ -18,6 +18,5 @@ class Beverage {
       this.hotIce,
       this.beveragePicUrl,
       this.category,
-      this.price
-      );
+      this.price);
 }

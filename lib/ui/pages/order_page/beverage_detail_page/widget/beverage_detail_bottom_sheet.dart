@@ -5,8 +5,7 @@ import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/beverage.dart';
-import 'package:project_coffee/ui/pages/main_page/main_page.dart';
-import 'package:project_coffee/ui/widgets/custom_alert_window.dart';
+import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/shopping_cart_page.dart';
 import 'package:project_coffee/ui/widgets/custom_green_button.dart';
 import 'package:project_coffee/ui/widgets/custom_white_button.dart';
 
@@ -102,11 +101,11 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                 IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.heart)),
                 Row(
                   children: [
-                    CustomWhiteButton("담기", MainPage),
+                    CustomWhiteButton("담기", ShoppingCartPage),
                     SizedBox(
                       width: gap_m,
                     ),
-                    CustomGreenButton("주문하기", 120, 25, MainPage),
+                    CustomGreenButton("주문하기", 120, 25, ShoppingCartPage),
                     // CustomAlertWindow(content: "주문할 매장을 선택해주세요.", buttonName1: "주문하기", buttonName2: "담기", clickButton: "뭐더라"),
                     TextButton(
                         onPressed: () => showDialog<String>(
@@ -116,7 +115,8 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                                   width: 400,
                                   height: 100,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text("주문할 매장을 선택해주세요"),
                                       Text(
@@ -137,7 +137,10 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text("취소",style: TextStyle(color: kAccentColor),),
+                                    child: Text(
+                                      "취소",
+                                      style: TextStyle(color: kAccentColor),
+                                    ),
                                   ),
                                   TextButton(
                                     style: TextButton.styleFrom(
@@ -152,7 +155,10 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                                       // Navigator.push(context,
                                       //     MaterialPageRoute(builder: (context) => move1)); //이동할 페이지1
                                     },
-                                    child: Text("매장 선택하기",style: TextStyle(color: Colors.white),), //버튼이름1
+                                    child: Text(
+                                      "매장 선택하기",
+                                      style: TextStyle(color: Colors.white),
+                                    ), //버튼이름1
                                   ),
                                 ],
                               ),
