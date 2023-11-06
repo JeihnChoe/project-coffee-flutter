@@ -1,11 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/data/model/beverage.dart';
+import 'package:project_coffee/data/store/order_store.dart';
 import 'package:project_coffee/ui/pages/main_page/main_page.dart';
+import 'package:project_coffee/ui/pages/order_page/beverage_detail_page/widget/beverage_detail_cart_bottom_sheet.dart';
 import 'package:project_coffee/ui/widgets/custom_alert_window.dart';
 import 'package:project_coffee/ui/widgets/custom_green_button.dart';
 import 'package:project_coffee/ui/widgets/custom_white_button.dart';
@@ -14,11 +18,9 @@ import 'bottom_sheet_outline_button.dart';
 import 'bottom_sheet_sliver_appbar.dart';
 
 class BeverageDetailBottomSheet extends StatefulWidget {
-  final Beverage beverage;
-  final isIced;
+  BeverageOrderReqDTO beverageOrderReqDTO;
 
-  const BeverageDetailBottomSheet(
-      {required this.beverage, required this.isIced});
+  BeverageDetailBottomSheet({required this.beverageOrderReqDTO});
 
   @override
   State<BeverageDetailBottomSheet> createState() =>
@@ -29,26 +31,36 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
   int selectedTabMethod = 1;
   int count = 1;
   int totalprice = 0;
+  final _formKey = GlobalKey<State>();
+
+  // void submit(WidgetRef ref) {
+    // &&arePasswordsEqual(_password.text, _passwordchk.text)==true
+    // if (_formKey.currentState!.validate()) {
+
+    // passwordChk : _passwordchk.text,
+    // );
+    // ref.read(sessionProvider).join(joinReqDTO);
+  // }
+// }
+
   final ScrollController controller = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    totalprice = widget.beverage.price;
-    Logger().d(widget.isIced);
+    totalprice = widget.beverageOrderReqDTO.beverage.price;
+    widget.beverageOrderReqDTO.size = 1;
+    widget.beverageOrderReqDTO.cup = 1;
+    widget.beverageOrderReqDTO.count = 1;
+    widget.beverageOrderReqDTO.totalmoney = totalprice;
+    Logger().d(widget.beverageOrderReqDTO.isIced);
   }
 
-  void updateTotalPrice() {
-    if (selectedTabMethod == 2) {
-      totalprice = widget.beverage.price * count;
-    } else {
-      totalprice = widget.beverage.price * count;
-    }
-  }
+
 
   void orderBeverage() {
     Logger().d(
-        "Ordered: ${widget.beverage.beverageName}, Quantity: $count, Total Price: $totalprice");
+        "Ordered: ${widget.beverageOrderReqDTO.beverage.beverageName}, Quantity: $count, Total Price: $totalprice");
   }
 
   @override
@@ -67,19 +79,25 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                         if (count != 1) {
                           setState(() {
                             count--;
-                            totalprice = totalprice - widget.beverage.price;
+                            totalprice = totalprice -
+                                widget.beverageOrderReqDTO.beverage.price;
+                            widget.beverageOrderReqDTO.count = count;
+                            widget.beverageOrderReqDTO.totalmoney = totalprice;
                           });
                         }
                       },
                       icon: Icon(CupertinoIcons.minus_circle),
                       color: count == 1 ? Colors.grey : Colors.black,
                     ),
-                    Text("$count"),
+                    Text("${widget.beverageOrderReqDTO.count}"),
                     IconButton(
                       onPressed: () {
                         setState(() {
                           count++;
-                          totalprice = totalprice + widget.beverage.price;
+                          totalprice = totalprice +
+                              widget.beverageOrderReqDTO.beverage.price;
+                          widget.beverageOrderReqDTO.count = count;
+                          widget.beverageOrderReqDTO.totalmoney = totalprice;
                         });
                       },
                       icon: Icon(CupertinoIcons.plus_circle),
@@ -88,7 +106,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                 ),
                 Row(
                   children: [
-                    textTitle1("${totalprice}"),
+                    textTitle1("${widget.beverageOrderReqDTO.totalmoney}"),
                     SizedBox(
                       width: 16,
                     )
@@ -102,13 +120,48 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                 IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.heart)),
                 Row(
                   children: [
-                    CustomWhiteButton("담기", MainPage),
+                    Consumer(builder: (context, ref, child) {
+                      return OutlinedButton(
+                        onPressed: () {
+
+                          ref.read(beverageProvider).cart(widget.beverageOrderReqDTO);
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
+                            builder: (context,) {
+                              return FractionallySizedBox(
+                                heightFactor: 0.20, // 높이를 90%로 설정
+                                child: BeverageDetailCartBottomSheet(beverageOrderReqDTO: widget.beverageOrderReqDTO),
+                              );
+                            },
+                          );
+                        },
+                        style: OutlinedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            side: BorderSide(
+                              color: kAccentColor,
+                            )),
+                        child: Text(
+                          "담기",
+                          style: TextStyle(color: kAccentColor),
+                        ),
+                      );
+                    },
+                    ),
                     SizedBox(
                       width: gap_m,
                     ),
-                    CustomGreenButton("주문하기", 120, 25, MainPage),
                     // CustomAlertWindow(content: "주문할 매장을 선택해주세요.", buttonName1: "주문하기", buttonName2: "담기", clickButton: "뭐더라"),
                     TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: kAccentColor,
+                          minimumSize: Size(120, 25),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                        ),
                         onPressed: () => showDialog<String>(
                               context: context,
                               builder: (context) => AlertDialog(
@@ -116,11 +169,11 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                                   width: 400,
                                   height: 100,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text("주문할 매장을 선택해주세요"),
-                                      Text(
-                                          "매장을 먼저 선택하신 후 주문해주세요. 판매 완료된 메뉴는 주문하실 수 없습니다."),
+                                      Text("매장을 먼저 선택하신 후 주문해주세요. 판매 완료된 메뉴는 주문하실 수 없습니다."),
                                     ],
                                   ),
                                 ),
@@ -137,7 +190,10 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text("취소",style: TextStyle(color: kAccentColor),),
+                                    child: Text(
+                                      "취소",
+                                      style: TextStyle(color: kAccentColor),
+                                    ),
                                   ),
                                   TextButton(
                                     style: TextButton.styleFrom(
@@ -152,12 +208,15 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                                       // Navigator.push(context,
                                       //     MaterialPageRoute(builder: (context) => move1)); //이동할 페이지1
                                     },
-                                    child: Text("매장 선택하기",style: TextStyle(color: Colors.white),), //버튼이름1
+                                    child: Text(
+                                      "매장 선택하기",
+                                      style: TextStyle(color: Colors.white),
+                                    ), //버튼이름1
                                   ),
                                 ],
                               ),
                             ),
-                        child: Text("주문하기")),
+                        child: Text("주문하기",style: TextStyle(color: Colors.white),)),
                     SizedBox(
                       width: gap_m,
                     )
@@ -174,7 +233,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
             child: Container(color: Colors.white, child: SizedBox(height: 16)),
           ),
           BottomSheetSliverAppBar(
-            beverage: widget.beverage,
+            beverage: widget.beverageOrderReqDTO.beverage,
           ),
           SliverToBoxAdapter(
             child: Container(
@@ -211,7 +270,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                     ),
                     BottomSheetOutlineButton(
                         selectedPaymentMethod: 1,
-                        hotice: widget.beverage.hotIce),
+                        beverageOrderReqDTO: widget.beverageOrderReqDTO),
                     SizedBox(
                       height: gap_l,
                     ),
@@ -223,6 +282,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                             onPressed: () {
                               setState(() {
                                 selectedTabMethod = 1;
+                                widget.beverageOrderReqDTO.cup = 1;
                               });
                             },
                             child: Text(
@@ -254,6 +314,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                             onPressed: () {
                               setState(() {
                                 selectedTabMethod = 2;
+                                widget.beverageOrderReqDTO.cup = 2;
                               });
                             },
                             child: Text(
@@ -283,6 +344,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                             onPressed: () {
                               setState(() {
                                 selectedTabMethod = 3;
+                                widget.beverageOrderReqDTO.cup = 3;
                               });
                             },
                             child: Text(

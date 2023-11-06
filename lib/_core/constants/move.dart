@@ -27,7 +27,7 @@ class Move {
 
 Map<String, Widget Function(BuildContext)> getRouters() {
   return {
-    Move.MainPage: (context) => const MainPage(),
+    Move.MainPage: (context) => MainPage(),
     Move.LoginPage: (context) => LoginPage(),
     Move.JoinPage: (context) => JoinPage(),
     Move.JoinSuccessPage: (context) => JoinSuccessPage(),

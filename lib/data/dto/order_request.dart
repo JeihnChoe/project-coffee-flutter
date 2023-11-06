@@ -1,3 +1,5 @@
+import 'package:project_coffee/data/model/beverage.dart';
+
 class CategoryReqDTO{
   final int id;
   final String categoryName;
@@ -75,22 +77,23 @@ class BeverageReqDTO{
 }
 
 class BeverageOrderReqDTO{
-  final BeverageReqDTO beverageReqDTO;
+  Beverage beverage;
    int? isIced;
    int? count;
    int? size;
    int? cup;
-   BeverageOrderReqDTO({required this.beverageReqDTO,this.isIced,this.count,this.cup,this.size});
+   int? totalmoney;
+   BeverageOrderReqDTO({required this.beverage,this.isIced,this.count,this.cup,this.size,this.totalmoney});
    Map<String, dynamic> toJson() =>
        {
-         "BeverageReqDTO": beverageReqDTO,
+         "beverage": beverage,
          "isIced": isIced,
          "count": count,
          "size": size,
          "cup": cup
        };
   BeverageOrderReqDTO.fromJson(Map<String, dynamic> json)
-      : beverageReqDTO = json["beverageReqDTO"],
+      : beverage = json["beverage"],
         isIced = json["isIced"],
         count =  json["count"],
         size =  json["size"],
