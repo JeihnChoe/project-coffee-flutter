@@ -30,11 +30,12 @@ class UserRepository {
   Future<ResponseDTO> fetchLogin(LoginReqDTO requestDTO) async {
     try{
       // 1. 통신 시작
-      Response response = await dio.post("/login", data: requestDTO.toJson());
+      Response response = await dio.post("/api/login", data: requestDTO.toJson());
 
       // 2. DTO 파싱
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       responseDTO.response = User.fromJson(responseDTO.response);
+
 
       // 3. 토큰 받기
       final authorization = response.headers["authorization"];
