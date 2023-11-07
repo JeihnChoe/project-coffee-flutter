@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
-import 'package:project_coffee/data/dto/order_request.dart';
-import 'package:project_coffee/ui/pages/order_page/shopping_cart_beverage_page/shopping_cart_beverage_empty_page.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
 class ShoppingCartBeveragePage extends StatefulWidget {
-  final List<BeverageOrderReqDTO> beverageOrderList;
-  const ShoppingCartBeveragePage(this.beverageOrderList, {super.key});
+  // final List<BeverageOrderReqDTO> beverageOrderList;
+
+  const ShoppingCartBeveragePage(/*this.beverageOrderList,*/ {Key? key});
 
   @override
   State<ShoppingCartBeveragePage> createState() =>
@@ -16,9 +15,15 @@ class ShoppingCartBeveragePage extends StatefulWidget {
 }
 
 class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
-  bool isSelectAll = false;
-  bool showSecondContainer = true; // 두 번째 컨테이너를 보이거나 숨길 상태
-  bool checkBoxValue = false; // 두 번째 컨테이너의 체크박스 상태
+  List<bool> itemCheckedState = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // 초기에 모든 항목을 false로 설정
+    itemCheckedState =
+        List.generate(/*widget.beverageOrderList.length,*/ 3, (index) => false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +32,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
         Container(
           padding: EdgeInsets.only(top: 16.0),
           height: 110,
-          color: Colors.white, // 음료/푸드 페이지 배경색
+          color: Colors.white,
           child: Column(
             children: [
               Padding(
@@ -49,12 +54,14 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                     Row(
                       children: [
                         Checkbox(
-                          // 체크박스
-                          value: isSelectAll,
+                          value: itemCheckedState.every((item) => item),
                           onChanged: (bool? value) {
                             setState(() {
-                              isSelectAll = value ?? false;
-                              checkBoxValue = value ?? false;
+                              for (var i = 0;
+                                  i < itemCheckedState.length;
+                                  i++) {
+                                itemCheckedState[i] = value ?? false;
+                              }
                             });
                           },
                           activeColor: kAccentColor,
@@ -64,16 +71,15 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                       ],
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center, // 가운데 정렬
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextButton(
                           onPressed: () {
-                            if (isSelectAll || checkBoxValue) {
+                            if (itemCheckedState.contains(true)) {
                               setState(() {
-                                showSecondContainer = false;
+                                itemCheckedState.removeWhere((item) => item);
                               });
                             } else {
-                              // 선택된 체크박스가 없는 경우 알림창 표시
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
@@ -96,24 +102,17 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                               style: TextStyle(color: kAccentColor)),
                         ),
                         Container(
-                          width: 1, // 수직선의 너비 (두께)
-                          height: 15, // 수직선의 높이를 원하는 크기로 설정
-                          color: Colors.grey, // 수직선의 색상
+                          width: 1,
+                          height: 15,
+                          color: Colors.grey,
                         ),
                         TextButton(
                           onPressed: () {
                             setState(() {
-                              // showSecondContainer를 false로 설정하여 모든 컨테이너가 삭제되도록 합니다.
-                              showSecondContainer = false;
+                              itemCheckedState = List.generate(
+                                  3, // widget.beverageOrderList.length,
+                                  (index) => false);
                             });
-
-                            // 현재 페이지 종료 및 이동
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    ShoppingCartBeverageEmptyPage(),
-                              ),
-                            );
                           },
                           child: Text("전체삭제",
                               style: TextStyle(color: Colors.grey)),
@@ -127,13 +126,11 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
           ),
         ),
         Container(height: gap_m, color: Colors.grey[200]),
-
-        // 두 번째 컨테이너를 조건부로 표시
         Expanded(
           child: ListView.builder(
-              itemCount: widget.beverageOrderList.length,
+              itemCount: 3, //widget.beverageOrderList.length,
               itemBuilder: (context, index) {
-                final beverageOrder = widget.beverageOrderList[index];
+                //final beverageOrder = widget.beverageOrderList[index];
                 return Container(
                   height: 200,
                   color: Colors.white,
@@ -143,10 +140,10 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Checkbox(
-                            value: checkBoxValue,
+                            value: itemCheckedState[index],
                             onChanged: (bool? value) {
                               setState(() {
-                                checkBoxValue = value ?? false;
+                                itemCheckedState[index] = value ?? false;
                               });
                             },
                             activeColor: kAccentColor,
@@ -154,7 +151,9 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                           IconButton(
                             onPressed: () {
                               setState(() {
-                                showSecondContainer = false;
+                                itemCheckedState[index] = false;
+                                // 아이템 삭제 코드 추가
+                                // widget.beverageOrderList.removeAt(index);
                               });
                             },
                             icon: Icon(Icons.cancel_outlined),
@@ -168,8 +167,8 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                           children: [
                             ClipOval(
                               child: Image.network(
-                                // beverageOrder.beverage.beveragePicUrl,
-                                'https://picsum.photos/id/237/100/100',
+                                "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002950]_20210426150654756.jpg",
+                                //beverageOrder.beverage.beveragePicUrl,
                                 width: 100,
                                 height: 100,
                                 fit: BoxFit.cover,
@@ -181,11 +180,12 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  textTitle2(beverageOrder
-                                      .beverage.beverageName), //제품 한글 이름 자리
+                                  textTitle2("내가 커피"
+                                      // beverageOrder.beverage.beverageName
+                                      ),
                                   Text(
-                                    beverageOrder
-                                        .beverage.beverageEngName, //영어이름 자리
+                                    "coffee",
+                                    //beverageOrder.beverage.beverageEngName,
                                     style: TextStyle(color: Colors.black45),
                                   ),
                                   SizedBox(height: gap_m),
@@ -193,30 +193,36 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        "아이스",
-                                        // beverageOrder.isIced
-                                        //     .toString(), //음료 일땐 (아이스,사이즈,컵), 푸드 일땐 (제품이름)
-                                        style: TextStyle(color: Colors.black45),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "아이스  ",
+                                            //beverageOrder.isIced.toString(),
+                                            style: TextStyle(
+                                                color: Colors.black45),
+                                          ),
+                                          Text(
+                                            "Tall  ",
+                                            //beverageOrder.size.toString(),
+                                            style: TextStyle(
+                                                color: Colors.black45),
+                                          ),
+                                          Text(
+                                            "개인컵",
+                                            //beverageOrder.cup.toString(),
+                                            style: TextStyle(
+                                                color: Colors.black45),
+                                          ),
+                                        ],
                                       ),
-                                      // Text(
-                                      //   beverageOrder.size
-                                      //       .toString(), //음료 일땐 (아이스,사이즈,컵), 푸드 일땐 (제품이름)
-                                      //   style:
-                                      //       TextStyle(color: Colors.black45),
-                                      // ),
-                                      // Text(
-                                      //   beverageOrder.cup
-                                      //       .toString(), //음료 일땐 (아이스,사이즈,컵), 푸드 일땐 (제품이름)
-                                      //   style:
-                                      //       TextStyle(color: Colors.black45),
-                                      // ),
                                       Text(
-                                        beverageOrder.beverage.price.toString(),
+                                        "8000",
+                                        // beverageOrder.beverage.price.toString(),
                                         style: TextStyle(color: Colors.black45),
                                       ),
                                     ],
                                   ),
+                                  dd
                                 ],
                               ),
                             ),
@@ -229,8 +235,8 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
               }),
         ),
         Divider(
-          color: Colors.grey[300], // 구분선의 색상 설정
-          height: 3.0, // 구분선의 높이 설정
+          color: Colors.grey[300],
+          height: 3.0,
         ),
       ],
     );
