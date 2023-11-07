@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
+import 'package:project_coffee/ui/pages/order_page/shopping_cart_beverage_page/shopping_cart_beverage_empty_page.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_beverage_page/shopping_cart_beverage_page.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/shopping_cart_page_view_model.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_product_page/shopping_cart_product_empty_page.dart';
@@ -42,12 +43,11 @@ class ShoppingCartPageBody extends ConsumerWidget {
               child: TabBarView(
                 children: [
                   // 첫 번째 탭 페이지: 음료/푸드
-                  ShoppingCartBeveragePage(),
+                  //  ShoppingCartBeveragePage(),
 
-                  // beverageOrderList.isEmpty
-                  //     ? ShoppingCartBeverageEmptyPage()
-                  //     : ShoppingCartBeveragePage(beverageOrderList),
-                  //
+                  beverageOrderList.isEmpty
+                      ? ShoppingCartBeverageEmptyPage()
+                      : ShoppingCartBeveragePage(beverageOrderList),
 
                   // 두 번째 탭 페이지: 상품
                   //ShoppingCartProductPage(),

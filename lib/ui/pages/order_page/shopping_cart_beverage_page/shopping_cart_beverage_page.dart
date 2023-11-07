@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_beverage_page/shopping_cart_beverage_empty_page.dart';
 
 class ShoppingCartBeveragePage extends StatefulWidget {
-  const ShoppingCartBeveragePage({Key? key});
+  List<BeverageOrderReqDTO> beverageOrderList = [];
+  ShoppingCartBeveragePage(this.beverageOrderList, {Key? key});
 
   @override
   State<ShoppingCartBeveragePage> createState() =>
@@ -133,8 +135,11 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
         Container(height: gap_m, color: Colors.grey[200]),
         Expanded(
           child: ListView.builder(
-            itemCount: itemTotalPrice.length,
+            itemCount: widget.beverageOrderList.length,
             itemBuilder: (context, index) {
+              final beverageOrder =
+                  widget.beverageOrderList[index]; // 현재 인덱스의 주문 정보
+
               return Container(
                 height: 200,
                 color: Colors.white,
@@ -167,7 +172,8 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                         children: [
                           ClipOval(
                             child: Image.network(
-                              "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002950]_20210426150654756.jpg",
+                              beverageOrder
+                                  .beverage.beveragePicUrl, // 음료의 이미지 URL 사용
                               width: 100,
                               height: 100,
                               fit: BoxFit.cover,
@@ -179,9 +185,11 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                textTitle2("내가 커피"),
-                                Text("coffee",
-                                    style: TextStyle(color: Colors.black45)),
+                                textTitle2(beverageOrder
+                                    .beverage.beverageName), // 음료 이름 사용
+                                Text(beverageOrder.beverage.beverageEngName,
+                                    style: TextStyle(
+                                        color: Colors.black45)), // 음료 유형 사용
                                 SizedBox(height: gap_m),
                                 Row(
                                   mainAxisAlignment:
@@ -200,7 +208,9 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                                 color: Colors.black45)),
                                       ],
                                     ),
-                                    Text("8000",
+                                    Text(
+                                        beverageOrder.beverage.price
+                                            .toString(), // 음료 가격 사용
                                         style:
                                             TextStyle(color: Colors.black45)),
                                   ],
@@ -216,7 +226,9 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                             if (itemCounts[index] != 1) {
                                               setState(() {
                                                 itemCounts[index]--;
-                                                itemTotalPrice[index] -= 8000;
+                                                itemTotalPrice[index] -=
+                                                    beverageOrder
+                                                        .beverage.price;
                                               });
                                             }
                                           },
@@ -231,7 +243,8 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                           onPressed: () {
                                             setState(() {
                                               itemCounts[index]++;
-                                              itemTotalPrice[index] += 8000;
+                                              itemTotalPrice[index] +=
+                                                  beverageOrder.beverage.price;
                                             });
                                           },
                                           icon:
