@@ -1,4 +1,4 @@
-class Beverage {
+class                                                                                                                                                                                                                                                                                                        Beverage {
   final int id;
   final String beverageName;
   final String beverageEngName;
