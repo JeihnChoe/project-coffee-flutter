@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/move.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/dto/user_request.dart';
@@ -48,7 +49,7 @@ class SessionStore extends SessionUser {
       this.isLogin = true;
 
       // 2. 디바이스에 JWT 저장 (자동 로그인)
-      await secureStorage.write(key: "jwt", value: responseDTO.token);
+      // await secureStorage.write(key: "jwt", value: responseDTO.token);
 
       // 3. 페이지 이동
 
