@@ -69,8 +69,8 @@ SliverPadding _body(BeverageOrderReqDTO beverageOrderReqDTO) {
           else if(beverageOrderReqDTO.beverage.hotIce == 2)
               Row(
                 children: [
-                  Expanded(child: BeverageOutlineButton("ICE", kActiveColor1,beverageOrderReqDTO,true)),
                   Expanded(child: BeverageOutlineButton("HOT", kActiveColor2,beverageOrderReqDTO,false)),
+                  Expanded(child: BeverageOutlineButton("ICE", kActiveColor1,beverageOrderReqDTO,true)),
                 ],
               ),
 

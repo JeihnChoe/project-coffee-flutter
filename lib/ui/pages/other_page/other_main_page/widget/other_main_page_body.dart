@@ -10,6 +10,8 @@ import 'package:project_coffee/ui/widgets/custom_green_button.dart';
 import 'package:project_coffee/ui/widgets/custom_white_button.dart';
 
 import '../../../home_page/login_page/login_page.dart';
+import 'other_customer_service_section.dart';
+import 'other_main_page_body_item.dart';
 import 'other_order_section_page.dart';
 import 'other_pay_section_page.dart';
 
@@ -27,166 +29,12 @@ class OtherMainPageBody extends StatelessWidget {
           OtherPaySection(),
           OtherOrderSection(),
           OtherShopSection(),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16.0, top: 25, right: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  textTitle1("고객지원"),
-                  SizedBox(
-                    height: gap_l,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.storefront,
-                                    color: Colors.black,
-                                  ),
-                                  SizedBox(width: gap_m,),
-                                  Text(
-                                    "스토어 케어",
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ],
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.grey[200],
-                                elevation: 0,
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.edit_location,
-                                    color: Colors.black,
-                                  ),
-                                  SizedBox(width: gap_m,),
-                                  Text(
-                                    "매장 정보 ",
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ],
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.grey[200],
-                                elevation: 0,
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.rate_review_outlined,
-                                    color: Colors.black,
-                                  ),
-                                  SizedBox(width: gap_m,),
-                                  Text(
-                                    "마이 스타벅스 리뷰",
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ],
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.grey[200],
-                                elevation: 0,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    CupertinoIcons.ear,
-                                    color: Colors.black,
-                                  ),
-                                  SizedBox(width: gap_m,),
-                                  Text(
-                                    "고객의 소리",
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ],
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.grey[200],
-                                elevation: 0,
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    LineIcons.recycle,
-                                    color: Colors.black,
-                                  ),
-                                  SizedBox(width: gap_m,),
-                                  Text(
-                                    "반납기 정보",
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ],
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.grey[200],
-                                elevation: 0,
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    CupertinoIcons.doc_text_search,
-                                    color: Colors.black,
-                                  ),
-                                  SizedBox(width: gap_m,),
-                                  Text(
-                                    "바리스타 채용",
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ],
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.grey[200],
-                                elevation: 0,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  Divider(),
-                ],
-              ),
-            ),
-
-          )
+          OtherCustomerServiceSection()
         ],
       ),
     );
   }
 }
-
-
-
 
 class OtherTopButton extends StatelessWidget {
   const OtherTopButton({
@@ -237,78 +85,119 @@ class OtherTopButton extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            OutlinedButton(
-              onPressed: () {},
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.lock_outlined,
-                    color: kAccentColor,
-                    size: 40,
-                  ),
-                  Text(
-                    "개인정보 관리",
-                    style: TextStyle(color: Colors.black),
-                  )
-                ],
-              ),
-              style: OutlinedButton.styleFrom(
-                backgroundColor: Colors.white,
-                minimumSize: Size(110, 120),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-            ),
-            OutlinedButton(
-              onPressed: () {},
-              child: Column(
-                children: [
-                  Icon(
-                    CupertinoIcons.person_crop_circle_badge_checkmark,
-                    color: kAccentColor,
-                    size: 40,
-                  ),
-                  Text(
-                    "계정정보",
-                    style: TextStyle(color: Colors.black),
-                  )
-                ],
-              ),
-              style: OutlinedButton.styleFrom(
-                backgroundColor: Colors.white,
-                minimumSize: Size(110, 120),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-            ),
-            OutlinedButton(
-              onPressed: () {},
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.receipt_long,
-                    color: kAccentColor,
-                    size: 40,
-                  ),
-                  Text(
-                    "전자영수증",
-                    style: TextStyle(color: Colors.black),
-                  )
-                ],
-              ),
-              style: OutlinedButton.styleFrom(
-                backgroundColor: Colors.white,
-                minimumSize: Size(110, 120),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-            )
+            PrivacyButton(title: "개인정보 관리"),
+            PrimaryInfoButton(title: "계정정보"),
+            ReceiptButton()
           ],
         )
       ]),
+    );
+  }
+}
+
+class ReceiptButton extends StatelessWidget {
+  const ReceiptButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      onPressed: () {
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) => LoginPage()))  //영수증 페이지로 이동해야함
+      },
+      child: Column(
+        children: [
+          Icon(
+            Icons.receipt_long,
+            color: kAccentColor,
+            size: 40,
+          ),
+          Text(
+            "전자영수증",
+            style: TextStyle(color: Colors.black),
+          )
+        ],
+      ),
+      style: OutlinedButton.styleFrom(
+        backgroundColor: Colors.white,
+        minimumSize: Size(110, 120),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+    );
+  }
+}
+
+class PrimaryInfoButton extends StatelessWidget {
+  String title;
+
+  PrimaryInfoButton({
+    required this.title
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      onPressed: () => OtherShowDialog(context, title,1),
+      child: Column(
+        children: [
+          Icon(
+            CupertinoIcons.person_crop_circle_badge_checkmark,
+            color: kAccentColor,
+            size: 40,
+          ),
+          Text(
+            "${title}",
+            style: TextStyle(color: Colors.black),
+          )
+        ],
+      ),
+      style: OutlinedButton.styleFrom(
+        backgroundColor: Colors.white,
+        minimumSize: Size(110, 120),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+    );
+  }
+}
+
+class PrivacyButton extends StatelessWidget {
+  String title;
+  PrivacyButton({
+    required this.title
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      onPressed: () => OtherShowDialog(context,title,1),
+      child: Column(
+        children: [
+          Icon(
+            Icons.lock_outlined,
+            color: kAccentColor,
+            size: 40,
+          ),
+          Text(
+            "${title}",
+            style: TextStyle(color: Colors.black),
+          )
+        ],
+      ),
+      style: OutlinedButton.styleFrom(
+        backgroundColor: Colors.white,
+        minimumSize: Size(110, 120),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
     );
   }
 }
@@ -326,7 +215,9 @@ class OtherSliverAppbar extends StatelessWidget {
       automaticallyImplyLeading: false,
       actions: [
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+
+            },
             icon: Icon(
               CupertinoIcons.bell,
               color: Colors.black,
@@ -355,3 +246,4 @@ class OtherSliverAppbar extends StatelessWidget {
     );
   }
 }
+
