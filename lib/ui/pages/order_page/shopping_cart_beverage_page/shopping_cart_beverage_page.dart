@@ -135,11 +135,8 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
         Container(height: gap_m, color: Colors.grey[200]),
         Expanded(
           child: ListView.builder(
-            itemCount: widget.beverageOrderList.length,
+            itemCount: itemTotalPrice.length,
             itemBuilder: (context, index) {
-              final beverageOrder =
-                  widget.beverageOrderList[index]; // 현재 인덱스의 주문 정보
-
               return Container(
                 height: 200,
                 color: Colors.white,
@@ -172,8 +169,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                         children: [
                           ClipOval(
                             child: Image.network(
-                              beverageOrder
-                                  .beverage.beveragePicUrl, // 음료의 이미지 URL 사용
+                              "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002950]_20210426150654756.jpg",
                               width: 100,
                               height: 100,
                               fit: BoxFit.cover,
@@ -185,11 +181,9 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                textTitle2(beverageOrder
-                                    .beverage.beverageName), // 음료 이름 사용
-                                Text(beverageOrder.beverage.beverageEngName,
-                                    style: TextStyle(
-                                        color: Colors.black45)), // 음료 유형 사용
+                                textTitle2("내가 커피"),
+                                Text("coffee",
+                                    style: TextStyle(color: Colors.black45)),
                                 SizedBox(height: gap_m),
                                 Row(
                                   mainAxisAlignment:
@@ -208,9 +202,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                                 color: Colors.black45)),
                                       ],
                                     ),
-                                    Text(
-                                        beverageOrder.beverage.price
-                                            .toString(), // 음료 가격 사용
+                                    Text("8000",
                                         style:
                                             TextStyle(color: Colors.black45)),
                                   ],
@@ -226,9 +218,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                             if (itemCounts[index] != 1) {
                                               setState(() {
                                                 itemCounts[index]--;
-                                                itemTotalPrice[index] -=
-                                                    beverageOrder
-                                                        .beverage.price;
+                                                itemTotalPrice[index] -= 8000;
                                               });
                                             }
                                           },
@@ -243,8 +233,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                           onPressed: () {
                                             setState(() {
                                               itemCounts[index]++;
-                                              itemTotalPrice[index] +=
-                                                  beverageOrder.beverage.price;
+                                              itemTotalPrice[index] += 8000;
                                             });
                                           },
                                           icon:
@@ -280,3 +269,35 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
     );
   }
 }
+// persistentFooterButtons: [
+// Consumer(
+// builder: (context, ref, child) {
+// return Column(
+// children: [
+// Row(
+// mainAxisAlignment: MainAxisAlignment.spaceBetween,
+// children: [
+// textBody1("총 / 20개"),
+// textTitle1("떙떙원"),
+// ],
+// ),
+// SizedBox(height: gap_m),
+// TextButton(
+// style: TextButton.styleFrom(
+// backgroundColor: kAccentColor,
+// minimumSize: Size(double.infinity, 50),
+// shape: RoundedRectangleBorder(
+// borderRadius: BorderRadius.circular(25),
+// ),
+// ),
+// onPressed: () {},
+// child: Text(
+// "주문하기",
+// style: TextStyle(color: Colors.white),
+// ),
+// ),
+// ],
+// );
+// },
+// ),
+// ],
