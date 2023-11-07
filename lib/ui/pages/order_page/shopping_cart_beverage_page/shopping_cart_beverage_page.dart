@@ -1,14 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_beverage_page/shopping_cart_beverage_empty_page.dart';
-import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
 class ShoppingCartBeveragePage extends StatefulWidget {
-  final List<BeverageOrderReqDTO> beverageOrderList;
-  const ShoppingCartBeveragePage(this.beverageOrderList, {super.key});
+  List<BeverageOrderReqDTO> beverageOrderList = [];
+  ShoppingCartBeveragePage(this.beverageOrderList, {Key? key});
 
   @override
   State<ShoppingCartBeveragePage> createState() =>
@@ -16,9 +16,32 @@ class ShoppingCartBeveragePage extends StatefulWidget {
 }
 
 class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
-  bool isSelectAll = false;
-  bool showSecondContainer = true; // 두 번째 컨테이너를 보이거나 숨길 상태
-  bool checkBoxValue = false; // 두 번째 컨테이너의 체크박스 상태
+  List<bool> itemCheckedState = [];
+  List<int> itemCounts = [1, 1, 1]; // 각 아이템의 수량을 나타내는 변수
+  List<double> itemTotalPrice = [8000, 8000, 8000]; // 각 아이템의 총 가격을 나타내는 변수
+
+  @override
+  void initState() {
+    super.initState();
+    // 초기에 모든 아이템을 선택하지 않도록 false로 설정
+    itemCheckedState = List.generate(3, (index) => false);
+  }
+
+  void removeItem(int index) {
+    setState(() {
+      itemTotalPrice.removeAt(index);
+      itemCounts.removeAt(index);
+      itemCheckedState.removeAt(index);
+    });
+  }
+
+  void removeAllItems() {
+    setState(() {
+      itemTotalPrice.clear();
+      itemCounts.clear();
+      itemCheckedState.clear();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +50,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
         Container(
           padding: EdgeInsets.only(top: 16.0),
           height: 110,
-          color: Colors.white, // 음료/푸드 페이지 배경색
+          color: Colors.white,
           child: Column(
             children: [
               Padding(
@@ -49,12 +72,14 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                     Row(
                       children: [
                         Checkbox(
-                          // 체크박스
-                          value: isSelectAll,
+                          value: itemCheckedState.every((item) => item),
                           onChanged: (bool? value) {
                             setState(() {
-                              isSelectAll = value ?? false;
-                              checkBoxValue = value ?? false;
+                              for (var i = 0;
+                                  i < itemCheckedState.length;
+                                  i++) {
+                                itemCheckedState[i] = value ?? false;
+                              }
                             });
                           },
                           activeColor: kAccentColor,
@@ -64,51 +89,32 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                       ],
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center, // 가운데 정렬
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextButton(
                           onPressed: () {
-                            if (isSelectAll || checkBoxValue) {
-                              setState(() {
-                                showSecondContainer = false;
-                              });
-                            } else {
-                              // 선택된 체크박스가 없는 경우 알림창 표시
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: AlertDialog(
-                                      content: Text("장바구니에서 삭제하실 메뉴를\n선택해주세요."),
-                                      actions: [
-                                        CustomWhitePopButton(
-                                          text: "확인",
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              );
+                            for (var i = itemCheckedState.length - 1;
+                                i >= 0;
+                                i--) {
+                              if (itemCheckedState[i]) {
+                                removeItem(i);
+                              }
                             }
                           },
                           child: Text("선택삭제",
                               style: TextStyle(color: kAccentColor)),
                         ),
                         Container(
-                          width: 1, // 수직선의 너비 (두께)
-                          height: 15, // 수직선의 높이를 원하는 크기로 설정
-                          color: Colors.grey, // 수직선의 색상
+                          width: 1,
+                          height: 15,
+                          color: Colors.grey,
                         ),
                         TextButton(
                           onPressed: () {
-                            setState(() {
-                              // showSecondContainer를 false로 설정하여 모든 컨테이너가 삭제되도록 합니다.
-                              showSecondContainer = false;
-                            });
-
-                            // 현재 페이지 종료 및 이동
-                            Navigator.of(context).pushReplacement(
+                            removeAllItems();
+                            // 여기서 페이지를 이동
+                            Navigator.pushReplacement(
+                              context,
                               MaterialPageRoute(
                                 builder: (context) =>
                                     ShoppingCartBeverageEmptyPage(),
@@ -127,112 +133,171 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
           ),
         ),
         Container(height: gap_m, color: Colors.grey[200]),
-
-        // 두 번째 컨테이너를 조건부로 표시
         Expanded(
           child: ListView.builder(
-              itemCount: widget.beverageOrderList.length,
-              itemBuilder: (context, index) {
-                final beverageOrder = widget.beverageOrderList[index];
-                return Container(
-                  height: 200,
-                  color: Colors.white,
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            itemCount: itemTotalPrice.length,
+            itemBuilder: (context, index) {
+              return Container(
+                height: 200,
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Checkbox(
+                          value: itemCheckedState[index],
+                          onChanged: (bool? value) {
+                            setState(() {
+                              itemCheckedState[index] = value ?? false;
+                            });
+                          },
+                          activeColor: kAccentColor,
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            removeItem(index);
+                          },
+                          icon: Icon(Icons.cancel_outlined),
+                          color: Colors.grey,
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, right: 16),
+                      child: Row(
                         children: [
-                          Checkbox(
-                            value: checkBoxValue,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                checkBoxValue = value ?? false;
-                              });
-                            },
-                            activeColor: kAccentColor,
+                          ClipOval(
+                            child: Image.network(
+                              "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002950]_20210426150654756.jpg",
+                              width: 100,
+                              height: 100,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                showSecondContainer = false;
-                              });
-                            },
-                            icon: Icon(Icons.cancel_outlined),
-                            color: Colors.grey,
+                          SizedBox(width: gap_xl),
+                          SizedBox(
+                            width: 220,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                textTitle2("내가 커피"),
+                                Text("coffee",
+                                    style: TextStyle(color: Colors.black45)),
+                                SizedBox(height: gap_m),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text("아이스  ",
+                                            style: TextStyle(
+                                                color: Colors.black45)),
+                                        Text("Tall  ",
+                                            style: TextStyle(
+                                                color: Colors.black45)),
+                                        Text("개인컵",
+                                            style: TextStyle(
+                                                color: Colors.black45)),
+                                      ],
+                                    ),
+                                    Text("8000",
+                                        style:
+                                            TextStyle(color: Colors.black45)),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {
+                                            if (itemCounts[index] != 1) {
+                                              setState(() {
+                                                itemCounts[index]--;
+                                                itemTotalPrice[index] -= 8000;
+                                              });
+                                            }
+                                          },
+                                          icon:
+                                              Icon(CupertinoIcons.minus_circle),
+                                          color: itemCounts[index] == 1
+                                              ? Colors.grey
+                                              : Colors.black,
+                                        ),
+                                        Text("${itemCounts[index]}"),
+                                        IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              itemCounts[index]++;
+                                              itemTotalPrice[index] += 8000;
+                                            });
+                                          },
+                                          icon:
+                                              Icon(CupertinoIcons.plus_circle),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        textTitle1("${itemTotalPrice[index]}"),
+                                        SizedBox(width: 16),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0, right: 16),
-                        child: Row(
-                          children: [
-                            ClipOval(
-                              child: Image.network(
-                                // beverageOrder.beverage.beveragePicUrl,
-                                'https://picsum.photos/id/237/100/100',
-                                width: 100,
-                                height: 100,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            SizedBox(width: gap_xl),
-                            SizedBox(
-                              width: 220,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  textTitle2(beverageOrder
-                                      .beverage.beverageName), //제품 한글 이름 자리
-                                  Text(
-                                    beverageOrder
-                                        .beverage.beverageEngName, //영어이름 자리
-                                    style: TextStyle(color: Colors.black45),
-                                  ),
-                                  SizedBox(height: gap_m),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "아이스",
-                                        // beverageOrder.isIced
-                                        //     .toString(), //음료 일땐 (아이스,사이즈,컵), 푸드 일땐 (제품이름)
-                                        style: TextStyle(color: Colors.black45),
-                                      ),
-                                      // Text(
-                                      //   beverageOrder.size
-                                      //       .toString(), //음료 일땐 (아이스,사이즈,컵), 푸드 일땐 (제품이름)
-                                      //   style:
-                                      //       TextStyle(color: Colors.black45),
-                                      // ),
-                                      // Text(
-                                      //   beverageOrder.cup
-                                      //       .toString(), //음료 일땐 (아이스,사이즈,컵), 푸드 일땐 (제품이름)
-                                      //   style:
-                                      //       TextStyle(color: Colors.black45),
-                                      // ),
-                                      Text(
-                                        beverageOrder.beverage.price.toString(),
-                                        style: TextStyle(color: Colors.black45),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
         ),
         Divider(
-          color: Colors.grey[300], // 구분선의 색상 설정
-          height: 3.0, // 구분선의 높이 설정
+          color: Colors.grey[300],
+          height: 3.0,
         ),
       ],
     );
   }
 }
+// persistentFooterButtons: [
+// Consumer(
+// builder: (context, ref, child) {
+// return Column(
+// children: [
+// Row(
+// mainAxisAlignment: MainAxisAlignment.spaceBetween,
+// children: [
+// textBody1("총 / 20개"),
+// textTitle1("떙떙원"),
+// ],
+// ),
+// SizedBox(height: gap_m),
+// TextButton(
+// style: TextButton.styleFrom(
+// backgroundColor: kAccentColor,
+// minimumSize: Size(double.infinity, 50),
+// shape: RoundedRectangleBorder(
+// borderRadius: BorderRadius.circular(25),
+// ),
+// ),
+// onPressed: () {},
+// child: Text(
+// "주문하기",
+// style: TextStyle(color: Colors.white),
+// ),
+// ),
+// ],
+// );
+// },
+// ),
+// ],

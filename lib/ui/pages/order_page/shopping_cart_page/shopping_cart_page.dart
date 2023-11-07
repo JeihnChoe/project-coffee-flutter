@@ -9,9 +9,6 @@ class ShoppingCartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ShoppingCartPageBody(),
-      // persistentFooterButtons: [
-      //   SubmitBottomButton(text: "로그인", formField: formField)
-      // ],
     );
   }
 }
