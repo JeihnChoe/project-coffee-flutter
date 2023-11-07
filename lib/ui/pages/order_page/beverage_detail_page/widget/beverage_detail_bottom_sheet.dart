@@ -61,6 +61,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
   void updateChildState(int newValue) {
     setState(() {
       outlinbuttonchange = newValue;
+      Logger().d(widget.beverageOrderReqDTO.totalmoney);
     });
   }
 
@@ -403,10 +404,9 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                       if (count != 1) {
                         setState(() {
                           count--;
-                          totalprice = totalprice -
-                              widget.beverageOrderReqDTO.beverage.price;
+                          Logger().d("이거좀 알려줘봐라 ${widget.beverageOrderReqDTO.totalmoney}");
                           widget.beverageOrderReqDTO.count = count;
-                          widget.beverageOrderReqDTO.totalmoney = totalprice;
+                          widget.beverageOrderReqDTO.totalmoney = widget.beverageOrderReqDTO.totalmoney! * count;
                         });
                       }
                     },
@@ -418,10 +418,12 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                     onPressed: () {
                       setState(() {
                         count++;
-                        totalprice = totalprice +
-                            widget.beverageOrderReqDTO.beverage.price;
+                        Logger().d("이거좀 알려줘봐라 ${widget.beverageOrderReqDTO.totalmoney}");
+                        widget.beverageOrderReqDTO.totalmoney = widget.beverageOrderReqDTO.totalmoney! * count;
+                        // totalprice = totalprice +
+                        //     widget.beverageOrderReqDTO.beverage.price;
                         widget.beverageOrderReqDTO.count = count;
-                        widget.beverageOrderReqDTO.totalmoney = totalprice;
+                        // widget.beverageOrderReqDTO.totalmoney = totalprice;
                       });
                     },
                     icon: Icon(CupertinoIcons.plus_circle),

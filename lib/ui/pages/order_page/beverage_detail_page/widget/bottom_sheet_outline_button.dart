@@ -48,11 +48,10 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
             child: OutlinedButton(
               onPressed: () {
                 setState(() {
-
                   selectedPayment = 0;
-                  widget.onStateChange(selectedPayment);
                   widget.beverageOrderReqDTO.totalmoney = zeroprice;
                   widget.beverageOrderReqDTO.cup = 0;
+                  widget.onStateChange(selectedPayment);
                   Logger().d(widget.beverageOrderReqDTO.cup);
                   Logger().d("이거 안보여줘 ???${widget.beverageOrderReqDTO.totalmoney}");
                 });
@@ -112,9 +111,11 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
             onPressed: () {
               setState(() {
                 selectedPayment = 1;
-                widget.onStateChange(selectedPayment);
+
                 widget.beverageOrderReqDTO.totalmoney = oneprice;
+
                 widget.beverageOrderReqDTO.cup = 1;
+                widget.onStateChange(selectedPayment);
                 Logger().d(widget.beverageOrderReqDTO.cup);
                 Logger().d("이거 안보여줘 ???${widget.beverageOrderReqDTO.totalmoney}");
               });
@@ -174,10 +175,9 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
             onPressed: () {
               setState(() {
                 selectedPayment = 2;
-
                 widget.beverageOrderReqDTO.totalmoney = twoprice;
-                widget.onStateChange(selectedPayment);
                 widget.beverageOrderReqDTO.cup = 2;
+                widget.onStateChange(selectedPayment);
                 Logger().d(widget.beverageOrderReqDTO.cup);
                 Logger().d("이거 안보여줘 ???${widget.beverageOrderReqDTO.totalmoney}");
               });
@@ -237,10 +237,9 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
             onPressed: () {
               setState(() {
                 selectedPayment = 3;
-
                 widget.beverageOrderReqDTO.totalmoney = threeprice;
-                widget.onStateChange(selectedPayment);
                 widget.beverageOrderReqDTO.cup = 3;
+                widget.onStateChange(selectedPayment);
                 Logger().d(widget.beverageOrderReqDTO.cup);
                 Logger().d("이거 안보여줘 ???${widget.beverageOrderReqDTO.totalmoney}");
               });
