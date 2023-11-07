@@ -74,13 +74,4 @@ List<Beverage> _mBeverageList = [
       1,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[25]_20210415144211211.jpg",
       3,15),
-  Beverage(
-      6,
-      "에스프레소 콘 마끼아또",
-      "Espresso Macchiato",
-      "신선한 에스프레소 샷에 우유 거품을 살짝 얹은 커피 음료로써, 강렬한 에스프레소의 맛과 우유의 부드러움을 같이 즐길 수 있는 커피 음료",
-      "디카페인결제시 300원 추가됩니다.",
-      3,
-      "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[25]_20210415144211211.jpg",
-      12,15),
 ];

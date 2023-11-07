@@ -21,7 +21,7 @@ class PromotionRepository {
         List<Promotion> promotionList = bodyList
             .map((e) => Promotion.fromJson(e)) // Promotion 모델에 따라 변환
             .toList();
-        //Logger().d("통신?할게요");
+        Logger().d("통신?할게요");
         return promotionList;
       } else {
         // 서버 응답이 Promotion 목록이 아닌 경우 처리
