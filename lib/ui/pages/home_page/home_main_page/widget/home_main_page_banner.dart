@@ -34,7 +34,7 @@ class HomeMainPageBanner extends StatelessWidget {
           // borderRadius: BorderRadius.circular(10),
           color: Colors.white,
           image: DecorationImage(
-            image: NetworkImage("${promotion.productPicUrl}"),
+            image: NetworkImage("${promotion.smallThumbnail}"),
             fit: BoxFit.cover,
           ),
         ),

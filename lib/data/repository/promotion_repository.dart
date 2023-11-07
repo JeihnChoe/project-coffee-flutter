@@ -12,7 +12,8 @@ class PromotionRepository {
 
   Future<List<Promotion>> fetchPromotionDetailList() async {
     try {
-      Response<dynamic> response = await dio.get("/api/promotion/viewListPage");
+      Response<dynamic> response =
+          await dio.get("/api/promotion/viewpromotionlist");
       Logger().d("통신?${response.data}");
 
       if (response.data != null && response.data is List) {

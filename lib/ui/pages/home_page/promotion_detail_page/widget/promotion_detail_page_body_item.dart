@@ -54,7 +54,7 @@ class PromotionDetailPageBodyIteam extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 5, right: 5),
                   child: Image.network(
-                    "${promotion.productPicUrl}",
+                    "${promotion.bigThumbnail}",
                     // 이미지의 URL을 promotion 객체에서 가져옵니다.
                     fit: BoxFit.cover, // 이미지 크기를 조절하여 카드에 맞게 표시
                   ),
