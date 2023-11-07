@@ -3,6 +3,8 @@ import 'package:line_icons/line_icons.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 
+import 'other_main_page_body_item.dart';
+
 class OtherShopSection extends StatelessWidget {
   const OtherShopSection({
     super.key,
@@ -26,7 +28,7 @@ class OtherShopSection extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () =>OtherShowDialog(context,"온라인 스토어 주문내역",1),
                         child: Row(
                           children: [
                             Icon(

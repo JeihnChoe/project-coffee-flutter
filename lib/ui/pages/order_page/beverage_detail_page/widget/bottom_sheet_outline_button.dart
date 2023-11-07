@@ -6,10 +6,10 @@ import 'package:project_coffee/data/dto/order_request.dart';
 
 class BottomSheetOutlineButton extends StatefulWidget {
   final BeverageOrderReqDTO beverageOrderReqDTO;
-  final int selectedPaymentMethod;
+
 
   BottomSheetOutlineButton(
-      {required this.selectedPaymentMethod, required this.beverageOrderReqDTO});
+      {required this.beverageOrderReqDTO});
 
   int submit(int selectedPayment) {
     int selectedPaymentMethod = selectedPayment;
@@ -22,11 +22,18 @@ class BottomSheetOutlineButton extends StatefulWidget {
 }
 
 class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
-  int selectedPayment = 0;
-
+  int selectedPayment = 1;
+  int zeroprice= 0;
+  int oneprice= 1;
+  int twoprice= 2;
+  int threeprice= 3;
   @override
   void initState() {
-    selectedPayment = widget.selectedPaymentMethod;
+    selectedPayment = selectedPayment;
+    zeroprice = widget.beverageOrderReqDTO.beverage.price-500;
+    oneprice= widget.beverageOrderReqDTO.beverage.price;
+    twoprice= widget.beverageOrderReqDTO.beverage.price+500;
+    threeprice= widget.beverageOrderReqDTO.beverage.price+1000;
     super.initState();
   }
 
@@ -40,6 +47,10 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
               onPressed: () {
                 setState(() {
                   selectedPayment = 0;
+                  widget.beverageOrderReqDTO.totalmoney = zeroprice;
+                  widget.beverageOrderReqDTO.cup = 0;
+                  Logger().d(widget.beverageOrderReqDTO.cup);
+                  Logger().d("이거 안보여줘 ???${widget.beverageOrderReqDTO.totalmoney}");
                 });
               },
               style: OutlinedButton.styleFrom(
@@ -97,6 +108,10 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
             onPressed: () {
               setState(() {
                 selectedPayment = 1;
+                widget.beverageOrderReqDTO.totalmoney = oneprice;
+                widget.beverageOrderReqDTO.cup = 1;
+                Logger().d(widget.beverageOrderReqDTO.cup);
+                Logger().d("이거 안보여줘 ???${widget.beverageOrderReqDTO.totalmoney}");
               });
             },
             style: OutlinedButton.styleFrom(
@@ -154,6 +169,11 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
             onPressed: () {
               setState(() {
                 selectedPayment = 2;
+
+                widget.beverageOrderReqDTO.totalmoney = twoprice;
+                widget.beverageOrderReqDTO.cup = 2;
+                Logger().d(widget.beverageOrderReqDTO.cup);
+                Logger().d("이거 안보여줘 ???${widget.beverageOrderReqDTO.totalmoney}");
               });
             },
             style: OutlinedButton.styleFrom(
@@ -211,6 +231,11 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
             onPressed: () {
               setState(() {
                 selectedPayment = 3;
+
+                widget.beverageOrderReqDTO.totalmoney = threeprice;
+                widget.beverageOrderReqDTO.cup = 3;
+                Logger().d(widget.beverageOrderReqDTO.cup);
+                Logger().d("이거 안보여줘 ???${widget.beverageOrderReqDTO.totalmoney}");
               });
             },
             style: OutlinedButton.styleFrom(

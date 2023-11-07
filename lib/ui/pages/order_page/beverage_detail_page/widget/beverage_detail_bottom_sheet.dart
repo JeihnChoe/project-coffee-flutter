@@ -58,7 +58,6 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
   }
 
 
-
   void orderBeverage() {
     Logger().d(
         "Ordered: ${widget.beverageOrderReqDTO.beverage.beverageName}, Quantity: $count, Total Price: $totalprice");
@@ -124,7 +123,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                     Consumer(builder: (context, ref, child) {
                       return OutlinedButton(
                         onPressed: () {
-
+                          Logger().d("${widget.beverageOrderReqDTO.size}");
                           ref.read(beverageProvider).cart(widget.beverageOrderReqDTO);
                           showModalBottomSheet(
                             context: context,
@@ -270,7 +269,6 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                       height: 16,
                     ),
                     BottomSheetOutlineButton(
-                        selectedPaymentMethod: 1,
                         beverageOrderReqDTO: widget.beverageOrderReqDTO),
                     SizedBox(
                       height: gap_l,

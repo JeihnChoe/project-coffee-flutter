@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
-import 'package:project_coffee/ui/pages/pay_page/pay_card_save/pay_card_save_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import 'other_main_page_body.dart';
 import 'other_main_page_body_item.dart';
 
-class OtherPaySection extends StatelessWidget {
-  const OtherPaySection({
+class OtherCustomerServiceSection extends StatelessWidget {
+  const OtherCustomerServiceSection({
     super.key,
   });
 
@@ -20,33 +21,26 @@ class OtherPaySection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            textTitle1("Pay"),
+            textTitle1("고객지원"),
             SizedBox(
               height: gap_l,
             ),
             Row(
-
               children: [
                 Expanded(
                   child: Column(
                     children: [
                       ElevatedButton(
-                        onPressed: () {
-                          OtherShowDialog(context,"스타벅스 카드 등록",2);
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => PayCardSavePage())); //이동할 페이지2
-                        },
+                        onPressed: () =>OtherShowDialog(context,"스토어 케어",3),
                         child: Row(
                           children: [
                             Icon(
-                              CupertinoIcons.creditcard,
+                              Icons.storefront,
                               color: Colors.black,
                             ),
                             SizedBox(width: gap_m,),
                             Text(
-                              "스타벅스 카드 등록",
+                              "스토어 케어",
                               style: TextStyle(color: Colors.black),
                             ),
                           ],
@@ -57,16 +51,36 @@ class OtherPaySection extends StatelessWidget {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () =>OtherShowDialog(context,"쿠폰 등록",1),
+                        onPressed: () {},
                         child: Row(
                           children: [
                             Icon(
-                              CupertinoIcons.ticket,
+                              Icons.edit_location,
                               color: Colors.black,
                             ),
                             SizedBox(width: gap_m,),
                             Text(
-                              "쿠폰 등록",
+                              "매장 정보 ",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ],
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.grey[200],
+                          elevation: 0,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () =>OtherShowDialog(context,"마이 스타벅스 리뷰",3),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.rate_review_outlined,
+                              color: Colors.black,
+                            ),
+                            SizedBox(width: gap_m,),
+                            Text(
+                              "마이 스타벅스 리뷰",
                               style: TextStyle(color: Colors.black),
                             ),
                           ],
@@ -83,16 +97,16 @@ class OtherPaySection extends StatelessWidget {
                   child: Column(
                     children: [
                       ElevatedButton(
-                        onPressed: () =>OtherShowDialog(context,"카드 교환권 등록",2),
+                        onPressed: () =>OtherShowDialog(context,"스토어 케어",3),
                         child: Row(
                           children: [
                             Icon(
-                              Icons.add_card_rounded,
+                              CupertinoIcons.ear,
                               color: Colors.black,
                             ),
                             SizedBox(width: gap_m,),
                             Text(
-                              "카드 교환권 등록",
+                              "고객의 소리",
                               style: TextStyle(color: Colors.black),
                             ),
                           ],
@@ -103,16 +117,38 @@ class OtherPaySection extends StatelessWidget {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () =>OtherShowDialog(context,"쿠폰 히스토리",1),
+                        onPressed: () {},
                         child: Row(
                           children: [
                             Icon(
-                              CupertinoIcons.tickets,
+                              LineIcons.recycle,
                               color: Colors.black,
                             ),
                             SizedBox(width: gap_m,),
                             Text(
-                              "쿠폰 히스토리",
+                              "반납기 정보",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ],
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.grey[200],
+                          elevation: 0,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              CupertinoIcons.doc_text_search,
+                              color: Colors.black,
+                            ),
+                            SizedBox(width: gap_m,),
+                            Text(
+                              "바리스타 채용",
                               style: TextStyle(color: Colors.black),
                             ),
                           ],
@@ -135,3 +171,4 @@ class OtherPaySection extends StatelessWidget {
     );
   }
 }
+
