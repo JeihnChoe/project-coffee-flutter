@@ -6,11 +6,11 @@ class Promotion {
   final String endDate;
   final bool isOpen;
   final String? productPicUrl;
-  final String? thumbnail;
-  final String? homeThumbnail;
+  final String? smallThumbnail;
+  final String? bigThumbnail;
 
   Promotion(this.id, this.title, this.subContent, this.startDate, this.endDate,
-      this.isOpen, this.productPicUrl, this.thumbnail, this.homeThumbnail);
+      this.isOpen, this.productPicUrl, this.smallThumbnail, this.bigThumbnail);
 
   Promotion.fromJson(Map<String, dynamic> json)
       : id = json["id"],
@@ -20,6 +20,6 @@ class Promotion {
         endDate = json["endDate"],
         isOpen = json["isOpen"],
         productPicUrl = json["productPicUrl"],
-        thumbnail = json["thumbnail"],
-        homeThumbnail = json["homeThumbnail"];
+        smallThumbnail = json["smallThumbnail"],
+        bigThumbnail = json["bigThumbnail"];
 }
