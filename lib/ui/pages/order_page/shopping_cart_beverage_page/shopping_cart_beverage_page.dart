@@ -30,6 +30,10 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
     Logger().d("여기 한대 맞았습니다 행님${widget.beverageOrderList.toString()}");
   }
 
+  int getCheckedItemCount() {
+    return itemCheckedState.where((checked) => checked).length;
+  }
+
   void removeItem(int index) {
     setState(() {
       itemTotalPrice.removeAt(index);
@@ -44,6 +48,15 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
       itemCounts.clear();
       itemCheckedState.clear();
     });
+  }
+
+  Map<String, dynamic> calculateTotal() {
+    int totalItemCount = itemCounts.reduce((a, b) => a + b);
+    double totalPrice = itemTotalPrice.reduce((a, b) => a + b);
+    return {
+      'totalItemCount': totalItemCount,
+      'totalPrice': totalPrice,
+    };
   }
 
   @override
@@ -155,6 +168,15 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                             onChanged: (bool? value) {
                               setState(() {
                                 itemCheckedState[index] = value ?? false;
+                                if (value == true) {
+                                  // 체크박스가 활성화되었을 때 수량을 더함
+                                  itemCounts[index]++;
+                                  itemTotalPrice[index] += 8000;
+                                } else {
+                                  // 체크박스가 비활성화되었을 때 수량을 감소
+                                  itemCounts[index]--;
+                                  itemTotalPrice[index] -= 8000;
+                                }
                               });
                             },
                             activeColor: kAccentColor,
@@ -277,7 +299,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    textBody1("총 / 20개"),
+                    textBody1("총 ${getCheckedItemCount()}/ 20개"),
                     textTitle1("떙떙원"),
                   ],
                 ),
