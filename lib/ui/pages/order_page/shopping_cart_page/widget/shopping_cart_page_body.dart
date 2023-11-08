@@ -9,64 +9,25 @@ import 'package:project_coffee/ui/pages/order_page/shopping_cart_beverage_page/s
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/shopping_cart_page_view_model.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_product_page/shopping_cart_product_empty_page.dart';
 
-class ShoppingCartPageBody extends StatefulWidget {
+import '../../shopping_cart_beverage_page/shopping_cart_beverage_empty_page.dart';
+
+class ShoppingCartPageBody extends ConsumerWidget {
   const ShoppingCartPageBody({super.key});
 
-  @override
-  State<ShoppingCartPageBody> createState() => _ShoppingCartPageBodyState();
-}
 
-class _ShoppingCartPageBodyState extends State<ShoppingCartPageBody> {
-  int count = 0;
-  List<int> outlineButtonChange =[];
-
-
-  void updateChildState(int newValue) {
-    setState(() {
-      outlineButtonChange.add(newValue);
-      Logger().d("얘 값을 구하시오${outlineButtonChange.toString()}");
-    });
-  }
 
   @override
-  Widget build(BuildContext context) {
-
+  Widget build(BuildContext context,WidgetRef ref) {
+    ShoppingCartListModel? model = ref.watch(shoppingCartListProvider);
+    List<BeverageOrderReqDTO> beverageOrderList = model?.beverageOrderList??[];
+    // Logger().d("이거 동동그리브다 동동그리브${beverageOrderList.length}");
+    // int count = 0;
+    // List<int> outlineButtonChange =[];
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         backgroundColor: Colors.white,
-        persistentFooterButtons: [
-          Consumer(
-            builder: (context, ref, child) {
-              return Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      textBody1("총 / 20개"),
-                      textTitle1("떙떙원"),
-                    ],
-                  ),
-                  SizedBox(height: gap_m),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: kAccentColor,
-                      minimumSize: Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                    onPressed: () {},
-                    child: Text(
-                      "주문하기",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
-        ],
+
 
         body: CustomScrollView(
           slivers: [
@@ -90,14 +51,8 @@ class _ShoppingCartPageBodyState extends State<ShoppingCartPageBody> {
               child: TabBarView(
                 children: [
                   // 첫 번째 탭 페이지: 음료/푸드
-                  Consumer(builder: (context, ref, child) {
-                    ShoppingCartListModel? model = ref.watch(shoppingCartListProvider);
-                    List<BeverageOrderReqDTO> beverageOrderList = [];
-                    return ShoppingCartBeveragePage(beverageOrderList,count,updateChildState);
-                  },
-                  ),
 
-
+                    ShoppingCartBeveragePage(beverageOrderList),
                   // beverageOrderList.isEmpty
                   //     ? ShoppingCartBeverageEmptyPage()
                   //     : ShoppingCartBeveragePage(beverageOrderList),

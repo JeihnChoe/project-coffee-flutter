@@ -6,6 +6,9 @@ class BeverageOrder {
   int? count;
   int? size;
   int? cup;
+  int? sizePrice;
+  int? totalMoney;
 
-  BeverageOrder(this.beverage, this.isIced, this.count, this.size, this.cup);
+  BeverageOrder(this.beverage, this.isIced, this.count, this.size, this.cup ,this.sizePrice,
+  this.totalMoney);
 }
