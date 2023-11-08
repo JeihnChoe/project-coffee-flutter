@@ -32,6 +32,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
   int selectedTabMethod = 1;
   int count = 1;
   int totalprice = 0;
+  int outlinbuttonchange = 1;
   final _formKey = GlobalKey<State>();
 
   // void submit(WidgetRef ref) {
@@ -57,6 +58,12 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
     Logger().d(widget.beverageOrderReqDTO.isIced);
   }
 
+  void updateChildState(int newValue) {
+    setState(() {
+      outlinbuttonchange = newValue;
+      Logger().d(widget.beverageOrderReqDTO.totalmoney);
+    });
+  }
 
   void orderBeverage() {
     Logger().d(
@@ -66,167 +73,6 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      persistentFooterButtons: [
-        Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        if (count != 1) {
-                          setState(() {
-                            count--;
-                            totalprice = totalprice -
-                                widget.beverageOrderReqDTO.beverage.price;
-                            widget.beverageOrderReqDTO.count = count;
-                            widget.beverageOrderReqDTO.totalmoney = totalprice;
-                          });
-                        }
-                      },
-                      icon: Icon(CupertinoIcons.minus_circle),
-                      color: count == 1 ? Colors.grey : Colors.black,
-                    ),
-                    Text("${widget.beverageOrderReqDTO.count}"),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          count++;
-                          totalprice = totalprice +
-                              widget.beverageOrderReqDTO.beverage.price;
-                          widget.beverageOrderReqDTO.count = count;
-                          widget.beverageOrderReqDTO.totalmoney = totalprice;
-                        });
-                      },
-                      icon: Icon(CupertinoIcons.plus_circle),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    textTitle1("${widget.beverageOrderReqDTO.totalmoney}"),
-                    SizedBox(
-                      width: 16,
-                    )
-                  ],
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.heart)),
-                Row(
-                  children: [
-                    Consumer(builder: (context, ref, child) {
-                      return OutlinedButton(
-                        onPressed: () {
-                          Logger().d("${widget.beverageOrderReqDTO.size}");
-                          ref.read(beverageProvider).cart(widget.beverageOrderReqDTO);
-                          showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
-                            builder: (context,) {
-                              return FractionallySizedBox(
-                                heightFactor: 0.20, // 높이를 90%로 설정
-                                child: BeverageDetailCartBottomSheet(beverageOrderReqDTO: widget.beverageOrderReqDTO),
-                              );
-                            },
-                          );
-                        },
-                        style: OutlinedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            side: BorderSide(
-                              color: kAccentColor,
-                            )),
-                        child: Text(
-                          "담기",
-                          style: TextStyle(color: kAccentColor),
-                        ),
-                      );
-                    },
-                    ),
-                    SizedBox(
-                      width: gap_m,
-                    ),
-                    // CustomAlertWindow(content: "주문할 매장을 선택해주세요.", buttonName1: "주문하기", buttonName2: "담기", clickButton: "뭐더라"),
-                    TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: kAccentColor,
-                          minimumSize: Size(120, 25),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                        ),
-                        onPressed: () => showDialog<String>(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            content: Container(
-                              width: 400,
-                              height: 100,
-                              child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  Text("주문할 매장을 선택해주세요"),
-                                  Text("매장을 먼저 선택하신 후 주문해주세요. 판매 완료된 메뉴는 주문하실 수 없습니다."),
-                                ],
-                              ),
-                            ),
-                            actions: [
-                              TextButton(
-                                style: OutlinedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.circular(25),
-                                    ),
-                                    side: BorderSide(
-                                      color: kAccentColor,
-                                    )),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Text(
-                                  "취소",
-                                  style: TextStyle(color: kAccentColor),
-                                ),
-                              ),
-                              TextButton(
-                                style: TextButton.styleFrom(
-                                  backgroundColor: kAccentColor,
-                                  minimumSize: Size(150, 25),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                ),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  // Navigator.push(context,
-                                  //     MaterialPageRoute(builder: (context) => move1)); //이동할 페이지1
-                                },
-                                child: Text(
-                                  "매장 선택하기",
-                                  style: TextStyle(color: Colors.white),
-                                ), //버튼이름1
-                              ),
-                            ],
-                          ),
-                        ),
-                        child: Text("주문하기",style: TextStyle(color: Colors.white),)),
-                    SizedBox(
-                      width: gap_m,
-                    )
-                  ],
-                ),
-              ],
-            )
-          ],
-        )
-      ],
       body: Container(
         child: CustomScrollView(slivers: [
           SliverToBoxAdapter(
@@ -269,7 +115,9 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                       height: 16,
                     ),
                     BottomSheetOutlineButton(
-                        beverageOrderReqDTO: widget.beverageOrderReqDTO),
+                        beverageOrderReqDTO: widget.beverageOrderReqDTO,  // DTO보내기
+                        selectedTabMethod : outlinbuttonchange,
+                      onStateChange: updateChildState,), //디폴트 값
                     SizedBox(
                       height: gap_l,
                     ),
@@ -422,6 +270,175 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
           ),
         ]),
       ),
+      persistentFooterButtons: [
+        Column(
+          children: [
+            PersistentTopButton(),
+            PersistentBottomButton(context)
+          ],
+        )
+      ],
     );
+  }
+
+  Row PersistentBottomButton(BuildContext context) {
+    return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.heart)),
+              Row(
+                children: [
+                  Consumer(builder: (context, ref, child) {
+                    return OutlinedButton(
+                      onPressed: () {
+                        ref.read(beverageProvider).cart(widget.beverageOrderReqDTO);
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
+                          builder: (context,) {
+                            return FractionallySizedBox(
+                              heightFactor: 0.20, // 높이를 90%로 설정
+                              child: BeverageDetailCartBottomSheet(beverageOrderReqDTO: widget.beverageOrderReqDTO),
+                            );
+                          },
+                        );
+                      },
+                      style: OutlinedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          side: BorderSide(
+                            color: kAccentColor,
+                          )),
+                      child: Text(
+                        "담기",
+                        style: TextStyle(color: kAccentColor),
+                      ),
+                    );
+                  },
+                  ),
+                  SizedBox(
+                    width: gap_m,
+                  ),
+                  // CustomAlertWindow(content: "주문할 매장을 선택해주세요.", buttonName1: "주문하기", buttonName2: "담기", clickButton: "뭐더라"),
+                  TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: kAccentColor,
+                        minimumSize: Size(120, 25),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                      ),
+                      onPressed: () => showDialog<String>(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          content: Container(
+                            width: 400,
+                            height: 100,
+                            child: Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              children: [
+                                Text("주문할 매장을 선택해주세요"),
+                                Text("매장을 먼저 선택하신 후 주문해주세요. 판매 완료된 메뉴는 주문하실 수 없습니다."),
+                              ],
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              style: OutlinedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(25),
+                                  ),
+                                  side: BorderSide(
+                                    color: kAccentColor,
+                                  )),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                "취소",
+                                style: TextStyle(color: kAccentColor),
+                              ),
+                            ),
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                backgroundColor: kAccentColor,
+                                minimumSize: Size(150, 25),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                                // Navigator.push(context,
+                                //     MaterialPageRoute(builder: (context) => move1)); //이동할 페이지1
+                              },
+                              child: Text(
+                                "매장 선택하기",
+                                style: TextStyle(color: Colors.white),
+                              ), //버튼이름1
+                            ),
+                          ],
+                        ),
+                      ),
+                      child: Text("주문하기",style: TextStyle(color: Colors.white),)),
+                  SizedBox(
+                    width: gap_m,
+                  )
+                ],
+              ),
+            ],
+          );
+  }
+
+  Row PersistentTopButton() {
+    return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      if (count != 1) {
+                        setState(() {
+                          count--;
+                          Logger().d("이거좀 알려줘봐라 ${widget.beverageOrderReqDTO.totalmoney}");
+                          widget.beverageOrderReqDTO.count = count;
+                          widget.beverageOrderReqDTO.totalmoney = widget.beverageOrderReqDTO.totalmoney! * count;
+                        });
+                      }
+                    },
+                    icon: Icon(CupertinoIcons.minus_circle),
+                    color: count == 1 ? Colors.grey : Colors.black,
+                  ),
+                  Text("${widget.beverageOrderReqDTO.count}"),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        count++;
+                        Logger().d("이거좀 알려줘봐라 ${widget.beverageOrderReqDTO.totalmoney}");
+                        widget.beverageOrderReqDTO.totalmoney = widget.beverageOrderReqDTO.totalmoney! * count;
+                        // totalprice = totalprice +
+                        //     widget.beverageOrderReqDTO.beverage.price;
+                        widget.beverageOrderReqDTO.count = count;
+                        // widget.beverageOrderReqDTO.totalmoney = totalprice;
+                      });
+                    },
+                    icon: Icon(CupertinoIcons.plus_circle),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  textTitle1("${widget.beverageOrderReqDTO.totalmoney}"),
+                  SizedBox(
+                    width: 16,
+                  )
+                ],
+              ),
+            ],
+          );
   }
 }
