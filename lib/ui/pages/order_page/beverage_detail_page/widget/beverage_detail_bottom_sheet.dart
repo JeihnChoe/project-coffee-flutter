@@ -401,14 +401,8 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                       if (count != 1) {
                         setState(() {
                           count--;
-
                           widget.beverageOrderReqDTO.count = count;
-
-                          // if(widget.beverageOrderReqDTO.totalmoney! == widget.beverageOrderReqDTO.beverage){
-                          //
-                          // }
                           widget.beverageOrderReqDTO.totalmoney = widget.beverageOrderReqDTO.sizePrice! * count;
-                          // Logger().d("야이놈아 $totalPrice");
                         }
                         );
                       }
@@ -421,12 +415,8 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                     onPressed: () {
                       setState(() {
                         count++;
-                        Logger().d("이거좀 알려줘봐라 ${widget.beverageOrderReqDTO.totalmoney}");
-
-
                         widget.beverageOrderReqDTO.count = count;
                         widget.beverageOrderReqDTO.totalmoney = widget.beverageOrderReqDTO.sizePrice! * count;
-                        // widget.beverageOrderReqDTO.totalmoney = totalprice;
                       });
                     },
                     icon: Icon(CupertinoIcons.plus_circle),
