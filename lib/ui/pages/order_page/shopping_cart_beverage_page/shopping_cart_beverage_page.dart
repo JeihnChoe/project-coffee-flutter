@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
@@ -9,8 +8,10 @@ import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_beverage_page/shopping_cart_beverage_empty_page.dart';
 
 class ShoppingCartBeveragePage extends StatefulWidget {
-  List<BeverageOrderReqDTO> beverageOrderList = [];
-  ShoppingCartBeveragePage(this.beverageOrderList, {Key? key});
+  final List<BeverageOrderReqDTO> beverageOrderList;
+
+  ShoppingCartBeveragePage(this.beverageOrderList, {Key? key})
+      : super(key: key);
 
   @override
   State<ShoppingCartBeveragePage> createState() =>
@@ -26,8 +27,11 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
   void initState() {
     super.initState();
     // 초기에 모든 아이템을 선택하지 않도록 false로 설정
-    itemCheckedState = List.generate(3, (index) => false);
-    Logger().d("여기 한대 맞았습니다 행님${widget.beverageOrderList.toString()}");
+    itemCheckedState = List.generate(
+        3, (index) => false); //3 대신 widget.beverageOrderList.length
+    // itemCounts = List.generate(widget.beverageOrderList.length, (index) => 1);
+    // itemTotalPrice =
+    //     List.generate(widget.beverageOrderList.length, (index) => 8000);
   }
 
   int getCheckedItemCount() {
@@ -39,6 +43,10 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
     for (int i = 0; i < itemCheckedState.length; i++) {
       if (itemCheckedState[i]) {
         totalAmount += itemCounts[i];
+        if (totalAmount > 20) {
+          showAlertDialog();
+          return 20; // 20을 넘으면 20으로 제한
+        }
       }
     }
     return totalAmount;
@@ -68,14 +76,30 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
       }
     }
     setState(() {
-      itemTotalPrice = List.generate(itemTotalPrice.length, (index) {
-        return itemTotalPrice[index];
-      });
       // 아이템 수량 업데이트
-      itemCounts = List.generate(itemCounts.length, (index) {
-        return itemCounts[index];
-      });
+      itemTotalPrice = itemTotalPrice;
+      itemCounts = itemCounts;
     });
+  }
+
+  void showAlertDialog() async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("총 주문 갯수 초과"),
+          content: Text("총 주문 갯수는 20개를 초과할 수 없습니다."),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("확인"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
