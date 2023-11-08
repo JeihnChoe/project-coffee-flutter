@@ -16,7 +16,7 @@ Beverage _mBeverage = Beverage(
     "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
     1,7777);
 
-BeverageOrder _beverageOrder = BeverageOrder(_mBeverage, 1, 2, 1, 1);
+BeverageOrder _beverageOrder = BeverageOrder(_mBeverage, 1, 2, 1, 1,505,9999);
 
 
 List<Beverage> _mBeverageList = [

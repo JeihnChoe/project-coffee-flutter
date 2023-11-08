@@ -88,8 +88,10 @@ class BeverageOrderReqDTO {
       this.count,
       this.cup,
       this.size,
-      this.sizePrice,
-      this.totalmoney});
+        this.sizePrice,
+        this.totalmoney
+      }
+      );
 
   Map<String, dynamic> toJson() => {
         "beverage": beverage,

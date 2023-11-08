@@ -8,7 +8,6 @@ class HomeMainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final arguments = ModalRoute.of(context)!.settings.arguments;
-    Logger().d(" 아규먼트 값은 ${arguments}");
     // if (arguments != null && arguments is Map<String, dynamic>) {
     //   final isLogin = arguments['isLogin'];
     //   final jwt = arguments['jwt'];
