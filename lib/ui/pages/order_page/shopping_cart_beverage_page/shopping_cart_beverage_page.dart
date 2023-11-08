@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
@@ -8,7 +9,9 @@ import 'package:project_coffee/ui/pages/order_page/shopping_cart_beverage_page/s
 
 class ShoppingCartBeveragePage extends StatefulWidget {
   List<BeverageOrderReqDTO> beverageOrderList = [];
-  ShoppingCartBeveragePage(this.beverageOrderList, {Key? key});
+  int selectedMethod;
+  final ValueChanged<int> onStateChange;
+  ShoppingCartBeveragePage(this.beverageOrderList,this.selectedMethod,this.onStateChange ,{Key? key});
 
   @override
   State<ShoppingCartBeveragePage> createState() =>
@@ -25,6 +28,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
     super.initState();
     // 초기에 모든 아이템을 선택하지 않도록 false로 설정
     itemCheckedState = List.generate(3, (index) => false);
+    Logger().d("여기 한대 맞았습니다 행님${widget.beverageOrderList.toString()}");
   }
 
   void removeItem(int index) {
@@ -42,6 +46,8 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
       itemCheckedState.clear();
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +155,10 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                           value: itemCheckedState[index],
                           onChanged: (bool? value) {
                             setState(() {
+                              Logger().d("나 너 좋아하냐 ?");
                               itemCheckedState[index] = value ?? false;
+                              widget.onStateChange(index);
+
                             });
                           },
                           activeColor: kAccentColor,
@@ -269,35 +278,3 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
     );
   }
 }
-// persistentFooterButtons: [
-// Consumer(
-// builder: (context, ref, child) {
-// return Column(
-// children: [
-// Row(
-// mainAxisAlignment: MainAxisAlignment.spaceBetween,
-// children: [
-// textBody1("총 / 20개"),
-// textTitle1("떙떙원"),
-// ],
-// ),
-// SizedBox(height: gap_m),
-// TextButton(
-// style: TextButton.styleFrom(
-// backgroundColor: kAccentColor,
-// minimumSize: Size(double.infinity, 50),
-// shape: RoundedRectangleBorder(
-// borderRadius: BorderRadius.circular(25),
-// ),
-// ),
-// onPressed: () {},
-// child: Text(
-// "주문하기",
-// style: TextStyle(color: Colors.white),
-// ),
-// ),
-// ],
-// );
-// },
-// ),
-// ],
