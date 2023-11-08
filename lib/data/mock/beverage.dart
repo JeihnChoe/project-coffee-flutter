@@ -28,7 +28,7 @@ List<Beverage> _mBeverageList = [
       "디카페인결제시 300원 추가됩니다.",
       2,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
-      1,8888),
+      1,1),
   Beverage(
       2,
       "바닐라 크림 콜드 브루",

@@ -31,9 +31,7 @@ class BeverageDetailBottomSheet extends StatefulWidget {
 class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
   int selectedTabMethod = 1;
   int count = 1;
-  int totalprice = 0;
   int outlinbuttonchange = 1;
-  final _formKey = GlobalKey<State>();
 
   // void submit(WidgetRef ref) {
   // &&arePasswordsEqual(_password.text, _passwordchk.text)==true
@@ -50,28 +48,26 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
   @override
   void initState() {
     super.initState();
-    totalprice = widget.beverageOrderReqDTO.beverage.price;
+
     widget.beverageOrderReqDTO.size = 1;
     widget.beverageOrderReqDTO.cup = 1;
     widget.beverageOrderReqDTO.count = 1;
-    widget.beverageOrderReqDTO.totalmoney = totalprice;
+    widget.beverageOrderReqDTO.totalmoney = widget.beverageOrderReqDTO.beverage.price;
     Logger().d(widget.beverageOrderReqDTO.isIced);
   }
 
   void updateChildState(int newValue) {
     setState(() {
       outlinbuttonchange = newValue;
-      Logger().d(widget.beverageOrderReqDTO.totalmoney);
+      Logger().d("dfjbhaejhfbkawbf ${widget.beverageOrderReqDTO.sizePrice}");
     });
   }
 
-  void orderBeverage() {
-    Logger().d(
-        "Ordered: ${widget.beverageOrderReqDTO.beverage.beverageName}, Quantity: $count, Total Price: $totalprice");
-  }
+
 
   @override
   Widget build(BuildContext context) {
+    int? sizePrice = widget.beverageOrderReqDTO.sizePrice;
     return Scaffold(
       body: Container(
         child: CustomScrollView(slivers: [
@@ -117,6 +113,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                     BottomSheetOutlineButton(
                         beverageOrderReqDTO: widget.beverageOrderReqDTO,  // DTO보내기
                         selectedTabMethod : outlinbuttonchange,
+                      count : count,
                       onStateChange: updateChildState,), //디폴트 값
                     SizedBox(
                       height: gap_l,
@@ -297,7 +294,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                           isScrollControlled: true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
                           builder: (context,) {
                             return FractionallySizedBox(
-                              heightFactor: 0.20, // 높이를 90%로 설정
+                              heightFactor: 0.20, // 높이를 20%로 설정
                               child: BeverageDetailCartBottomSheet(beverageOrderReqDTO: widget.beverageOrderReqDTO),
                             );
                           },
@@ -404,10 +401,16 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                       if (count != 1) {
                         setState(() {
                           count--;
-                          Logger().d("이거좀 알려줘봐라 ${widget.beverageOrderReqDTO.totalmoney}");
+
                           widget.beverageOrderReqDTO.count = count;
-                          widget.beverageOrderReqDTO.totalmoney = widget.beverageOrderReqDTO.totalmoney! * count;
-                        });
+
+                          // if(widget.beverageOrderReqDTO.totalmoney! == widget.beverageOrderReqDTO.beverage){
+                          //
+                          // }
+                          widget.beverageOrderReqDTO.totalmoney = widget.beverageOrderReqDTO.sizePrice! * count;
+                          // Logger().d("야이놈아 $totalPrice");
+                        }
+                        );
                       }
                     },
                     icon: Icon(CupertinoIcons.minus_circle),
@@ -419,10 +422,10 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                       setState(() {
                         count++;
                         Logger().d("이거좀 알려줘봐라 ${widget.beverageOrderReqDTO.totalmoney}");
-                        widget.beverageOrderReqDTO.totalmoney = widget.beverageOrderReqDTO.totalmoney! * count;
-                        // totalprice = totalprice +
-                        //     widget.beverageOrderReqDTO.beverage.price;
+
+
                         widget.beverageOrderReqDTO.count = count;
+                        widget.beverageOrderReqDTO.totalmoney = widget.beverageOrderReqDTO.sizePrice! * count;
                         // widget.beverageOrderReqDTO.totalmoney = totalprice;
                       });
                     },

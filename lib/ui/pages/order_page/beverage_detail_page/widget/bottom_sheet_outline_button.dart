@@ -7,10 +7,11 @@ import 'package:project_coffee/data/dto/order_request.dart';
 class BottomSheetOutlineButton extends StatefulWidget {
   final BeverageOrderReqDTO beverageOrderReqDTO;
   int selectedTabMethod;
+  int count;
   final ValueChanged<int> onStateChange;
 
   BottomSheetOutlineButton(
-      {required this.beverageOrderReqDTO,required this.selectedTabMethod,required this.onStateChange});
+      {required this.beverageOrderReqDTO,required this.selectedTabMethod,required this.count,required this.onStateChange});
 
   int submit(int selectedPayment) {
     int selectedPaymentMethod = selectedPayment;
@@ -49,7 +50,8 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
               onPressed: () {
                 setState(() {
                   selectedPayment = 0;
-                  widget.beverageOrderReqDTO.totalmoney = zeroprice;
+                  widget.beverageOrderReqDTO.sizePrice = zeroprice;
+                  widget.beverageOrderReqDTO.totalmoney = zeroprice * widget.count;
                   widget.beverageOrderReqDTO.cup = 0;
                   widget.onStateChange(selectedPayment);
                   Logger().d(widget.beverageOrderReqDTO.cup);
@@ -111,8 +113,8 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
             onPressed: () {
               setState(() {
                 selectedPayment = 1;
-
-                widget.beverageOrderReqDTO.totalmoney = oneprice;
+                widget.beverageOrderReqDTO.sizePrice = oneprice;
+                widget.beverageOrderReqDTO.totalmoney = oneprice* widget.count;
 
                 widget.beverageOrderReqDTO.cup = 1;
                 widget.onStateChange(selectedPayment);
@@ -175,7 +177,8 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
             onPressed: () {
               setState(() {
                 selectedPayment = 2;
-                widget.beverageOrderReqDTO.totalmoney = twoprice;
+                widget.beverageOrderReqDTO.sizePrice = twoprice;
+                widget.beverageOrderReqDTO.totalmoney = twoprice* widget.count;
                 widget.beverageOrderReqDTO.cup = 2;
                 widget.onStateChange(selectedPayment);
                 Logger().d(widget.beverageOrderReqDTO.cup);
@@ -237,7 +240,8 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
             onPressed: () {
               setState(() {
                 selectedPayment = 3;
-                widget.beverageOrderReqDTO.totalmoney = threeprice;
+                widget.beverageOrderReqDTO.sizePrice = threeprice;
+                widget.beverageOrderReqDTO.totalmoney = threeprice* widget.count;
                 widget.beverageOrderReqDTO.cup = 3;
                 widget.onStateChange(selectedPayment);
                 Logger().d(widget.beverageOrderReqDTO.cup);
