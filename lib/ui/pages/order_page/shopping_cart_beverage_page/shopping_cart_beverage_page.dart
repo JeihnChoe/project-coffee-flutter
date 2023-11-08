@@ -34,6 +34,16 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
     return itemCheckedState.where((checked) => checked).length;
   }
 
+  int getCheckedItemAmount() {
+    int totalAmount = 0;
+    for (int i = 0; i < itemCheckedState.length; i++) {
+      if (itemCheckedState[i]) {
+        totalAmount += itemCounts[i];
+      }
+    }
+    return totalAmount;
+  }
+
   void removeItem(int index) {
     setState(() {
       itemTotalPrice.removeAt(index);
@@ -50,13 +60,22 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
     });
   }
 
-  Map<String, dynamic> calculateTotal() {
-    int totalItemCount = itemCounts.reduce((a, b) => a + b);
-    double totalPrice = itemTotalPrice.reduce((a, b) => a + b);
-    return {
-      'totalItemCount': totalItemCount,
-      'totalPrice': totalPrice,
-    };
+  void updateTotalPrice() {
+    double totalPrice = 0;
+    for (int i = 0; i < itemTotalPrice.length; i++) {
+      if (itemCheckedState[i]) {
+        totalPrice += itemTotalPrice[i];
+      }
+    }
+    setState(() {
+      itemTotalPrice = List.generate(itemTotalPrice.length, (index) {
+        return itemTotalPrice[index];
+      });
+      // 아이템 수량 업데이트
+      itemCounts = List.generate(itemCounts.length, (index) {
+        return itemCounts[index];
+      });
+    });
   }
 
   @override
@@ -97,6 +116,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                     i++) {
                                   itemCheckedState[i] = value ?? false;
                                 }
+                                updateTotalPrice();
                               });
                             },
                             activeColor: kAccentColor,
@@ -118,6 +138,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                   removeItem(i);
                                 }
                               }
+                              updateTotalPrice();
                             },
                             child: Text("선택삭제",
                                 style: TextStyle(color: kAccentColor)),
@@ -168,15 +189,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                             onChanged: (bool? value) {
                               setState(() {
                                 itemCheckedState[index] = value ?? false;
-                                if (value == true) {
-                                  // 체크박스가 활성화되었을 때 수량을 더함
-                                  itemCounts[index]++;
-                                  itemTotalPrice[index] += 8000;
-                                } else {
-                                  // 체크박스가 비활성화되었을 때 수량을 감소
-                                  itemCounts[index]--;
-                                  itemTotalPrice[index] -= 8000;
-                                }
+                                updateTotalPrice();
                               });
                             },
                             activeColor: kAccentColor,
@@ -184,6 +197,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                           IconButton(
                             onPressed: () {
                               removeItem(index);
+                              updateTotalPrice();
                             },
                             icon: Icon(Icons.cancel_outlined),
                             color: Colors.grey,
@@ -242,18 +256,21 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                         children: [
                                           IconButton(
                                             onPressed: () {
-                                              if (itemCounts[index] != 1) {
+                                              if (itemCheckedState[index] &&
+                                                  itemCounts[index] > 1) {
                                                 setState(() {
                                                   itemCounts[index]--;
                                                   itemTotalPrice[index] -= 8000;
+                                                  updateTotalPrice();
                                                 });
                                               }
                                             },
                                             icon: Icon(
                                                 CupertinoIcons.minus_circle),
-                                            color: itemCounts[index] == 1
-                                                ? Colors.grey
-                                                : Colors.black,
+                                            color: itemCheckedState[index] &&
+                                                    itemCounts[index] > 1
+                                                ? Colors.black
+                                                : Colors.grey,
                                           ),
                                           Text("${itemCounts[index]}"),
                                           IconButton(
@@ -261,6 +278,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                               setState(() {
                                                 itemCounts[index]++;
                                                 itemTotalPrice[index] += 8000;
+                                                updateTotalPrice();
                                               });
                                             },
                                             icon: Icon(
@@ -299,7 +317,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    textBody1("총 ${getCheckedItemCount()}/ 20개"),
+                    textBody1("총 ${getCheckedItemAmount()}/ 20개"),
                     textTitle1("떙떙원"),
                   ],
                 ),
