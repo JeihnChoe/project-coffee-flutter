@@ -6,6 +6,7 @@ import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_beverage_page/shopping_cart_beverage_empty_page.dart';
+import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
 class ShoppingCartBeveragePage extends StatefulWidget {
   final List<BeverageOrderReqDTO> beverageOrderList;
@@ -54,7 +55,6 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
       if (itemCheckedState[i]) {
         totalAmount += itemCounts[i];
         if (totalAmount > 20) {
-          showAlertDialog();
           return 20; // 20을 넘으면 20으로 제한
         }
       }
@@ -92,20 +92,15 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
     });
   }
 
-  void showAlertDialog() async {
-    await showDialog(
+  void showAlertDialog(BuildContext context) {
+    showDialog(
       context: context,
       builder: (BuildContext context) {
+        print("까꿍 alert입니다.");
         return AlertDialog(
-          title: Text("총 주문 갯수 초과"),
-          content: Text("총 주문 갯수는 20개를 초과할 수 없습니다."),
+          content: textBody1("장바구니에 담을 수 있는 수량이\n초과 되었습니다.\n장바구니를 정리 해 주세요."),
           actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text("확인"),
-            ),
+            CustomWhitePopButton(text: "확인"),
           ],
         );
       },
@@ -290,19 +285,25 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                         children: [
                                           IconButton(
                                             onPressed: () {
-                                              if (itemCheckedState[index] ||
-                                                  itemCounts[index] > 1) {
+                                              if (itemCounts[index] > 1) {
                                                 setState(() {
                                                   itemCounts[index]--;
                                                   itemTotalPrice[index] -= 8000;
                                                   updateTotalPrice();
                                                 });
+                                                int totalItemCount =
+                                                    itemCounts.fold(
+                                                        0,
+                                                        (acc, itemCount) =>
+                                                            acc + itemCount);
+                                                if (totalItemCount > 20) {
+                                                  showAlertDialog(context);
+                                                }
                                               }
                                             },
                                             icon: Icon(
                                                 CupertinoIcons.minus_circle),
-                                            color: itemCheckedState[index] &&
-                                                    itemCounts[index] > 1
+                                            color: (itemCounts[index] > 1)
                                                 ? Colors.black
                                                 : Colors.grey,
                                           ),
@@ -314,6 +315,14 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                                 itemTotalPrice[index] += 8000;
                                                 updateTotalPrice();
                                               });
+                                              int totalItemCount =
+                                                  itemCounts.fold(
+                                                      0,
+                                                      (acc, itemCount) =>
+                                                          acc + itemCount);
+                                              if (totalItemCount > 20) {
+                                                showAlertDialog(context);
+                                              }
                                             },
                                             icon: Icon(
                                                 CupertinoIcons.plus_circle),
