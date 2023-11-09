@@ -38,6 +38,16 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
     return itemCheckedState.where((checked) => checked).length;
   }
 
+  double getCheckedItemTotalPrice() {
+    double totalItemPrice = 0;
+    for (int i = 0; i < itemCheckedState.length; i++) {
+      if (itemCheckedState[i]) {
+        totalItemPrice += itemTotalPrice[i];
+      }
+    }
+    return totalItemPrice;
+  }
+
   int getCheckedItemAmount() {
     int totalAmount = 0;
     for (int i = 0; i < itemCheckedState.length; i++) {
@@ -280,7 +290,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                         children: [
                                           IconButton(
                                             onPressed: () {
-                                              if (itemCheckedState[index] &&
+                                              if (itemCheckedState[index] ||
                                                   itemCounts[index] > 1) {
                                                 setState(() {
                                                   itemCounts[index]--;
@@ -342,7 +352,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     textBody1("총 ${getCheckedItemAmount()}/ 20개"),
-                    textTitle1("떙떙원"),
+                    textTitle1("${getCheckedItemTotalPrice()} 원"),
                   ],
                 ),
                 SizedBox(height: gap_m),
