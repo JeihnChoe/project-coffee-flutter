@@ -18,12 +18,13 @@ class BeverageRepository {
       BeverageOrderReqDTO beverageOrderReqDTO) async {
     try {
       // dynamic -> http body
+      Logger().d("여기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ인");
       Response<dynamic> response =
-          await dio.post("/api/carts/add", data: beverageOrderReqDTO.toJson());
+          await dio.post("/api/carts/addCartList", data: beverageOrderReqDTO.toJson());
+      Logger().d("여기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ인");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-
       //  responseDTO.response = User.fromJson(responseDTO.response);
-
+      Logger().d("여기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ인");
       return responseDTO;
     } catch (e) {
       // 200이 아니면 catch로 감

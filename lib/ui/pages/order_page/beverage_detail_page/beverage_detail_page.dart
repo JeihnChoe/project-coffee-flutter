@@ -10,7 +10,7 @@ import 'package:project_coffee/data/model/beverage.dart';
 
 import 'widget/beverage_detail_page_body.dart';
 import 'widget/beverage_detail_bottom_sheet.dart';
-import 'widget/bottom_sheet_outline_button.dart';
+import 'widget/bottom_sheet_outline_button_one.dart';
 
 class BeverageDetailPage extends StatelessWidget {
   final Beverage beverage;
