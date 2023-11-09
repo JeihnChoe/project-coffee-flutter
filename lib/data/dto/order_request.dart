@@ -1,4 +1,5 @@
-import 'package:project_coffee/data/model/beverage.dart';
+import 'package:flutter/foundation.dart';
+import 'package:project_coffee/data/model/Product.dart';
 
 class CategoryReqDTO {
   final int id;
@@ -31,59 +32,36 @@ class CategoryReqDTO {
         categoryPicUrl = json["categoryPicUrl"];
 }
 
-class BeverageReqDTO {
-  final int id;
-  final String beverageName;
-  final String beverageEngName;
-  final String beverageDescription;
-  final String beverageTip;
-  final String hotIce; //
-  final String beveragePicUrl;
-  final int category;
+class ProductListResDTO {
+  Category category;
+  Product product;
+  int optionPrice;
 
-  BeverageReqDTO(
-      {required this.id,
-      required this.beverageName,
-      required this.beverageEngName,
-      required this.beverageDescription,
-      required this.beverageTip,
-      required this.hotIce,
-      required this.beveragePicUrl,
-      required this.category});
+  ProductListResDTO(
+      {required this.category, required this.product, required this.optionPrice});
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "beverageName": beverageName,
-        "beverageEngName": beverageEngName,
-        "beverageDescription": beverageDescription,
-        "beverageTip": beverageTip,
-        "hotIce": hotIce,
-        "beveragePicUrl": beveragePicUrl,
         "category": category,
+        "product": product,
+        "optionPrice": optionPrice,
       };
 
-  BeverageReqDTO.fromJson(Map<String, dynamic> json)
-      : id = json["id"],
-        beverageName = json["beverageName"],
-        beverageEngName = json["beverageEngName"],
-        beverageDescription = json["beverageDescription"],
-        beverageTip = json["beverageTip"],
-        hotIce = json["hotIce"],
-        beveragePicUrl = json["beveragePicUrl"],
-        category = json["category"];
+ProductListResDTO.fromJson(Map<String, dynamic> json) :
+       category = json["category"],
+        product = json["product"],
+        optionPrice = json["optionPrice"];
 }
-
-class BeverageOrderReqDTO {
-  Beverage beverage;
+class ProductOrderReqDTO {
+  Product product;
   int? isIced;
   int? count;
   int? size;
   int? cup;
   int? sizePrice;
   int? totalmoney;
-
-  BeverageOrderReqDTO(
-      {required this.beverage,
+  //
+  ProductOrderReqDTO(
+      {required this.product,
       this.isIced,
       this.count,
       this.cup,
@@ -92,9 +70,9 @@ class BeverageOrderReqDTO {
         this.totalmoney
       }
       );
-
+  //
   Map<String, dynamic> toJson() => {
-        "beverage": beverage,
+        "product": product,
         "isIced": isIced,
         "count": count,
         "size": size,
@@ -102,9 +80,9 @@ class BeverageOrderReqDTO {
         "SizePrice": sizePrice,
         "totalmoney": totalmoney
       };
-
-  BeverageOrderReqDTO.fromJson(Map<String, dynamic> json)
-      : beverage = json["beverage"],
+  //
+  ProductOrderReqDTO.fromJson(Map<String, dynamic> json)
+      : product = json["product"],
         isIced = json["isIced"],
         count = json["count"],
         size = json["size"],

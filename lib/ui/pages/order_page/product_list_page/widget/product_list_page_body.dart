@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_coffee/data/model/category.dart';
-import 'package:project_coffee/ui/pages/order_page/beverage_list_page/beverage_list_page_view_model.dart';
+
 import 'package:project_coffee/ui/widgets/custom_sliver_app_bar.dart';
 
-import 'beverage_list_page_body_item.dart';
+import '../product_list_page_view_model.dart';
+import 'product_list_page_body_item.dart';
 
-class BeverageListPageBody extends ConsumerWidget {
+class ProductListPageBody extends ConsumerWidget {
   final Category category;
-  BeverageListPageBody(this.category);
+  ProductListPageBody(this.category);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(BeverageListProvider);
-    final beverageList = model?.BeverageList ?? [];
+    final model = ref.read(ProductListProvider);
+    final productList = model?.productListResDTO ?? [];
 
-    final indexItems =
-        beverageList.where((item) => item.category == category.id).toList();
+    final indexItems = productList.where((item) => item.product.category == category.id).toList();
+        // productList..where((item) => item.category == category.id).toList();
 
     return CustomScrollView(
       shrinkWrap: true,

@@ -6,30 +6,23 @@ import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
-import 'package:project_coffee/data/model/beverage.dart';
-import 'package:project_coffee/ui/pages/order_page/beverage_detail_page/widget/bottom_sheet_outline_button_two.dart';
-import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/shopping_cart_page.dart';
 import 'package:project_coffee/data/store/order_store.dart';
-import 'package:project_coffee/ui/pages/main_page/main_page.dart';
-import 'package:project_coffee/ui/pages/order_page/beverage_detail_page/widget/beverage_detail_cart_bottom_sheet.dart';
-import 'package:project_coffee/ui/widgets/custom_alert_window.dart';
-import 'package:project_coffee/ui/widgets/custom_green_button.dart';
-import 'package:project_coffee/ui/widgets/custom_white_button.dart';
 
 import 'bottom_sheet_outline_button_one.dart';
 import 'bottom_sheet_sliver_appbar.dart';
+import 'product_detail_cart_bottom_sheet.dart';
 
-class BeverageDetailBottomSheet extends StatefulWidget {
-  BeverageOrderReqDTO beverageOrderReqDTO;
+class ProductDetailBottomSheet extends StatefulWidget {
+  ProductOrderReqDTO productOrderReqDTO;
 
-  BeverageDetailBottomSheet({required this.beverageOrderReqDTO});
+  ProductDetailBottomSheet({required this.productOrderReqDTO});
 
   @override
-  State<BeverageDetailBottomSheet> createState() =>
-      BeverageDetailBottomSheetState();
+  State<ProductDetailBottomSheet> createState() =>
+      ProductDetailBottomSheetState();
 }
 
-class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
+class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
   int selectedTabMethod = 1;
   int count = 1;
   int outlinbuttonchange = 1;
@@ -50,13 +43,12 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
   void initState() {
     super.initState();
 
-    widget.beverageOrderReqDTO.size = 1;
-    widget.beverageOrderReqDTO.cup = 1;
-    widget.beverageOrderReqDTO.count = 1;
-    widget.beverageOrderReqDTO.totalmoney = widget.beverageOrderReqDTO.beverage.price;
-    widget.beverageOrderReqDTO.sizePrice = widget.beverageOrderReqDTO.beverage.price;
-
-    Logger().d(widget.beverageOrderReqDTO.isIced);
+    widget.productOrderReqDTO.size = 1;
+    widget.productOrderReqDTO.cup = 1;
+    widget.productOrderReqDTO.count = 1;
+    // widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.product.price;  가격 넣어야함
+    // widget.productOrderReqDTO.sizePrice = widget.productOrderReqDTO.beverage.price;
+    Logger().d(widget.productOrderReqDTO.isIced);
   }
 
   void updateChildState(int newValue) {
@@ -69,7 +61,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    int? sizePrice = widget.beverageOrderReqDTO.sizePrice;
+    int? sizePrice = widget.productOrderReqDTO.sizePrice;
     return Scaffold(
       body: Container(
         child: CustomScrollView(slivers: [
@@ -77,7 +69,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
             child: Container(color: Colors.white, child: SizedBox(height: 16)),
           ),
           BottomSheetSliverAppBar(
-            beverage: widget.beverageOrderReqDTO.beverage,
+            product: widget.productOrderReqDTO.product,
           ),
           SliverToBoxAdapter(
             child: Container(
@@ -112,15 +104,9 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                     SizedBox(
                       height: 16,
                     ),
-                    if(widget.beverageOrderReqDTO.beverage.category == 3)
-            BottomSheetOutlineButtonTwo(
-            beverageOrderReqDTO: widget.beverageOrderReqDTO,  // DTO보내기
-            selectedTabMethod : outlinbuttonchange,
-            count : count,
-            onStateChange: updateChildState,) //디폴트 값
-                      else
+                    if(widget.productOrderReqDTO.product.category == 3)
                       BottomSheetOutlineButtonOne(
-                        beverageOrderReqDTO: widget.beverageOrderReqDTO,  // DTO보내기
+                        productOrderReqDTO: widget.productOrderReqDTO,  // DTO보내기
                         selectedTabMethod : outlinbuttonchange,
                         count : count,
                         onStateChange: updateChildState,), //디폴트 값
@@ -135,7 +121,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                             onPressed: () {
                               setState(() {
                                 selectedTabMethod = 1;
-                                widget.beverageOrderReqDTO.cup = 1;
+                                widget.productOrderReqDTO.cup = 1;
                               });
                             },
                             child: Text(
@@ -167,7 +153,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                             onPressed: () {
                               setState(() {
                                 selectedTabMethod = 2;
-                                widget.beverageOrderReqDTO.cup = 2;
+                                widget.productOrderReqDTO.cup = 2;
                               });
                             },
                             child: Text(
@@ -197,7 +183,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                             onPressed: () {
                               setState(() {
                                 selectedTabMethod = 3;
-                                widget.beverageOrderReqDTO.cup = 3;
+                                widget.productOrderReqDTO.cup = 3;
                               });
                             },
                             child: Text(
@@ -297,14 +283,14 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                   Consumer(builder: (context, ref, child) {
                     return OutlinedButton(
                       onPressed: () {
-                        ref.read(beverageProvider).cart(context,widget.beverageOrderReqDTO);
+                        ref.read(beverageProvider).cart(context,widget.productOrderReqDTO);
                         showModalBottomSheet(
                           context: context,
                           isScrollControlled: true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
                           builder: (context,) {
                             return FractionallySizedBox(
                               heightFactor: 0.20, // 높이를 20%로 설정
-                              child: BeverageDetailCartBottomSheet(beverageOrderReqDTO: widget.beverageOrderReqDTO),
+                              child: ProductDetailCartBottomSheet(productOrderReqDTO: widget.productOrderReqDTO),
                             );
                           },
                         );
@@ -410,8 +396,8 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                       if (count != 1) {
                         setState(() {
                           count--;
-                          widget.beverageOrderReqDTO.count = count;
-                          widget.beverageOrderReqDTO.totalmoney = widget.beverageOrderReqDTO.sizePrice! * count;
+                          widget.productOrderReqDTO.count = count;
+                          widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.sizePrice! * count;
                         }
                         );
                       }
@@ -419,13 +405,13 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                     icon: Icon(CupertinoIcons.minus_circle),
                     color: count == 1 ? Colors.grey : Colors.black,
                   ),
-                  Text("${widget.beverageOrderReqDTO.count}"),
+                  Text("${widget.productOrderReqDTO.count}"),
                   IconButton(
                     onPressed: () {
                       setState(() {
                         count++;
-                        widget.beverageOrderReqDTO.count = count;
-                        widget.beverageOrderReqDTO.totalmoney = widget.beverageOrderReqDTO.sizePrice! * count;
+                        widget.productOrderReqDTO.count = count;
+                        widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.sizePrice! * count;
                       });
                     },
                     icon: Icon(CupertinoIcons.plus_circle),
@@ -434,7 +420,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
               ),
               Row(
                 children: [
-                  textTitle1("${widget.beverageOrderReqDTO.totalmoney}"),
+                  textTitle1("${widget.productOrderReqDTO.totalmoney}"),
                   SizedBox(
                     width: 16,
                   )

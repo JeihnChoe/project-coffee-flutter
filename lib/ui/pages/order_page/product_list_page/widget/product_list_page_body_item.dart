@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/style.dart';
-import 'package:project_coffee/data/model/beverage.dart';
-import 'package:project_coffee/ui/pages/order_page/beverage_detail_page/beverage_detail_page.dart';
+import 'package:project_coffee/data/model/Product.dart';
+import 'package:project_coffee/ui/pages/order_page/beverage_detail_page/product_detail_page.dart';
 
 import '../../../../../_core/constants/size.dart';
 
 class CategoryBeverageListPageBodyItem extends StatelessWidget {
-  Beverage beverage;
-  CategoryBeverageListPageBodyItem(this.beverage,{super.key});
+  Product product;
+  CategoryBeverageListPageBodyItem(this.product,{super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class CategoryBeverageListPageBodyItem extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => BeverageDetailPage(beverage)));
+                  builder: (context) => BeverageDetailPage(product)));
         },
         child: Padding(
           padding: const EdgeInsets.only(top: 5,bottom: 15, right: 16),
@@ -28,9 +28,9 @@ class CategoryBeverageListPageBodyItem extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                _image(beverage),
+                _image(product),
                 SizedBox(width: gap_m),
-                _Beverage(beverage),
+                _Beverage(product),
               ],
             ),
           ),

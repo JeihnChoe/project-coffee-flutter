@@ -6,8 +6,8 @@ import 'package:project_coffee/main.dart';
 
 //창고데이터
 class ShoppingCartListModel {
-  List<BeverageOrderReqDTO> beverageOrderList;
-  ShoppingCartListModel(this.beverageOrderList);
+  List<ProductOrderReqDTO> productOrderList;
+  ShoppingCartListModel(this.productOrderList);
 }
 
 //창고
@@ -18,8 +18,8 @@ class ShoppingCartListViewModel extends StateNotifier<ShoppingCartListModel?> {
       : super(state);
 
   Future<void> notifyInit() async {
-    List<BeverageOrderReqDTO>? responseDTO =
-        await BeverageRepository().fetchBeverageOrderList();
+    List<ProductOrderReqDTO>? responseDTO =
+        await ProductRepository().fetchproductOrderList();
     Logger().d("쇼핑카드야 통신하자");
     state = ShoppingCartListModel(responseDTO ?? []);
     Logger().d("너 지금 뭔데 $responseDTO");

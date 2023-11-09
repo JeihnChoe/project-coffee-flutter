@@ -6,9 +6,9 @@ import 'package:project_coffee/ui/pages/main_page/main_page.dart';
 import 'package:project_coffee/ui/pages/order_page/category_list_page/category_list_page.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/shopping_cart_page.dart';
 
-class BeverageDetailCartBottomSheet extends StatelessWidget {
-  BeverageOrderReqDTO beverageOrderReqDTO;
-  BeverageDetailCartBottomSheet({required this.beverageOrderReqDTO});
+class ProductDetailCartBottomSheet extends StatelessWidget {
+  ProductOrderReqDTO productOrderReqDTO;
+  ProductDetailCartBottomSheet({required this.productOrderReqDTO});
 
 
 

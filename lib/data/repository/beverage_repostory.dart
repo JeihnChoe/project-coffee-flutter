@@ -3,24 +3,24 @@ import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/http.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
-import 'package:project_coffee/data/mock/beverage.dart';
+import 'package:project_coffee/data/mock/product.dart';
 
-class BeverageRepository {
-  Future<ResponseDTO> fetchBeverageDetail() {
-    return Future.delayed(Duration(seconds: 3), () => mBeverageResponseDTO);
+class ProductRepository {
+  Future<ResponseDTO> fetchproductDetail() {
+    return Future.delayed(Duration(seconds: 3), () => mProductResponseDTO);
   }
 
-  Future<ResponseDTO> fetchBeverageDetailList() {
-    return Future.delayed(Duration(seconds: 3), () => mBeverageListResponseDTO);
+  Future<ResponseDTO> fetchproductDetailList() {
+    return Future.delayed(Duration(seconds: 3), () => mProductListResponseDTO);
   }
 
-  Future<ResponseDTO> fetchBeverageCartSave(
-      BeverageOrderReqDTO beverageOrderReqDTO) async {
+  Future<ResponseDTO> fetchproductCartSave(
+      ProductOrderReqDTO productOrderReqDTO) async {
     try {
       // dynamic -> http body
       Logger().d("여기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ인");
       Response<dynamic> response =
-          await dio.post("/api/carts/addCartList", data: beverageOrderReqDTO.toJson());
+          await dio.post("/api/carts/addCartList", data: productOrderReqDTO.toJson());
       Logger().d("여기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ인");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       //  responseDTO.response = User.fromJson(responseDTO.response);
@@ -31,21 +31,21 @@ class BeverageRepository {
       return ResponseDTO(false, "잘못된 방법입니다.", null);
     }
     return Future.delayed(
-        Duration(seconds: 3), () => mBeverageOrderResponseDTO);
+        Duration(seconds: 3), () => mProductOrderResponseDTO);
   }
 
-  Future<List<BeverageOrderReqDTO>> fetchBeverageOrderList() async {
+  Future<List<ProductOrderReqDTO>> fetchproductOrderList() async {
     try {
       Response<dynamic> response = await dio.get("api/뭐가 들어 올까요? 아직 백에서 안 만듦");
       Logger().d("쇼핑카드야 ${response.data}");
 
       if (response.data != null && response.data is List) {
         List<dynamic> bodyList = response.data as List<dynamic>;
-        List<BeverageOrderReqDTO> beverageOrderList = bodyList
-            .map((e) => BeverageOrderReqDTO.fromJson(e)) // Promotion 모델에 따라 변환
+        List<ProductOrderReqDTO> productOrderList = bodyList
+            .map((e) => ProductOrderReqDTO.fromJson(e)) // Promotion 모델에 따라 변환
             .toList();
         //Logger().d("통신?할게요");
-        return beverageOrderList;
+        return productOrderList;
       } else {
         // 서버 응답이 Promotion 목록이 아닌 경우 처리
         throw Exception("Invalid server response format");

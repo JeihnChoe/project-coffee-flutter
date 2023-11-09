@@ -9,9 +9,9 @@ import 'package:project_coffee/ui/pages/order_page/shopping_cart_beverage_page/s
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
 class ShoppingCartBeveragePage extends StatefulWidget {
-  final List<BeverageOrderReqDTO> beverageOrderList;
+  final List<ProductOrderReqDTO> productOrderList;
 
-  ShoppingCartBeveragePage(this.beverageOrderList, {Key? key})
+  ShoppingCartBeveragePage(this.productOrderList, {Key? key})
       : super(key: key);
 
   @override

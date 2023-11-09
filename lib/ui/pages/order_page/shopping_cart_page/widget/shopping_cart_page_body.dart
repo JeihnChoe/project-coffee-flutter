@@ -19,7 +19,7 @@ class ShoppingCartPageBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     ShoppingCartListModel? model = ref.watch(shoppingCartListProvider);
-    List<BeverageOrderReqDTO> beverageOrderList = model?.beverageOrderList??[];
+    List<ProductOrderReqDTO> beverageOrderList = model?.productOrderList??[];
     // Logger().d("이거 동동그리브다 동동그리브${beverageOrderList.length}");
     // int count = 0;
     // List<int> outlineButtonChange =[];

@@ -7,7 +7,7 @@ import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/store/order_store.dart';
 import 'package:project_coffee/ui/pages/main_page/main_page.dart';
-import 'package:project_coffee/ui/pages/order_page/beverage_detail_page/widget/beverage_detail_cart_bottom_sheet.dart';
+
 import '../../../../../data/model/stroes.dart';
 
 class StoresDetailBottomSheet extends StatefulWidget {

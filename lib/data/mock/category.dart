@@ -6,7 +6,6 @@ ResponseDTO mCategoryListResponseDTO = ResponseDTO(true, _mCategoryList, null);
 
 Category _mCategory = Category(1, "커피", "coffee", 1,
     "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000000038]_20210430113202458.jpg");
-
 List<Category> _mCategoryList = [
   Category(1, "콜드 브루 커피", "coffee", 1,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000000038]_20210430113202458.jpg"),
