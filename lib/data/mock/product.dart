@@ -1,6 +1,6 @@
 import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
-import 'package:project_coffee/data/model/Product.dart';
+import 'package:project_coffee/data/model/product.dart';
 
 import '../model/product_order.dart';
 
@@ -20,6 +20,7 @@ Product _mProduct = Product(
     "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
     1);
 ProductOrder _productOrder = ProductOrder( _mProduct, 1, 2, "1", "1", 505, 9999);
+// ProductDetailResDTO productAndOption = ProductDetailResDTO()
 List<ProductListResDTO> productListResDTO = [
     ProductListResDTO(optionPrice: 8888,product: _mProduct),
     ProductListResDTO(optionPrice: 8888,product: _mProduct),

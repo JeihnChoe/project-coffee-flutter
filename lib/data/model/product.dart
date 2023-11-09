@@ -8,7 +8,6 @@ class Product {
   final String productPicUrl;
   final int category;
 
-
   Product(
       this.id,
       this.productName,

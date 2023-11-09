@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
 
-import 'package:project_coffee/data/model/Product.dart';
+import 'package:project_coffee/data/model/product.dart';
 
 
 import 'widget/product_detail_page_body.dart';

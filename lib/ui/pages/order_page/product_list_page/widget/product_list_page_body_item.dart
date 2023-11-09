@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
-import 'package:project_coffee/data/model/Product.dart';
+import 'package:project_coffee/data/model/product.dart';
 import 'package:project_coffee/ui/pages/order_page/product_detail_page/product_detail_page.dart';
 
 import '../../../../../_core/constants/size.dart';
