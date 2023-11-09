@@ -21,6 +21,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
   List<bool> itemCheckedState = [];
   List<int> itemCounts = [1, 1, 1]; // 각 아이템의 수량을 나타내는 변수
   List<double> itemTotalPrice = [8000, 8000, 8000]; // 각 아이템의 총 가격을 나타내는 변수
+  List<int> itemCheck = [];
 
   @override
   void initState() {
@@ -35,7 +36,9 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
       itemTotalPrice.removeAt(index);
       itemCounts.removeAt(index);
       itemCheckedState.removeAt(index);
-    });
+      itemCheck.remove(index);
+    }
+    );
   }
 
   void removeAllItems() {
@@ -193,8 +196,9 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                   value: itemCheckedState[index],
                                   onChanged: (bool? value) {
                                     setState(() {
-
+                                      itemCheck.add(index);
                                       itemCheckedState[index] = value ?? false;
+                                      Logger().d("${itemCheck.toString()}");
                                     });
                                   },
                                   activeColor: kAccentColor,
@@ -313,11 +317,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
               ],
             ),
           ),
-        )
-,
-
-
-
+        ),
       ],
     );
   }
