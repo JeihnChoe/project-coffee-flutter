@@ -1,4 +1,4 @@
-import 'package:project_coffee/data/model/Product.dart';
+import 'package:project_coffee/data/model/product.dart';
 
 class ProductOrder {
   final Product product;

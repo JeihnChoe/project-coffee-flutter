@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:project_coffee/data/model/Product.dart';
+import 'package:project_coffee/data/model/product.dart';
+
+import '../model/option.dart';
 
 class CategoryReqDTO {
   final int id;
@@ -88,4 +90,18 @@ class ProductOrderReqDTO {
         cup = json["cup"],
         sizePrice = json["sizePrice"],
         totalmoney = json["totalmoney"];
+}
+class ProductDetailResDTO{
+  Product product;
+  Option option;
+
+  ProductDetailResDTO(this.product, this.option);
+
+  Map<String, dynamic> toJson() => {
+  "product" : product,
+  "option" : option,
+  };
+  ProductDetailResDTO.fromJson(Map<String, dynamic> json) :
+      product = json["product"],
+      option = json["option"];
 }

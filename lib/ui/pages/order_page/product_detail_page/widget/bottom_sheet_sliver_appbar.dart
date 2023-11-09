@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_coffee/data/model/Product.dart';
+import 'package:project_coffee/data/model/product.dart';
 
 class BottomSheetSliverAppBar extends StatelessWidget {
   Product product;
