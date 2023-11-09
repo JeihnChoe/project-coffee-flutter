@@ -4,7 +4,8 @@ import 'package:project_coffee/data/model/beverage_order.dart';
 
 ResponseDTO mBeverageResponseDTO = ResponseDTO(true, _mBeverage, null,);
 ResponseDTO mBeverageListResponseDTO = ResponseDTO(true, _mBeverageList, null);
-ResponseDTO mBeverageOrderResponseDTO = ResponseDTO(true, _beverageOrder, null);
+ResponseDTO mBeverageOrderResponseDTO = ResponseDTO(true, _mbeverageOrder, null);
+ResponseDTO mBeverageOrderListResponseDTO = ResponseDTO(true, _mbeverageOrderList, null);
 
 Beverage _mBeverage = Beverage(
     1,
@@ -14,9 +15,35 @@ Beverage _mBeverage = Beverage(
     "디카페인결제시 300원 추가됩니다.",
     0,
     "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
-    1,7777);
-
-BeverageOrder _beverageOrder = BeverageOrder(_mBeverage, 1, 2, 1, 1,505,9999);
+    1,
+    7777);
+BeverageOrder _mbeverageOrder = BeverageOrder( _mBeverage, 1, 2, "1", "1", 505, 9999);
+List<BeverageOrder> _mbeverageOrderList = [
+  BeverageOrder(
+      _mBeverage,
+      1,
+      2,
+      "1",
+      "1",
+      505,
+      9999),
+  BeverageOrder(
+      _mBeverage,
+      1,
+      2,
+      "1",
+      "1",
+      505,
+      9999),
+  BeverageOrder(
+      _mBeverage,
+      1,
+      2,
+      "1",
+      "1",
+      505,
+      9999),
+];
 
 
 List<Beverage> _mBeverageList = [
@@ -28,7 +55,8 @@ List<Beverage> _mBeverageList = [
       "디카페인결제시 300원 추가됩니다.",
       2,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
-      1,1),
+      1,
+      1),
   Beverage(
       2,
       "바닐라 크림 콜드 브루",
@@ -37,7 +65,8 @@ List<Beverage> _mBeverageList = [
       "디카페인결제시 300원 추가됩니다.",
       0,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
-      1,8888),
+      1,
+      8888),
   Beverage(
       3,
       "바닐라 크림 콜드 브루",
@@ -46,7 +75,8 @@ List<Beverage> _mBeverageList = [
       "디카페인결제시 300원 추가됩니다.",
       0,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
-      1,9999),
+      1,
+      9999),
   Beverage(
       4,
       "돌체 콜드 브루",
@@ -55,7 +85,8 @@ List<Beverage> _mBeverageList = [
       "디카페인결제시 300원 추가됩니다.",
       1,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
-      2,10000),
+      2,
+      10000),
   Beverage(
       5,
       "에스프레소 콘 파나",
@@ -64,7 +95,8 @@ List<Beverage> _mBeverageList = [
       "디카페인결제시 300원 추가됩니다.",
       2,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[30]_20210415144252425.jpg",
-      3,1),
+      3,
+      1),
   Beverage(
       6,
       "에스프레소 콘 마끼아또",
@@ -73,5 +105,6 @@ List<Beverage> _mBeverageList = [
       "디카페인결제시 300원 추가됩니다.",
       1,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[25]_20210415144211211.jpg",
-      3,15),
+      3,
+      15),
 ];

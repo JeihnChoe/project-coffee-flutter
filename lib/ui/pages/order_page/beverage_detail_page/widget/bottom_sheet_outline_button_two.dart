@@ -4,13 +4,13 @@ import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
 
-class BottomSheetOutlineButton extends StatefulWidget {
+class BottomSheetOutlineButtonTwo extends StatefulWidget {
   final BeverageOrderReqDTO beverageOrderReqDTO;
   int selectedTabMethod;
   int count;
   final ValueChanged<int> onStateChange;
 
-  BottomSheetOutlineButton(
+  BottomSheetOutlineButtonTwo(
       {required this.beverageOrderReqDTO,required this.selectedTabMethod,required this.count,required this.onStateChange});
 
   int submit(int selectedPayment) {
@@ -19,24 +19,20 @@ class BottomSheetOutlineButton extends StatefulWidget {
   }
 
   @override
-  State<BottomSheetOutlineButton> createState() =>
+  State<BottomSheetOutlineButtonTwo> createState() =>
       _BottomSheetOutlineButtonState();
 }
 
-class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
-  int selectedPayment = 1;
-  int zeroprice= 0;
-  int oneprice= 1;
-  int twoprice= 2;
-  int threeprice= 3;
+class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButtonTwo> {
+  int selectedPayment = 6;
+  int zeroprice= 6;
+  int oneprice= 7;
 
   @override
   void initState() {
     selectedPayment = selectedPayment;
-    zeroprice = widget.beverageOrderReqDTO.beverage.price-500;
-    oneprice= widget.beverageOrderReqDTO.beverage.price;
-    twoprice= widget.beverageOrderReqDTO.beverage.price+500;
-    threeprice= widget.beverageOrderReqDTO.beverage.price+1000;
+    zeroprice = widget.beverageOrderReqDTO.beverage.price;
+    oneprice= widget.beverageOrderReqDTO.beverage.price+500;
     super.initState();
   }
 
@@ -44,7 +40,7 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButton> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        if (widget.beverageOrderReqDTO.isIced == 0)
+        if (widget.beverageOrderReqDTO.isIced == 1)
           Expanded(
             child: OutlinedButton(
               onPressed: () {

@@ -7,6 +7,7 @@ import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/data/model/beverage.dart';
+import 'package:project_coffee/ui/pages/order_page/beverage_detail_page/widget/bottom_sheet_outline_button_two.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/shopping_cart_page.dart';
 import 'package:project_coffee/data/store/order_store.dart';
 import 'package:project_coffee/ui/pages/main_page/main_page.dart';
@@ -15,7 +16,7 @@ import 'package:project_coffee/ui/widgets/custom_alert_window.dart';
 import 'package:project_coffee/ui/widgets/custom_green_button.dart';
 import 'package:project_coffee/ui/widgets/custom_white_button.dart';
 
-import 'bottom_sheet_outline_button.dart';
+import 'bottom_sheet_outline_button_one.dart';
 import 'bottom_sheet_sliver_appbar.dart';
 
 class BeverageDetailBottomSheet extends StatefulWidget {
@@ -53,13 +54,14 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
     widget.beverageOrderReqDTO.cup = 1;
     widget.beverageOrderReqDTO.count = 1;
     widget.beverageOrderReqDTO.totalmoney = widget.beverageOrderReqDTO.beverage.price;
+    widget.beverageOrderReqDTO.sizePrice = widget.beverageOrderReqDTO.beverage.price;
+
     Logger().d(widget.beverageOrderReqDTO.isIced);
   }
 
   void updateChildState(int newValue) {
     setState(() {
       outlinbuttonchange = newValue;
-      Logger().d("dfjbhaejhfbkawbf ${widget.beverageOrderReqDTO.sizePrice}");
     });
   }
 
@@ -110,11 +112,18 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                     SizedBox(
                       height: 16,
                     ),
-                    BottomSheetOutlineButton(
+                    if(widget.beverageOrderReqDTO.beverage.category == 3)
+            BottomSheetOutlineButtonTwo(
+            beverageOrderReqDTO: widget.beverageOrderReqDTO,  // DTO보내기
+            selectedTabMethod : outlinbuttonchange,
+            count : count,
+            onStateChange: updateChildState,) //디폴트 값
+                      else
+                      BottomSheetOutlineButtonOne(
                         beverageOrderReqDTO: widget.beverageOrderReqDTO,  // DTO보내기
                         selectedTabMethod : outlinbuttonchange,
-                      count : count,
-                      onStateChange: updateChildState,), //디폴트 값
+                        count : count,
+                        onStateChange: updateChildState,), //디폴트 값
                     SizedBox(
                       height: gap_l,
                     ),
@@ -288,7 +297,7 @@ class BeverageDetailBottomSheetState extends State<BeverageDetailBottomSheet> {
                   Consumer(builder: (context, ref, child) {
                     return OutlinedButton(
                       onPressed: () {
-                        ref.read(beverageProvider).cart(widget.beverageOrderReqDTO);
+                        ref.read(beverageProvider).cart(context,widget.beverageOrderReqDTO);
                         showModalBottomSheet(
                           context: context,
                           isScrollControlled: true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.

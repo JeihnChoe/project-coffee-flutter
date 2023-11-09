@@ -1,29 +1,38 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/model/beverage.dart';
 import 'package:project_coffee/data/repository/beverage_repostory.dart';
-import 'package:project_coffee/main.dart';
+import 'package:project_coffee/ui/pages/order_page/beverage_detail_page/widget/beverage_detail_cart_bottom_sheet.dart';
 
-class BeverageModel{
+class BeverageModel {
   Beverage? beverage;
   BeverageModel({this.beverage});
 }
 
 class BeverageStore extends BeverageModel {
-  final mContext = navigatorKey.currentContext;
+  BeverageStore();
 
-  Future<void> cart(BeverageOrderReqDTO beverageOrderReqDTO) async{
+  Future<void> cart(BuildContext context, BeverageOrderReqDTO beverageOrderReqDTO) async {
+    Logger().d("여기 오냐 ?");
     ResponseDTO responseDTO = await BeverageRepository().fetchBeverageCartSave(beverageOrderReqDTO);
-    // Navigator.pushNamed(mContext!, Move.PayMainPage);
+    if (responseDTO.success == true) {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (context) {
+          return FractionallySizedBox(
+            heightFactor: 0.20,
+            child: BeverageDetailCartBottomSheet(beverageOrderReqDTO: beverageOrderReqDTO),
+          );
+        },
+      );
+    }
   }
-
 }
 
-//창고 관리자
 final beverageProvider = Provider<BeverageStore>((ref) {
   return BeverageStore();
 });
