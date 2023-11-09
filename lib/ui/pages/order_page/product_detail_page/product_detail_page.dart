@@ -14,7 +14,6 @@ import 'widget/bottom_sheet_outline_button_one.dart';
 
 class ProductDetailPage extends StatelessWidget {
   Product product;
-
   ProductDetailPage(this.product);
 
   @override

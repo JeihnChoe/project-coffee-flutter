@@ -7,13 +7,13 @@ import 'package:project_coffee/data/model/Product.dart';
 import 'package:project_coffee/data/repository/beverage_repostory.dart';
 import 'package:project_coffee/ui/pages/order_page/product_detail_page/widget/product_detail_cart_bottom_sheet.dart';
 
-class BeverageModel {
-  Product? beverage;
-  BeverageModel({this.beverage});
+class ProductModel {
+  Product? product;
+  ProductModel({this.product});
 }
 
-class BeverageStore extends BeverageModel {
-  BeverageStore();
+class ProductStore extends ProductModel {
+  // ProductStore();
 
   Future<void> cart(BuildContext context, ProductOrderReqDTO productOrderReqDTO) async {
     Logger().d("여기 오냐 ?");
@@ -33,6 +33,6 @@ class BeverageStore extends BeverageModel {
   }
 }
 
-final beverageProvider = Provider<BeverageStore>((ref) {
-  return BeverageStore();
+final beverageProvider = Provider<ProductStore>((ref) {
+  return ProductStore();
 });
