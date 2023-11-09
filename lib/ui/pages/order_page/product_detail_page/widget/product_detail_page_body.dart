@@ -5,20 +5,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
-import 'package:project_coffee/data/model/beverage.dart';
+import 'package:project_coffee/data/model/Product.dart';
 
-import 'beverage_outline_button.dart';
+import 'product_outline_button.dart';
 
-class BeverageDetailPageBody extends StatelessWidget {
-  BeverageOrderReqDTO beverageOrderReqDTO;
-  BeverageDetailPageBody(this.beverageOrderReqDTO);
+class ProductDetailPageBody extends StatelessWidget {
+  ProductOrderReqDTO productOrderReqDTO;
+  ProductDetailPageBody(this.productOrderReqDTO);
 
   @override
   Widget build(BuildContext context) {
-    if(beverageOrderReqDTO.beverage.hotIce == 0){
-      beverageOrderReqDTO.isIced = 0;
-    }else if(beverageOrderReqDTO.beverage.hotIce == 1){
-      beverageOrderReqDTO.isIced = 1;
+    if(productOrderReqDTO.product.hotIce == 0){
+      productOrderReqDTO.isIced = 0;
+    }else if(productOrderReqDTO.product.hotIce == 1){
+      productOrderReqDTO.isIced = 1;
     }
 
     // ProductDetailModel? model = ref.watch(productDetailProvider);
@@ -29,58 +29,58 @@ class BeverageDetailPageBody extends StatelessWidget {
 
     return CustomScrollView(
       slivers: [
-        _appbar(beverageOrderReqDTO.beverage),
-        _body(beverageOrderReqDTO),
+        _appbar(productOrderReqDTO.product),
+        _body(productOrderReqDTO),
       ],
     );
   }
 }
 
-SliverPadding _body(BeverageOrderReqDTO beverageOrderReqDTO) {
+SliverPadding _body(ProductOrderReqDTO productOrderReqDTO) {
   return SliverPadding(
     padding: EdgeInsets.all(16.0), // 패딩 설정
     sliver: SliverToBoxAdapter(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          textTitle1("${beverageOrderReqDTO.beverage.beverageName}"),
-          textBody2("${beverageOrderReqDTO.beverage.beverageEngName}"),
+          textTitle1("${productOrderReqDTO.product.productName}"),
+          textBody2("${productOrderReqDTO.product.productEngName}"),
           SizedBox(height: 10),
           textBody1(
-            "${beverageOrderReqDTO.beverage.beverageDescription}",
+            "${productOrderReqDTO.product.productDescription}",
           ),
           SizedBox(height: 10),
-          textTitle1("${beverageOrderReqDTO.beverage.price}원"),
+          // textTitle1("${productOrderReqDTO.beverage.price}원"),
           SizedBox(height: 10),
-          if (beverageOrderReqDTO.beverage.hotIce==0)
+          if (productOrderReqDTO.product.hotIce==0)
             Row(
               children: [
                 Expanded(
-                    child:BeverageOutlineButton ("HOT", kActiveColor2,beverageOrderReqDTO,false)),
+                    child:ProductOutlineButton ("HOT", kActiveColor2,productOrderReqDTO,false)),
 
               ],
             )
-          else if(beverageOrderReqDTO.beverage.hotIce == 1)
+          else if(productOrderReqDTO.product.hotIce == 1)
             Row(
               children: [
-                Expanded(child: BeverageOutlineButton("ICED ONLY", kActiveColor1,beverageOrderReqDTO,true)),
+                Expanded(child: ProductOutlineButton("ICED ONLY", kActiveColor1,productOrderReqDTO,true)),
               ],
             )
-          else if(beverageOrderReqDTO.beverage.hotIce == 2)
+          else if(productOrderReqDTO.product.hotIce == 2)
               Row(
                 children: [
-                  Expanded(child: BeverageOutlineButton("HOT", kActiveColor2,beverageOrderReqDTO,false)),
-                  Expanded(child: BeverageOutlineButton("ICE", kActiveColor1,beverageOrderReqDTO,true)),
+                  Expanded(child: ProductOutlineButton("HOT", kActiveColor2,productOrderReqDTO,false)),
+                  Expanded(child: ProductOutlineButton("ICE", kActiveColor1,productOrderReqDTO,true)),
                 ],
               ),
 
           SizedBox(height: 10),
-          if(beverageOrderReqDTO.beverage.hotIce != 3)
+          if(productOrderReqDTO.product.hotIce != 3)
           Container(
             padding: EdgeInsets.all(10),
             width: double.infinity,
             color: Colors.grey[100],
-            child: textBody3("${beverageOrderReqDTO.beverage.beverageTip}"),
+            child: textBody3("${productOrderReqDTO.product.productTip}"),
           ),
           // SizedBox(height: 1000),
         ],
@@ -89,7 +89,7 @@ SliverPadding _body(BeverageOrderReqDTO beverageOrderReqDTO) {
   );
 }
 
-SliverAppBar _appbar(Beverage beverage) {
+SliverAppBar _appbar(Product product) {
   return SliverAppBar(
     pinned: true,
     elevation: 0.0,
@@ -111,13 +111,13 @@ SliverAppBar _appbar(Beverage beverage) {
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               image: DecorationImage(
-                  image: NetworkImage("${beverage.beveragePicUrl}"),
+                  image: NetworkImage("${product.productPicUrl}"),
                   fit: BoxFit.cover),
             ),
           ),
           title: isCollapsed
               ? Text(
-            '${beverage.beverageName}',
+            '${product.productName}',
             style: TextStyle(color: Colors.black),
           )
               : null,

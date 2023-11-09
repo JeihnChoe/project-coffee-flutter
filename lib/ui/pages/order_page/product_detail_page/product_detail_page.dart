@@ -5,23 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
 
-import 'package:project_coffee/data/model/beverage.dart';
+import 'package:project_coffee/data/model/Product.dart';
 
 
-import 'widget/beverage_detail_page_body.dart';
-import 'widget/beverage_detail_bottom_sheet.dart';
+import 'widget/product_detail_page_body.dart';
+import 'widget/product_detail_bottom_sheet.dart';
 import 'widget/bottom_sheet_outline_button_one.dart';
 
-class BeverageDetailPage extends StatelessWidget {
-  final Beverage beverage;
+class ProductDetailPage extends StatelessWidget {
+  Product product;
 
-  BeverageDetailPage(this.beverage);
+  ProductDetailPage(this.product);
 
   @override
   Widget build(BuildContext context) {
-    BeverageOrderReqDTO beverageOrderReqDTO = BeverageOrderReqDTO(beverage: beverage,);
+    ProductOrderReqDTO productOrderReqDTO = ProductOrderReqDTO(product: product);
     return Scaffold(
-      body: BeverageDetailPageBody(beverageOrderReqDTO),
+      body: ProductDetailPageBody(productOrderReqDTO),
       persistentFooterButtons: [
         TextButton(
           style: TextButton.styleFrom(
@@ -37,8 +37,8 @@ class BeverageDetailPage extends StatelessWidget {
               isScrollControlled: true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
               builder: (context) {
                 return FractionallySizedBox(
-                  heightFactor: 0.95, // 높이를 90%로 설정
-                  child: BeverageDetailBottomSheet(beverageOrderReqDTO: beverageOrderReqDTO),
+                  heightFactor: 0.90, // 높이를 90%로 설정
+                  child: ProductDetailBottomSheet(productOrderReqDTO: productOrderReqDTO),
                 );
               },
             );

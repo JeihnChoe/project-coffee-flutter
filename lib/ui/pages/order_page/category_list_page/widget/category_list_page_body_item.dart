@@ -3,8 +3,9 @@ import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/category.dart';
+import 'package:project_coffee/ui/pages/order_page/product_list_page/product_list_page.dart';
 
-import '../../beverage_list_page/beverage_list_page.dart';
+
 
 class CategoryListPageBodyItem extends StatelessWidget {
   Category category;
@@ -19,7 +20,7 @@ class CategoryListPageBodyItem extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => BeverageListPage(category)));
+                  builder: (context) => ProductListPage(category)));
         },
         child: Padding(
           padding: const EdgeInsets.only(top: 5,bottom: 15, right: 16),

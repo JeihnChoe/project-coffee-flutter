@@ -17,7 +17,7 @@ class CategoryConsumer extends StatelessWidget {
       builder: (context, ref, child) {
         CategoryListModel? model = ref.watch(CategoryListProvider);
         List<Category> categoryList = model?.categoryList ?? [];
-        final code1Items = categoryList.where((item) => item.code == code).toList();
+        final codeItems = categoryList.where((item) => item.code == code).toList();
         return CustomScrollView(
           slivers: [
             SliverPadding(
@@ -25,8 +25,8 @@ class CategoryConsumer extends StatelessWidget {
               sliver: SliverList(
                 delegate: SliverChildBuilderDelegate(
                       (context, index) =>
-                      CategoryListPageBodyItem(code1Items[index]),
-                  childCount: code1Items.length,
+                      CategoryListPageBodyItem(codeItems[index]),
+                  childCount: codeItems.length,
                 ),
               ),
             ),

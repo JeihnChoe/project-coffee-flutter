@@ -6,10 +6,8 @@ import 'package:project_coffee/main.dart';
 
 class CategoryListModel {
   List<Category> categoryList;
-
   CategoryListModel(this.categoryList);
 }
-
 //창고
 class CategoryListViewModel extends StateNotifier<CategoryListModel?> {
   final mContext = navigatorKey.currentContext;
@@ -20,11 +18,8 @@ class CategoryListViewModel extends StateNotifier<CategoryListModel?> {
     ResponseDTO responseDTO =
     await CategoryRepository().fetchCategoryDetailList();
     state = CategoryListModel(responseDTO.response);
-
-
   }
 }
-
 //창고관리자
 final CategoryListProvider =
 StateNotifierProvider<CategoryListViewModel, CategoryListModel?>((ref) {

@@ -1,13 +1,15 @@
 import 'package:project_coffee/data/dto/reponse_dto.dart';
-import 'package:project_coffee/data/model/beverage.dart';
-import 'package:project_coffee/data/model/beverage_order.dart';
+import 'package:project_coffee/data/model/Product.dart';
 
-ResponseDTO mBeverageResponseDTO = ResponseDTO(true, _mBeverage, null,);
-ResponseDTO mBeverageListResponseDTO = ResponseDTO(true, _mBeverageList, null);
-ResponseDTO mBeverageOrderResponseDTO = ResponseDTO(true, _mbeverageOrder, null);
-ResponseDTO mBeverageOrderListResponseDTO = ResponseDTO(true, _mbeverageOrderList, null);
+import '../model/beverage_order.dart';
 
-Beverage _mBeverage = Beverage(
+
+ResponseDTO mProductResponseDTO = ResponseDTO(true, _mProduct, null,);
+ResponseDTO mProductListResponseDTO = ResponseDTO(true, _mProductList, null);
+ResponseDTO mProductOrderResponseDTO = ResponseDTO(true, _productOrder, null);
+ResponseDTO mProductOrderListResponseDTO = ResponseDTO(true, _mproductOrderList, null);
+
+Product _mProduct = Product(
     1,
     "나이트로바닐라크림",
     "Nitro Vanilla Cream",
@@ -15,28 +17,27 @@ Beverage _mBeverage = Beverage(
     "디카페인결제시 300원 추가됩니다.",
     0,
     "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
-    1,
-    7777);
-BeverageOrder _mbeverageOrder = BeverageOrder( _mBeverage, 1, 2, "1", "1", 505, 9999);
-List<BeverageOrder> _mbeverageOrderList = [
-  BeverageOrder(
-      _mBeverage,
+    1);
+ProductOrder _productOrder = ProductOrder( _mProduct, 1, 2, "1", "1", 505, 9999);
+List<ProductOrder> _mproductOrderList = [
+  ProductOrder(
+      _mProduct,
       1,
       2,
       "1",
       "1",
       505,
       9999),
-  BeverageOrder(
-      _mBeverage,
+  ProductOrder(
+      _mProduct,
       1,
       2,
       "1",
       "1",
       505,
       9999),
-  BeverageOrder(
-      _mBeverage,
+  ProductOrder(
+      _mProduct,
       1,
       2,
       "1",
@@ -46,8 +47,8 @@ List<BeverageOrder> _mbeverageOrderList = [
 ];
 
 
-List<Beverage> _mBeverageList = [
-  Beverage(
+List<Product> _mProductList = [
+  Product(
       1,
       "나이트로바닐라크림",
       "Nitro Vanilla Cream",
@@ -55,9 +56,8 @@ List<Beverage> _mBeverageList = [
       "디카페인결제시 300원 추가됩니다.",
       2,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
-      1,
-      1),
-  Beverage(
+      1,),
+  Product(
       2,
       "바닐라 크림 콜드 브루",
       "Vanilla Cream Cold Brew",
@@ -65,9 +65,8 @@ List<Beverage> _mBeverageList = [
       "디카페인결제시 300원 추가됩니다.",
       0,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
-      1,
-      8888),
-  Beverage(
+      1,),
+  Product(
       3,
       "바닐라 크림 콜드 브루",
       "Vanilla Cream Cold Brew",
@@ -75,9 +74,8 @@ List<Beverage> _mBeverageList = [
       "디카페인결제시 300원 추가됩니다.",
       0,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
-      1,
-      9999),
-  Beverage(
+      1),
+  Product(
       4,
       "돌체 콜드 브루",
       "Dolche Cold Brew",
@@ -85,9 +83,8 @@ List<Beverage> _mBeverageList = [
       "디카페인결제시 300원 추가됩니다.",
       1,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
-      2,
-      10000),
-  Beverage(
+      2,),
+  Product(
       5,
       "에스프레소 콘 파나",
       "Espresso Con Panna",
@@ -96,8 +93,8 @@ List<Beverage> _mBeverageList = [
       2,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[30]_20210415144252425.jpg",
       3,
-      1),
-  Beverage(
+      ),
+  Product(
       6,
       "에스프레소 콘 마끼아또",
       "Espresso Macchiato",
@@ -106,5 +103,5 @@ List<Beverage> _mBeverageList = [
       1,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[25]_20210415144211211.jpg",
       3,
-      15),
+      ),
 ];

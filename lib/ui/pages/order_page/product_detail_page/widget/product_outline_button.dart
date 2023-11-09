@@ -3,23 +3,23 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
 
-class BeverageOutlineButton extends StatefulWidget {
+class ProductOutlineButton extends StatefulWidget {
   String text;
   Color mColor;
-  BeverageOrderReqDTO beverageOrderReqDTO;
+  ProductOrderReqDTO productOrderReqDTO;
   bool isIced;
-  BeverageOutlineButton(
+  ProductOutlineButton(
       this.text,
-      this.mColor, this.beverageOrderReqDTO,this.isIced,{
+      this.mColor, this.productOrderReqDTO,this.isIced,{
         super.key,
       });
 
 
   @override
-  State<BeverageOutlineButton> createState() => _BeverageOutlineButtonState();
+  State<ProductOutlineButton> createState() => _ProductOutlineButtonState();
 }
 
-class _BeverageOutlineButtonState extends State<BeverageOutlineButton> {
+class _ProductOutlineButtonState extends State<ProductOutlineButton> {
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +28,12 @@ class _BeverageOutlineButtonState extends State<BeverageOutlineButton> {
       onPressed: () {
         setState(() {
           if(widget.isIced == true){
-            widget.beverageOrderReqDTO.isIced = 0;
-            Logger().d("이거 값 보여줭${widget.beverageOrderReqDTO.isIced}");
+            widget.productOrderReqDTO.isIced = 0;
+            Logger().d("이거 값 보여줭${widget.productOrderReqDTO.isIced}");
           }  else{
 
-            widget.beverageOrderReqDTO.isIced = 1;
-            Logger().d("이거 값 보여줭${widget.beverageOrderReqDTO.isIced}");
+            widget.productOrderReqDTO.isIced = 1;
+            Logger().d("이거 값 보여줭${widget.productOrderReqDTO.isIced}");
           }
         });
       },

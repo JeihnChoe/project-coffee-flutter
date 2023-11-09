@@ -10,17 +10,11 @@ import 'package:project_coffee/ui/widgets/custom_tab_bar.dart';
 import 'category_list_page_app_bar.dart';
 import 'category_list_page_custom_nested_tab_bar.dart';
 
-class CategoryListPageBody extends ConsumerWidget {
+class CategoryListPageBody extends StatelessWidget {
   const CategoryListPageBody({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    CategoryListModel? model = ref.watch(CategoryListProvider);
-    List<Category> categoryList = [];
-
-    if (model != null) {
-      categoryList = model.categoryList;
-    }
+  Widget build(BuildContext context) {
 
     return DefaultTabController(
       length: 2,
@@ -37,7 +31,7 @@ class CategoryListPageBody extends ConsumerWidget {
               child: TabBarView(children: [
                 CustomNestedTabBar("푸드"),
                 Center(
-                  child: Text("푸드"),
+                  child: Text("나만의 메뉴"),
                 )
               ]),
             )
