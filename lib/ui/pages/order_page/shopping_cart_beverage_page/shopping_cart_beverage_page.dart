@@ -285,8 +285,7 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                         children: [
                                           IconButton(
                                             onPressed: () {
-                                              if (itemCheckedState[index] &&
-                                                  itemCounts[index] > 1) {
+                                              if (itemCounts[index] > 1) {
                                                 setState(() {
                                                   itemCounts[index]--;
                                                   itemTotalPrice[index] -= 8000;
@@ -299,17 +298,12 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                                             acc + itemCount);
                                                 if (totalItemCount > 20) {
                                                   showAlertDialog(context);
-                                                  setState(() {
-                                                    itemCheckedState[index] =
-                                                        false; // 해당 아이템 선택 해제
-                                                  });
                                                 }
                                               }
                                             },
                                             icon: Icon(
                                                 CupertinoIcons.minus_circle),
-                                            color: (itemCheckedState[index] &&
-                                                    itemCounts[index] > 1)
+                                            color: (itemCounts[index] > 1)
                                                 ? Colors.black
                                                 : Colors.grey,
                                           ),
