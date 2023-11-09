@@ -35,7 +35,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "${paycard.cardName}",
+                  "${paycard.name}",
                   style: TextStyle(
                     color: Colors.black87,
                     fontWeight: FontWeight.bold,
@@ -242,7 +242,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
       children: [
         textBody1("카드잔액"),
         SizedBox(width: gap_s),
-        textTitle0("${paycard.cardMoney}원"),
+        textTitle0("${paycard.money}원"),
       ],
     );
   }
@@ -255,7 +255,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.black12),
         image: DecorationImage(
-          image: NetworkImage("${paycard.cardPicUrl}"),
+          image: NetworkImage("${paycard.picUrl}"),
           fit: BoxFit.cover,
         ),
       ),
@@ -273,7 +273,7 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
             title: textTitle2("카드 이름을 입력해주세요."),
             content: TextFormField(
               obscureText: false,
-              decoration: InputDecoration(hintText: "${paycard.cardName}"),
+              decoration: InputDecoration(hintText: "${paycard.name}"),
             ),
             actionsPadding:
                 EdgeInsets.symmetric(horizontal: 20, vertical: 10), // 버튼 여백 조절
@@ -302,14 +302,14 @@ class PayCardDetailPageBodyItem extends StatelessWidget {
                 style: DefaultTextStyle.of(context).style,
                 children: <TextSpan>[
                   TextSpan(
-                    text: "카드 잔액:${paycard.cardMoney}원\n\n",
+                    text: "카드 잔액:${paycard.money}원\n\n",
                     style: TextStyle(
-                        color: paycard.cardMoney > 0
+                        color: paycard.money > 0
                             ? kAccentColor
                             : Colors.black), // 잔액이 있을 때는 초록색, 없을 때는 검정색
                   ),
                   TextSpan(
-                    text: paycard.cardMoney > 0
+                    text: paycard.money > 0
                         ? '현재 카드에 잔액이 있습니다.\n해지 하겠습니까?'
                         : '카드를 정말 해지하시겠습니까?',
                   ),

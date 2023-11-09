@@ -1,21 +1,23 @@
 class PayCard {
   final int id;
-  final String cardPicUrl;
-  final String cardName;
-  final int cardMoney;
-  final int cardNumber;
-  final int pinNumber;
-  final String cardCreatedAt;
+  final String picUrl;
+  final String name;
+  final int money;
+  final int? userId;
+  int? number;
+  int? pinNumber;
+  String? createdAt;
 
-  PayCard(this.id, this.cardPicUrl, this.cardName, this.cardMoney,
-      this.cardNumber, this.pinNumber, this.cardCreatedAt);
+  PayCard(this.id, this.picUrl, this.name, this.money, this.userId, this.number,
+      this.pinNumber, this.createdAt);
 
   PayCard.fromjson(Map<String, dynamic> json)
       : id = json["id"],
-        cardPicUrl = json["cardPicUrl"],
-        cardName = json["cardName"],
-        cardMoney = json["cardMoney"],
-        cardNumber = json["cardNumber"],
+        picUrl = json["picUrl"],
+        name = json["name"],
+        money = json["money"],
+        userId = json["userId"],
+        number = json["number"],
         pinNumber = json["pinNumber"],
-        cardCreatedAt = json["cardCreatedAt"];
+        createdAt = json["createdAt"];
 }
