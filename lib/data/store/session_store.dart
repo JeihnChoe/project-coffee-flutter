@@ -38,11 +38,10 @@ class SessionStore extends SessionUser {
 
   Future<void> login(LoginReqDTO loginReqDTO) async {
     // 1. 통신 코드
-    Logger().d("그래 여긴 오겠지{}");
     ResponseDTO responseDTO = await UserRepository().fetchLogin(loginReqDTO);
-
+    Logger().d("값을 고해 보거라 왜 폴스라떠 ? ${responseDTO}");
     // 2. 비지니스 로직
-    if (responseDTO.response == 1) {
+    if (responseDTO.success == true) {
       // 1. 세션값 갱신
       this.user = responseDTO.response as User;
       this.jwt = responseDTO.token;
