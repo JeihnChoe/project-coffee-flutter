@@ -11,6 +11,7 @@ class ProductRepository {
   }
 
   Future<ResponseDTO> fetchproductDetailList() {
+
     return Future.delayed(Duration(seconds: 3), () => mProductListResponseDTO);
   }
 
@@ -18,13 +19,10 @@ class ProductRepository {
       ProductOrderReqDTO productOrderReqDTO) async {
     try {
       // dynamic -> http body
-      Logger().d("여기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ인");
       Response<dynamic> response =
           await dio.post("/api/carts/addCartList", data: productOrderReqDTO.toJson());
-      Logger().d("여기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ인");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       //  responseDTO.response = User.fromJson(responseDTO.response);
-      Logger().d("여기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ인");
       return responseDTO;
     } catch (e) {
       // 200이 아니면 catch로 감

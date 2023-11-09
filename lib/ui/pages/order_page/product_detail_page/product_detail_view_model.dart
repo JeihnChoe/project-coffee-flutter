@@ -3,7 +3,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:project_coffee/data/model/Product.dart';
-import 'package:project_coffee/data/model/beverage_order.dart';
+import 'package:project_coffee/data/model/product_order.dart';
 import 'package:project_coffee/data/repository/beverage_repostory.dart';
 import 'package:project_coffee/main.dart';
 

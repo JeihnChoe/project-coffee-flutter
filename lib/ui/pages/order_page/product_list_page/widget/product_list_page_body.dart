@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/data/model/category.dart';
 
 import 'package:project_coffee/ui/widgets/custom_sliver_app_bar.dart';
@@ -17,6 +18,7 @@ class ProductListPageBody extends ConsumerWidget {
     final productList = model?.productListResDTO ?? [];
 
     final indexItems = productList.where((item) => item.product.category == category.id).toList();
+    // Logger().d("너가 나오는거니 ?1111111111111111111111${indexItems[0]}");
         // productList..where((item) => item.category == category.id).toList();
 
     return CustomScrollView(
@@ -28,7 +30,7 @@ class ProductListPageBody extends ConsumerWidget {
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) =>
-                  CategoryBeverageListPageBodyItem(indexItems[index]),
+                  CategoryProductListPageBodyItem(indexItems[index]),
               childCount: indexItems.length,
             ),
           ),
