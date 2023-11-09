@@ -310,17 +310,18 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartBeveragePage> {
                                           Text("${itemCounts[index]}"),
                                           IconButton(
                                             onPressed: () {
-                                              setState(() {
-                                                itemCounts[index]++;
-                                                itemTotalPrice[index] += 8000;
-                                                updateTotalPrice();
-                                              });
                                               int totalItemCount =
                                                   itemCounts.fold(
                                                       0,
                                                       (acc, itemCount) =>
                                                           acc + itemCount);
-                                              if (totalItemCount > 20) {
+                                              if (totalItemCount < 20) {
+                                                setState(() {
+                                                  itemCounts[index]++;
+                                                  itemTotalPrice[index] += 8000;
+                                                  updateTotalPrice();
+                                                });
+                                              } else {
                                                 showAlertDialog(context);
                                               }
                                             },
