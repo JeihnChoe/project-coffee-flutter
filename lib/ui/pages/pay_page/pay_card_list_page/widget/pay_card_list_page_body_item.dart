@@ -82,7 +82,7 @@ class PayCardListPageBodyItem extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(color: Colors.black12),
                                 image: DecorationImage(
-                                  image: NetworkImage("${card.cardPicUrl}"),
+                                  image: NetworkImage("${card.picUrl}"),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -93,10 +93,10 @@ class PayCardListPageBodyItem extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 textTitle2(
-                                  "${card.cardName}",
+                                  "${card.name}",
                                 ),
                                 SizedBox(height: gap_m),
-                                textBody3("${card.cardMoney}")
+                                textBody3("${card.money}")
                               ],
                             ),
                           ],

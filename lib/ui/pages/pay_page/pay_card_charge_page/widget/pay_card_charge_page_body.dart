@@ -26,20 +26,20 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
 
   void sum(String text) {
     if (text == "1만원") {
-      total = 10000 + widget.paycard.cardMoney;
+      total = 10000 + widget.paycard.money;
       print(total);
     } else if (text == "3만원") {
-      total = 30000 + widget.paycard.cardMoney;
-      print(widget.paycard.cardMoney);
+      total = 30000 + widget.paycard.money;
+      print(widget.paycard.money);
     } else if (text == "5만원") {
-      total = 50000 + widget.paycard.cardMoney;
-      print(widget.paycard.cardMoney);
+      total = 50000 + widget.paycard.money;
+      print(widget.paycard.money);
     } else if (text == "7만원") {
-      total = 70000 + widget.paycard.cardMoney;
-      print(widget.paycard.cardMoney);
+      total = 70000 + widget.paycard.money;
+      print(widget.paycard.money);
     } else if (text == "10만원") {
-      total = 100000 + widget.paycard.cardMoney;
-      print(widget.paycard.cardMoney);
+      total = 100000 + widget.paycard.money;
+      print(widget.paycard.money);
     } else if (text == "다른 금액") {
       showCustomAmountDialog();
     }
@@ -64,7 +64,7 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: Colors.black12),
                         image: DecorationImage(
-                          image: NetworkImage("${widget.paycard.cardPicUrl}"),
+                          image: NetworkImage("${widget.paycard.picUrl}"),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -75,9 +75,9 @@ class _PayCardChargePageBodyState extends State<PayCardChargePageBody> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         textBody1(""),
-                        textBody1("${widget.paycard.cardName}"),
+                        textBody1("${widget.paycard.name}"),
                         SizedBox(width: gap_s),
-                        textTitle2("${widget.paycard.cardMoney}원"),
+                        textTitle2("${widget.paycard.money}원"),
                       ],
                     ),
                   ],

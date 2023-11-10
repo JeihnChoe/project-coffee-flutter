@@ -28,7 +28,7 @@ class PayCardLostPageBody extends StatelessWidget {
                           width: 130,
                           height: 80,
                           child: Image.network(
-                            "${paycard.cardPicUrl}",
+                            "${paycard.picUrl}",
                             fit: BoxFit.contain,
                           )),
                       SizedBox(
@@ -37,9 +37,9 @@ class PayCardLostPageBody extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("${paycard.cardName}"),
+                          Text("${paycard.name}"),
                           Text(
-                            "${paycard.cardMoney}",
+                            "${paycard.money}",
                             style: TextStyle(
                                 fontSize: 22, fontWeight: FontWeight.bold),
                           ),
@@ -47,7 +47,7 @@ class PayCardLostPageBody extends StatelessWidget {
                             height: 7,
                           ),
                           Text(
-                            "${paycard.cardNumber}",
+                            "${paycard.number}",
                             style: TextStyle(fontSize: 12, color: Colors.grey),
                           ),
                         ],

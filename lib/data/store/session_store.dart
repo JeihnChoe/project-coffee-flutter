@@ -22,8 +22,13 @@ class SessionUser {
 class SessionStore extends SessionUser {
   final mContext = navigatorKey.currentContext;
 
-  Future<void> join(JoinReqDTO joinReqDTO) async {
+  // 토큰을 저장하는 메서드
+  void saveToken(String token) {
+    this.jwt = token;
+    Logger().d("Saved token: $token"); // 확인을 위한 출력문
+  }
 
+  Future<void> join(JoinReqDTO joinReqDTO) async {
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
     if (responseDTO.success == true) {
       Navigator.pushNamed(mContext!, Move.JoinSuccessPage,
@@ -49,12 +54,15 @@ class SessionStore extends SessionUser {
 
       // 2. 디바이스에 JWT 저장 (자동 로그인)
       await secureStorage.write(key: "jwt", value: responseDTO.token);
-      // 3. 페이지 이동
+
+      // 3. 토큰을 저장
+      saveToken(responseDTO.token);
+
+      // 4. 페이지 이동
       Navigator.pushNamed(mContext!, Move.MainPage, arguments: {
         'isLogin': isLogin,
         'jwt': jwt,
       });
-
     } else {
       ScaffoldMessenger.of(mContext!)
           .showSnackBar(SnackBar(content: Text(responseDTO.error)));
