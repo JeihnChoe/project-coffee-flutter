@@ -16,7 +16,7 @@ class ProductListPageBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(ProductListProvider.notifier).notifyAdd(category);
+    final model = ref.watch(ProductListProvider(category));
 
     // Logger().d(ref.watch(ProductListProvider.notifier).notifyAdd(category));
     Logger().d("픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미! 업! ${model.toString()}");

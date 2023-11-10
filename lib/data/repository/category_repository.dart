@@ -1,5 +1,3 @@
-
-
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/http.dart';
@@ -14,34 +12,24 @@ class CategoryRepository {
     return Future.delayed(Duration(seconds: 3), () => mCategoryResponseDTO);
   }
 
-  Future<ResponseDTO> fetchCategoryDetailList() async {
+  Future<List<Category>> fetchCategoryDetailList() async {
     try {
-      Logger().d("들어오냐 ?");
       Response<dynamic> response = await dio.get("/api/category/");
-
-      if (response.data != null) {
-        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-        if (responseDTO.success == true) {
-          Logger().d("픽미오냐?${responseDTO.response}");
-          List<dynamic> mapList = responseDTO.response;
-          Logger().d(mapList?.toList() ?? []);
-          List<CategoryReqDTO> categoryList = mapList.map((e) => CategoryReqDTO.fromJson(e)).toList();
-          responseDTO.response = categoryList;
-        }
-        return responseDTO;
-      } else {
-        Logger().d("요기");
-        return ResponseDTO(false, null, "실패: response.data is null");
+      if (response.data != null && response.data is List) {
+        List<dynamic> mapList = response.data as List<dynamic>;
+        List<Category> categoryList = mapList
+            .map((e) => Category.fromJson(e)) // Promotion 모델에 따라 변환
+            .toList();
+        return categoryList;
+      }else {
+        throw Exception("여기 아닌데");
       }
     } catch (e) {
-      Logger().d("요기");
-      return ResponseDTO(false, null, "실패 : ${e}");
-      // return Future.delayed(Duration(seconds: 3), () => mCategoryListResponseDTO);
+      Logger().d("요기 왜 요기로 오냐 ??? 통신 됬잖아${e}");
+      throw Exception(e);
+      // return ResponseDTO(false, null, "실패 : ${e}");
+      // return Future.delayed(Duration(seconds: 3), ()
+      // => mCategoryListResponseDTO);
     }
   }
-
-
-
-
 }
-

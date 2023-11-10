@@ -14,6 +14,12 @@ class Category {
         "name": name,
         "engName": engName,
         "code": code,
-        "picUrl": picUrl,
+        "picUrl": picUrl
       };
+  Category.fromJson(Map<String, dynamic> json)
+      : id = json["id"],
+        name = json["name"],
+        engName = json["engName"],
+        code = json["code"],
+        picUrl = json["picUrl"];
 }

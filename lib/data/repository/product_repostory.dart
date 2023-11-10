@@ -14,12 +14,24 @@ class ProductRepository {
     return Future.delayed(Duration(seconds: 3), () => mProductOrderResponseDTO);
   }
 
-  Future<ResponseDTO> fetchProductDetailList() {
-    // try{
-    // Response<dynamic> response = await dio.get("/api")
-    // }
-
-    return Future.delayed(Duration(seconds: 3), () => mProductListResponseDTO);
+  Future<List<ProductListResDTO>> fetchProductDetailList(Category category) async{
+    try {
+      Logger().d("이제 들어와라 한번쯤은");
+      Response<dynamic> response = await dio.get(
+          "/api/category/${category.id}/productList");
+      Logger().d("이제 들어와라 한번쯤은${response.data}");
+      if (response.data != null && response.data is List) {
+        // List<dynamic> mapList = response.data as List<dynsmic>;
+        List<dynamic> mapList = response.data;
+        List<ProductListResDTO> productList = mapList.map((e) =>
+            ProductListResDTO.fromJson(e)).toList();
+        return productList;
+      } else {
+        throw Exception("이게 터지네");
+      }
+    }catch (e) {
+      throw Exception(e);
+    }
   }
 
   Future<ResponseDTO> fetchProductDetailList2(Category category) async{

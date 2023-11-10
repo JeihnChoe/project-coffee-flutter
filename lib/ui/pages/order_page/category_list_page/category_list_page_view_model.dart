@@ -8,7 +8,7 @@ import 'package:project_coffee/data/repository/category_repository.dart';
 import 'package:project_coffee/main.dart';
 
 class CategoryListModel {
-  List<CategoryReqDTO> categoryList;
+  List<Category> categoryList;
   CategoryListModel(this.categoryList);
 }
 //창고
@@ -18,14 +18,12 @@ class CategoryListViewModel extends StateNotifier<CategoryListModel?> {
   CategoryListViewModel(super.state, this.ref);
 
   Future<void> notifyInit() async {
-    Logger().d("오냐 ?");
-    ResponseDTO responseDTO =
+
+    List<Category> responseDTO =
     await CategoryRepository().fetchCategoryDetailList();
-    state = CategoryListModel(responseDTO.response);
+    state = CategoryListModel(responseDTO);
   }
-  Future<void> select(Category category) async {
-    Logger().d("${category}");
-  }
+
 }
 //창고관리자
 final CategoryListProvider =
