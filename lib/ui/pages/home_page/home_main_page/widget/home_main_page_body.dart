@@ -20,23 +20,11 @@ class HomeMainPageBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final homeModel = ref.watch(homeProvider);
 
-    if (homeModel == null) {
-      return Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    } else {
-      return _buildUI(context, homeModel);
-    }
-  }
-
-  Widget _buildUI(BuildContext context, HomeModel homeModel) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: homeModel.isLogin
-          ? LoginAfter(promotionList: homeModel.promotionList)
-          : LoginBefore(promotionList: homeModel.promotionList),
+      body: homeModel?.isLogin == true
+          ? LoginAfter(promotionList: homeModel!.promotionList)
+          : LoginBefore(promotionList: homeModel!.promotionList),
     );
   }
 }
