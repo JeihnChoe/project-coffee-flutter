@@ -1,9 +1,13 @@
 import 'package:dio/dio.dart';
+
 import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/http.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
+import 'package:project_coffee/data/mock/category.dart';
 import 'package:project_coffee/data/mock/product.dart';
+
+import '../model/category.dart';
 
 class ProductRepository {
   Future<ResponseDTO> fetchProductDetail() {
@@ -12,9 +16,32 @@ class ProductRepository {
 
   Future<ResponseDTO> fetchProductDetailList() {
     // try{
-    //   Response<dynamic> response = await dio.get("/api")
+    // Response<dynamic> response = await dio.get("/api")
     // }
+
     return Future.delayed(Duration(seconds: 3), () => mProductListResponseDTO);
+  }
+
+  Future<ResponseDTO> fetchProductDetailList2(Category category) async{
+    try{
+      Logger().d("카테고리 들고오냐!!!!!!!!!!!!!!!${category.id}");
+      Response<dynamic> response = await dio.get("/api/category/${category.id}");
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      List<dynamic> mapList = responseDTO.response as List<dynamic>;
+      Logger().d(mapList.toList());
+      List<ProductListResDTO> productListResDTOList = mapList.map((e) => ProductListResDTO.fromJson(e)).toList();
+      // responseDTO.response = ProductListResDTO.fromJson(responseDTO.response);
+      responseDTO.response = productListResDTOList;
+
+      return responseDTO;
+    }catch(e){
+      Logger().d("너 여기올꺼잖아!!!!!!!!!!!!!!!!!!!!!!!!!!!!${category.id}");
+      return Future.delayed(Duration(seconds: 3), () => mProductListResponseDTO);
+    }
+  }
+
+  Future<ResponseDTO> fetchCategoryList(){
+    return Future.delayed(Duration(seconds: 3),() => mCategoryListResponseDTO);
   }
 
   Future<ResponseDTO> fetchProductCartSave(

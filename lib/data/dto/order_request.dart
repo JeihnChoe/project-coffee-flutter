@@ -5,36 +5,37 @@ import '../model/option.dart';
 
 class CategoryReqDTO {
   final int id;
-  final String categoryName;
-  final String categoryEngName;
+  final String name;
+  final String engName;
   final int code; // 0 : 음료 , 1 : 푸드
-  final String categoryPicUrl;
+  final String picUrl;
 
   CategoryReqDTO({
     required this.id,
-    required this.categoryName,
-    required this.categoryEngName,
+    required this.name,
+    required this.engName,
     required this.code,
-    required this.categoryPicUrl,
+    required this.picUrl,
   });
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "categoryName": categoryName,
-        "categoryEngName": categoryEngName,
+        "name": name,
+        "engName": engName,
         "code": code,
-        "categoryPicUrl": categoryPicUrl,
+        "picUrl": picUrl,
       };
 
   CategoryReqDTO.fromJson(Map<String, dynamic> json)
       : id = json["id"],
-        categoryName = json["categoryName"],
-        categoryEngName = json["categoryEngName"],
+        name = json["name"],
+        engName = json["engName"],
         code = json["code"],
-        categoryPicUrl = json["categoryPicUrl"];
+        picUrl = json["picUrl"];
 }
 
 class ProductListResDTO {
+
   Product product;
   int optionPrice;
 

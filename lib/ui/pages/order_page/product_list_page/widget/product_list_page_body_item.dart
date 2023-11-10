@@ -16,10 +16,11 @@ class CategoryProductListPageBodyItem extends StatelessWidget {
       color: Colors.white,
       child: InkWell(
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ProductDetailPage(productListResDTO.product)));
+
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) => ProductDetailPage(productListResDTO.product)));
         },
         child: Padding(
           padding: const EdgeInsets.only(top: 5,bottom: 15, right: 16),
@@ -29,7 +30,7 @@ class CategoryProductListPageBodyItem extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                _image(productListResDTO.product),
+                // _image(productListResDTO.product),
                 SizedBox(width: gap_m),
                 _Product(productListResDTO),
               ],
@@ -47,11 +48,11 @@ _Product(ProductListResDTO product) {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        textTitle2(
-          "${product.product.productName}",
-        ),
+        // textTitle2(
+          // "${product.product.productName}",
+        // ),
         SizedBox(height: gap_s),
-        textBody3("${product.product.productEngName}"),
+        // textBody3("${product.product.productEngName}"),
         SizedBox(height: gap_m),
         textBody3("${product.optionPrice}원")
       ],

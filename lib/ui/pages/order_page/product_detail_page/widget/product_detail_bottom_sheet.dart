@@ -43,7 +43,7 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
     widget.productOrderReqDTO.cup = 1;
     widget.productOrderReqDTO.count = 1;
     widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.option.price;  //가격 넣어야함
-    widget.productOrderReqDTO.sizePrice = widget.productOrderReqDTO.option.sizeId;
+    widget.productOrderReqDTO.sizePrice = widget.productOrderReqDTO.option.id;
     Logger().d("이건 isiced    ${widget.productOrderReqDTO.isIced}");
     Logger().d("이건 product    ${widget.productOrderReqDTO.product}");
     Logger().d("이건 option    ${widget.productOrderReqDTO.option}");

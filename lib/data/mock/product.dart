@@ -2,6 +2,7 @@ import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/model/option.dart';
 import 'package:project_coffee/data/model/product.dart';
+import 'package:project_coffee/data/model/size.dart';
 
 import '../model/product_order.dart';
 
@@ -20,13 +21,24 @@ Product _mProduct = Product(
     0,
     "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
     1);
+Product mProduct2 = Product(
+    2,
+    "바닐라 크림 콜드 브루",
+    "Vanilla Cream Cold Brew",
+    "콜드 브루에 더해진 바닐라 크림으로 깔끔하면서 달콤한 콜드 브루를 새롭게 즐길 수 있는 음료입니다.",
+    "디카페인결제시 300원 추가됩니다.",
+    2,
+    "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
+    2,);
 ProductOrder _productOrder = ProductOrder( _mProduct, 1, 2, "1", "1", 505, 9999);
 // ProductDetailResDTO productAndOption = ProductDetailResDTO()
 ProductDetailResDTO productDetailResDTO = ProductDetailResDTO(_mProduct,_mOption);
-Option _mOption = Option(1, 1, 1, 5000);
+Option _mOption = Option(1, _mProduct, mSize, 5000);
+Size mSize = Size(1,1,1);
+
 List<ProductListResDTO> productListResDTO = [
-    ProductListResDTO(optionPrice: 8888,product: _mProduct),
-    ProductListResDTO(optionPrice: 8888,product: _mProduct),
+    ProductListResDTO(optionPrice: 7777,product: _mProduct),
+    ProductListResDTO(optionPrice: 8888,product: mProduct2),
     ProductListResDTO(optionPrice: 8888,product: _mProduct),
     ProductListResDTO(optionPrice: 8888,product: _mProduct),
     ProductListResDTO(optionPrice: 8888,product: _mProduct),
@@ -71,15 +83,15 @@ List<Product> _mProductList = [
       2,
       "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
       1,),
-  Product(
-      2,
-      "바닐라 크림 콜드 브루",
-      "Vanilla Cream Cold Brew",
-      "콜드 브루에 더해진 바닐라 크림으로 깔끔하면서 달콤한 콜드 브루를 새롭게 즐길 수 있는 음료입니다.",
-      "디카페인결제시 300원 추가됩니다.",
-      0,
-      "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
-      1,),
+    Product(
+        2,
+        "바닐라 크림 콜드 브루",
+        "Vanilla Cream Cold Brew",
+        "콜드 브루에 더해진 바닐라 크림으로 깔끔하면서 달콤한 콜드 브루를 새롭게 즐길 수 있는 음료입니다.",
+        "디카페인결제시 300원 추가됩니다.",
+        0,
+        "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg",
+        1,),
   Product(
       3,
       "바닐라 크림 콜드 브루",

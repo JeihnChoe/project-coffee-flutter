@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
+import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/data/model/category.dart';
 
 import '../category_list_page_view_model.dart';
@@ -15,7 +17,7 @@ class CategoryConsumer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        CategoryListModel? model = ref.watch(CategoryListProvider);
+        dynamic? model = ref.watch(CategoryListProvider);
         List<Category> categoryList = model?.categoryList ?? [];
         final codeItems = categoryList.where((item) => item.code == code).toList();
         return CustomScrollView(
