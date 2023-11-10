@@ -6,16 +6,18 @@ import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/mock/product.dart';
 
 class ProductRepository {
-  Future<ResponseDTO> fetchproductDetail() {
-    return Future.delayed(Duration(seconds: 3), () => mProductResponseDTO);
+  Future<ResponseDTO> fetchProductDetail() {
+    return Future.delayed(Duration(seconds: 3), () => mProductOrderResponseDTO);
   }
 
-  Future<ResponseDTO> fetchproductDetailList() {
-
+  Future<ResponseDTO> fetchProductDetailList() {
+    // try{
+    //   Response<dynamic> response = await dio.get("/api")
+    // }
     return Future.delayed(Duration(seconds: 3), () => mProductListResponseDTO);
   }
 
-  Future<ResponseDTO> fetchproductCartSave(
+  Future<ResponseDTO> fetchProductCartSave(
       ProductOrderReqDTO productOrderReqDTO) async {
     try {
       // dynamic -> http body
@@ -32,7 +34,19 @@ class ProductRepository {
         Duration(seconds: 3), () => mProductOrderResponseDTO);
   }
 
-  Future<List<ProductOrderReqDTO>> fetchproductOrderList() async {
+  Future<ResponseDTO> fetchProductOrderSave(ProductOrderReqDTO productOrderReqDTO) async{
+    try {
+      Response<dynamic> response = await dio.post("/api/아직 안넣음",data: productOrderReqDTO);
+      if(response.data != null && response.data){
+        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+        return responseDTO;
+      }
+      throw Exception("값이 안들어왔는데");
+    } on Exception catch (e) {
+      throw Exception("터졌데");
+    }
+  }
+  Future<List<ProductOrderReqDTO>> fetchProductOrderList() async {
     try {
       Response<dynamic> response = await dio.get("api/뭐가 들어 올까요? 아직 백에서 안 만듦");
       Logger().d("쇼핑카드야 ${response.data}");

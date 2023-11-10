@@ -54,15 +54,17 @@ ProductListResDTO.fromJson(Map<String, dynamic> json) :
 }
 class ProductOrderReqDTO {
   Product product;
+  Option option;
   int? isIced;
   int? count;
   int? size;
   int? cup;
   int? sizePrice;
   int? totalmoney;
-  //
+
   ProductOrderReqDTO(
       {required this.product,
+        required this.option,
       this.isIced,
       this.count,
       this.cup,
@@ -74,6 +76,7 @@ class ProductOrderReqDTO {
   //
   Map<String, dynamic> toJson() => {
         "product": product,
+    "option" :option,
         "isIced": isIced,
         "count": count,
         "size": size,
@@ -84,6 +87,7 @@ class ProductOrderReqDTO {
   //
   ProductOrderReqDTO.fromJson(Map<String, dynamic> json)
       : product = json["product"],
+  option = json["option"],
         isIced = json["isIced"],
         count = json["count"],
         size = json["size"],

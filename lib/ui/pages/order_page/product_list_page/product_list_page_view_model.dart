@@ -4,7 +4,7 @@ import 'package:logger/logger.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/model/product.dart';
-import 'package:project_coffee/data/repository/beverage_repostory.dart';
+import 'package:project_coffee/data/repository/product_repostory.dart';
 
 import 'package:project_coffee/main.dart';
 //창고 데이터
@@ -22,7 +22,7 @@ class ProductListViewModel extends StateNotifier<ProductListModel?> {
 
   Future<void> notifyInit() async {
     ResponseDTO responseDTO =
-    await ProductRepository().fetchproductDetailList();
+    await ProductRepository().fetchProductDetailList();
     state = ProductListModel(responseDTO.response);
   }
 }

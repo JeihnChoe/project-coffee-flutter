@@ -6,7 +6,7 @@ import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/model/product.dart';
 import 'package:project_coffee/data/model/product_order.dart';
-import 'package:project_coffee/data/repository/beverage_repostory.dart';
+import 'package:project_coffee/data/repository/product_repostory.dart';
 import 'package:project_coffee/main.dart';
 
 class ProductDetailModel {
@@ -22,11 +22,8 @@ class ProductDetailViewModel extends StateNotifier<ProductDetailModel?> {
   ProductDetailViewModel(ProductDetailModel? state, this.ref) : super(state);
 
   Future<void> notifyInit() async {
-    ResponseDTO responseDTO = await ProductRepository().fetchproductDetail();
-    // BeverageOrder responseDTO = await BeverageRepository().fetchBeverageDetailAndOrder();
-    Logger().d("프로모션 통신1");
-    // state = BeverageDetailModel(responseDTO); // 수정된 부분
-    Logger().d("프로모션 통신2");
+    ResponseDTO responseDTO = await ProductRepository().fetchProductDetail();
+    state = ProductDetailModel(responseDTO.response); // 수정된 부분
   }
 }
 //

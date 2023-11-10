@@ -14,7 +14,7 @@ class ProductListPageBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.read(ProductListProvider);
+    final model = ref.watch(ProductListProvider);
     final productList = model?.productListResDTO ?? [];
 
     final indexItems = productList.where((item) => item.product.category == category.id).toList();
