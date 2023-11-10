@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
+import 'package:project_coffee/data/model/product.dart';
 
 class ProductOutlineButton extends StatefulWidget {
   String text;
@@ -27,11 +28,10 @@ class _ProductOutlineButtonState extends State<ProductOutlineButton> {
     return OutlinedButton(
       onPressed: () {
         setState(() {
-          if(widget.isIced == true){
+          if(widget.isIced == false){
             widget.productOrderReqDTO.isIced = 0;
             Logger().d("이거 값 보여줭${widget.productOrderReqDTO.isIced}");
           }  else{
-
             widget.productOrderReqDTO.isIced = 1;
             Logger().d("이거 값 보여줭${widget.productOrderReqDTO.isIced}");
           }

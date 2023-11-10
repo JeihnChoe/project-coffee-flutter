@@ -1,5 +1,6 @@
 import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
+import 'package:project_coffee/data/model/option.dart';
 import 'package:project_coffee/data/model/product.dart';
 
 import '../model/product_order.dart';
@@ -7,7 +8,7 @@ import '../model/product_order.dart';
 
 ResponseDTO mProductResponseDTO = ResponseDTO(true, _mProduct, null,);
 ResponseDTO mProductListResponseDTO = ResponseDTO(true, productListResDTO, null);
-ResponseDTO mProductOrderResponseDTO = ResponseDTO(true, _productOrder, null);
+ResponseDTO mProductOrderResponseDTO = ResponseDTO(true, productDetailResDTO, null);
 ResponseDTO mProductOrderListResponseDTO = ResponseDTO(true, _mproductOrderList, null);
 
 Product _mProduct = Product(
@@ -21,6 +22,8 @@ Product _mProduct = Product(
     1);
 ProductOrder _productOrder = ProductOrder( _mProduct, 1, 2, "1", "1", 505, 9999);
 // ProductDetailResDTO productAndOption = ProductDetailResDTO()
+ProductDetailResDTO productDetailResDTO = ProductDetailResDTO(_mProduct,_mOption);
+Option _mOption = Option(1, 1, 1, 5000);
 List<ProductListResDTO> productListResDTO = [
     ProductListResDTO(optionPrice: 8888,product: _mProduct),
     ProductListResDTO(optionPrice: 8888,product: _mProduct),

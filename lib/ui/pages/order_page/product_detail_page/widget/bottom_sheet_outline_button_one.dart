@@ -44,18 +44,18 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButtonOne> 
   Widget build(BuildContext context) {
     return Row(
       children: [
-        if (widget.productOrderReqDTO.isIced == 1)
+        if (widget.productOrderReqDTO.product.hotIce == 1)
           Expanded(
             child: OutlinedButton(
               onPressed: () {
                 setState(() {
                   selectedPayment = 7;
-                  widget.productOrderReqDTO.sizePrice = zeroprice;
-                  widget.productOrderReqDTO.totalmoney = zeroprice * widget.count;
-                  widget.productOrderReqDTO.cup = 0;
-                  widget.onStateChange(selectedPayment);
-                  Logger().d(widget.productOrderReqDTO.cup);
-                  Logger().d("이거 안보여줘 ???${widget.productOrderReqDTO.totalmoney}");
+                  // widget.productDetailResDTO.option.price = zeroprice;
+                  // widget.productOrderReqDTO.totalmoney = zeroprice * widget.count;
+                  // widget.productOrderReqDTO.cup = 0;
+                  // widget.onStateChange(selectedPayment);
+                  // Logger().d(widget.productOrderReqDTO.cup);
+                  // Logger().d("이거 안보여줘 ???${widget.productOrderReqDTO.totalmoney}");
                 });
               },
               style: OutlinedButton.styleFrom(
@@ -113,13 +113,13 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButtonOne> 
             onPressed: () {
               setState(() {
                 selectedPayment = 1;
-                widget.productOrderReqDTO.sizePrice = oneprice;
-                widget.productOrderReqDTO.totalmoney = oneprice* widget.count;
-
-                widget.productOrderReqDTO.cup = 1;
-                widget.onStateChange(selectedPayment);
-                Logger().d(widget.productOrderReqDTO.cup);
-                Logger().d("이거 안보여줘 ???${widget.productOrderReqDTO.totalmoney}");
+                // widget.productOrderReqDTO.sizePrice = oneprice;
+                // widget.productOrderReqDTO.totalmoney = oneprice* widget.count;
+                //
+                // widget.productOrderReqDTO.cup = 1;
+                // widget.onStateChange(selectedPayment);
+                // Logger().d(widget.productOrderReqDTO.cup);
+                // Logger().d("이거 안보여줘 ???${widget.productOrderReqDTO.totalmoney}");
               });
             },
             style: OutlinedButton.styleFrom(
@@ -177,12 +177,12 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButtonOne> 
             onPressed: () {
               setState(() {
                 selectedPayment = 2;
-                widget.productOrderReqDTO.sizePrice = twoprice;
-                widget.productOrderReqDTO.totalmoney = twoprice* widget.count;
-                widget.productOrderReqDTO.cup = 2;
-                widget.onStateChange(selectedPayment);
-                Logger().d(widget.productOrderReqDTO.cup);
-                Logger().d("이거 안보여줘 ???${widget.productOrderReqDTO.totalmoney}");
+                // widget.productOrderReqDTO.sizePrice = twoprice;
+                // widget.productOrderReqDTO.totalmoney = twoprice* widget.count;
+                // widget.productOrderReqDTO.cup = 2;
+                // widget.onStateChange(selectedPayment);
+                // Logger().d(widget.productOrderReqDTO.cup);
+                // Logger().d("이거 안보여줘 ???${widget.productOrderReqDTO.totalmoney}");
               });
             },
             style: OutlinedButton.styleFrom(
@@ -240,12 +240,12 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButtonOne> 
             onPressed: () {
               setState(() {
                 selectedPayment = 3;
-                widget.productOrderReqDTO.sizePrice = threeprice;
-                widget.productOrderReqDTO.totalmoney = threeprice* widget.count;
-                widget.productOrderReqDTO.cup = 3;
-                widget.onStateChange(selectedPayment);
-                Logger().d(widget.productOrderReqDTO.cup);
-                Logger().d("이거 안보여줘 ???${widget.productOrderReqDTO.totalmoney}");
+                // widget.productOrderReqDTO.sizePrice = threeprice;
+                // widget.productOrderReqDTO.totalmoney = threeprice* widget.count;
+                // widget.productOrderReqDTO.cup = 3;
+                // widget.onStateChange(selectedPayment);
+                // Logger().d(widget.productOrderReqDTO.cup);
+                // Logger().d("이거 안보여줘 ???${widget.productOrderReqDTO.totalmoney}");
               });
             },
             style: OutlinedButton.styleFrom(

@@ -14,7 +14,6 @@ import 'product_detail_cart_bottom_sheet.dart';
 
 class ProductDetailBottomSheet extends StatefulWidget {
   ProductOrderReqDTO productOrderReqDTO;
-
   ProductDetailBottomSheet({required this.productOrderReqDTO});
 
   @override
@@ -26,7 +25,6 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
   int selectedTabMethod = 1;
   int count = 1;
   int outlinbuttonchange = 1;
-
   // void submit(WidgetRef ref) {
   // &&arePasswordsEqual(_password.text, _passwordchk.text)==true
   // if (_formKey.currentState!.validate()) {
@@ -42,13 +40,17 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
   @override
   void initState() {
     super.initState();
-
-    widget.productOrderReqDTO.size = 1;
     widget.productOrderReqDTO.cup = 1;
     widget.productOrderReqDTO.count = 1;
-    // widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.product.price;  가격 넣어야함
-    // widget.productOrderReqDTO.sizePrice = widget.productOrderReqDTO.beverage.price;
-    Logger().d(widget.productOrderReqDTO.isIced);
+    widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.option.price;  //가격 넣어야함
+    widget.productOrderReqDTO.sizePrice = widget.productOrderReqDTO.option.sizeId;
+    Logger().d("이건 isiced    ${widget.productOrderReqDTO.isIced}");
+    Logger().d("이건 product    ${widget.productOrderReqDTO.product}");
+    Logger().d("이건 option    ${widget.productOrderReqDTO.option}");
+    Logger().d("이건 sizeprice    ${widget.productOrderReqDTO.sizePrice}");
+    Logger().d("이건 size    ${widget.productOrderReqDTO.size}");
+    Logger().d("이건 cup    ${widget.productOrderReqDTO.cup}");
+    Logger().d("이건 count    ${widget.productOrderReqDTO.count}");
   }
 
   void updateChildState(int newValue) {
@@ -61,7 +63,7 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    int? sizePrice = widget.productOrderReqDTO.sizePrice;
+    int? sizePrice = widget.productOrderReqDTO.option.price;
     return Scaffold(
       body: Container(
         child: CustomScrollView(slivers: [
@@ -104,7 +106,7 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                     SizedBox(
                       height: 16,
                     ),
-                    if(widget.productOrderReqDTO.product.category == 3)
+                    // if(widget.productOrderReqDTO.product.category == 3)
                       BottomSheetOutlineButtonOne(
                         productOrderReqDTO: widget.productOrderReqDTO,  // DTO보내기
                         selectedTabMethod : outlinbuttonchange,
@@ -121,7 +123,7 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                             onPressed: () {
                               setState(() {
                                 selectedTabMethod = 1;
-                                widget.productOrderReqDTO.cup = 1;
+                                // widget.productOrderReqDTO.cup = 1;
                               });
                             },
                             child: Text(
@@ -153,7 +155,7 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                             onPressed: () {
                               setState(() {
                                 selectedTabMethod = 2;
-                                widget.productOrderReqDTO.cup = 2;
+                                // widget.productOrderReqDTO.cup = 2;
                               });
                             },
                             child: Text(
@@ -183,7 +185,7 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                             onPressed: () {
                               setState(() {
                                 selectedTabMethod = 3;
-                                widget.productOrderReqDTO.cup = 3;
+                                // widget.productOrderReqDTO.cup = 3;
                               });
                             },
                             child: Text(
@@ -283,17 +285,17 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                   Consumer(builder: (context, ref, child) {
                     return OutlinedButton(
                       onPressed: () {
-                        ref.read(beverageProvider).cart(context,widget.productOrderReqDTO);
-                        showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
-                          builder: (context,) {
-                            return FractionallySizedBox(
-                              heightFactor: 0.20, // 높이를 20%로 설정
-                              child: ProductDetailCartBottomSheet(productOrderReqDTO: widget.productOrderReqDTO),
-                            );
-                          },
-                        );
+                        // ref.read(beverageProvider).cart(context,widget.productOrderReqDTO);
+                        // showModalBottomSheet(
+                        //   context: context,
+                        //   isScrollControlled: true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
+                        //   builder: (context,) {
+                        //     return FractionallySizedBox(
+                        //       heightFactor: 0.20, // 높이를 20%로 설정
+                        //       child: ProductDetailCartBottomSheet(productOrderReqDTO: widget.productOrderReqDTO),
+                        //     );
+                        //   },
+                        // );
                       },
                       style: OutlinedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -396,8 +398,8 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                       if (count != 1) {
                         setState(() {
                           count--;
-                          widget.productOrderReqDTO.count = count;
-                          widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.sizePrice! * count;
+                          // widget.productOrderReqDTO.count = count;
+                          // widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.sizePrice! * count;
                         }
                         );
                       }
@@ -405,13 +407,13 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                     icon: Icon(CupertinoIcons.minus_circle),
                     color: count == 1 ? Colors.grey : Colors.black,
                   ),
-                  Text("${widget.productOrderReqDTO.count}"),
+                  // Text("${widget.productOrderReqDTO.count}"),
                   IconButton(
                     onPressed: () {
                       setState(() {
                         count++;
-                        widget.productOrderReqDTO.count = count;
-                        widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.sizePrice! * count;
+                        // widget.productOrderReqDTO.count = count;
+                        // widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.sizePrice! * count;
                       });
                     },
                     icon: Icon(CupertinoIcons.plus_circle),
@@ -420,7 +422,7 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
               ),
               Row(
                 children: [
-                  textTitle1("${widget.productOrderReqDTO.totalmoney}"),
+                  // textTitle1("${widget.productOrderReqDTO.totalmoney}"),
                   SizedBox(
                     width: 16,
                   )

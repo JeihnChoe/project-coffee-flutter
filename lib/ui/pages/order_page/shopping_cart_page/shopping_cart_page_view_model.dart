@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
-import 'package:project_coffee/data/repository/beverage_repostory.dart';
+import 'package:project_coffee/data/repository/product_repostory.dart';
 import 'package:project_coffee/main.dart';
 
 //창고데이터
@@ -19,7 +19,7 @@ class ShoppingCartListViewModel extends StateNotifier<ShoppingCartListModel?> {
 
   Future<void> notifyInit() async {
     List<ProductOrderReqDTO>? responseDTO =
-        await ProductRepository().fetchproductOrderList();
+        await ProductRepository().fetchProductOrderList();
     Logger().d("쇼핑카드야 통신하자");
     state = ShoppingCartListModel(responseDTO ?? []);
     Logger().d("너 지금 뭔데 $responseDTO");

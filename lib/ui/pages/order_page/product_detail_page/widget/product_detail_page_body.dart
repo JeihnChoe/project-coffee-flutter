@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
@@ -17,15 +18,11 @@ class ProductDetailPageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     if(productOrderReqDTO.product.hotIce == 0){
       productOrderReqDTO.isIced = 0;
+      Logger().d("뭐가 들어왔나 보까~?${productOrderReqDTO.isIced}");
     }else if(productOrderReqDTO.product.hotIce == 1){
       productOrderReqDTO.isIced = 1;
+      Logger().d("뭐가 들어왔나 보까~?${productOrderReqDTO.isIced}");
     }
-
-    // ProductDetailModel? model = ref.watch(productDetailProvider);
-    // if (model == null) {
-    //   return Center(child: CircularProgressIndicator());
-    // } else {
-    //   Product product = model.product;
 
     return CustomScrollView(
       slivers: [
@@ -50,14 +47,14 @@ SliverPadding _body(ProductOrderReqDTO productOrderReqDTO) {
             "${productOrderReqDTO.product.productDescription}",
           ),
           SizedBox(height: 10),
-          // textTitle1("${productOrderReqDTO.beverage.price}원"),
+          textTitle1("${productOrderReqDTO.option.price}원"),
           SizedBox(height: 10),
+          // private int isIced; // 0 : hot, 1 : iced, 2 : both
           if (productOrderReqDTO.product.hotIce==0)
             Row(
               children: [
                 Expanded(
-                    child:ProductOutlineButton ("HOT", kActiveColor2,productOrderReqDTO,false)),
-
+                    child:ProductOutlineButton ("HOT ONLY", kActiveColor2,productOrderReqDTO,false)),
               ],
             )
           else if(productOrderReqDTO.product.hotIce == 1)
@@ -75,7 +72,7 @@ SliverPadding _body(ProductOrderReqDTO productOrderReqDTO) {
               ),
 
           SizedBox(height: 10),
-          if(productOrderReqDTO.product.hotIce != 3)
+          if(productOrderReqDTO.product.hotIce == 0 ||productOrderReqDTO.product.hotIce == 1||productOrderReqDTO.product.hotIce == 2)
           Container(
             padding: EdgeInsets.all(10),
             width: double.infinity,
