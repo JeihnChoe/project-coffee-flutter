@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project_coffee/ui/pages/home_page/home_login_change_main_page/home_login_change_main_page.dart';
 
 import '../../_core/constants/color.dart';
 
@@ -27,10 +26,7 @@ class SubmitBottomButton extends StatelessWidget {
           ),
           onPressed: () {
             formField.submit(ref);
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) => HomeLoginChangeMainPage()));
+            //ref.refresh(homeProvider); // homeProvider를 사용하는 화면을 다시 그리도록 함
           },
           child: Text(
             "${text}",
