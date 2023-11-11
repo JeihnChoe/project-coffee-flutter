@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/promotion.dart';
+import 'package:project_coffee/data/store/session_store.dart';
 import 'package:project_coffee/ui/pages/home_page/home_login_change_main_page/widget/home_login_change_main_page_body_item.dart';
-import 'package:project_coffee/ui/pages/home_page/home_main_page/home_main_page_view_model.dart';
 import 'package:project_coffee/ui/pages/home_page/home_main_page/widget/card_registration.dart';
 import 'package:project_coffee/ui/pages/home_page/home_main_page/widget/change_app_bar.dart';
 import 'package:project_coffee/ui/pages/home_page/home_main_page/widget/home_main_page_appbar.dart';
@@ -19,13 +19,19 @@ class HomeMainPageBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bool isLogin = ref.watch(loginStateProvider);
+
+    SessionStore sessionUser = ref.read(sessionProvider);
     PromotionListModel? model = ref.watch(promotionListProvider);
     List<Promotion> promotionList = [];
 
+    if (model != null) {
+      promotionList = model.promotionList;
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
-      body: isLogin == true
+      body: sessionUser!.isLogin == true
+
           ? LoginAfter(promotionList: promotionList)
           : LoginBefore(promotionList: promotionList),
     );
