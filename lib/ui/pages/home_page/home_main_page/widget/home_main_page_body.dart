@@ -19,6 +19,7 @@ class HomeMainPageBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     SessionStore sessionUser = ref.read(sessionProvider);
     PromotionListModel? model = ref.watch(promotionListProvider);
     List<Promotion> promotionList = [];
@@ -30,6 +31,7 @@ class HomeMainPageBody extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: sessionUser!.isLogin == true
+
           ? LoginAfter(promotionList: promotionList)
           : LoginBefore(promotionList: promotionList),
     );
