@@ -21,6 +21,7 @@ class PromotionDetailViewModel extends StateNotifier<PromotionDetailModel?> {
         await PromotionRepository().fetchPromotionDetail();
     state = PromotionDetailModel(responseDTO.response);
   }
+
 }
 
 // 3. 창고 관리자

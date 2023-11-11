@@ -22,11 +22,13 @@ class ProductDetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     final model = ref.watch(productDetailProvider);
-    ProductOrderReqDTO productOrderReqDTO = ProductOrderReqDTO(product: model!.productDetailResDTO.product,option: model!.productDetailResDTO.option);
+    if(model?.productDetailResDTO.product.id == product.id){
 
+    }
+    ProductOrderReqDTO productOrderReqDTO = ProductOrderReqDTO(product: model!.productDetailResDTO.product,option: model!.productDetailResDTO.option);
     // ProductOrderReqDTO productOrderReqDTO = ProductOrderReqDTO(product: productList!.product,option: productList.option);
-    // final indexItems = productList.where((item) => item.product.category == category.id).toList();
-  Logger().d("롸롸롸롸롸롸롸로롸롸롸롸롸롸롸롸롸롸로라ㅗ라롸롸롸롸롸${productOrderReqDTO}");
+    // final indexItems = productOrderReqDTO.where((item) => item.product.category == category.id).toList();
+  // Logger().d("롸롸롸롸롸롸롸로롸롸롸롸롸롸롸롸롸롸로라ㅗ라롸롸롸롸롸${productOrderReqDTO}");
 
     return Scaffold(
       body: ProductDetailPageBody(productOrderReqDTO),

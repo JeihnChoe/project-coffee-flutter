@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/data/model/category.dart';
 import 'package:project_coffee/ui/pages/order_page/product_list_page/product_list_page.dart';
 
@@ -17,10 +19,10 @@ class CategoryListPageBodyItem extends StatelessWidget {
       color: Colors.white,
       child: InkWell(
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ProductListPage(category)));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ProductListPage(category)));
         },
         child: Padding(
           padding: const EdgeInsets.only(top: 5,bottom: 15, right: 16),
@@ -48,10 +50,10 @@ class CategoryListPageBodyItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           textTitle2(
-            "${category.categoryName}",
+            "${category.name}",
           ),
           SizedBox(height: gap_m),
-          textBody3("${category.categoryEngName}")
+          textBody3("${category.engName}")
         ],
       ),
     );
@@ -64,7 +66,7 @@ class CategoryListPageBodyItem extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         image: DecorationImage(
-            image: NetworkImage("${category.categoryPicUrl}"),
+            image: NetworkImage("${category.picUrl}"),
             fit: BoxFit.cover),
       ),
     );

@@ -5,53 +5,68 @@ import '../model/option.dart';
 
 class CategoryReqDTO {
   final int id;
-  final String categoryName;
-  final String categoryEngName;
+  final String name;
+  final String engName;
   final int code; // 0 : 음료 , 1 : 푸드
-  final String categoryPicUrl;
+  final String picUrl;
 
   CategoryReqDTO({
     required this.id,
-    required this.categoryName,
-    required this.categoryEngName,
+    required this.name,
+    required this.engName,
     required this.code,
-    required this.categoryPicUrl,
+    required this.picUrl,
   });
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "categoryName": categoryName,
-        "categoryEngName": categoryEngName,
+        "name": name,
+        "engName": engName,
         "code": code,
-        "categoryPicUrl": categoryPicUrl,
+        "picUrl": picUrl,
       };
 
   CategoryReqDTO.fromJson(Map<String, dynamic> json)
       : id = json["id"],
-        categoryName = json["categoryName"],
-        categoryEngName = json["categoryEngName"],
+        name = json["name"],
+        engName = json["engName"],
         code = json["code"],
-        categoryPicUrl = json["categoryPicUrl"];
+        picUrl = json["picUrl"];
 }
 
 class ProductListResDTO {
-  Product product;
+
+  int id;
+  String name;
+  String engName;
+  int isIced;
+  String picUrl;
   int optionPrice;
 
-  ProductListResDTO(
-      {required this.product, required this.optionPrice});
+
+  ProductListResDTO(this.id, this.name, this.engName, this.isIced, this.picUrl,
+      this.optionPrice);
 
   Map<String, dynamic> toJson() => {
-
-        "product": product,
+        "id" : id,
+        "name" : name,
+        "engName" : engName,
+        "isIced" : isIced,
+        "picUrl": picUrl,
         "optionPrice": optionPrice,
       };
 
 ProductListResDTO.fromJson(Map<String, dynamic> json) :
 
-        product = json["product"],
+      id = json["id"],
+      name = json["name"],
+      engName = json["engName"],
+      isIced = json["isIced"],
+      picUrl = json["picUrl"],
         optionPrice = json["optionPrice"];
 }
+
+
 class ProductOrderReqDTO {
   Product product;
   Option option;

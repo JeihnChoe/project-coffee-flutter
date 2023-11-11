@@ -12,10 +12,10 @@ class Promotion {
 
   Promotion.fromJson(Map<String, dynamic> json)
       : id = json["id"],
-        title = json["title"],
-        subContent = json["subContent"],
-        startDate = json["startDate"],
-        endDate = json["endDate"],
-        smallThumbnail = json["smallThumbnail"],
+  title = json["title"],
+  subContent = json["subContent"],
+  startDate = json["startDate"],
+  endDate = json["endDate"],
+  smallThumbnail = json["smallThumbnail"],
         bigThumbnail = json["bigThumbnail"];
 }
