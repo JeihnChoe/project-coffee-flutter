@@ -4,6 +4,8 @@
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:project_coffee/data/model/promotion.dart';
 // import 'package:project_coffee/ui/pages/home_page/home_login_change_main_page/widget/home_login_change_main_page_body_item.dart';
+// import 'package:project_coffee/ui/pages/home_page/home_main_page/widget/card_registration.dart';
+// import 'package:project_coffee/ui/pages/home_page/home_main_page/widget/change_app_bar.dart';
 // import 'package:project_coffee/ui/pages/home_page/promotion_list_page/promotion_list_page_view_model.dart';
 //
 // class HomeLoginChangeMainPageBody extends StatefulWidget {

@@ -20,7 +20,7 @@ class PayCardListViewModel extends StateNotifier<PayCardListModel?> {
   Future<void> notifyInit(String? token) async {
     List<PayCard> responseDTO =
         await CardRepository().fetchCardDetailList(token);
-    Logger().d("통신하자");
+    Logger().d("카드야 통신하자 ${responseDTO}");
     state = PayCardListModel(responseDTO);
   }
 }

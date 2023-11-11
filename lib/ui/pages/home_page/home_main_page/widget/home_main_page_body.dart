@@ -12,19 +12,22 @@ import 'package:project_coffee/ui/pages/home_page/home_main_page/widget/change_a
 import 'package:project_coffee/ui/pages/home_page/home_main_page/widget/home_main_page_appbar.dart';
 import 'package:project_coffee/ui/pages/home_page/home_main_page/widget/home_main_page_banner.dart';
 import 'package:project_coffee/ui/pages/home_page/home_main_page/widget/home_main_page_body_item.dart';
+import 'package:project_coffee/ui/pages/home_page/promotion_list_page/promotion_list_page_view_model.dart';
 
 class HomeMainPageBody extends ConsumerWidget {
   HomeMainPageBody();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final homeModel = ref.watch(homeProvider);
+    final bool isLogin = ref.watch(loginStateProvider);
+    PromotionListModel? model = ref.watch(promotionListProvider);
+    List<Promotion> promotionList = [];
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: homeModel?.isLogin == true
-          ? LoginAfter(promotionList: homeModel!.promotionList)
-          : LoginBefore(promotionList: homeModel!.promotionList),
+      body: isLogin == true
+          ? LoginAfter(promotionList: promotionList)
+          : LoginBefore(promotionList: promotionList),
     );
   }
 }
