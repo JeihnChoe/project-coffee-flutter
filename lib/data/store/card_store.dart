@@ -36,6 +36,7 @@ class PayCardStore extends PayCardModel {
       }
     } catch (e) {
       Logger().e("카드 등록 중 오류: $e");
+      Logger().e("카드등록아 토큰이 없어? : $token");
     }
   }
 }

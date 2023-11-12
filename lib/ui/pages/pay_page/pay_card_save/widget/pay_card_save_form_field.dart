@@ -31,7 +31,7 @@ class CardSaveFormField extends StatelessWidget {
       // 토큰 얻기
       String? token = ref.read(sessionProvider).jwt;
       if (token != null) {
-        ref.read(cardProvider).save(cardSaveReqDTO, token);
+        ref.read(cardProvider).save(cardSaveReqDTO, token!);
       } else {
         // token이 null일 때의 처리
         Logger().e("Token is null!");
