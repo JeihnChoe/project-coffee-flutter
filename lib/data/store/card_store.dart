@@ -1,11 +1,12 @@
 //창고 데이터
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/move.dart';
 import 'package:project_coffee/data/dto/card_request.dart';
 import 'package:project_coffee/data/model/paycard.dart';
+import 'package:project_coffee/data/repository/card_repository.dart';
 import 'package:project_coffee/main.dart';
-
 import '../dto/reponse_dto.dart';
 
 class PayCardModel{
@@ -22,7 +23,19 @@ class PayCardStore extends PayCardModel {
   }
 
   Future<void> save(CardSaveReqDTO cardSaveReqDTO) async{
-    Navigator.pushNamed(mContext!, Move.PayMainPage);
+    ResponseDTO responseDTO = await CardRepository().fetchCardSave(cardSaveReqDTO);
+    Logger().d("카드 등록 중");
+    if(responseDTO.success ==true){
+     Navigator.pushNamed(mContext!, Move.PayMainPage);
+      Logger().d("카드 등록 ${responseDTO}");
+    }else {
+      ScaffoldMessenger.of(mContext!)
+          .showSnackBar(SnackBar(content: Text(responseDTO.error)));
+    }
+
+
+
+
   }
 }
 
