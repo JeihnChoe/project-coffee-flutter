@@ -61,38 +61,10 @@ class ProductListResDTO {
         optionId = json["optionId"],
         price = json["price"];
 }
-class ProductResDTO{
-  ProductListResDTO productList;
 
-  ProductResDTO(this.productList);
-  Map<String ,dynamic> toJson() => {
-    "productList" : productList,
-  };
-
-  ProductResDTO.fromJson(Map<String,dynamic> json)
-  : productList = json["productList"];
-}
-
-
-class sampleProductListResDTO {
-  Product product;
-  int optionPrice;
-
-  sampleProductListResDTO(this.product, this.optionPrice);
-
-  Map<String, dynamic> toJson() => {
-        "product": product,
-        "optionPrice": optionPrice,
-      };
-
-  sampleProductListResDTO.fromJson(Map<String, dynamic> json)
-      : product = json["product"],
-        optionPrice = json["optionPrice"];
-}
 
 class ProductOrderReqDTO {
-  Product product;
-  Option option;
+  int? productId;
   int? isIced;
   int? count;
   int? size;
@@ -100,9 +72,8 @@ class ProductOrderReqDTO {
   int? sizePrice;
   int? totalmoney;
 
-  ProductOrderReqDTO(
-      {required this.product,
-      required this.option,
+  ProductOrderReqDTO({
+      this.productId,
       this.isIced,
       this.count,
       this.cup,
@@ -112,8 +83,7 @@ class ProductOrderReqDTO {
 
   //
   Map<String, dynamic> toJson() => {
-        "product": product,
-        "option": option,
+        "productId": productId,
         "isIced": isIced,
         "count": count,
         "size": size,
@@ -124,8 +94,7 @@ class ProductOrderReqDTO {
 
   //
   ProductOrderReqDTO.fromJson(Map<String, dynamic> json)
-      : product = json["product"],
-        option = json["option"],
+      : productId = json["productId"],
         isIced = json["isIced"],
         count = json["count"],
         size = json["size"],
@@ -135,17 +104,59 @@ class ProductOrderReqDTO {
 }
 
 class ProductDetailResDTO {
-  Product product;
-  Option option;
+  int productId;
+  String picUrl;
+  String productName;
+  String productEngName;
+  int optionId;
+  int optionPrice;
+  int isIced;
+  String tip;
+  String discription;
+  String size;
 
-  ProductDetailResDTO(this.product, this.option);
+
+  ProductDetailResDTO(
+      this.productId,
+      this.picUrl,
+      this.productName,
+      this.productEngName,
+      this.optionId,
+      this.optionPrice,
+      this.isIced,
+      this.tip,
+      this.discription,
+      this.size);
 
   Map<String, dynamic> toJson() => {
-        "product": product,
-        "option": option,
+        "productId": productId,
+        "picUrl" : picUrl,
+        "productName": productName,
+        "productEngName": productEngName,
+        "optionId": optionId,
+        "optionPrice": optionPrice,
+        "isIced": isIced,
+        "tip": tip,
+        "discription": discription,
+        "size": size,
+
       };
 
   ProductDetailResDTO.fromJson(Map<String, dynamic> json)
-      : product = json["product"],
-        option = json["option"];
+      : productId = json["productId"],
+        picUrl = json["picUrl"],
+        productName = json["productName"],
+        productEngName = json["productEngName"],
+        optionId = json["optionId"],
+        optionPrice = json["optionPrice"],
+        isIced = json["isIced"],
+        tip = json["tip"],
+        discription = json["discription"],
+        size = json["size"];
+}
+class ProductDetailViewDTO{
+  ProductListResDTO productListResDTO;
+  ProductDetailResDTO productDetailResDTO;
+
+  ProductDetailViewDTO(this.productListResDTO, this.productDetailResDTO);
 }

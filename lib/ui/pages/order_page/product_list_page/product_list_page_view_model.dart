@@ -25,9 +25,9 @@ class ProductListViewModel extends StateNotifier<ProductListModel?> {
 
   Future<void> notifyInit(Category category) async {
     Logger().d("여기는 오는감...???");
-    List<ProductListResDTO> responseDTO = await ProductRepository().fetchProductDetailList(category);
+    ResponseDTO responseDTO = await ProductRepository().fetchProductDetailList(category);
     Logger().d("여기 오는감....?${responseDTO}");
-    state = ProductListModel(responseDTO);
+    state = ProductListModel(responseDTO.response);
   }
 
   // Future<ProductListModel?> notifyAdd(Category category) async{

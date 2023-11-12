@@ -11,73 +11,75 @@ import 'package:project_coffee/data/model/product.dart';
 import 'product_outline_button.dart';
 
 class ProductDetailPageBody extends StatelessWidget {
-  ProductOrderReqDTO productOrderReqDTO;
-  ProductDetailPageBody(this.productOrderReqDTO);
+  ProductDetailResDTO productDetailResDTO;
+  // ProductOrderReqDTO productOrderReqDTO;
+  ProductDetailPageBody(this.productDetailResDTO);
 
   @override
   Widget build(BuildContext context) {
-    if(productOrderReqDTO.product.hotIce == 0){
-      productOrderReqDTO.isIced = 0;
-      Logger().d("뭐가 들어왔나 보까~?${productOrderReqDTO.isIced}");
-    }else if(productOrderReqDTO.product.hotIce == 1){
-      productOrderReqDTO.isIced = 1;
-      Logger().d("뭐가 들어왔나 보까~?${productOrderReqDTO.isIced}");
+    if(productDetailResDTO.isIced == 0){
+      // productOrderReqDTO.isIced = 0;
+
+    }else if(productDetailResDTO.isIced == 1){
+      // productOrderReqDTO.isIced = 1;
+
     }
 
     return CustomScrollView(
       slivers: [
-        _appbar(productOrderReqDTO.product),
-        _body(productOrderReqDTO),
+        _appbar(productDetailResDTO),
+        _body(productDetailResDTO),
       ],
     );
   }
 }
 
-SliverPadding _body(ProductOrderReqDTO productOrderReqDTO) {
+// SliverPadding _body(ProductDetailResDTO productDetailResDTO,ProductOrderReqDTO productOrderReqDTO) {
+SliverPadding _body(ProductDetailResDTO productDetailResDTO) {
   return SliverPadding(
     padding: EdgeInsets.all(16.0), // 패딩 설정
     sliver: SliverToBoxAdapter(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          textTitle1("${productOrderReqDTO.product.productName}"),
-          textBody2("${productOrderReqDTO.product.productEngName}"),
+          textTitle1("${productDetailResDTO.productName}"),
+          textBody2("${productDetailResDTO.productEngName}"),
           SizedBox(height: 10),
           textBody1(
-            "${productOrderReqDTO.product.productDescription}",
+            "${productDetailResDTO.discription}",
           ),
           SizedBox(height: 10),
-          textTitle1("${productOrderReqDTO.option.price}원"),
+          textTitle1("${productDetailResDTO.optionPrice}원"),
           SizedBox(height: 10),
           // private int isIced; // 0 : hot, 1 : iced, 2 : both
-          if (productOrderReqDTO.product.hotIce==0)
+          if (productDetailResDTO.isIced==0)
+            Row(
+              // children: [
+                // Expanded(
+                    // child:ProductOutlineButton ("HOT ONLY", kActiveColor2,productDetailResDTO,productOrderReqDTO,false)),
+              // ],
+            )
+          else if(productDetailResDTO.isIced == 1)
             Row(
               children: [
-                Expanded(
-                    child:ProductOutlineButton ("HOT ONLY", kActiveColor2,productOrderReqDTO,false)),
+                // Expanded(child: ProductOutlineButton("ICED ONLY", kActiveColor1,productDetailResDTO,productOrderReqDTO,true)),
               ],
             )
-          else if(productOrderReqDTO.product.hotIce == 1)
-            Row(
-              children: [
-                Expanded(child: ProductOutlineButton("ICED ONLY", kActiveColor1,productOrderReqDTO,true)),
-              ],
-            )
-          else if(productOrderReqDTO.product.hotIce == 2)
+          else if(productDetailResDTO.isIced == 2)
               Row(
                 children: [
-                  Expanded(child: ProductOutlineButton("HOT", kActiveColor2,productOrderReqDTO,false)),
-                  Expanded(child: ProductOutlineButton("ICE", kActiveColor1,productOrderReqDTO,true)),
+                  // Expanded(child: ProductOutlineButton("HOT", kActiveColor2,productDetailResDTO,productOrderReqDTO,false)),
+                  // Expanded(child: ProductOutlineButton("ICE", kActiveColor1,productDetailResDTO,productOrderReqDTO,true)),
                 ],
               ),
 
           SizedBox(height: 10),
-          if(productOrderReqDTO.product.hotIce == 0 ||productOrderReqDTO.product.hotIce == 1||productOrderReqDTO.product.hotIce == 2)
+          if(productDetailResDTO.isIced == 0 ||productDetailResDTO.isIced == 1||productDetailResDTO.isIced == 2)
           Container(
             padding: EdgeInsets.all(10),
             width: double.infinity,
             color: Colors.grey[100],
-            child: textBody3("${productOrderReqDTO.product.productTip}"),
+            child: textBody3("${productDetailResDTO.tip}"),
           ),
           // SizedBox(height: 1000),
         ],
@@ -86,7 +88,7 @@ SliverPadding _body(ProductOrderReqDTO productOrderReqDTO) {
   );
 }
 
-SliverAppBar _appbar(Product product) {
+SliverAppBar _appbar(ProductDetailResDTO productDetailResDTO) {
   return SliverAppBar(
     pinned: true,
     elevation: 0.0,
@@ -108,13 +110,13 @@ SliverAppBar _appbar(Product product) {
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               image: DecorationImage(
-                  image: NetworkImage("${product.productPicUrl}"),
+                  image: NetworkImage("${productDetailResDTO.picUrl}"),
                   fit: BoxFit.cover),
             ),
           ),
           title: isCollapsed
               ? Text(
-            '${product.productName}',
+            '${productDetailResDTO.productName}',
             style: TextStyle(color: Colors.black),
           )
               : null,

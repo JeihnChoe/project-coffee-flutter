@@ -10,25 +10,53 @@ import 'package:project_coffee/data/mock/product.dart';
 import '../model/category.dart';
 
 class ProductRepository {
-  Future<ResponseDTO> fetchProductDetail() {
-    return Future.delayed(Duration(seconds: 3), () => mProductOrderResponseDTO);
+  Future<ResponseDTO> fetchProductDetail(ProductListResDTO productListResDTO) async {
+    try {
+      Response response = await dio.get("/api/product/${productListResDTO.productId}/viewdetail/");
+      Logger().d("이거 널나오면 안된다");
+      Logger().d(response.data);
+      if (response.data != null) {
+        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+        Logger().d(responseDTO.response);
+
+        // List일 경우 첫 번째 요소를 가져옴
+        if (responseDTO.response is List<dynamic> && responseDTO.response.isNotEmpty) {
+          ProductDetailResDTO productDetail = ProductDetailResDTO.fromJson(responseDTO.response.first);
+          Logger().d("이거이거");
+          Logger().d(productDetail);
+
+          responseDTO.response = productDetail;
+          return responseDTO;
+        } else {
+          throw Exception("API 응답 형식이 예상과 다릅니다.");
+        }
+      } else {
+        throw Exception("이거 뭔가 잘못됬다");
+      }
+    } catch (e) {
+      throw Exception("이거 터졌다 고쳐라 ${e}");
+      // return Future.delayed(Duration(seconds: 3), () => mProductOrderResponseDTO);
+    }
   }
 
-  Future<List<ProductListResDTO>> fetchProductDetailList(Category category) async{
+
+
+  Future<ResponseDTO> fetchProductDetailList(Category category) async{
     try {
       Logger().d("이제 들어와라 한번쯤은");
       Response<dynamic> response = await dio.get(
           "/api/product/${category.id}/productlist");
       Logger().d("이제 들어와라 한번쯤은 ${response.data}");
+      Logger().d(response.data);
 
-      if (response.data != null && response.data is List) {
-        List<dynamic> mapList = response.data;
-        Logger().d("이제 들어와라 한번쯤은 ${mapList}");
+      if (response.data != null) {
+        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+        List<dynamic> mapList = responseDTO.response;
         // List<dynamic> mapList = response.data;
         List<ProductListResDTO> productList = mapList.map((e) =>
             ProductListResDTO.fromJson(e)).toList();
-
-        return productList;
+        responseDTO.response = productList;
+        return responseDTO;
       } else {
         throw Exception("이게 터지네");
       }
@@ -36,25 +64,6 @@ class ProductRepository {
       throw Exception(e);
     }
   }
-
-  // Future<ResponseDTO> fetchProductDetailList2(Category category) async{
-  //   try{
-  //     Logger().d("카테고리 들고오냐!!!!!!!!!!!!!!!${category.id}");
-  //     Response<dynamic> response = await dio.get("/api/category/${category.id}");
-  //     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-  //     List<dynamic> mapList = responseDTO.response as List<dynamic>;
-  //     Logger().d(mapList.toList());
-  //     List<ProductListResDTO> productListResDTOList = mapList.map((e) => ProductListResDTO.fromJson(e)).toList();
-  //     // responseDTO.response = ProductListResDTO.fromJson(responseDTO.response);
-  //     responseDTO.response = productListResDTOList;
-  //
-  //     return responseDTO;
-  //   }catch(e){
-  //     Logger().d("너 여기올꺼잖아!!!!!!!!!!!!!!!!!!!!!!!!!!!!${category.id}");
-  //     return Future.delayed(Duration(seconds: 3), () => mProductListResponseDTO);
-  //   }
-  // }
-
   Future<ResponseDTO> fetchCategoryList(){
     return Future.delayed(Duration(seconds: 3),() => mCategoryListResponseDTO);
   }
@@ -72,8 +81,6 @@ class ProductRepository {
       // 200이 아니면 catch로 감
       return ResponseDTO(false, "잘못된 방법입니다.", null);
     }
-    return Future.delayed(
-        Duration(seconds: 3), () => mProductOrderResponseDTO);
   }
 
   Future<ResponseDTO> fetchProductOrderSave(ProductOrderReqDTO productOrderReqDTO) async{

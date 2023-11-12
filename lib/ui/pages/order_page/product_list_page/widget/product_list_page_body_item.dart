@@ -16,11 +16,10 @@ class CategoryProductListPageBodyItem extends StatelessWidget {
       color: Colors.white,
       child: InkWell(
         onTap: () {
-
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => ProductDetailPage(productListResDTO)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => productListResDTO != null ? ProductDetailPage(productListResDTO) : Center(child: CircularProgressIndicator()) ));
         },
         child: Padding(
           padding: const EdgeInsets.only(top: 5,bottom: 15, right: 16),
@@ -40,9 +39,9 @@ class CategoryProductListPageBodyItem extends StatelessWidget {
       ),
     );
   }
-  }
+}
 
-_Product(ProductListResDTO product) {
+Widget _Product(ProductListResDTO product) {
   return Expanded(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -59,6 +58,7 @@ _Product(ProductListResDTO product) {
     ),
   );
 }
+
 
 _image(ProductListResDTO product) {
   return Container(
