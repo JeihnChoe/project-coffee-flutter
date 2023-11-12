@@ -4,13 +4,13 @@ import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
 
-class BottomSheetOutlineButtonOne extends StatefulWidget {
+class BottomSheetOutlineButtonFirst extends StatefulWidget {
   final ProductOrderReqDTO productOrderReqDTO;
   int selectedTabMethod;
   int count;
   final ValueChanged<int> onStateChange;
 
-  BottomSheetOutlineButtonOne(
+  BottomSheetOutlineButtonFirst(
       {required this.productOrderReqDTO,required this.selectedTabMethod,required this.count,required this.onStateChange});
 
   int submit(int selectedPayment) {
@@ -19,12 +19,12 @@ class BottomSheetOutlineButtonOne extends StatefulWidget {
   }
 
   @override
-  State<BottomSheetOutlineButtonOne> createState() =>
+  State<BottomSheetOutlineButtonFirst> createState() =>
       _BottomSheetOutlineButtonState();
 }
 
-class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButtonOne> {
-  int selectedPayment = 1;
+class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButtonFirst> {
+  int selectedPayment = 2;
   int zeroprice= 0;
   int oneprice= 1;
   int twoprice= 2;
@@ -44,7 +44,7 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButtonOne> 
   Widget build(BuildContext context) {
     return Row(
       children: [
-        // if (widget.productOrderReqDTO.product.hotIce == 1)
+        if (widget.productOrderReqDTO.isIced == 0)
           Expanded(
             child: OutlinedButton(
               onPressed: () {

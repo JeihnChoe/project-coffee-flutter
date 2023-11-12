@@ -64,43 +64,38 @@ class ProductListResDTO {
 
 
 class ProductOrderReqDTO {
-  int? productId;
-  int? isIced;
-  int? count;
-  int? size;
-  int? cup;
-  int? sizePrice;
-  int? totalmoney;
+  int? optionId; // 옵션아이디
+  int? isIced; //선택된 핫 아이스
+  int? quantity; // 갯수
+  int? sizeId; // 사이즈 Id값
+  int? cuptype;  // 컵타입
+  int? totalPrice; // 총 가격
+  int? userId;
 
-  ProductOrderReqDTO({
-      this.productId,
-      this.isIced,
-      this.count,
-      this.cup,
-      this.size,
-      this.sizePrice,
-      this.totalmoney});
+  ProductOrderReqDTO({this.optionId, this.isIced, this.quantity, this.sizeId,
+    this.cuptype, this.totalPrice, this.userId}); // 유저Id  비회원일시 0
+
 
   //
   Map<String, dynamic> toJson() => {
-        "productId": productId,
+        "optionId": optionId,
         "isIced": isIced,
-        "count": count,
-        "size": size,
-        "cup": cup,
-        "SizePrice": sizePrice,
-        "totalmoney": totalmoney
+        "quantity": quantity,
+        "sizeId": sizeId,
+        "cuptype": cuptype,
+        "totalPrice": totalPrice,
+        "userId": userId
       };
 
   //
   ProductOrderReqDTO.fromJson(Map<String, dynamic> json)
-      : productId = json["productId"],
+      : optionId = json["optionId"],
         isIced = json["isIced"],
-        count = json["count"],
-        size = json["size"],
-        cup = json["cup"],
-        sizePrice = json["sizePrice"],
-        totalmoney = json["totalmoney"];
+        quantity = json["quantity"],
+        sizeId = json["sizeId"],
+        cuptype = json["cuptype"],
+        totalPrice = json["totalPrice"],
+        userId = json["userId"];
 }
 
 class ProductDetailResDTO {
@@ -113,7 +108,8 @@ class ProductDetailResDTO {
   int isIced;
   String tip;
   String discription;
-  String size;
+  int sizeType;
+
 
 
   ProductDetailResDTO(
@@ -126,7 +122,9 @@ class ProductDetailResDTO {
       this.isIced,
       this.tip,
       this.discription,
-      this.size);
+      this.sizeType,
+
+      );
 
   Map<String, dynamic> toJson() => {
         "productId": productId,
@@ -138,7 +136,7 @@ class ProductDetailResDTO {
         "isIced": isIced,
         "tip": tip,
         "discription": discription,
-        "size": size,
+        "sizeType": sizeType,
 
       };
 
@@ -152,11 +150,6 @@ class ProductDetailResDTO {
         isIced = json["isIced"],
         tip = json["tip"],
         discription = json["discription"],
-        size = json["size"];
-}
-class ProductDetailViewDTO{
-  ProductListResDTO productListResDTO;
-  ProductDetailResDTO productDetailResDTO;
+        sizeType = json["sizeType"];
 
-  ProductDetailViewDTO(this.productListResDTO, this.productDetailResDTO);
 }

@@ -22,12 +22,15 @@ class ProductDetailPage extends ConsumerWidget {
   Widget build(BuildContext context,WidgetRef ref) {
     final model = ref.watch(productDetailProvider(productListResDTO));
     ProductDetailResDTO? productDetailResDTO = model?.productDetailResDTO;
+    ProductOrderReqDTO  productOrderReqDTO = ProductOrderReqDTO();
+
+
     if (productDetailResDTO == null) {
       return Center(child: CircularProgressIndicator()); // 혹은 다른 예외 처리 방법
     }
 
     return Scaffold(
-      body: ProductDetailPageBody(productDetailResDTO),
+      body: ProductDetailPageBody(productDetailResDTO,productOrderReqDTO),
       persistentFooterButtons: [
         TextButton(
           style: TextButton.styleFrom(
@@ -44,7 +47,7 @@ class ProductDetailPage extends ConsumerWidget {
               builder: (context) {
                 return FractionallySizedBox(
                   heightFactor: 0.90, // 높이를 90%로 설정
-                  child: ProductDetailBottomSheet(productListResDTO: productListResDTO),
+                  child: ProductDetailBottomSheet(productDetailResDTO: productDetailResDTO,productOrderReqDTO: productOrderReqDTO),
                   // child: ProductDetailBottomSheet(productListResDTO: productListResDTO,productOrderReqDTO: productOrderReqDTO),
                 );
               },
