@@ -1,12 +1,43 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/http.dart';
+import 'package:project_coffee/data/dto/card_request.dart';
+import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/model/paycard.dart';
 
 class CardRepository {
   // Future<ResponseDTO> fetchCardDetail() {
   //   return Future.delayed(Duration(seconds: 3), () => mCardResponseDTO);
   // }
+
+  Future<ResponseDTO> fetchCardSave(CardSaveReqDTO cardSaveReqDTO, String token) async {
+    try {
+      // 카드 저장을 위한 요청 URL
+      String url = "/api/cards/cardregistrationpage";
+
+      // 카드 저장 요청 헤더에 토큰 추가
+      Options options = Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      // dynamic -> http body
+      Response<dynamic> response = await dio.post(url, data: cardSaveReqDTO.toJson(), options: options);
+
+      // 서버 응답을 ResponseDTO로 변환
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      Logger().d("카드 등록 결과: $responseDTO");
+
+      return responseDTO;
+    } catch (e) {
+      // Dio 요청 중 예외 발생 시 처리
+      Logger().e("카드 등록 중 오류: $e");
+
+      // 카드 등록에 실패한 경우 에러 응답 반환
+      return ResponseDTO(false, "카드 등록에 실패했습니다", null);
+    }
+  }
 
   Future<List<PayCard>> fetchCardDetailList(String? token) async {
     try {

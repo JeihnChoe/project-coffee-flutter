@@ -7,6 +7,7 @@ import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/_core/utils/validator_util.dart';
 import 'package:project_coffee/data/dto/card_request.dart';
 import 'package:project_coffee/data/store/card_store.dart';
+import 'package:project_coffee/data/store/session_store.dart';
 import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
 
 class CardSaveFormField extends StatelessWidget {
@@ -17,15 +18,25 @@ class CardSaveFormField extends StatelessWidget {
   CardSaveFormField({
     super.key,});
 
-  void submit(WidgetRef ref) {
+  void submit(WidgetRef ref) async {
     if (_formKey.currentState!.validate()) {
       CardSaveReqDTO cardSaveReqDTO = CardSaveReqDTO(
-          cardName: _cardName.text,
-          cardNumber: _cardNumber.text,
-          pinNumber: _pinNumber.text);
+        cardName: _cardName.text,
+        cardNumber: _cardNumber.text,
+        pinNumber: _pinNumber.text,
+      );
 
       Logger().d("CardSaveReqDTO : ${cardSaveReqDTO.toJson()}");
-      ref.read(cardProvider).save(cardSaveReqDTO);
+
+      // 토큰 얻기
+      String? token = ref.read(sessionProvider).jwt;
+      if (token != null) {
+        ref.read(cardProvider).save(cardSaveReqDTO, token!);
+      } else {
+        // token이 null일 때의 처리
+        Logger().e("Token is null!");
+
+      }
     }
   }
 
