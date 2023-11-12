@@ -14,7 +14,7 @@ class CategoryRepository {
 
   Future<List<Category>> fetchCategoryDetailList() async {
     try {
-      Response<dynamic> response = await dio.get("/api/category/");
+      Response<dynamic> response = await dio.get("/api/category/viewlist");
       if (response.data != null && response.data is List) {
         List<dynamic> mapList = response.data as List<dynamic>;
         List<Category> categoryList = mapList

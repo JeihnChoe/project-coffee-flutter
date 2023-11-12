@@ -35,37 +35,60 @@ class CategoryReqDTO {
 }
 
 class ProductListResDTO {
-
-  int id;
+  int productId;
   String name;
   String engName;
-  int isIced;
   String picUrl;
-  int optionPrice;
+  int optionId;
+  int price;
 
-
-  ProductListResDTO(this.id, this.name, this.engName, this.isIced, this.picUrl,
-      this.optionPrice);
+  ProductListResDTO(this.productId, this.name, this.engName, this.picUrl, this.optionId ,this.price);
 
   Map<String, dynamic> toJson() => {
-        "id" : id,
-        "name" : name,
-        "engName" : engName,
-        "isIced" : isIced,
+        "productId": productId,
+        "name": name,
+        "engName": engName,
         "picUrl": picUrl,
+        "optionId": optionId,
+        "price" : price,
+      };
+
+  ProductListResDTO.fromJson(Map<String, dynamic> json)
+      : productId = json["productId"],
+        name = json["name"],
+        engName = json["engName"],
+        picUrl = json["picUrl"],
+        optionId = json["optionId"],
+        price = json["price"];
+}
+class ProductResDTO{
+  ProductListResDTO productList;
+
+  ProductResDTO(this.productList);
+  Map<String ,dynamic> toJson() => {
+    "productList" : productList,
+  };
+
+  ProductResDTO.fromJson(Map<String,dynamic> json)
+  : productList = json["productList"];
+}
+
+
+class sampleProductListResDTO {
+  Product product;
+  int optionPrice;
+
+  sampleProductListResDTO(this.product, this.optionPrice);
+
+  Map<String, dynamic> toJson() => {
+        "product": product,
         "optionPrice": optionPrice,
       };
 
-ProductListResDTO.fromJson(Map<String, dynamic> json) :
-
-      id = json["id"],
-      name = json["name"],
-      engName = json["engName"],
-      isIced = json["isIced"],
-      picUrl = json["picUrl"],
+  sampleProductListResDTO.fromJson(Map<String, dynamic> json)
+      : product = json["product"],
         optionPrice = json["optionPrice"];
 }
-
 
 class ProductOrderReqDTO {
   Product product;
@@ -79,19 +102,18 @@ class ProductOrderReqDTO {
 
   ProductOrderReqDTO(
       {required this.product,
-        required this.option,
+      required this.option,
       this.isIced,
       this.count,
       this.cup,
       this.size,
-        this.sizePrice,
-        this.totalmoney
-      }
-      );
+      this.sizePrice,
+      this.totalmoney});
+
   //
   Map<String, dynamic> toJson() => {
         "product": product,
-    "option" :option,
+        "option": option,
         "isIced": isIced,
         "count": count,
         "size": size,
@@ -99,10 +121,11 @@ class ProductOrderReqDTO {
         "SizePrice": sizePrice,
         "totalmoney": totalmoney
       };
+
   //
   ProductOrderReqDTO.fromJson(Map<String, dynamic> json)
       : product = json["product"],
-  option = json["option"],
+        option = json["option"],
         isIced = json["isIced"],
         count = json["count"],
         size = json["size"],
@@ -110,17 +133,19 @@ class ProductOrderReqDTO {
         sizePrice = json["sizePrice"],
         totalmoney = json["totalmoney"];
 }
-class ProductDetailResDTO{
+
+class ProductDetailResDTO {
   Product product;
   Option option;
 
   ProductDetailResDTO(this.product, this.option);
 
   Map<String, dynamic> toJson() => {
-  "product" : product,
-  "option" : option,
-  };
-  ProductDetailResDTO.fromJson(Map<String, dynamic> json) :
-      product = json["product"],
-      option = json["option"];
+        "product": product,
+        "option": option,
+      };
+
+  ProductDetailResDTO.fromJson(Map<String, dynamic> json)
+      : product = json["product"],
+        option = json["option"];
 }

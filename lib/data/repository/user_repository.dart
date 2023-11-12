@@ -32,7 +32,7 @@ class UserRepository {
       // 2. DTO 파싱
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       responseDTO.response = User.fromJson(responseDTO.response);
-      // Logger().d("아니 이거참내${response.headers.toString()}");
+
 
       // 3. 토큰 받기
       final authorization = response.headers["authorization"];
