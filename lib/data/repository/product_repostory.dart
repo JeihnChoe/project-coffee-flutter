@@ -44,8 +44,7 @@ class ProductRepository {
   Future<ResponseDTO> fetchProductDetailList(Category category) async{
     try {
       Logger().d("이제 들어와라 한번쯤은");
-      Response<dynamic> response = await dio.get(
-          "/api/product/${category.id}/productlist");
+      Response<dynamic> response = await dio.get("/api/product/${category.id}/productlist");
       Logger().d("이제 들어와라 한번쯤은 ${response.data}");
       Logger().d(response.data);
 

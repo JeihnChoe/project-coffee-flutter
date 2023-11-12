@@ -12,30 +12,30 @@ import 'product_outline_button.dart';
 
 class ProductDetailPageBody extends StatelessWidget {
   ProductDetailResDTO productDetailResDTO;
-  // ProductOrderReqDTO productOrderReqDTO;
-  ProductDetailPageBody(this.productDetailResDTO);
+  ProductOrderReqDTO productOrderReqDTO;
+  ProductDetailPageBody(this.productDetailResDTO,this.productOrderReqDTO);
 
   @override
   Widget build(BuildContext context) {
     if(productDetailResDTO.isIced == 0){
-      // productOrderReqDTO.isIced = 0;
+      productOrderReqDTO.isIced = 0;
 
     }else if(productDetailResDTO.isIced == 1){
-      // productOrderReqDTO.isIced = 1;
+      productOrderReqDTO.isIced = 1;
 
     }
 
     return CustomScrollView(
       slivers: [
         _appbar(productDetailResDTO),
-        _body(productDetailResDTO),
+        _body(productDetailResDTO,productOrderReqDTO),
       ],
     );
   }
 }
 
-// SliverPadding _body(ProductDetailResDTO productDetailResDTO,ProductOrderReqDTO productOrderReqDTO) {
-SliverPadding _body(ProductDetailResDTO productDetailResDTO) {
+SliverPadding _body(ProductDetailResDTO productDetailResDTO,ProductOrderReqDTO productOrderReqDTO) {
+// SliverPadding _body(ProductDetailResDTO productDetailResDTO) {
   return SliverPadding(
     padding: EdgeInsets.all(16.0), // 패딩 설정
     sliver: SliverToBoxAdapter(
@@ -54,22 +54,22 @@ SliverPadding _body(ProductDetailResDTO productDetailResDTO) {
           // private int isIced; // 0 : hot, 1 : iced, 2 : both
           if (productDetailResDTO.isIced==0)
             Row(
-              // children: [
-                // Expanded(
-                    // child:ProductOutlineButton ("HOT ONLY", kActiveColor2,productDetailResDTO,productOrderReqDTO,false)),
-              // ],
+              children: [
+                Expanded(
+                    child:ProductOutlineButton ("HOT ONLY", kActiveColor2,productDetailResDTO,productOrderReqDTO,false)),
+              ],
             )
           else if(productDetailResDTO.isIced == 1)
             Row(
               children: [
-                // Expanded(child: ProductOutlineButton("ICED ONLY", kActiveColor1,productDetailResDTO,productOrderReqDTO,true)),
+                Expanded(child: ProductOutlineButton("ICED ONLY", kActiveColor1,productDetailResDTO,productOrderReqDTO,true)),
               ],
             )
           else if(productDetailResDTO.isIced == 2)
               Row(
                 children: [
-                  // Expanded(child: ProductOutlineButton("HOT", kActiveColor2,productDetailResDTO,productOrderReqDTO,false)),
-                  // Expanded(child: ProductOutlineButton("ICE", kActiveColor1,productDetailResDTO,productOrderReqDTO,true)),
+                  Expanded(child: ProductOutlineButton("HOT", kActiveColor2,productDetailResDTO,productOrderReqDTO,false)),
+                  Expanded(child: ProductOutlineButton("ICE", kActiveColor1,productDetailResDTO,productOrderReqDTO,true)),
                 ],
               ),
 

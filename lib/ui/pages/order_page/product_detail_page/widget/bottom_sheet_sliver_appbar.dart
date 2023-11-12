@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/data/model/product.dart';
 
 class BottomSheetSliverAppBar extends StatelessWidget {
-  Product product;
+  String productName;
   BottomSheetSliverAppBar({
     super.key,
-    required this.product,
+    required this.productName,
   });
 
   @override
@@ -15,7 +15,7 @@ class BottomSheetSliverAppBar extends StatelessWidget {
       pinned: true,
       floating: true,
       title: Text(
-        product.productName,
+        productName,
         style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,

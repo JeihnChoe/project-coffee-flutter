@@ -19,7 +19,7 @@ class ProductListPageBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(ProductListProvider(category));
     final productList = model?.productListResDTO??[];
-    Logger().d("픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미! 업! ${productList.length}");
+
 
     // Logger().d("모달가꼬와!!!!!!!!!!!${model?.productListResDTO ?? []}");
 

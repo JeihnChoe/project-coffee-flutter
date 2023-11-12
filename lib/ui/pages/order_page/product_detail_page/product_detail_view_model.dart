@@ -47,3 +47,4 @@ final productDetailProvider = StateNotifierProvider.family<ProductDetailViewMode
   Logger().d("통신?33333333");
   return ProductDetailViewModel(null, ref)..notifyInit(productListResDTO);
 });
+//창고데이터

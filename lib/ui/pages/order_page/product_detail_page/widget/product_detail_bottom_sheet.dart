@@ -6,13 +6,18 @@ import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
+import 'package:project_coffee/ui/pages/order_page/product_detail_page/widget/bottom_sheet_outline_button_second.dart';
 
-import 'bottom_sheet_outline_button_one.dart';
+import 'bottom_sheet_outline_button_first.dart';
+import 'bottom_sheet_outline_button_third.dart';
 import 'bottom_sheet_sliver_appbar.dart';
 
 class ProductDetailBottomSheet extends StatefulWidget {
-  ProductListResDTO productListResDTO;
-  ProductDetailBottomSheet({required this.productListResDTO});
+  ProductDetailResDTO productDetailResDTO;
+  ProductOrderReqDTO productOrderReqDTO;
+
+  ProductDetailBottomSheet(
+      {required this.productDetailResDTO, required this.productOrderReqDTO});
 
   @override
   State<ProductDetailBottomSheet> createState() =>
@@ -23,6 +28,7 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
   int selectedTabMethod = 1;
   int count = 1;
   int outlinbuttonchange = 1;
+
   // void submit(WidgetRef ref) {
   // &&arePasswordsEqual(_password.text, _passwordchk.text)==true
   // if (_formKey.currentState!.validate()) {
@@ -57,8 +63,6 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     // int? sizePrice = widget.productOrderReqDTO.option.price;
@@ -68,9 +72,9 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
           SliverToBoxAdapter(
             child: Container(color: Colors.white, child: SizedBox(height: 16)),
           ),
-          // BottomSheetSliverAppBar(
-          //   product: widget.productOrderReqDTO.product,
-          // ),
+          BottomSheetSliverAppBar(
+            productName: widget.productDetailResDTO.productName,
+          ),
           SliverToBoxAdapter(
             child: Container(
               color: Colors.white,
@@ -104,12 +108,39 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                     SizedBox(
                       height: 16,
                     ),
-                    // if(widget.productOrderReqDTO.product.category == 3)
-                    //   BottomSheetOutlineButtonOne(
-                    //     productOrderReqDTO: widget.productOrderReqDTO,  // DTO보내기
-                    //     selectedTabMethod : outlinbuttonchange,
-                    //     count : count,
-                    //     onStateChange: updateChildState,), //디폴트 값
+                    if (widget.productDetailResDTO.sizeType == 0)
+                      BottomSheetOutlineButtonFirst(
+                        productOrderReqDTO: widget.productOrderReqDTO, // DTO보내기
+                        selectedTabMethod: outlinbuttonchange,
+                        count: count,
+                        onStateChange: updateChildState,
+                      ) //디폴트 값
+                    else if (widget.productDetailResDTO.sizeType == 1)
+                      BottomSheetOutlineButtonSecond(
+                        productOrderReqDTO: widget.productOrderReqDTO,
+                        // DTO보내기
+                        selectedTabMethod: outlinbuttonchange,
+                        count: count,
+                        onStateChange: updateChildState,
+                      ) //디폴트 값
+                    else if(widget.productDetailResDTO.sizeType == 2)
+                      BottomSheetOutlineButtonThird(
+                        productOrderReqDTO: widget.productOrderReqDTO,
+                        // DTO보내기
+                        selectedTabMethod: outlinbuttonchange,
+                        count: count,
+                        onStateChange: updateChildState,
+                      )
+                    else
+                        BottomSheetOutlineButtonThird(   //ford로 바꿀꺼임
+                          productOrderReqDTO: widget.productOrderReqDTO,
+                          // DTO보내기
+                          selectedTabMethod: outlinbuttonchange,
+                          count: count,
+                          onStateChange: updateChildState,
+                        ),
+                      
+                      //디폴트 값
                     SizedBox(
                       height: gap_l,
                     ),
@@ -264,10 +295,7 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
       ),
       persistentFooterButtons: [
         Column(
-          children: [
-            PersistentTopButton(),
-            PersistentBottomButton(context)
-          ],
+          children: [PersistentTopButton(), PersistentBottomButton(context)],
         )
       ],
     );
@@ -275,158 +303,160 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
 
   Row PersistentBottomButton(BuildContext context) {
     return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.heart)),
-              Row(
-                children: [
-                  Consumer(builder: (context, ref, child) {
-                    return OutlinedButton(
-                      onPressed: () {
-                        // ref.read(beverageProvider).cart(context,widget.productOrderReqDTO);
-                        // showModalBottomSheet(
-                        //   context: context,
-                        //   isScrollControlled: true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
-                        //   builder: (context,) {
-                        //     return FractionallySizedBox(
-                        //       heightFactor: 0.20, // 높이를 20%로 설정
-                        //       child: ProductDetailCartBottomSheet(productOrderReqDTO: widget.productOrderReqDTO),
-                        //     );
-                        //   },
-                        // );
-                      },
-                      style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          side: BorderSide(
-                            color: kAccentColor,
-                          )),
-                      child: Text(
-                        "담기",
-                        style: TextStyle(color: kAccentColor),
-                      ),
-                    );
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.heart)),
+        Row(
+          children: [
+            Consumer(
+              builder: (context, ref, child) {
+                return OutlinedButton(
+                  onPressed: () {
+                    // ref.read(beverageProvider).cart(context,widget.productOrderReqDTO);
+                    // showModalBottomSheet(
+                    //   context: context,
+                    //   isScrollControlled: true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
+                    //   builder: (context,) {
+                    //     return FractionallySizedBox(
+                    //       heightFactor: 0.20, // 높이를 20%로 설정
+                    //       child: ProductDetailCartBottomSheet(productOrderReqDTO: widget.productOrderReqDTO),
+                    //     );
+                    //   },
+                    // );
                   },
-                  ),
-                  SizedBox(
-                    width: gap_m,
-                  ),
-                  // CustomAlertWindow(content: "주문할 매장을 선택해주세요.", buttonName1: "주문하기", buttonName2: "담기", clickButton: "뭐더라"),
-                  TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: kAccentColor,
-                        minimumSize: Size(120, 25),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
-                        ),
+                  style: OutlinedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      onPressed: () => showDialog<String>(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          content: Container(
-                            width: 400,
-                            height: 100,
-                            child: Column(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              children: [
-                                Text("주문할 매장을 선택해주세요"),
-                                Text("매장을 먼저 선택하신 후 주문해주세요. 판매 완료된 메뉴는 주문하실 수 없습니다."),
-                              ],
-                            ),
+                      side: BorderSide(
+                        color: kAccentColor,
+                      )),
+                  child: Text(
+                    "담기",
+                    style: TextStyle(color: kAccentColor),
+                  ),
+                );
+              },
+            ),
+            SizedBox(
+              width: gap_m,
+            ),
+            // CustomAlertWindow(content: "주문할 매장을 선택해주세요.", buttonName1: "주문하기", buttonName2: "담기", clickButton: "뭐더라"),
+            TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: kAccentColor,
+                  minimumSize: Size(120, 25),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
+                onPressed: () => showDialog<String>(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        content: Container(
+                          width: 400,
+                          height: 100,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("주문할 매장을 선택해주세요"),
+                              Text(
+                                  "매장을 먼저 선택하신 후 주문해주세요. 판매 완료된 메뉴는 주문하실 수 없습니다."),
+                            ],
                           ),
-                          actions: [
-                            TextButton(
-                              style: OutlinedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(25),
-                                  ),
-                                  side: BorderSide(
-                                    color: kAccentColor,
-                                  )),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text(
-                                "취소",
-                                style: TextStyle(color: kAccentColor),
-                              ),
-                            ),
-                            TextButton(
-                              style: TextButton.styleFrom(
-                                backgroundColor: kAccentColor,
-                                minimumSize: Size(150, 25),
+                        ),
+                        actions: [
+                          TextButton(
+                            style: OutlinedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25),
                                 ),
-                              ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                                // Navigator.push(context,
-                                //     MaterialPageRoute(builder: (context) => move1)); //이동할 페이지1
-                              },
-                              child: Text(
-                                "매장 선택하기",
-                                style: TextStyle(color: Colors.white),
-                              ), //버튼이름1
+                                side: BorderSide(
+                                  color: kAccentColor,
+                                )),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              "취소",
+                              style: TextStyle(color: kAccentColor),
                             ),
-                          ],
-                        ),
+                          ),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              backgroundColor: kAccentColor,
+                              minimumSize: Size(150, 25),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                              // Navigator.push(context,
+                              //     MaterialPageRoute(builder: (context) => move1)); //이동할 페이지1
+                            },
+                            child: Text(
+                              "매장 선택하기",
+                              style: TextStyle(color: Colors.white),
+                            ), //버튼이름1
+                          ),
+                        ],
                       ),
-                      child: Text("주문하기",style: TextStyle(color: Colors.white),)),
-                  SizedBox(
-                    width: gap_m,
-                  )
-                ],
-              ),
-            ],
-          );
+                    ),
+                child: Text(
+                  "주문하기",
+                  style: TextStyle(color: Colors.white),
+                )),
+            SizedBox(
+              width: gap_m,
+            )
+          ],
+        ),
+      ],
+    );
   }
 
   Row PersistentTopButton() {
     return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      if (count != 1) {
-                        setState(() {
-                          count--;
-                          // widget.productOrderReqDTO.count = count;
-                          // widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.sizePrice! * count;
-                        }
-                        );
-                      }
-                    },
-                    icon: Icon(CupertinoIcons.minus_circle),
-                    color: count == 1 ? Colors.grey : Colors.black,
-                  ),
-                  // Text("${widget.productOrderReqDTO.count}"),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        count++;
-                        // widget.productOrderReqDTO.count = count;
-                        // widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.sizePrice! * count;
-                      });
-                    },
-                    icon: Icon(CupertinoIcons.plus_circle),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  // textTitle1("${widget.productOrderReqDTO.totalmoney}"),
-                  SizedBox(
-                    width: 16,
-                  )
-                ],
-              ),
-            ],
-          );
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            IconButton(
+              onPressed: () {
+                if (count != 1) {
+                  setState(() {
+                    count--;
+                    // widget.productOrderReqDTO.count = count;
+                    // widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.sizePrice! * count;
+                  });
+                }
+              },
+              icon: Icon(CupertinoIcons.minus_circle),
+              color: count == 1 ? Colors.grey : Colors.black,
+            ),
+            // Text("${widget.productOrderReqDTO.count}"),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  count++;
+                  // widget.productOrderReqDTO.count = count;
+                  // widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.sizePrice! * count;
+                });
+              },
+              icon: Icon(CupertinoIcons.plus_circle),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            // textTitle1("${widget.productOrderReqDTO.totalmoney}"),
+            SizedBox(
+              width: 16,
+            )
+          ],
+        ),
+      ],
+    );
   }
 }
