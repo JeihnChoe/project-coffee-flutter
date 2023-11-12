@@ -6,15 +6,13 @@ import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
-import 'package:project_coffee/data/store/order_store.dart';
 
 import 'bottom_sheet_outline_button_one.dart';
 import 'bottom_sheet_sliver_appbar.dart';
-import 'product_detail_cart_bottom_sheet.dart';
 
 class ProductDetailBottomSheet extends StatefulWidget {
-  ProductOrderReqDTO productOrderReqDTO;
-  ProductDetailBottomSheet({required this.productOrderReqDTO});
+  ProductListResDTO productListResDTO;
+  ProductDetailBottomSheet({required this.productListResDTO});
 
   @override
   State<ProductDetailBottomSheet> createState() =>
@@ -40,17 +38,17 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
   @override
   void initState() {
     super.initState();
-    widget.productOrderReqDTO.cup = 1;
-    widget.productOrderReqDTO.count = 1;
-    widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.option.price;  //가격 넣어야함
-    widget.productOrderReqDTO.sizePrice = widget.productOrderReqDTO.option.id;
-    Logger().d("이건 isiced    ${widget.productOrderReqDTO.isIced}");
-    Logger().d("이건 product    ${widget.productOrderReqDTO.product}");
-    Logger().d("이건 option    ${widget.productOrderReqDTO.option}");
-    Logger().d("이건 sizeprice    ${widget.productOrderReqDTO.sizePrice}");
-    Logger().d("이건 size    ${widget.productOrderReqDTO.size}");
-    Logger().d("이건 cup    ${widget.productOrderReqDTO.cup}");
-    Logger().d("이건 count    ${widget.productOrderReqDTO.count}");
+    // widget.productOrderReqDTO.cup = 1;
+    // widget.productOrderReqDTO.count = 1;
+    // widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.option.price;  //가격 넣어야함
+    // widget.productOrderReqDTO.sizePrice = widget.productOrderReqDTO.option.id;
+    // Logger().d("이건 isiced    ${widget.productOrderReqDTO.isIced}");
+    // Logger().d("이건 product    ${widget.productOrderReqDTO.product}");
+    // Logger().d("이건 option    ${widget.productOrderReqDTO.option}");
+    // Logger().d("이건 sizeprice    ${widget.productOrderReqDTO.sizePrice}");
+    // Logger().d("이건 size    ${widget.productOrderReqDTO.size}");
+    // Logger().d("이건 cup    ${widget.productOrderReqDTO.cup}");
+    // Logger().d("이건 count    ${widget.productOrderReqDTO.count}");
   }
 
   void updateChildState(int newValue) {
@@ -63,16 +61,16 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    int? sizePrice = widget.productOrderReqDTO.option.price;
+    // int? sizePrice = widget.productOrderReqDTO.option.price;
     return Scaffold(
       body: Container(
         child: CustomScrollView(slivers: [
           SliverToBoxAdapter(
             child: Container(color: Colors.white, child: SizedBox(height: 16)),
           ),
-          BottomSheetSliverAppBar(
-            product: widget.productOrderReqDTO.product,
-          ),
+          // BottomSheetSliverAppBar(
+          //   product: widget.productOrderReqDTO.product,
+          // ),
           SliverToBoxAdapter(
             child: Container(
               color: Colors.white,
@@ -107,11 +105,11 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                       height: 16,
                     ),
                     // if(widget.productOrderReqDTO.product.category == 3)
-                      BottomSheetOutlineButtonOne(
-                        productOrderReqDTO: widget.productOrderReqDTO,  // DTO보내기
-                        selectedTabMethod : outlinbuttonchange,
-                        count : count,
-                        onStateChange: updateChildState,), //디폴트 값
+                    //   BottomSheetOutlineButtonOne(
+                    //     productOrderReqDTO: widget.productOrderReqDTO,  // DTO보내기
+                    //     selectedTabMethod : outlinbuttonchange,
+                    //     count : count,
+                    //     onStateChange: updateChildState,), //디폴트 값
                     SizedBox(
                       height: gap_l,
                     ),

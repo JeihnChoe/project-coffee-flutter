@@ -7,11 +7,12 @@ import 'package:project_coffee/data/model/product.dart';
 class ProductOutlineButton extends StatefulWidget {
   String text;
   Color mColor;
+  ProductDetailResDTO productDetailResDTO;
   ProductOrderReqDTO productOrderReqDTO;
   bool isIced;
   ProductOutlineButton(
       this.text,
-      this.mColor, this.productOrderReqDTO,this.isIced,{
+      this.mColor,this.productDetailResDTO, this.productOrderReqDTO,this.isIced,{
         super.key,
       });
 

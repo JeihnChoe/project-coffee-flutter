@@ -23,7 +23,6 @@ class CategoryListViewModel extends StateNotifier<CategoryListModel?> {
     await CategoryRepository().fetchCategoryDetailList();
     state = CategoryListModel(responseDTO);
   }
-
 }
 //창고관리자
 final CategoryListProvider =

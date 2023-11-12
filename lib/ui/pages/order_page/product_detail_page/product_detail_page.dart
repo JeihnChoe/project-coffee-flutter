@@ -7,31 +7,27 @@ import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
 
-import 'package:project_coffee/data/model/product.dart';
 import 'package:project_coffee/ui/pages/order_page/product_detail_page/product_detail_view_model.dart';
 
 
 import 'widget/product_detail_page_body.dart';
 import 'widget/product_detail_bottom_sheet.dart';
-import 'widget/bottom_sheet_outline_button_one.dart';
+
 
 class ProductDetailPage extends ConsumerWidget {
-  Product product;
-  ProductDetailPage(this.product);
+  ProductListResDTO productListResDTO;
+  ProductDetailPage(this.productListResDTO);
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    final model = ref.watch(productDetailProvider);
-    if(model?.productDetailResDTO.product.id == product.id){
-
+    final model = ref.watch(productDetailProvider(productListResDTO));
+    ProductDetailResDTO? productDetailResDTO = model?.productDetailResDTO;
+    if (productDetailResDTO == null) {
+      return Center(child: CircularProgressIndicator()); // 혹은 다른 예외 처리 방법
     }
-    ProductOrderReqDTO productOrderReqDTO = ProductOrderReqDTO(product: model!.productDetailResDTO.product,option: model!.productDetailResDTO.option);
-    // ProductOrderReqDTO productOrderReqDTO = ProductOrderReqDTO(product: productList!.product,option: productList.option);
-    // final indexItems = productOrderReqDTO.where((item) => item.product.category == category.id).toList();
-  // Logger().d("롸롸롸롸롸롸롸로롸롸롸롸롸롸롸롸롸롸로라ㅗ라롸롸롸롸롸${productOrderReqDTO}");
 
     return Scaffold(
-      body: ProductDetailPageBody(productOrderReqDTO),
+      body: ProductDetailPageBody(productDetailResDTO),
       persistentFooterButtons: [
         TextButton(
           style: TextButton.styleFrom(
@@ -48,7 +44,8 @@ class ProductDetailPage extends ConsumerWidget {
               builder: (context) {
                 return FractionallySizedBox(
                   heightFactor: 0.90, // 높이를 90%로 설정
-                  child: ProductDetailBottomSheet(productOrderReqDTO: productOrderReqDTO),
+                  child: ProductDetailBottomSheet(productListResDTO: productListResDTO),
+                  // child: ProductDetailBottomSheet(productListResDTO: productListResDTO,productOrderReqDTO: productOrderReqDTO),
                 );
               },
             );
