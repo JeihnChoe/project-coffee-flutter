@@ -44,10 +44,12 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
   @override
   void initState() {
     super.initState();
-    // widget.productOrderReqDTO.cup = 1;
-    // widget.productOrderReqDTO.count = 1;
-    // widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.option.price;  //가격 넣어야함
-    // widget.productOrderReqDTO.sizePrice = widget.productOrderReqDTO.option.id;
+
+    widget.productOrderReqDTO.optionId = widget.productDetailResDTO.optionId;
+    widget.productOrderReqDTO.cuptype = 1;
+    widget.productOrderReqDTO.quantity = 1;
+    widget.productOrderReqDTO.totalPrice = widget.productDetailResDTO.optionPrice;  //가격 넣어야함
+    widget.productOrderReqDTO.sizePrice = widget.productDetailResDTO.optionPrice;
     // Logger().d("이건 isiced    ${widget.productOrderReqDTO.isIced}");
     // Logger().d("이건 product    ${widget.productOrderReqDTO.product}");
     // Logger().d("이건 option    ${widget.productOrderReqDTO.option}");
@@ -110,29 +112,23 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                     ),
                     if (widget.productDetailResDTO.sizeType == 0)
                       BottomSheetOutlineButtonFirst(
+                        productDetailResDTO: widget.productDetailResDTO,
                         productOrderReqDTO: widget.productOrderReqDTO, // DTO보내기
                         selectedTabMethod: outlinbuttonchange,
                         count: count,
                         onStateChange: updateChildState,
                       ) //디폴트 값
-                    else if (widget.productDetailResDTO.sizeType == 1)
+                    else if (widget.productDetailResDTO.sizeType == 2)
                       BottomSheetOutlineButtonSecond(
+                        productDetailResDTO: widget.productDetailResDTO,
                         productOrderReqDTO: widget.productOrderReqDTO,
                         // DTO보내기
                         selectedTabMethod: outlinbuttonchange,
                         count: count,
                         onStateChange: updateChildState,
                       ) //디폴트 값
-                    else if(widget.productDetailResDTO.sizeType == 2)
-                      BottomSheetOutlineButtonThird(
-                        productOrderReqDTO: widget.productOrderReqDTO,
-                        // DTO보내기
-                        selectedTabMethod: outlinbuttonchange,
-                        count: count,
-                        onStateChange: updateChildState,
-                      )
                     else
-                        BottomSheetOutlineButtonThird(   //ford로 바꿀꺼임
+                        BottomSheetOutlineButtonThird(   //third는 없는걸로 바꿀꺼임
                           productOrderReqDTO: widget.productOrderReqDTO,
                           // DTO보내기
                           selectedTabMethod: outlinbuttonchange,
@@ -152,7 +148,7 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                             onPressed: () {
                               setState(() {
                                 selectedTabMethod = 1;
-                                // widget.productOrderReqDTO.cup = 1;
+                                widget.productOrderReqDTO.cuptype = 1;
                               });
                             },
                             child: Text(
@@ -184,7 +180,7 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                             onPressed: () {
                               setState(() {
                                 selectedTabMethod = 2;
-                                // widget.productOrderReqDTO.cup = 2;
+                                widget.productOrderReqDTO.cuptype = 2;
                               });
                             },
                             child: Text(
@@ -214,7 +210,7 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                             onPressed: () {
                               setState(() {
                                 selectedTabMethod = 3;
-                                // widget.productOrderReqDTO.cup = 3;
+                                widget.productOrderReqDTO.cuptype = 3;
                               });
                             },
                             child: Text(
@@ -312,6 +308,8 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
               builder: (context, ref, child) {
                 return OutlinedButton(
                   onPressed: () {
+                    Logger().d(widget.productOrderReqDTO.toString());
+                    Logger().d(widget.productOrderReqDTO.toJson());
                     // ref.read(beverageProvider).cart(context,widget.productOrderReqDTO);
                     // showModalBottomSheet(
                     //   context: context,
@@ -427,21 +425,21 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                 if (count != 1) {
                   setState(() {
                     count--;
-                    // widget.productOrderReqDTO.count = count;
-                    // widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.sizePrice! * count;
+                    widget.productOrderReqDTO.quantity = count;
+                    widget.productOrderReqDTO.totalPrice = widget.productOrderReqDTO.sizePrice! * count;
                   });
                 }
               },
               icon: Icon(CupertinoIcons.minus_circle),
               color: count == 1 ? Colors.grey : Colors.black,
             ),
-            // Text("${widget.productOrderReqDTO.count}"),
+            Text("${widget.productOrderReqDTO.quantity}"),
             IconButton(
               onPressed: () {
                 setState(() {
                   count++;
-                  // widget.productOrderReqDTO.count = count;
-                  // widget.productOrderReqDTO.totalmoney = widget.productOrderReqDTO.sizePrice! * count;
+                  widget.productOrderReqDTO.quantity = count;
+                  widget.productOrderReqDTO.totalPrice = widget.productOrderReqDTO.sizePrice! * count;
                 });
               },
               icon: Icon(CupertinoIcons.plus_circle),
@@ -450,7 +448,7 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
         ),
         Row(
           children: [
-            // textTitle1("${widget.productOrderReqDTO.totalmoney}"),
+            textTitle1("${widget.productOrderReqDTO.totalPrice}"),
             SizedBox(
               width: 16,
             )
