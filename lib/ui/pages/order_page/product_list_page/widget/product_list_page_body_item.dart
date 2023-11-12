@@ -20,7 +20,7 @@ class CategoryProductListPageBodyItem extends StatelessWidget {
           // Navigator.push(
           //     context,
           //     MaterialPageRoute(
-          //         builder: (context) => ProductDetailPage(productListResDTO.product)));
+          //         builder: (context) => ProductDetailPage(productListResDTO)));
         },
         child: Padding(
           padding: const EdgeInsets.only(top: 5,bottom: 15, right: 16),
@@ -30,7 +30,7 @@ class CategoryProductListPageBodyItem extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                // _image(productListResDTO.product),
+                _image(productListResDTO),
                 SizedBox(width: gap_m),
                 _Product(productListResDTO),
               ],
@@ -48,26 +48,26 @@ _Product(ProductListResDTO product) {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // textTitle2(
-          // "${product.product.productName}",
-        // ),
+        textTitle2(
+          "${product.name}",
+        ),
         SizedBox(height: gap_s),
-        // textBody3("${product.product.productEngName}"),
+        textBody3("${product.engName}"),
         SizedBox(height: gap_m),
-        textBody3("${product.optionPrice}원")
+        textBody3("${product.price}원")
       ],
     ),
   );
 }
 
-_image(Product product) {
+_image(ProductListResDTO product) {
   return Container(
     width: 100,
     height: 90,
     decoration: BoxDecoration(
       shape: BoxShape.circle,
       image: DecorationImage(
-          image: NetworkImage("${product.productPicUrl}"),
+          image: NetworkImage("${product.picUrl}"),
           fit: BoxFit.cover),
     ),
   );

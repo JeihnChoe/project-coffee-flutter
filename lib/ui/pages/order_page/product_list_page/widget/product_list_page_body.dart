@@ -8,6 +8,7 @@ import 'package:project_coffee/data/model/category.dart';
 import 'package:project_coffee/ui/widgets/custom_sliver_app_bar.dart';
 
 import '../product_list_page_view_model.dart';
+import 'product_list_page_body_item.dart';
 
 
 class ProductListPageBody extends ConsumerWidget {
@@ -17,9 +18,8 @@ class ProductListPageBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(ProductListProvider(category));
-
-    // Logger().d(ref.watch(ProductListProvider.notifier).notifyAdd(category));
-    Logger().d("픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미! 업! ${model.toString()}");
+    final productList = model?.productListResDTO??[];
+    Logger().d("픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미!픽 미! 업! ${productList.length}");
 
     // Logger().d("모달가꼬와!!!!!!!!!!!${model?.productListResDTO ?? []}");
 
@@ -33,16 +33,16 @@ class ProductListPageBody extends ConsumerWidget {
       shrinkWrap: true,
       slivers: [
         CustomSliverAppBar(title: "${category.name}"),
-        // SliverPadding(
-        //   padding: EdgeInsets.all(16),
-        //   sliver: SliverList(
-        //     delegate: SliverChildBuilderDelegate(
-        //       (context, index) =>
-        //           CategoryProductListPageBodyItem(indexItems[index]),
-        //       childCount: indexItems.length,
-        //     ),
-        //   ),
-        // ),
+        SliverPadding(
+          padding: EdgeInsets.all(16),
+          sliver: SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) =>
+                  CategoryProductListPageBodyItem(productList[index]),
+              childCount: productList.length,
+            ),
+          ),
+        ),
       ],
     );
   }

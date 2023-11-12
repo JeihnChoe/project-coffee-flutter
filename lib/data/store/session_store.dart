@@ -44,7 +44,7 @@ class SessionStore extends SessionUser {
   Future<void> login(LoginReqDTO loginReqDTO) async {
     // 1. 통신 코드
     ResponseDTO responseDTO = await UserRepository().fetchLogin(loginReqDTO);
-    Logger().d("값을 고해 보거라 왜 폴스라떠 ? ${responseDTO}");
+    Logger().d("값을 고해 보거라 왜 폴스라떠 ? ${responseDTO.success}");
     // 2. 비지니스 로직
     if (responseDTO.success == true) {
       // 1. 세션값 갱신
