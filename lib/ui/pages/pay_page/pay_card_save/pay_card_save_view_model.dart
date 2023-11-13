@@ -19,6 +19,11 @@ class PayCardStore extends PayCardModel {
 
   // PayCardStore();
 
+  Future<void> charge(CardChargeReqDTO cardChargeReqDTO) async {
+    Navigator.pushNamed(mContext!, Move.MainPage);
+    // Navigator.push(mContext, JoinSucessPage())
+  }
+
   Future<void> save(CardSaveReqDTO cardSaveReqDTO, String? token) async {
     try {
       ResponseDTO responseDTO =
