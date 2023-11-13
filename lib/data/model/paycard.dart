@@ -1,6 +1,6 @@
 class PayCard {
   final int id;
-  final String? picUrl;
+  final String picUrl;
   final String name;
   final int money;
   final int? userId;
