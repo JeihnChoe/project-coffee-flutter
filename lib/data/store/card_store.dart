@@ -6,8 +6,8 @@ import 'package:project_coffee/_core/constants/move.dart';
 import 'package:project_coffee/data/dto/card_request.dart';
 import 'package:project_coffee/data/model/paycard.dart';
 import 'package:project_coffee/data/repository/card_repository.dart';
-import 'package:project_coffee/data/store/session_store.dart';
 import 'package:project_coffee/main.dart';
+
 import '../dto/reponse_dto.dart';
 
 class PayCardModel {
@@ -18,7 +18,7 @@ class PayCardModel {
 class PayCardStore extends PayCardModel {
   final mContext = navigatorKey.currentContext;
 
- // PayCardStore();
+  // PayCardStore();
 
   Future<void> charge(CardChargeReqDTO cardChargeReqDTO) async {
     Navigator.pushNamed(mContext!, Move.MainPage);
@@ -27,7 +27,8 @@ class PayCardStore extends PayCardModel {
 
   Future<void> save(CardSaveReqDTO cardSaveReqDTO, String? token) async {
     try {
-      ResponseDTO responseDTO = await CardRepository().fetchCardSave(cardSaveReqDTO, token);
+      ResponseDTO responseDTO =
+          await CardRepository().fetchCardSave(cardSaveReqDTO);
       Logger().d("카드 등록 중 ${responseDTO.response}");
       Logger().d("카드 등록 중 ${responseDTO.success}");
 
@@ -42,7 +43,6 @@ class PayCardStore extends PayCardModel {
       Logger().e("카드 등록 중 오류: $e");
     }
   }
-
 }
 
 //창고 관리자
