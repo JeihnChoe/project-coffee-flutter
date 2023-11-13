@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:project_coffee/ui/pages/main_page/main_page.dart';
 
 import 'other_main_page_body_item.dart';
 
 class OtherCustomerServiceSection extends StatelessWidget {
-  const OtherCustomerServiceSection({
+  String? jwt;
+  OtherCustomerServiceSection({
+    required this.jwt,
     super.key,
   });
 
@@ -31,14 +32,21 @@ class OtherCustomerServiceSection extends StatelessWidget {
                   child: Column(
                     children: [
                       ElevatedButton(
-                        onPressed: () =>OtherShowDialog(context,"스토어 케어",3),
+                        onPressed: () => jwt != null && !jwt!.isEmpty
+                            ? Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MainPage()))
+                            : OtherShowDialog(context, "스토어 케어", 3),
                         child: Row(
                           children: [
                             Icon(
                               Icons.storefront,
                               color: Colors.black,
                             ),
-                            SizedBox(width: gap_m,),
+                            SizedBox(
+                              width: gap_m,
+                            ),
                             Text(
                               "스토어 케어",
                               style: TextStyle(color: Colors.black),
@@ -58,7 +66,9 @@ class OtherCustomerServiceSection extends StatelessWidget {
                               Icons.edit_location,
                               color: Colors.black,
                             ),
-                            SizedBox(width: gap_m,),
+                            SizedBox(
+                              width: gap_m,
+                            ),
                             Text(
                               "매장 정보 ",
                               style: TextStyle(color: Colors.black),
@@ -71,14 +81,21 @@ class OtherCustomerServiceSection extends StatelessWidget {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () =>OtherShowDialog(context,"마이 스타벅스 리뷰",3),
+                        onPressed: () => jwt != null && !jwt!.isEmpty
+                            ? Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MainPage()))
+                            : OtherShowDialog(context, "마이 스타벅스 리뷰", 3),
                         child: Row(
                           children: [
                             Icon(
                               Icons.rate_review_outlined,
                               color: Colors.black,
                             ),
-                            SizedBox(width: gap_m,),
+                            SizedBox(
+                              width: gap_m,
+                            ),
                             Text(
                               "마이 스타벅스 리뷰",
                               style: TextStyle(color: Colors.black),
@@ -97,14 +114,21 @@ class OtherCustomerServiceSection extends StatelessWidget {
                   child: Column(
                     children: [
                       ElevatedButton(
-                        onPressed: () =>OtherShowDialog(context,"스토어 케어",3),
+                        onPressed: () => jwt != null && !jwt!.isEmpty
+                            ? Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MainPage()))
+                            : OtherShowDialog(context, "고객의 소리", 3),
                         child: Row(
                           children: [
                             Icon(
                               CupertinoIcons.ear,
                               color: Colors.black,
                             ),
-                            SizedBox(width: gap_m,),
+                            SizedBox(
+                              width: gap_m,
+                            ),
                             Text(
                               "고객의 소리",
                               style: TextStyle(color: Colors.black),
@@ -124,7 +148,9 @@ class OtherCustomerServiceSection extends StatelessWidget {
                               LineIcons.recycle,
                               color: Colors.black,
                             ),
-                            SizedBox(width: gap_m,),
+                            SizedBox(
+                              width: gap_m,
+                            ),
                             Text(
                               "반납기 정보",
                               style: TextStyle(color: Colors.black),
@@ -137,16 +163,16 @@ class OtherCustomerServiceSection extends StatelessWidget {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () {
-
-                        },
+                        onPressed: () {},
                         child: Row(
                           children: [
                             Icon(
                               CupertinoIcons.doc_text_search,
                               color: Colors.black,
                             ),
-                            SizedBox(width: gap_m,),
+                            SizedBox(
+                              width: gap_m,
+                            ),
                             Text(
                               "바리스타 채용",
                               style: TextStyle(color: Colors.black),
@@ -167,8 +193,6 @@ class OtherCustomerServiceSection extends StatelessWidget {
           ],
         ),
       ),
-
     );
   }
 }
-

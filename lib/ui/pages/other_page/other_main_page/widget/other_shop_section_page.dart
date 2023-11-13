@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/ui/pages/shop_page/shop_page.dart';
 
 import 'other_main_page_body_item.dart';
 
 class OtherShopSection extends StatelessWidget {
-  const OtherShopSection({
+  String? jwt;
+  OtherShopSection({
+    required this.jwt,
     super.key,
   });
 
@@ -28,14 +31,21 @@ class OtherShopSection extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () =>OtherShowDialog(context,"온라인 스토어 주문내역",1),
+                        onPressed: () => jwt != null && !jwt!.isEmpty
+                            ? Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ShopPage()))
+                            : OtherShowDialog(context, "온라인 스토어 주문내역", 2),
                         child: Row(
                           children: [
                             Icon(
                               LineIcons.truck,
                               color: Colors.black,
                             ),
-                            SizedBox(width: gap_m,),
+                            SizedBox(
+                              width: gap_m,
+                            ),
                             Text(
                               "온라인 스토어\n주문내역",
                               style: TextStyle(color: Colors.black),
@@ -56,7 +66,6 @@ class OtherShopSection extends StatelessWidget {
           ],
         ),
       ),
-
     );
   }
 }
