@@ -102,7 +102,7 @@ class ProductDetailResDTO {
   String productEngName;
   int optionId;
   int optionPrice;
-  int isIced;
+  int? isIced;
   String tip;
   String? description;
   int? sizeType;
@@ -133,7 +133,7 @@ class ProductDetailResDTO {
         "sizeType": sizeType,
       };
 
-  ProductDetailResDTO.fromJson1(Map<String, dynamic> json)
+  ProductDetailResDTO.fromJson(Map<String, dynamic> json)
       : productId = json["productId"],
         picUrl = json["picUrl"],
         productName = json["productName"],
@@ -144,16 +144,6 @@ class ProductDetailResDTO {
         tip = json["tip"],
         description = json["description"],
         sizeType = json["sizeType"];
-
-  ProductDetailResDTO.fromJson2(Map<String, dynamic> json)
-      : productId = json["productId"],
-        picUrl = json["picUrl"],
-        productName = json["productName"],
-        productEngName = json["productEngName"],
-        optionId = json["optionId"],
-        optionPrice = json["optionPrice"],
-        isIced = json["isIced"],
-        tip = json["tip"];
 }
 
 class OrderResponse {

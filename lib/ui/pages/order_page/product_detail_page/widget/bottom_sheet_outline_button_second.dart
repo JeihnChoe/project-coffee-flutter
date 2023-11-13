@@ -37,6 +37,7 @@ class _BottomSheetOutlineButtonState
   @override
   void initState() {
     selectedPayment = selectedPayment;
+    widget.productOrderReqDTO.sizeId = selectedPayment;
     sixPrice = widget.productDetailResDTO.optionPrice;
     sevenPrice = widget.productDetailResDTO.optionPrice + 500;
 
@@ -51,7 +52,7 @@ class _BottomSheetOutlineButtonState
           onPressed: () {
             setState(() {
               selectedPayment = 6;
-
+              widget.productOrderReqDTO.sizeId = selectedPayment;
               widget.productOrderReqDTO.sizePrice = sixPrice;
               widget.productOrderReqDTO.totalPrice = sixPrice * widget.count;
               widget.onStateChange(selectedPayment);
@@ -91,6 +92,7 @@ class _BottomSheetOutlineButtonState
           onPressed: () {
             setState(() {
               selectedPayment = 7;
+              widget.productOrderReqDTO.sizeId = selectedPayment;
               widget.productOrderReqDTO.sizePrice = sevenPrice;
               widget.productOrderReqDTO.totalPrice = sevenPrice * widget.count;
               widget.onStateChange(selectedPayment);

@@ -31,6 +31,7 @@ class BottomSheetOutlineButtonFirst extends StatefulWidget {
 class _BottomSheetOutlineButtonState
     extends State<BottomSheetOutlineButtonFirst> {
   int selectedPayment = 2;
+  int optionState = 0;
   int zeroprice = 0;
   int oneprice = 1;
   int twoprice = 2;
@@ -39,6 +40,9 @@ class _BottomSheetOutlineButtonState
   @override
   void initState() {
     selectedPayment = selectedPayment;
+    optionState = widget.productDetailResDTO.optionId;
+    widget.productOrderReqDTO.optionId = widget.productDetailResDTO.optionId;
+    widget.productOrderReqDTO.sizeId = selectedPayment;
     zeroprice = widget.productDetailResDTO.optionPrice - 500;
     oneprice = widget.productDetailResDTO.optionPrice;
     twoprice = widget.productDetailResDTO.optionPrice + 500;
@@ -56,8 +60,8 @@ class _BottomSheetOutlineButtonState
               onPressed: () {
                 setState(() {
                   selectedPayment = 1;
-
-                  widget.productOrderReqDTO.sizePrice = zeroprice;
+                  widget.productOrderReqDTO.optionId = optionState - 1;
+                  widget.productOrderReqDTO.sizeId = selectedPayment;
                   widget.productOrderReqDTO.sizePrice = zeroprice;
                   widget.productOrderReqDTO.totalPrice =
                       zeroprice * widget.count;
@@ -121,6 +125,8 @@ class _BottomSheetOutlineButtonState
             onPressed: () {
               setState(() {
                 selectedPayment = 2;
+                widget.productOrderReqDTO.optionId = optionState;
+                widget.productOrderReqDTO.sizeId = selectedPayment;
                 widget.productOrderReqDTO.sizePrice = oneprice;
                 widget.productOrderReqDTO.totalPrice = oneprice * widget.count;
                 widget.onStateChange(selectedPayment);
@@ -183,6 +189,8 @@ class _BottomSheetOutlineButtonState
             onPressed: () {
               setState(() {
                 selectedPayment = 3;
+                widget.productOrderReqDTO.optionId = optionState + 1;
+                widget.productOrderReqDTO.sizeId = selectedPayment;
                 widget.productOrderReqDTO.sizePrice = twoprice;
                 widget.productOrderReqDTO.totalPrice = twoprice * widget.count;
                 widget.onStateChange(selectedPayment);
@@ -245,6 +253,8 @@ class _BottomSheetOutlineButtonState
             onPressed: () {
               setState(() {
                 selectedPayment = 4;
+                widget.productOrderReqDTO.optionId = optionState + 2;
+                widget.productOrderReqDTO.sizeId = selectedPayment;
                 widget.productOrderReqDTO.sizePrice = threeprice;
                 widget.productOrderReqDTO.totalPrice =
                     threeprice * widget.count;
