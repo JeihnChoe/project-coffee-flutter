@@ -1,26 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
-import 'package:project_coffee/data/store/session_store.dart';
-import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/shopping_cart_page_view_model.dart';
 
 import '../../shopping_cart_goods_page/shopping_cart_goods_empty_page.dart';
 import '../../shopping_cart_product_page/shopping_cart_product_page.dart';
 
 class ShoppingCartPageBody extends ConsumerWidget {
-  const ShoppingCartPageBody({super.key});
+  List<CartTotalDTO>? cartTotalDTO;
+  ShoppingCartPageBody({this.cartTotalDTO, super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    SessionUser sessionUser = ref.read(sessionProvider);
-    String? jwt = sessionUser.jwt;
-
-    ShoppingCartListModel? model = ref.watch(shoppingCartListProvider(jwt!));
-    List<CartTotalDTO> cartTotalList = model?.cartTotalDTO ?? [];
-    Logger().d(cartTotalList.length);
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -47,7 +38,7 @@ class ShoppingCartPageBody extends ConsumerWidget {
               child: TabBarView(
                 children: [
                   // 첫 번째 탭 페이지: 음료/푸드
-                  ShoppingCartProductPage(cartTotalList),
+                  ShoppingCartProductPage(cartTotalDTO!),
                   // beverageOrderList.isEmpty
                   //     ? ShoppingCartBeverageEmptyPage()
                   //     : ShoppingCartBeveragePage(beverageOrderList),

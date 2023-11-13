@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/utils/validator_util.dart';
 import 'package:project_coffee/data/dto/user_request.dart';
@@ -22,7 +21,7 @@ class LoginPageFormField extends StatelessWidget {
         loginId: loginId.text,
         password: password.text,
       );
-      Logger().d("${loginReqDTO.toJson()}");
+
       ref.read(sessionProvider).login(loginReqDTO);
     }
   }
@@ -38,9 +37,19 @@ class LoginPageFormField extends StatelessWidget {
               key: _formKey,
               child: Column(
                 children: [
-                  CustomTextForm("UserId", validatorFunction: validateUserId, controller: loginId,),
-                  SizedBox(height: gap_l,),
-                  CustomTextForm("Password", validatorFunction: validatePassword, controller: password,),
+                  CustomTextForm(
+                    "UserId",
+                    validatorFunction: validateUserId,
+                    controller: loginId,
+                  ),
+                  SizedBox(
+                    height: gap_l,
+                  ),
+                  CustomTextForm(
+                    "Password",
+                    validatorFunction: validatePassword,
+                    controller: password,
+                  ),
                 ],
               ),
             ),
