@@ -69,11 +69,12 @@ class ProductOrderReqDTO {
   int? quantity; // 갯수
   int? sizeId; // 사이즈 Id값
   int? cuptype;  // 컵타입
+  int? sizePrice; //이거뺴고 보낼꺼임
   int? totalPrice; // 총 가격
   int? userId;
 
   ProductOrderReqDTO({this.optionId, this.isIced, this.quantity, this.sizeId,
-    this.cuptype, this.totalPrice, this.userId}); // 유저Id  비회원일시 0
+    this.cuptype,this.sizePrice, this.totalPrice, this.userId}); // 유저Id  비회원일시 0
 
 
   //
@@ -87,7 +88,6 @@ class ProductOrderReqDTO {
         "userId": userId
       };
 
-  //
   ProductOrderReqDTO.fromJson(Map<String, dynamic> json)
       : optionId = json["optionId"],
         isIced = json["isIced"],
