@@ -44,16 +44,13 @@ class SessionStore extends SessionUser {
   Future<void> login(LoginReqDTO loginReqDTO) async {
     // 1. 통신 코드
     ResponseDTO responseDTO = await UserRepository().fetchLogin(loginReqDTO);
-    Logger().d("값을 고해 보거라 왜 폴스라떠 ? ${responseDTO.success}");
+
     // 2. 비지니스 로직
     if (responseDTO.success == true) {
       // 1. 세션값 갱신
       this.user = responseDTO.response as User;
       this.jwt = responseDTO.token;
       this.isLogin = true;
-      Logger().d("this.user : ${this.user}");
-      Logger().d("this.jwt : ${this.jwt}");
-      Logger().d("this.isLogin : ${this.isLogin}");
 
       // 2. 디바이스에 JWT 저장 (자동 로그인)
       await secureStorage.write(key: "jwt", value: responseDTO.token);

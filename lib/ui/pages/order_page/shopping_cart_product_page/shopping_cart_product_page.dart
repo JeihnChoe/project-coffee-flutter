@@ -24,16 +24,19 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
   List<int> itemCounts = []; // 각 아이템의 수량을 나타내는 변수
   List<int> itemTotalPrice = []; // 각 아이템의 총 가격을 나타내는 변수
 
+  // 초기에 모든 아이템을 선택하지 않도록 false로 설정
   @override
   void initState() {
     super.initState();
-    // 초기에 모든 아이템을 선택하지 않도록 false로 설정
     itemCheckedState =
         List.generate(widget.cartTotalList.length, (index) => false);
     itemCounts = List.generate(widget.cartTotalList.length,
         (index) => widget.cartTotalList[index].quantity);
     itemTotalPrice = List.generate(widget.cartTotalList.length,
-        (index) => widget.cartTotalList[index].sumPrice); // 예시로 8000으로 초기화
+        (index) => widget.cartTotalList[index].sumPrice);
+
+    print('itemCounts: $itemCounts');
+    print('itemTotalPrice: $itemTotalPrice');
   }
 
   int getCheckedItemCount() {

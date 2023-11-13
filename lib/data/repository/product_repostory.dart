@@ -21,7 +21,6 @@ class ProductRepository {
 
         // List일 경우 첫 번째 요소를 가져옴
 
-
         if (responseDTO.response.isNotEmpty) {
           Logger().d(
               "dddddddddddddddddddddd 샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라");
@@ -86,15 +85,10 @@ class ProductRepository {
       // dynamic -> http body
 
       Response response = await dio.post("/api/cart/addcartlist",
-<<<<<<< HEAD
-          data: productOrderReqDTO.toJson(),
-          options: Options(headers: {"Authorization": "${jwt}"}));
-=======
           data: modifiedData, options: options);
       Logger().d("통신은 된다냐??!!");
       Logger().d(response.data);
 
->>>>>>> 8d0ec0ea9e489512c672693c77f2e3fc6dfa70a1
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       //  responseDTO.response = User.fromJson(responseDTO.response);
       return responseDTO;
