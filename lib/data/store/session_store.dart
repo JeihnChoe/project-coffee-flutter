@@ -88,7 +88,7 @@ class SessionStore extends SessionUser {
     this.jwt = null;
     this.isLogin = false;
     await secureStorage.delete(key: "jwt");
-    Logger().d("세션 종료 및 디바이스 JWT 삭제");
+    Navigator.pushNamed(mContext!, Move.MainPage);
   }
 }
 

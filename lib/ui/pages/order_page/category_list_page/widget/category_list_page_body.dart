@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/data/store/session_store.dart';
+import 'package:project_coffee/ui/pages/home_page/login_page/login_page.dart';
 import 'package:project_coffee/ui/pages/order_page/%20select_order_store_page/select_order_store_list_page.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/shopping_cart_page.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/shopping_cart_page_view_model.dart';
+import 'package:project_coffee/ui/pages/other_page/other_main_page/widget/other_main_page_body_item.dart';
 import 'package:project_coffee/ui/widgets/custom_tab_bar.dart';
 
 import 'category_list_page_app_bar.dart';
@@ -16,6 +18,7 @@ class CategoryListPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -65,23 +68,36 @@ class CategoryListPageBody extends StatelessWidget {
                   builder: (context, ref, child) {
                     SessionUser sessionUser = ref.read(sessionProvider);
                     String? jwt = sessionUser.jwt;
+                    if(sessionUser.jwt != null){
+                      ShoppingCartListModel? model = ref.watch(shoppingCartListProvider(jwt!));
+                      List<CartTotalDTO> cartTotalList =
+                          model?.cartTotalDTO ?? [];
 
-                    ShoppingCartListModel? model =
-                        ref.watch(shoppingCartListProvider(jwt!));
-                    List<CartTotalDTO> cartTotalList =
-                        model?.cartTotalDTO ?? [];
-                    return IconButton(
-                      icon: Icon(CupertinoIcons.bag),
-                      color: Colors.white, // 아이콘 색상 설정
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ShoppingCartPage(
-                                  cartTOtalDTO: cartTotalList)),
-                        );
-                      },
-                    );
+                      return IconButton(
+                        icon: Icon(CupertinoIcons.bag),
+                        color: Colors.white, // 아이콘 색상 설정
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ShoppingCartPage(
+                                    cartTOtalDTO: cartTotalList)),
+                          );
+                        },
+                      );
+                    }else{
+                      return IconButton(
+                        icon: Icon(CupertinoIcons.bag),
+                        color: Colors.white, // 아이콘 색상 설정
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()
+                          ),);
+                        },
+                      );
+                    }
                   },
                 ),
               )
