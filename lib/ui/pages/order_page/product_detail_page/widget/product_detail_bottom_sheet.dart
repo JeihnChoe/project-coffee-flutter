@@ -45,16 +45,6 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
         widget.productDetailResDTO.optionPrice; //가격 넣어야함
     widget.productOrderReqDTO.sizePrice =
         widget.productDetailResDTO.optionPrice;
-<<<<<<< HEAD
-    // Logger().d("이건 isiced    ${widget.productOrderReqDTO.isIced}");
-    // Logger().d("이건 product    ${widget.productOrderReqDTO.product}");
-    // Logger().d("이건 option    ${widget.productOrderReqDTO.option}");
-    // Logger().d("이건 sizeprice    ${widget.productOrderReqDTO.sizePrice}");
-    // Logger().d("이건 size    ${widget.productOrderReqDTO.size}");
-    // Logger().d("이건 cup    ${widget.productOrderReqDTO.cup}");
-    // Logger().d("이건 count    ${widget.productOrderReqDTO.count}");
-=======
->>>>>>> d35f399b28dc11dc9d2c9157a79efe5e0d3553eb
   }
 
   void updateChildState(int newValue) {
@@ -131,16 +121,7 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                       BottomSheetOutlineButtonThird(
                         //third는 없는걸로 바꿀꺼임
                         productOrderReqDTO: widget.productOrderReqDTO,
-<<<<<<< HEAD
-                        // DTO보내기
-                        selectedTabMethod: outlinbuttonchange,
-                        count: count,
-                        onStateChange: updateChildState,
                       ),
-
-=======
-                      ),
->>>>>>> d35f399b28dc11dc9d2c9157a79efe5e0d3553eb
                     //디폴트 값
                     SizedBox(
                       height: gap_l,
@@ -324,7 +305,7 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                       OtherShowDialog(context, "장바구니 담기", 1);
                     }
                     // showModalBottomSheet(
-<<<<<<< HEAD
+
                     //                       context: context,
                     //                       isScrollControlled: true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
                     //                       builder: (context,) {
@@ -334,21 +315,6 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                     //                         );
                     //                       },
                     //                     );
-=======
-                    //   context: context,
-                    //   isScrollControlle d:
-                    //       true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
-                    //   builder: (
-                    //     context,
-                    //   ) {
-                    //     return FractionallySizedBox(
-                    //       heightFactor: 0.20, // 높이를 20%로 설정
-                    //       child: ProductDetailCartBottomSheet(
-                    //           productOrderReqDTO: widget.productOrderReqDTO),
-                    //     );
-                    //   },
-                    // );
->>>>>>> d35f399b28dc11dc9d2c9157a79efe5e0d3553eb
                   },
                   style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(
