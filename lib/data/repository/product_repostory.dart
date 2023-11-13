@@ -20,12 +20,16 @@ class ProductRepository {
         ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
         // List일 경우 첫 번째 요소를 가져옴
-        Logger().d("이거 가져와줘어이이잉");
-        Logger().d(responseDTO.response.first);
+
 
         if (responseDTO.response.isNotEmpty) {
+          Logger().d(
+              "dddddddddddddddddddddd 샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라");
+          Logger().d(responseDTO.response.first);
           ProductDetailResDTO productDetail =
-              ProductDetailResDTO.fromJson1(responseDTO.response.first);
+              ProductDetailResDTO.fromJson(responseDTO.response.first);
+          Logger().d("이거이거");
+          Logger().d(productDetail);
 
           Logger().d("상품 세부 정보: ${productDetail}");
 
@@ -80,10 +84,12 @@ class ProductRepository {
 
     try {
       // dynamic -> http body
+
       Response response = await dio.post("/api/cart/addcartlist",
           data: modifiedData, options: options);
       Logger().d("통신은 된다냐??!!");
       Logger().d(response.data);
+
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       //  responseDTO.response = User.fromJson(responseDTO.response);
       return responseDTO;

@@ -305,19 +305,16 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                       OtherShowDialog(context, "장바구니 담기", 1);
                     }
                     // showModalBottomSheet(
-                    //   context: context,
-                    //   isScrollControlle d:
-                    //       true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
-                    //   builder: (
-                    //     context,
-                    //   ) {
-                    //     return FractionallySizedBox(
-                    //       heightFactor: 0.20, // 높이를 20%로 설정
-                    //       child: ProductDetailCartBottomSheet(
-                    //           productOrderReqDTO: widget.productOrderReqDTO),
-                    //     );
-                    //   },
-                    // );
+
+                    //                       context: context,
+                    //                       isScrollControlled: true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
+                    //                       builder: (context,) {
+                    //                         return FractionallySizedBox(
+                    //                           heightFactor: 0.20, // 높이를 20%로 설정
+                    //                           child: ProductDetailCartBottomSheet(productOrderReqDTO: widget.productOrderReqDTO),
+                    //                         );
+                    //                       },
+                    //                     );
                   },
                   style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(
