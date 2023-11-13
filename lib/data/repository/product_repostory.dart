@@ -21,6 +21,7 @@ class ProductRepository {
 
         // List일 경우 첫 번째 요소를 가져옴
 
+
         if (responseDTO.response.isNotEmpty) {
           Logger().d(
               "dddddddddddddddddddddd 샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라");
@@ -71,15 +72,21 @@ class ProductRepository {
 
   Future<ResponseDTO> fetchProductCartSave(
       String jwt, ProductOrderReqDTO productOrderReqDTO) async {
+    Options options = Options(headers: {
+      "Authorization": "Bearer ${jwt}",
+    });
     Logger().d("값은 넘어와 ?");
     Logger().d(productOrderReqDTO.toJson());
+    List<Map<String, dynamic>> modifiedData = [productOrderReqDTO.toJson()];
+    Logger().d("리스트로 바꿧자나 제발");
+    Logger().d(modifiedData);
     Logger().d(jwt);
+
     try {
       // dynamic -> http body
 
       Response response = await dio.post("/api/cart/addcartlist",
-          data: productOrderReqDTO.toJson(),
-          options: Options(headers: {"Authorization": "${jwt}"}));
+          data: modifiedData, options: options);
       Logger().d("통신은 된다냐??!!");
       Logger().d(response.data);
 
@@ -88,6 +95,7 @@ class ProductRepository {
       return responseDTO;
     } catch (e) {
       // 200이 아니면 catch로 감
+      Logger().d(e);
       return ResponseDTO(false, "잘못된 방법입니다.", null);
     }
   }
