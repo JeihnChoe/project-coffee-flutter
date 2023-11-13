@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
-import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/dto/user_request.dart';
-import 'package:project_coffee/data/model/user.dart';
+import 'package:project_coffee/ui/pages/pay_page/pay_card_save/pay_card_save_page.dart';
 import 'package:project_coffee/ui/widgets/custom_green_button.dart';
 
 import 'widget/join_success_page_body.dart';
@@ -18,11 +16,13 @@ class JoinSuccessPage extends StatelessWidget {
     return Scaffold(
       body: JoinSuccessPageBody(joinReqDTO),
       persistentFooterButtons: [
-        CustomGreenButton("스타벅스 카드등록 바로가기",double.infinity,50,JoinSuccessPage()),
+        CustomGreenButton(
+            "스타벅스 카드등록 바로가기", double.infinity, 50, PayCardSavePage()),
       ],
-    ) ;
+    );
   }
 }
+
 class MyData {
   final String someField;
 
