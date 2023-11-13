@@ -155,3 +155,112 @@ class ProductDetailResDTO {
         isIced = json["isIced"],
         tip = json["tip"];
 }
+
+class OrderResponse {
+  int totalPrice;
+  List<ProductDTO> productList;
+
+  OrderResponse({
+    required this.totalPrice,
+    required this.productList,
+  });
+
+  factory OrderResponse.fromJson(Map<String, dynamic> json) {
+    return OrderResponse(
+      totalPrice: json['totalPrice'],
+      productList: (json['productList'] as List)
+          .map((productJson) => ProductDTO.fromJson(productJson))
+          .toList(),
+    );
+  }
+}
+
+class ProductDTO {
+  String name;
+  String engName;
+  String picUrl;
+  int isIced;
+  List<CartItemDTO> carts;
+
+  ProductDTO({
+    required this.name,
+    required this.engName,
+    required this.picUrl,
+    required this.isIced,
+    required this.carts,
+  });
+
+  factory ProductDTO.fromJson(Map<String, dynamic> json) {
+    return ProductDTO(
+      name: json['name'],
+      engName: json['engName'],
+      picUrl: json['picUrl'],
+      isIced: json['isIced'],
+      carts: (json['carts'] as List)
+          .map((cartJson) => CartItemDTO.fromJson(cartJson))
+          .toList(),
+    );
+  }
+}
+
+class CartItemDTO {
+  int cupType;
+  int quantity;
+  int price;
+  String size;
+  int sumPrice;
+
+  CartItemDTO({
+    required this.cupType,
+    required this.quantity,
+    required this.price,
+    required this.size,
+    required this.sumPrice,
+  });
+
+  factory CartItemDTO.fromJson(Map<String, dynamic> json) {
+    return CartItemDTO(
+      cupType: json['cupType'],
+      quantity: json['quantity'],
+      price: json['price'],
+      size: json['size'],
+      sumPrice: json['sumPrice'],
+    );
+  }
+}
+
+class CartTotalDTO {
+  String name;
+  String engName;
+  String picUrl;
+  int isIced;
+  int cupType;
+  int quantity;
+  int price;
+  String size;
+  int sumPrice;
+  int? totalPrice;
+
+  CartTotalDTO(
+      {required this.name,
+      required this.engName,
+      required this.picUrl,
+      required this.isIced,
+      required this.cupType,
+      required this.quantity,
+      required this.price,
+      required this.size,
+      required this.sumPrice,
+      this.totalPrice});
+
+  CartTotalDTO.fromJson(Map<String, dynamic> json)
+      : name = json["name"],
+        engName = json["engName"],
+        picUrl = json["picUrl"],
+        isIced = json["isIced"],
+        cupType = json["cupType"],
+        quantity = json["quantity"],
+        price = json["price"],
+        size = json["size"],
+        sumPrice = json["sumPrice"];
+}
