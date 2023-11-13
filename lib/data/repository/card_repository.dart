@@ -10,7 +10,8 @@ class CardRepository {
   //   return Future.delayed(Duration(seconds: 3), () => mCardResponseDTO);
   // }
 
-  Future<ResponseDTO> fetchCardSave(CardSaveReqDTO cardSaveReqDTO, String? token) async {
+  Future<ResponseDTO> fetchCardSave(
+      CardSaveReqDTO cardSaveReqDTO, String? token) async {
     try {
       // 카드 저장 요청 헤더에 토큰 추가
       Options options = Options(
@@ -39,8 +40,6 @@ class CardRepository {
       return ResponseDTO(false, "카드 등록에 실패했습니다", null);
     }
   }
-
-
 
   Future<List<PayCard>> fetchCardDetailList(String? token) async {
     try {

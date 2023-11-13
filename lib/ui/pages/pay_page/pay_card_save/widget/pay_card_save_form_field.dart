@@ -6,18 +6,16 @@ import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/_core/utils/validator_util.dart';
 import 'package:project_coffee/data/dto/card_request.dart';
-import 'package:project_coffee/data/repository/card_repository.dart';
-import 'package:project_coffee/data/store/card_store.dart';
 import 'package:project_coffee/data/store/session_store.dart';
+import 'package:project_coffee/ui/pages/pay_page/pay_card_save/pay_card_save_view_model.dart';
 import 'package:project_coffee/ui/widgets/custom_text_form_field.dart';
 
 class CardSaveFormField extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final _cardName = TextEditingController();
-  final _cardNumber= TextEditingController();
-  final _pinNumber= TextEditingController();
-  CardSaveFormField({
-    super.key,});
+  final _cardNumber = TextEditingController();
+  final _pinNumber = TextEditingController();
+  CardSaveFormField({super.key});
 
   void submit(WidgetRef ref) async {
     SessionStore sessionUser = ref.read(sessionProvider);
@@ -38,7 +36,6 @@ class CardSaveFormField extends StatelessWidget {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -48,14 +45,28 @@ class CardSaveFormField extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomTextForm("CardName",validatorFunction:validateCardName, controller: _cardName),
-            SizedBox(height: gap_m,),
-            Text("카드명은 미입력 시 자동으로 부여됩니다.",style: TextStyle(color: Colors.grey,fontSize: 13),),
-            SizedBox(height: gap_l,),
-            CustomTextForm("CardNumber",validatorFunction:validateCardNumber, controller: _cardNumber),
-            SizedBox(height: gap_m,),
-            SizedBox(height: gap_l,),
-            CustomTextForm("PinNumber",validatorFunction:validatePinNumber, controller: _pinNumber),
+            CustomTextForm("CardName",
+                validatorFunction: validateCardName, controller: _cardName),
+            SizedBox(
+              height: gap_m,
+            ),
+            Text(
+              "카드명은 미입력 시 자동으로 부여됩니다.",
+              style: TextStyle(color: Colors.grey, fontSize: 13),
+            ),
+            SizedBox(
+              height: gap_l,
+            ),
+            CustomTextForm("CardNumber",
+                validatorFunction: validateCardNumber, controller: _cardNumber),
+            SizedBox(
+              height: gap_m,
+            ),
+            SizedBox(
+              height: gap_l,
+            ),
+            CustomTextForm("PinNumber",
+                validatorFunction: validatePinNumber, controller: _pinNumber),
             CardSaveGreyTextFeild(),
           ],
         ),
