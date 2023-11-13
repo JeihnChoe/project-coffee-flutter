@@ -86,10 +86,15 @@ class ProductRepository {
       // dynamic -> http body
 
       Response response = await dio.post("/api/cart/addcartlist",
+<<<<<<< HEAD
+          data: productOrderReqDTO.toJson(),
+          options: Options(headers: {"Authorization": "${jwt}"}));
+=======
           data: modifiedData, options: options);
       Logger().d("통신은 된다냐??!!");
       Logger().d(response.data);
 
+>>>>>>> 8d0ec0ea9e489512c672693c77f2e3fc6dfa70a1
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       //  responseDTO.response = User.fromJson(responseDTO.response);
       return responseDTO;
@@ -100,40 +105,48 @@ class ProductRepository {
     }
   }
 
-  Future<ResponseDTO> fetchProductOrderSave(
-      ProductOrderReqDTO productOrderReqDTO) async {
+  Future<ResponseDTO> fetchProductOrderList(String jwt) async {
     try {
-      Response<dynamic> response =
-          await dio.post("/api/아직 안넣음", data: productOrderReqDTO);
-      if (response.data != null && response.data) {
-        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      Response<dynamic> response = await dio.get("/api/cart/viewcartlist",
+          options: Options(headers: {"Authorization": "${jwt}"}));
+
+      if (response.data != null) {
+        ResponseDTO responseDTO =
+            ResponseDTO.fromJson(response.data); // 여기에 주어진 JSON 문자열을 넣으세요.
+        OrderResponse orderResponseDTO =
+            OrderResponse.fromJson(responseDTO.response);
+
+        List<CartTotalDTO> cartTotalList = [];
+
+        for (ProductDTO product in orderResponseDTO.productList) {
+          for (CartItemDTO cartItem in product.carts) {
+            CartTotalDTO cartTotalDTO = CartTotalDTO(
+              totalPrice: orderResponseDTO.totalPrice,
+              name: product.name,
+              engName: product.engName,
+              picUrl: product.picUrl,
+              isIced: product.isIced,
+              cupType: cartItem.cupType,
+              quantity: cartItem.quantity,
+              price: cartItem.price,
+              size: cartItem.size,
+              sumPrice: cartItem.sumPrice,
+            );
+
+            cartTotalList.add(cartTotalDTO);
+            // Logger().d(cartTotalDTO); // 이 부분에서 cartTotalDTO를 사용
+          }
+        }
+
+        responseDTO.response = cartTotalList;
         return responseDTO;
-      }
-      throw Exception("값이 안들어왔는데");
-    } on Exception catch (e) {
-      throw Exception("터졌데");
-    }
-  }
-
-  Future<List<ProductOrderReqDTO>> fetchProductOrderList() async {
-    try {
-      Response<dynamic> response = await dio.get("api/뭐가 들어 올까요? 아직 백에서 안 만듦");
-      Logger().d("쇼핑카드야 ${response.data}");
-
-      if (response.data != null && response.data is List) {
-        List<dynamic> bodyList = response.data as List<dynamic>;
-        List<ProductOrderReqDTO> productOrderList = bodyList
-            .map((e) => ProductOrderReqDTO.fromJson(e)) // Promotion 모델에 따라 변환
-            .toList();
-        //Logger().d("통신?할게요");
-        return productOrderList;
       } else {
         // 서버 응답이 Promotion 목록이 아닌 경우 처리
         throw Exception("Invalid server response format");
       }
     } catch (e) {
       // 오류 처리를 수행할 수 있습니다.
-      throw Exception("Failed to fetch promotion list: $e");
+      throw Exception("뭐가 틀렸냐 하면은${e}");
     }
   }
 }

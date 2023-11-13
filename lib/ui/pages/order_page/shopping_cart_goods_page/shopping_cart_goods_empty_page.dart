@@ -4,8 +4,8 @@ import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/ui/pages/order_page/category_list_page/category_list_page.dart';
 import 'package:project_coffee/ui/widgets/custom_green_button.dart';
 
-class ShoppingCartBeverageEmptyPage extends StatelessWidget {
-  const ShoppingCartBeverageEmptyPage({super.key});
+class ShoppingCartGoodsEmptyPage extends StatelessWidget {
+  const ShoppingCartGoodsEmptyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +17,13 @@ class ShoppingCartBeverageEmptyPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              textTitle1("음료/푸드 장바구니가 비어있습니다."),
+              textTitle1("상품 장바구니가 비어있습니다."),
               SizedBox(height: gap_m),
-              Text("원하는 메뉴을 장바구니에 담고\n한번에 주문해 보세요.",
+              Text("원하는 상품을 장바구니에 담고\n한번에 주문해 보세요.",
                   style: TextStyle(color: Colors.black54, fontSize: 14)),
-              CustomGreenButton("메뉴 담으러 가기", 130, 20, CategoryListPage()),
+              CustomGreenButton("상품 담으러 가기", 130, 20, CategoryListPage()),
               Image.asset(
-                'assets/shoppingcart.png',
+                'assets/shoppingcartproduct.png',
                 width: 300,
                 height: 300,
               ),

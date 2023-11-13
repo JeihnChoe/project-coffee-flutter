@@ -2,33 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
-import 'package:project_coffee/_core/constants/size.dart';
-import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
-import 'package:project_coffee/ui/pages/order_page/shopping_cart_beverage_page/shopping_cart_beverage_page.dart';
+import 'package:project_coffee/data/store/session_store.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/shopping_cart_page_view_model.dart';
-import 'package:project_coffee/ui/pages/order_page/shopping_cart_product_page/shopping_cart_product_empty_page.dart';
 
-import '../../shopping_cart_beverage_page/shopping_cart_beverage_empty_page.dart';
+import '../../shopping_cart_goods_page/shopping_cart_goods_empty_page.dart';
+import '../../shopping_cart_product_page/shopping_cart_product_page.dart';
 
 class ShoppingCartPageBody extends ConsumerWidget {
   const ShoppingCartPageBody({super.key});
 
-
-
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-    ShoppingCartListModel? model = ref.watch(shoppingCartListProvider);
-    List<ProductOrderReqDTO> beverageOrderList = model?.productOrderList??[];
-    // Logger().d("이거 동동그리브다 동동그리브${beverageOrderList.length}");
-    // int count = 0;
-    // List<int> outlineButtonChange =[];
+  Widget build(BuildContext context, WidgetRef ref) {
+    SessionUser sessionUser = ref.read(sessionProvider);
+    String? jwt = sessionUser.jwt;
+
+    ShoppingCartListModel? model = ref.watch(shoppingCartListProvider(jwt!));
+    List<CartTotalDTO> cartTotalList = model?.cartTotalDTO ?? [];
+    Logger().d(cartTotalList.length);
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         backgroundColor: Colors.white,
-
-
         body: CustomScrollView(
           slivers: [
             ShoppingAppBar(),
@@ -51,15 +47,14 @@ class ShoppingCartPageBody extends ConsumerWidget {
               child: TabBarView(
                 children: [
                   // 첫 번째 탭 페이지: 음료/푸드
-
-                    ShoppingCartBeveragePage(beverageOrderList),
+                  ShoppingCartProductPage(cartTotalList),
                   // beverageOrderList.isEmpty
                   //     ? ShoppingCartBeverageEmptyPage()
                   //     : ShoppingCartBeveragePage(beverageOrderList),
 
                   // 두 번째 탭 페이지: 상품
                   //ShoppingCartProductPage(),
-                  ShoppingCartProductEmptyPage(),
+                  ShoppingCartGoodsEmptyPage(),
                 ],
               ),
             ),
