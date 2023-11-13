@@ -1,9 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/http.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/dto/user_request.dart';
-import 'package:project_coffee/data/mock/user.dart';
 import 'package:project_coffee/data/model/user.dart';
 
 class UserRepository {
