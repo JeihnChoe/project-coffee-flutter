@@ -61,91 +61,95 @@ class ProductListResDTO {
         optionId = json["optionId"],
         price = json["price"];
 }
-class ProductResDTO{
-  ProductListResDTO productList;
 
-  ProductResDTO(this.productList);
-  Map<String ,dynamic> toJson() => {
-    "productList" : productList,
-  };
-
-  ProductResDTO.fromJson(Map<String,dynamic> json)
-  : productList = json["productList"];
-}
-
-
-class sampleProductListResDTO {
-  Product product;
-  int optionPrice;
-
-  sampleProductListResDTO(this.product, this.optionPrice);
-
-  Map<String, dynamic> toJson() => {
-        "product": product,
-        "optionPrice": optionPrice,
-      };
-
-  sampleProductListResDTO.fromJson(Map<String, dynamic> json)
-      : product = json["product"],
-        optionPrice = json["optionPrice"];
-}
 
 class ProductOrderReqDTO {
-  Product product;
-  Option option;
-  int? isIced;
-  int? count;
-  int? size;
-  int? cup;
-  int? sizePrice;
-  int? totalmoney;
+  int? optionId; // 옵션아이디
+  int? isIced; //선택된 핫 아이스
+  int? quantity; // 갯수
+  int? sizeId; // 사이즈 Id값
+  int? cuptype;  // 컵타입
+  int? totalPrice; // 총 가격
+  int? userId;
 
-  ProductOrderReqDTO(
-      {required this.product,
-      required this.option,
-      this.isIced,
-      this.count,
-      this.cup,
-      this.size,
-      this.sizePrice,
-      this.totalmoney});
+  ProductOrderReqDTO({this.optionId, this.isIced, this.quantity, this.sizeId,
+    this.cuptype, this.totalPrice, this.userId}); // 유저Id  비회원일시 0
+
 
   //
   Map<String, dynamic> toJson() => {
-        "product": product,
-        "option": option,
+        "optionId": optionId,
         "isIced": isIced,
-        "count": count,
-        "size": size,
-        "cup": cup,
-        "SizePrice": sizePrice,
-        "totalmoney": totalmoney
+        "quantity": quantity,
+        "sizeId": sizeId,
+        "cuptype": cuptype,
+        "totalPrice": totalPrice,
+        "userId": userId
       };
 
   //
   ProductOrderReqDTO.fromJson(Map<String, dynamic> json)
-      : product = json["product"],
-        option = json["option"],
+      : optionId = json["optionId"],
         isIced = json["isIced"],
-        count = json["count"],
-        size = json["size"],
-        cup = json["cup"],
-        sizePrice = json["sizePrice"],
-        totalmoney = json["totalmoney"];
+        quantity = json["quantity"],
+        sizeId = json["sizeId"],
+        cuptype = json["cuptype"],
+        totalPrice = json["totalPrice"],
+        userId = json["userId"];
 }
 
 class ProductDetailResDTO {
-  Product product;
-  Option option;
+  int productId;
+  String picUrl;
+  String productName;
+  String productEngName;
+  int optionId;
+  int optionPrice;
+  int isIced;
+  String tip;
+  String discription;
+  int sizeType;
 
-  ProductDetailResDTO(this.product, this.option);
+
+
+  ProductDetailResDTO(
+      this.productId,
+      this.picUrl,
+      this.productName,
+      this.productEngName,
+      this.optionId,
+      this.optionPrice,
+      this.isIced,
+      this.tip,
+      this.discription,
+      this.sizeType,
+
+      );
 
   Map<String, dynamic> toJson() => {
-        "product": product,
-        "option": option,
+        "productId": productId,
+        "picUrl" : picUrl,
+        "productName": productName,
+        "productEngName": productEngName,
+        "optionId": optionId,
+        "optionPrice": optionPrice,
+        "isIced": isIced,
+        "tip": tip,
+        "discription": discription,
+        "sizeType": sizeType,
+
       };
 
   ProductDetailResDTO.fromJson(Map<String, dynamic> json)
-      : product = json["product"],
-        option = json["option"];
+      : productId = json["productId"],
+        picUrl = json["picUrl"],
+        productName = json["productName"],
+        productEngName = json["productEngName"],
+        optionId = json["optionId"],
+        optionPrice = json["optionPrice"],
+        isIced = json["isIced"],
+        tip = json["tip"],
+        discription = json["discription"],
+        sizeType = json["sizeType"];
+
 }
