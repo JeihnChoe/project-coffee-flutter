@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_coffee/_core/constants/color.dart';
-import 'package:project_coffee/_core/constants/size.dart';
-import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/data/store/session_store.dart';
 import 'package:project_coffee/ui/pages/home_page/join_page/join_page.dart';
 import 'package:project_coffee/ui/pages/other_page/other_main_page/widget/other_shop_section_page.dart';
 import 'package:project_coffee/ui/widgets/custom_green_button.dart';
@@ -15,23 +14,65 @@ import 'other_main_page_body_item.dart';
 import 'other_order_section_page.dart';
 import 'other_pay_section_page.dart';
 
-class OtherMainPageBody extends StatelessWidget {
+class OtherMainPageBody extends ConsumerWidget {
   const OtherMainPageBody({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    SessionUser sessionUser = ref.watch(sessionProvider);
+
     return Scaffold(
       backgroundColor: Colors.grey[200],
       body: CustomScrollView(
         slivers: [
           OtherSliverAppbar(),
-          OtherTopButton(),
-          OtherPaySection(),
-          OtherOrderSection(),
-          OtherShopSection(),
-          OtherCustomerServiceSection()
+          sessionUser!.jwt != null && !sessionUser.jwt!.isEmpty
+              ? OtherTopButton1(name: sessionUser.user!.userName)
+              : OtherTopButton(),
+          OtherPaySection(
+            jwt: sessionUser.jwt,
+          ),
+          OtherOrderSection(jwt: sessionUser.jwt),
+          OtherShopSection(jwt: sessionUser.jwt),
+          OtherCustomerServiceSection(jwt: sessionUser.jwt),
         ],
       ),
+    );
+  }
+}
+
+class OtherTopButton1 extends StatelessWidget {
+  String name;
+  OtherTopButton1({
+    required this.name,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Column(children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 25.0, bottom: 25),
+          child: Center(
+            child: Text(
+              "${name}님,\n환영합니다.",
+              style: TextStyle(
+                fontSize: 20,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            PrivacyButton(title: "개인정보 관리"),
+            PrimaryInfoButton(title: "계정정보"),
+            ReceiptButton()
+          ],
+        )
+      ]),
     );
   }
 }
@@ -136,14 +177,12 @@ class ReceiptButton extends StatelessWidget {
 class PrimaryInfoButton extends StatelessWidget {
   String title;
 
-  PrimaryInfoButton({
-    required this.title
-  });
+  PrimaryInfoButton({required this.title});
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () => OtherShowDialog(context, title,1),
+      onPressed: () => OtherShowDialog(context, title, 1),
       child: Column(
         children: [
           Icon(
@@ -170,14 +209,12 @@ class PrimaryInfoButton extends StatelessWidget {
 
 class PrivacyButton extends StatelessWidget {
   String title;
-  PrivacyButton({
-    required this.title
-  });
+  PrivacyButton({required this.title});
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () => OtherShowDialog(context,title,1),
+      onPressed: () => OtherShowDialog(context, title, 1),
       child: Column(
         children: [
           Icon(
@@ -215,9 +252,7 @@ class OtherSliverAppbar extends StatelessWidget {
       automaticallyImplyLeading: false,
       actions: [
         IconButton(
-            onPressed: () {
-
-            },
+            onPressed: () {},
             icon: Icon(
               CupertinoIcons.bell,
               color: Colors.black,
@@ -246,4 +281,3 @@ class OtherSliverAppbar extends StatelessWidget {
     );
   }
 }
-

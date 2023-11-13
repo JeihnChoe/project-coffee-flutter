@@ -60,10 +60,11 @@ class SessionStore extends SessionUser {
       saveToken(responseDTO.token);
 
       // 4. 페이지 이동
-      Navigator.pushNamed(mContext!, Move.MainPage, arguments: {
-        'isLogin': isLogin,
-        'jwt': jwt,
-      });
+      Navigator.popAndPushNamed(mContext!, Move.MainPage);
+      // Navigator.pushNamed(mContext!, Move.MainPage, arguments: {
+      //   'isLogin': isLogin,
+      //   'jwt': jwt,
+      // });
     } else {
       ScaffoldMessenger.of(mContext!)
           .showSnackBar(SnackBar(content: Text(responseDTO.error)));
@@ -81,6 +82,14 @@ class SessionStore extends SessionUser {
   Future<void> findPasswordNewSet(
       FindPasswordNewSetReqDTO findPasswordNewSetReqDTO) async {
     Navigator.pushNamed(mContext!, Move.LoginPage);
+  }
+
+  Future<void> logout() async {
+    this.user = null;
+    this.jwt = null;
+    this.isLogin = false;
+    await secureStorage.delete(key: "jwt");
+    Logger().d("세션 종료 및 디바이스 JWT 삭제");
   }
 }
 

@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
-import 'package:project_coffee/data/dto/order_request.dart';
-
 import 'package:project_coffee/data/model/category.dart';
-
 import 'package:project_coffee/ui/widgets/custom_sliver_app_bar.dart';
 
 import '../product_list_page_view_model.dart';
 import 'product_list_page_body_item.dart';
-
 
 class ProductListPageBody extends ConsumerWidget {
   Category category;
@@ -18,16 +13,7 @@ class ProductListPageBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(ProductListProvider(category));
-    final productList = model?.productListResDTO??[];
-
-
-    // Logger().d("모달가꼬와!!!!!!!!!!!${model?.productListResDTO ?? []}");
-
-    // final productList = model?.productListResDTO ?? [];
-
-    // final indexItems = productList.where((item) => item.product.category == category.id).toList();
-    // Logger().d("너가 나오는거니 ?1111111111111111111111${indexItems[0]}");
-        // productList..where((item) => item.category == category.id).toList();
+    final productList = model?.productListResDTO ?? [];
 
     return CustomScrollView(
       shrinkWrap: true,

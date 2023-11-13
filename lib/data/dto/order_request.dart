@@ -1,8 +1,3 @@
-import 'package:flutter/foundation.dart';
-import 'package:project_coffee/data/model/product.dart';
-
-import '../model/option.dart';
-
 class CategoryReqDTO {
   final int id;
   final String name;
@@ -42,7 +37,8 @@ class ProductListResDTO {
   int optionId;
   int price;
 
-  ProductListResDTO(this.productId, this.name, this.engName, this.picUrl, this.optionId ,this.price);
+  ProductListResDTO(this.productId, this.name, this.engName, this.picUrl,
+      this.optionId, this.price);
 
   Map<String, dynamic> toJson() => {
         "productId": productId,
@@ -50,7 +46,7 @@ class ProductListResDTO {
         "engName": engName,
         "picUrl": picUrl,
         "optionId": optionId,
-        "price" : price,
+        "price": price,
       };
 
   ProductListResDTO.fromJson(Map<String, dynamic> json)
@@ -62,20 +58,23 @@ class ProductListResDTO {
         price = json["price"];
 }
 
-
 class ProductOrderReqDTO {
   int? optionId; // 옵션아이디
   int? isIced; //선택된 핫 아이스
   int? quantity; // 갯수
   int? sizeId; // 사이즈 Id값
-  int? cuptype;  // 컵타입
+  int? cupType; // 컵타입
   int? sizePrice; //이거뺴고 보낼꺼임
   int? totalPrice; // 총 가격
-  int? userId;
 
-  ProductOrderReqDTO({this.optionId, this.isIced, this.quantity, this.sizeId,
-    this.cuptype,this.sizePrice, this.totalPrice, this.userId}); // 유저Id  비회원일시 0
-
+  ProductOrderReqDTO(
+      {this.optionId,
+      this.isIced,
+      this.quantity,
+      this.sizeId,
+      this.cupType,
+      this.sizePrice,
+      this.totalPrice}); // 유저Id  비회원일시 0
 
   //
   Map<String, dynamic> toJson() => {
@@ -83,9 +82,8 @@ class ProductOrderReqDTO {
         "isIced": isIced,
         "quantity": quantity,
         "sizeId": sizeId,
-        "cuptype": cuptype,
+        "cupType": cupType,
         "totalPrice": totalPrice,
-        "userId": userId
       };
 
   ProductOrderReqDTO.fromJson(Map<String, dynamic> json)
@@ -93,9 +91,8 @@ class ProductOrderReqDTO {
         isIced = json["isIced"],
         quantity = json["quantity"],
         sizeId = json["sizeId"],
-        cuptype = json["cuptype"],
-        totalPrice = json["totalPrice"],
-        userId = json["userId"];
+        cupType = json["cupType"],
+        totalPrice = json["totalPrice"];
 }
 
 class ProductDetailResDTO {
@@ -107,40 +104,36 @@ class ProductDetailResDTO {
   int optionPrice;
   int isIced;
   String tip;
-  String discription;
-  int sizeType;
-
-
+  String? description;
+  int? sizeType;
 
   ProductDetailResDTO(
-      this.productId,
-      this.picUrl,
-      this.productName,
-      this.productEngName,
-      this.optionId,
-      this.optionPrice,
-      this.isIced,
-      this.tip,
-      this.discription,
-      this.sizeType,
-
-      );
+    this.productId,
+    this.picUrl,
+    this.productName,
+    this.productEngName,
+    this.optionId,
+    this.optionPrice,
+    this.isIced,
+    this.tip,
+    this.description,
+    this.sizeType,
+  );
 
   Map<String, dynamic> toJson() => {
         "productId": productId,
-        "picUrl" : picUrl,
+        "picUrl": picUrl,
         "productName": productName,
         "productEngName": productEngName,
         "optionId": optionId,
         "optionPrice": optionPrice,
         "isIced": isIced,
         "tip": tip,
-        "discription": discription,
+        "description": description,
         "sizeType": sizeType,
-
       };
 
-  ProductDetailResDTO.fromJson(Map<String, dynamic> json)
+  ProductDetailResDTO.fromJson1(Map<String, dynamic> json)
       : productId = json["productId"],
         picUrl = json["picUrl"],
         productName = json["productName"],
@@ -149,7 +142,16 @@ class ProductDetailResDTO {
         optionPrice = json["optionPrice"],
         isIced = json["isIced"],
         tip = json["tip"],
-        discription = json["discription"],
+        description = json["description"],
         sizeType = json["sizeType"];
 
+  ProductDetailResDTO.fromJson2(Map<String, dynamic> json)
+      : productId = json["productId"],
+        picUrl = json["picUrl"],
+        productName = json["productName"],
+        productEngName = json["productEngName"],
+        optionId = json["optionId"],
+        optionPrice = json["optionPrice"],
+        isIced = json["isIced"],
+        tip = json["tip"];
 }

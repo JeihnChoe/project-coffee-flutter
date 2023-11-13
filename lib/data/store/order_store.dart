@@ -15,9 +15,11 @@ class ProductModel {
 class ProductStore extends ProductModel {
   // ProductStore();
 
-  Future<void> cart(BuildContext context, ProductOrderReqDTO productOrderReqDTO) async {
+  Future<void> cart(BuildContext context, String jwt,
+      ProductOrderReqDTO productOrderReqDTO) async {
     Logger().d("여기 오냐 ?");
-    ResponseDTO responseDTO = await ProductRepository().fetchProductCartSave(productOrderReqDTO);
+    ResponseDTO responseDTO =
+        await ProductRepository().fetchProductCartSave(jwt, productOrderReqDTO);
     if (responseDTO.success == true) {
       showModalBottomSheet(
         context: context,
@@ -25,7 +27,8 @@ class ProductStore extends ProductModel {
         builder: (context) {
           return FractionallySizedBox(
             heightFactor: 0.20,
-            child: ProductDetailCartBottomSheet(productOrderReqDTO: productOrderReqDTO),
+            child: ProductDetailCartBottomSheet(
+                productOrderReqDTO: productOrderReqDTO),
           );
         },
       );
@@ -33,6 +36,6 @@ class ProductStore extends ProductModel {
   }
 }
 
-final beverageProvider = Provider<ProductStore>((ref) {
+final productProvider = Provider<ProductStore>((ref) {
   return ProductStore();
 });
