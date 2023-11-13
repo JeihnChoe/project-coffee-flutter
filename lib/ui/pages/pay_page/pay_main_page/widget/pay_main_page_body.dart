@@ -17,11 +17,8 @@ class PayPageBody extends ConsumerWidget {
     // 세션 스토어를 이용하여 세션 토큰을 가져옴
     final sessionUser = ref.watch(sessionProvider);
 
-    // paycardListProvider에 토큰을 전달하여 ViewModel을 생성
+    // cardListProvider를 통해 PayCardListViewModel에 접근
     var cardList = ref.watch(paycardListProvider(sessionUser.jwt));
-
-    // cardList.state를 통해 PayCardListModel에 접근
-    var cardListModel = cardList.state;
 
     return CustomScrollView(
       slivers: [
@@ -34,9 +31,9 @@ class PayPageBody extends ConsumerWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: cardListModel == null || cardListModel.cardList.isEmpty
+                child: cardList == null
                     ? _buildEmptyCardList(context)
-                    : _buildCardList(context, cardListModel.cardList[0]),
+                    : _buildCardList(context, cardList.state?.cardList?.first),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -109,42 +106,47 @@ class PayPageBody extends ConsumerWidget {
     );
   }
 
-  Widget _buildCardList(BuildContext context, PayCard firstCard) {
-    return Card(
-      elevation: 10,
-      child: Container(
-        width: double.infinity,
-        height: 500,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(left: 4, right: 4, top: 16),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, Move.PayMainPage);
-                },
-                child: Image.network(
-                  firstCard.picUrl,
-                  fit: BoxFit.cover,
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.white,
-                  elevation: 0.0,
+  Widget _buildCardList(BuildContext context, PayCard? firstCard) {
+    if (firstCard != null) {
+      return Card(
+        elevation: 10,
+        child: Container(
+          width: double.infinity,
+          height: 500,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(left: 4, right: 4, top: 16),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, Move.PayMainPage);
+                  },
+                  child: Image.network(
+                    firstCard.picUrl,
+                    fit: BoxFit.cover,
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                    elevation: 0.0,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: gap_m),
-            SizedBox(height: gap_xl),
-            textTitle1("${firstCard.name}"),
-            SizedBox(
-              height: gap_m,
-            ),
-            textBody1("${firstCard.money}"),
-          ],
+              SizedBox(height: gap_m),
+              SizedBox(height: gap_xl),
+              textTitle1("${firstCard.name}"),
+              SizedBox(
+                height: gap_m,
+              ),
+              textBody1("${firstCard.money}"),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      // null인 경우 대체할 UI 혹은 다른 처리를 넣어주세요.
+      return _buildEmptyCardList(context);
+    }
   }
 
   SliverAppBar PayMainPageAppbar(context) {
