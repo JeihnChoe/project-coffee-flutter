@@ -10,20 +10,12 @@ class CardRepository {
   //   return Future.delayed(Duration(seconds: 3), () => mCardResponseDTO);
   // }
 
-  Future<ResponseDTO> fetchCardSave(CardSaveReqDTO cardSaveReqDTO, String? token) async {
+  Future<ResponseDTO> fetchCardSave(CardSaveReqDTO cardSaveReqDTO) async {
     try {
-      // 카드 저장 요청 헤더에 토큰 추가
-      Options options = Options(
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
-
       // dynamic -> http body
       Response<dynamic> response = await dio.post(
         "/api/cards/cardregistrationpage",
         data: cardSaveReqDTO.toJson(),
-        options: options,
       );
 
       // 서버 응답을 ResponseDTO로 변환
@@ -40,39 +32,38 @@ class CardRepository {
     }
   }
 
+  Future<List<PayCard>> fetchCardDetailList() async {
+    Response<dynamic> response = await dio.get("/api/cards/viewcardlistpage");
+    Logger().d("카드통신?${response}");
+    Logger().d("카드통신?${response.data}");
 
+    ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-  Future<List<PayCard>> fetchCardDetailList(String? token) async {
-    try {
-      Options options = Options(
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
+    // List<dynamic> mapList = responseDTO.data as List<dynamic>;
+    // List<Post> postList = mapList.map((e) => Post.fromJson(e)).toList();
 
-      Response<dynamic> response = await dio.get(
-        "/api/cards/viewcardlistpage",
-        options: options,
-      );
-      Logger().d("카드통신?${response.data}");
+    List<dynamic> mapList = responseDTO.response as List<PayCard>;
+    List<PayCard> cardList = mapList.map((e) => PayCard.fromjson(e)).toList();
+    return cardList;
 
-      if (response.data != null && response.data is Map<String, dynamic>) {
-        dynamic responseData = response.data["response"];
-
-        if (responseData != null && responseData is List) {
-          List<PayCard> paycardList =
-              responseData.map((e) => PayCard.fromjson(e)).toList();
-          Logger().d("카드 통신?할게요");
-          return paycardList;
-        } else {
-          throw Exception("서버 응답 형식 오류: 'response' 키가 리스트가 아닙니다");
-        }
-      } else {
-        throw Exception("서버 응답 형식 오류: 응답이 맵이 아닙니다");
-      }
-    } catch (e) {
-      // 오류 처리를 수행할 수 있습니다.
-      throw Exception(e);
-    }
+    //
+    //   if (response.data != null && response.data is Map<String, dynamic>) {
+    //     dynamic responseData = response.data["response"];
+    //
+    //     if (responseData != null && responseData is List) {
+    //       List<PayCard> paycardList =
+    //           responseData.map((e) => PayCard.fromjson(e)).toList();
+    //       Logger().d("카드 통신?할게요");
+    //       return paycardList;
+    //     } else {
+    //       throw Exception("서버 응답 형식 오류: 'response' 키가 리스트가 아닙니다");
+    //     }
+    //   } else {
+    //     throw Exception("서버 응답 형식 오류: 응답이 맵이 아닙니다");
+    //   }
+    // } catch (e) {
+    //   // 오류 처리를 수행할 수 있습니다.
+    //   throw Exception(e);
+    // }
   }
 }

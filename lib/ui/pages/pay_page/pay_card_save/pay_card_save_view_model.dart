@@ -1,0 +1,47 @@
+//창고 데이터
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
+import 'package:project_coffee/_core/constants/move.dart';
+import 'package:project_coffee/data/dto/card_request.dart';
+import 'package:project_coffee/data/repository/card_repository.dart';
+import 'package:project_coffee/main.dart';
+
+import '../../../../data/dto/reponse_dto.dart';
+import '../../../../data/model/paycard.dart';
+
+//창고데이터 - DTO
+
+class PayCardModel {
+  PayCard? card;
+  PayCardModel({this.card});
+}
+
+//창고관리자
+class PayCardStore {
+  final mContext = navigatorKey.currentContext;
+
+  Future<void> save(CardSaveReqDTO cardSaveReqDTO) async {
+    try {
+      ResponseDTO responseDTO =
+          await CardRepository().fetchCardSave(cardSaveReqDTO);
+      Logger().d("카드 등록 중 ${responseDTO.response}");
+      Logger().d("카드 등록 중 ${responseDTO.success}");
+
+      if (responseDTO.success == true) {
+        Navigator.pushNamed(mContext!, Move.PayMainPage);
+        Logger().d("카드 등록 $responseDTO");
+      } else {
+        ScaffoldMessenger.of(mContext!)
+            .showSnackBar(SnackBar(content: Text(responseDTO.error)));
+      }
+    } catch (e) {
+      Logger().e("카드 등록 중 오류: $e");
+    }
+  }
+}
+
+//창고 관리자
+final cardProvider = Provider<PayCardStore>((ref) {
+  return PayCardStore();
+});
