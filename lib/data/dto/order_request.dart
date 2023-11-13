@@ -63,20 +63,32 @@ class ProductOrderReqDTO {
   int? isIced; //선택된 핫 아이스
   int? quantity; // 갯수
   int? sizeId; // 사이즈 Id값
+<<<<<<< HEAD
   int? cuptype; // 컵타입
   int? sizePrice; //이거뺴고 보낼꺼임
   int? totalPrice; // 총 가격
   int? userId;
+=======
+  int? cupType; // 컵타입
+  int? sizePrice; //이거뺴고 보낼꺼임
+  int? totalPrice; // 총 가격
+>>>>>>> d35f399b28dc11dc9d2c9157a79efe5e0d3553eb
 
   ProductOrderReqDTO(
       {this.optionId,
       this.isIced,
       this.quantity,
       this.sizeId,
+<<<<<<< HEAD
       this.cuptype,
       this.sizePrice,
       this.totalPrice,
       this.userId}); // 유저Id  비회원일시 0
+=======
+      this.cupType,
+      this.sizePrice,
+      this.totalPrice}); // 유저Id  비회원일시 0
+>>>>>>> d35f399b28dc11dc9d2c9157a79efe5e0d3553eb
 
   //
   Map<String, dynamic> toJson() => {
@@ -84,9 +96,8 @@ class ProductOrderReqDTO {
         "isIced": isIced,
         "quantity": quantity,
         "sizeId": sizeId,
-        "cuptype": cuptype,
+        "cupType": cupType,
         "totalPrice": totalPrice,
-        "userId": userId
       };
 
   ProductOrderReqDTO.fromJson(Map<String, dynamic> json)
@@ -94,9 +105,8 @@ class ProductOrderReqDTO {
         isIced = json["isIced"],
         quantity = json["quantity"],
         sizeId = json["sizeId"],
-        cuptype = json["cuptype"],
-        totalPrice = json["totalPrice"],
-        userId = json["userId"];
+        cupType = json["cupType"],
+        totalPrice = json["totalPrice"];
 }
 
 class ProductDetailResDTO {
@@ -137,7 +147,7 @@ class ProductDetailResDTO {
         "sizeType": sizeType,
       };
 
-  ProductDetailResDTO.fromJson(Map<String, dynamic> json)
+  ProductDetailResDTO.fromJson1(Map<String, dynamic> json)
       : productId = json["productId"],
         picUrl = json["picUrl"],
         productName = json["productName"],
@@ -148,4 +158,17 @@ class ProductDetailResDTO {
         tip = json["tip"],
         description = json["description"],
         sizeType = json["sizeType"];
+<<<<<<< HEAD
+=======
+
+  ProductDetailResDTO.fromJson2(Map<String, dynamic> json)
+      : productId = json["productId"],
+        picUrl = json["picUrl"],
+        productName = json["productName"],
+        productEngName = json["productEngName"],
+        optionId = json["optionId"],
+        optionPrice = json["optionPrice"],
+        isIced = json["isIced"],
+        tip = json["tip"];
+>>>>>>> d35f399b28dc11dc9d2c9157a79efe5e0d3553eb
 }

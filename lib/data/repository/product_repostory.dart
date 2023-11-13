@@ -3,23 +3,37 @@ import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/http.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
+<<<<<<< HEAD
 import 'package:project_coffee/data/mock/category.dart';
+=======
+>>>>>>> d35f399b28dc11dc9d2c9157a79efe5e0d3553eb
 
 import '../model/category.dart';
 
 class ProductRepository {
   Future<ResponseDTO> fetchProductDetail(
+<<<<<<< HEAD
       ProductListResDTO productListResDTO) async {
     try {
       Response response = await dio
           .get("/api/product/${productListResDTO.productId}/viewdetail/");
       Logger().d("이거 널나오면 안된다");
       Logger().d(response.data);
+=======
+    ProductListResDTO productListResDTO,
+  ) async {
+    try {
+      Response response = await dio
+          .get("/api/product/${productListResDTO.productId}/viewdetail/");
+
+      Logger().d("API 응답 데이터: ${response.data}");
+
+>>>>>>> d35f399b28dc11dc9d2c9157a79efe5e0d3553eb
       if (response.data != null) {
         ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-        Logger().d(responseDTO.response);
 
         // List일 경우 첫 번째 요소를 가져옴
+<<<<<<< HEAD
         if (responseDTO.response.isNotEmpty) {
           Logger().d(
               "dddddddddddddddddddddd 샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라샤랄라");
@@ -28,6 +42,17 @@ class ProductRepository {
               ProductDetailResDTO.fromJson(responseDTO.response.first);
           Logger().d("이거이거");
           Logger().d(productDetail);
+=======
+        Logger().d("이거 가져와줘어이이잉");
+        Logger().d(responseDTO.response.first);
+        Logger().d(responseDTO.response[0].description);
+        if (responseDTO.response is List<dynamic> &&
+            responseDTO.response.isNotEmpty) {
+          ProductDetailResDTO productDetail =
+              ProductDetailResDTO.fromJson1(responseDTO.response.first);
+
+          Logger().d("상품 세부 정보: ${productDetail}");
+>>>>>>> d35f399b28dc11dc9d2c9157a79efe5e0d3553eb
 
           responseDTO.response = productDetail;
           return responseDTO;
@@ -35,18 +60,25 @@ class ProductRepository {
           throw Exception("API 응답 형식이 예상과 다릅니다.");
         }
       } else {
-        throw Exception("이거 뭔가 잘못됬다");
+        throw Exception("API 응답이 null입니다.");
       }
     } catch (e) {
-      throw Exception("이거 터졌다 고쳐라 ${e}");
-      // return Future.delayed(Duration(seconds: 3), () => mProductOrderResponseDTO);
+      throw Exception("API 요청 중 오류 발생: ${e}");
     }
   }
 
   Future<ResponseDTO> fetchProductDetailList(Category category) async {
     try {
+<<<<<<< HEAD
       Response<dynamic> response =
           await dio.get("/api/product/${category.id}/productlist");
+=======
+      Logger().d("이제 들어와라 한번쯤은");
+      Response<dynamic> response =
+          await dio.get("/api/product/${category.id}/productlist");
+      Logger().d("이제 들어와라 한번쯤은 ${response.data}");
+      Logger().d(response.data);
+>>>>>>> d35f399b28dc11dc9d2c9157a79efe5e0d3553eb
 
       if (response.data != null) {
         ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
@@ -63,17 +95,31 @@ class ProductRepository {
       throw Exception(e);
     }
   }
+<<<<<<< HEAD
 
   Future<ResponseDTO> fetchCategoryList() {
     return Future.delayed(Duration(seconds: 3), () => mCategoryListResponseDTO);
   }
+=======
+>>>>>>> d35f399b28dc11dc9d2c9157a79efe5e0d3553eb
 
   Future<ResponseDTO> fetchProductCartSave(
-      ProductOrderReqDTO productOrderReqDTO) async {
+      String jwt, ProductOrderReqDTO productOrderReqDTO) async {
+    Logger().d("값은 넘어와 ?");
+    Logger().d(productOrderReqDTO.toJson());
+    Logger().d(jwt);
     try {
       // dynamic -> http body
+<<<<<<< HEAD
       Response<dynamic> response = await dio.post("/api/carts/addCartList",
           data: productOrderReqDTO.toJson());
+=======
+      Response response = await dio.post("/api/cart/addcartlist",
+          data: productOrderReqDTO.toJson(),
+          options: Options(headers: {"Authorization": "${jwt}"}));
+      Logger().d("통신은 된다냐??!!");
+      Logger().d(response.data);
+>>>>>>> d35f399b28dc11dc9d2c9157a79efe5e0d3553eb
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       //  responseDTO.response = User.fromJson(responseDTO.response);
       return responseDTO;

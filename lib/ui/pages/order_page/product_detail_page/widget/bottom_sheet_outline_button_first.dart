@@ -12,7 +12,11 @@ class BottomSheetOutlineButtonFirst extends StatefulWidget {
   final ValueChanged<int> onStateChange;
 
   BottomSheetOutlineButtonFirst(
-      {required this.productDetailResDTO ,required this.productOrderReqDTO,required this.selectedTabMethod,required this.count,required this.onStateChange});
+      {required this.productDetailResDTO,
+      required this.productOrderReqDTO,
+      required this.selectedTabMethod,
+      required this.count,
+      required this.onStateChange});
 
   int submit(int selectedPayment) {
     int selectedPaymentMethod = selectedPayment;
@@ -24,20 +28,21 @@ class BottomSheetOutlineButtonFirst extends StatefulWidget {
       _BottomSheetOutlineButtonState();
 }
 
-class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButtonFirst> {
+class _BottomSheetOutlineButtonState
+    extends State<BottomSheetOutlineButtonFirst> {
   int selectedPayment = 2;
-  int zeroprice= 0;
-  int oneprice= 1;
-  int twoprice= 2;
-  int threeprice= 3;
+  int zeroprice = 0;
+  int oneprice = 1;
+  int twoprice = 2;
+  int threeprice = 3;
 
   @override
   void initState() {
     selectedPayment = selectedPayment;
-    zeroprice = widget.productDetailResDTO.optionPrice -500;
-    oneprice= widget.productDetailResDTO.optionPrice;
-    twoprice= widget.productDetailResDTO.optionPrice+500;
-    threeprice= widget.productDetailResDTO.optionPrice+1000;
+    zeroprice = widget.productDetailResDTO.optionPrice - 500;
+    oneprice = widget.productDetailResDTO.optionPrice;
+    twoprice = widget.productDetailResDTO.optionPrice + 500;
+    threeprice = widget.productDetailResDTO.optionPrice + 1000;
     super.initState();
   }
 
@@ -54,9 +59,11 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButtonFirst
 
                   widget.productOrderReqDTO.sizePrice = zeroprice;
                   widget.productOrderReqDTO.sizePrice = zeroprice;
-                  widget.productOrderReqDTO.totalPrice = zeroprice * widget.count;
+                  widget.productOrderReqDTO.totalPrice =
+                      zeroprice * widget.count;
                   widget.onStateChange(selectedPayment);
-                  Logger().d("이거 안보여줘 ???${widget.productOrderReqDTO.totalPrice}");
+                  Logger()
+                      .d("이거 안보여줘 ???${widget.productOrderReqDTO.totalPrice}");
                 });
               },
               style: OutlinedButton.styleFrom(
@@ -115,9 +122,10 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButtonFirst
               setState(() {
                 selectedPayment = 2;
                 widget.productOrderReqDTO.sizePrice = oneprice;
-                widget.productOrderReqDTO.totalPrice = oneprice* widget.count;
+                widget.productOrderReqDTO.totalPrice = oneprice * widget.count;
                 widget.onStateChange(selectedPayment);
-                Logger().d("이거 안보여줘 ???${widget.productOrderReqDTO.totalPrice}");
+                Logger()
+                    .d("이거 안보여줘 ???${widget.productOrderReqDTO.totalPrice}");
               });
             },
             style: OutlinedButton.styleFrom(
@@ -176,9 +184,10 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButtonFirst
               setState(() {
                 selectedPayment = 3;
                 widget.productOrderReqDTO.sizePrice = twoprice;
-                widget.productOrderReqDTO.totalPrice = twoprice* widget.count;
+                widget.productOrderReqDTO.totalPrice = twoprice * widget.count;
                 widget.onStateChange(selectedPayment);
-                Logger().d("이거 안보여줘 ???${widget.productOrderReqDTO.totalPrice}");
+                Logger()
+                    .d("이거 안보여줘 ???${widget.productOrderReqDTO.totalPrice}");
               });
             },
             style: OutlinedButton.styleFrom(
@@ -237,11 +246,13 @@ class _BottomSheetOutlineButtonState extends State<BottomSheetOutlineButtonFirst
               setState(() {
                 selectedPayment = 4;
                 widget.productOrderReqDTO.sizePrice = threeprice;
-                widget.productOrderReqDTO.totalPrice = threeprice* widget.count;
+                widget.productOrderReqDTO.totalPrice =
+                    threeprice * widget.count;
 
                 widget.onStateChange(selectedPayment);
 
-                Logger().d("이거 안보여줘 ???${widget.productOrderReqDTO.totalPrice}");
+                Logger()
+                    .d("이거 안보여줘 ???${widget.productOrderReqDTO.totalPrice}");
               });
             },
             style: OutlinedButton.styleFrom(

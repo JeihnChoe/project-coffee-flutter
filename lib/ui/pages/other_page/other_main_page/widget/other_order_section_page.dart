@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
-import 'package:project_coffee/ui/pages/home_page/login_page/login_page.dart';
+import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/shopping_cart_page.dart';
+
+import 'other_main_page_body_item.dart';
 
 class OtherOrderSection extends StatelessWidget {
-  const OtherOrderSection({
+  String? jwt;
+  OtherOrderSection({
+    required this.jwt,
     super.key,
   });
 
@@ -27,14 +30,21 @@ class OtherOrderSection extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () => jwt != null && !jwt!.isEmpty
+                            ? Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ShoppingCartPage()))
+                            : OtherShowDialog(context, "장바구니", 2),
                         child: Row(
                           children: [
                             Icon(
                               Icons.shopping_basket,
                               color: Colors.black,
                             ),
-                            SizedBox(width: gap_m,),
+                            SizedBox(
+                              width: gap_m,
+                            ),
                             Text(
                               "장바구니",
                               style: TextStyle(color: Colors.black),
@@ -49,14 +59,21 @@ class OtherOrderSection extends StatelessWidget {
                     ),
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () => jwt != null && !jwt!.isEmpty
+                            ? Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ShoppingCartPage()))
+                            : OtherShowDialog(context, "홀케이크 예약", 2),
                         child: Row(
                           children: [
                             Icon(
                               Icons.cake_outlined,
                               color: Colors.black,
                             ),
-                            SizedBox(width: gap_m,),
+                            SizedBox(
+                              width: gap_m,
+                            ),
                             Text(
                               "홀케이크 예약",
                               style: TextStyle(color: Colors.black),
@@ -74,14 +91,21 @@ class OtherOrderSection extends StatelessWidget {
                 Column(
                   children: [
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => jwt != null && !jwt!.isEmpty
+                          ? Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ShoppingCartPage()))
+                          : OtherShowDialog(context, "히스토리", 1),
                       child: Row(
                         children: [
                           Icon(
                             Icons.history,
                             color: Colors.black,
                           ),
-                          SizedBox(width: gap_m,),
+                          SizedBox(
+                            width: gap_m,
+                          ),
                           Text(
                             "히스토리",
                             style: TextStyle(color: Colors.black),
@@ -93,7 +117,6 @@ class OtherOrderSection extends StatelessWidget {
                         elevation: 0,
                       ),
                     ),
-
                   ],
                 )
               ],
@@ -102,9 +125,6 @@ class OtherOrderSection extends StatelessWidget {
           ],
         ),
       ),
-
     );
   }
 }
-
-
