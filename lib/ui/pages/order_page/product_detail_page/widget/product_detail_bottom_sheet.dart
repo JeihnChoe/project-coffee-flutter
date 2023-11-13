@@ -48,8 +48,10 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
     widget.productOrderReqDTO.optionId = widget.productDetailResDTO.optionId;
     widget.productOrderReqDTO.cuptype = 1;
     widget.productOrderReqDTO.quantity = 1;
-    widget.productOrderReqDTO.totalPrice = widget.productDetailResDTO.optionPrice;  //가격 넣어야함
-    widget.productOrderReqDTO.sizePrice = widget.productDetailResDTO.optionPrice;
+    widget.productOrderReqDTO.totalPrice =
+        widget.productDetailResDTO.optionPrice; //가격 넣어야함
+    widget.productOrderReqDTO.sizePrice =
+        widget.productDetailResDTO.optionPrice;
     // Logger().d("이건 isiced    ${widget.productOrderReqDTO.isIced}");
     // Logger().d("이건 product    ${widget.productOrderReqDTO.product}");
     // Logger().d("이건 option    ${widget.productOrderReqDTO.option}");
@@ -128,15 +130,16 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                         onStateChange: updateChildState,
                       ) //디폴트 값
                     else
-                        BottomSheetOutlineButtonThird(   //third는 없는걸로 바꿀꺼임
-                          productOrderReqDTO: widget.productOrderReqDTO,
-                          // DTO보내기
-                          selectedTabMethod: outlinbuttonchange,
-                          count: count,
-                          onStateChange: updateChildState,
-                        ),
-                      
-                      //디폴트 값
+                      BottomSheetOutlineButtonThird(
+                        //third는 없는걸로 바꿀꺼임
+                        productOrderReqDTO: widget.productOrderReqDTO,
+                        // DTO보내기
+                        selectedTabMethod: outlinbuttonchange,
+                        count: count,
+                        onStateChange: updateChildState,
+                      ),
+
+                    //디폴트 값
                     SizedBox(
                       height: gap_l,
                     ),
@@ -312,15 +315,15 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                     Logger().d(widget.productOrderReqDTO.toJson());
                     // ref.read(beverageProvider).cart(context,widget.productOrderReqDTO);
                     // showModalBottomSheet(
-                    //   context: context,
-                    //   isScrollControlled: true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
-                    //   builder: (context,) {
-                    //     return FractionallySizedBox(
-                    //       heightFactor: 0.20, // 높이를 20%로 설정
-                    //       child: ProductDetailCartBottomSheet(productOrderReqDTO: widget.productOrderReqDTO),
-                    //     );
-                    //   },
-                    // );
+                    //                       context: context,
+                    //                       isScrollControlled: true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
+                    //                       builder: (context,) {
+                    //                         return FractionallySizedBox(
+                    //                           heightFactor: 0.20, // 높이를 20%로 설정
+                    //                           child: ProductDetailCartBottomSheet(productOrderReqDTO: widget.productOrderReqDTO),
+                    //                         );
+                    //                       },
+                    //                     );
                   },
                   style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -426,7 +429,8 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                   setState(() {
                     count--;
                     widget.productOrderReqDTO.quantity = count;
-                    widget.productOrderReqDTO.totalPrice = widget.productOrderReqDTO.sizePrice! * count;
+                    widget.productOrderReqDTO.totalPrice =
+                        widget.productOrderReqDTO.sizePrice! * count;
                   });
                 }
               },
@@ -439,7 +443,8 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                 setState(() {
                   count++;
                   widget.productOrderReqDTO.quantity = count;
-                  widget.productOrderReqDTO.totalPrice = widget.productOrderReqDTO.sizePrice! * count;
+                  widget.productOrderReqDTO.totalPrice =
+                      widget.productOrderReqDTO.sizePrice! * count;
                 });
               },
               icon: Icon(CupertinoIcons.plus_circle),
