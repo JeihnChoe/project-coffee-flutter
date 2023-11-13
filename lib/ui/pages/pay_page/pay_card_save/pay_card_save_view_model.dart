@@ -4,27 +4,30 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/move.dart';
 import 'package:project_coffee/data/dto/card_request.dart';
+import 'package:project_coffee/data/dto/reponse_dto.dart';
+import 'package:project_coffee/data/model/paycard.dart';
 import 'package:project_coffee/data/repository/card_repository.dart';
 import 'package:project_coffee/main.dart';
-
-import '../../../../data/dto/reponse_dto.dart';
-import '../../../../data/model/paycard.dart';
-
-//창고데이터 - DTO
 
 class PayCardModel {
   PayCard? card;
   PayCardModel({this.card});
 }
 
-//창고관리자
-class PayCardStore {
+class PayCardStore extends PayCardModel {
   final mContext = navigatorKey.currentContext;
 
-  Future<void> save(CardSaveReqDTO cardSaveReqDTO) async {
+  // PayCardStore();
+
+  Future<void> charge(CardChargeReqDTO cardChargeReqDTO) async {
+    Navigator.pushNamed(mContext!, Move.MainPage);
+    // Navigator.push(mContext, JoinSucessPage())
+  }
+
+  Future<void> save(CardSaveReqDTO cardSaveReqDTO, String? token) async {
     try {
       ResponseDTO responseDTO =
-          await CardRepository().fetchCardSave(cardSaveReqDTO);
+          await CardRepository().fetchCardSave(cardSaveReqDTO, token);
       Logger().d("카드 등록 중 ${responseDTO.response}");
       Logger().d("카드 등록 중 ${responseDTO.success}");
 

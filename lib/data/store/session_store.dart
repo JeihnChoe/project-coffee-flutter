@@ -51,6 +51,8 @@ class SessionStore extends SessionUser {
       this.user = responseDTO.response as User;
       this.jwt = responseDTO.token;
       this.isLogin = true;
+      Logger().d("this.user : ${this.user}");
+      Logger().d("this.jwt : ${this.jwt}");
       Logger().d("this.isLogin : ${this.isLogin}");
 
       // 2. 디바이스에 JWT 저장 (자동 로그인)
