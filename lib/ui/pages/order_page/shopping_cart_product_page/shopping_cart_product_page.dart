@@ -5,6 +5,8 @@ import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
+import 'package:project_coffee/data/store/session_store.dart';
+import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/shopping_cart_page_view_model.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/widget/shopping_cart_page_body.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
@@ -205,186 +207,207 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartProductPage> {
             child: ListView.builder(
               itemCount: itemTotalPrice.length,
               itemBuilder: (context, index) {
-                return Container(
-                  height: 200,
-                  color: Colors.white,
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                return Consumer(
+                  builder: (context, ref, child) {
+                    SessionUser sessionuser = ref.read(sessionProvider);
+                    final cartTotalModel =
+                        ref.watch(shoppingCartListProvider(sessionuser.jwt!));
+
+                    return Container(
+                      height: 200,
+                      color: Colors.white,
+                      child: Column(
                         children: [
-                          Checkbox(
-                            value: itemCheckedState[index],
-                            onChanged: (bool? value) {
-                              setState(() {
-                                itemCheckedState[index] = value ?? false;
-                                updateTotalPrice();
-                              });
-                            },
-                            activeColor: kAccentColor,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Checkbox(
+                                value: itemCheckedState[index],
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    itemCheckedState[index] = value ?? false;
+                                    updateTotalPrice();
+                                  });
+                                },
+                                activeColor: kAccentColor,
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  removeItem(index);
+                                  updateTotalPrice();
+                                },
+                                icon: Icon(Icons.cancel_outlined),
+                                color: Colors.grey,
+                              ),
+                            ],
                           ),
-                          IconButton(
-                            onPressed: () {
-                              removeItem(index);
-                              updateTotalPrice();
-                            },
-                            icon: Icon(Icons.cancel_outlined),
-                            color: Colors.grey,
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 16.0, right: 16),
+                            child: Row(
+                              children: [
+                                ClipOval(
+                                  child: Image.network(
+                                    "${cartTotalModel?.cartTotalDTO?[index].picUrl}",
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                SizedBox(width: gap_xl),
+                                SizedBox(
+                                  width: 220,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      textTitle2(
+                                          "${cartTotalModel?.cartTotalDTO?[index].name}"),
+                                      Text(
+                                          "${cartTotalModel?.cartTotalDTO?[index].engName}",
+                                          style:
+                                              TextStyle(color: Colors.black45)),
+                                      SizedBox(height: gap_m),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              if (cartTotalModel
+                                                      ?.cartTotalDTO?[index]
+                                                      .isIced ==
+                                                  0)
+                                                Text("HOT  | ",
+                                                    style: TextStyle(
+                                                        color: Colors.black45))
+                                              else if (cartTotalModel
+                                                      ?.cartTotalDTO?[index]
+                                                      .isIced ==
+                                                  1)
+                                                Text("Iced  | ",
+                                                    style: TextStyle(
+                                                        color: Colors.black45))
+                                              else
+                                                Text(""),
+                                              Text(
+                                                  " ${cartTotalModel?.cartTotalDTO?[index].size}  | ",
+                                                  style: TextStyle(
+                                                      color: Colors.black45)),
+                                              if (cartTotalModel
+                                                      ?.cartTotalDTO?[index]
+                                                      .cupType ==
+                                                  1)
+                                                Text("매장컵",
+                                                    style: TextStyle(
+                                                        color: Colors.black45))
+                                              else if (cartTotalModel
+                                                      ?.cartTotalDTO?[index]
+                                                      .cupType ==
+                                                  2)
+                                                Text("개인컵",
+                                                    style: TextStyle(
+                                                        color: Colors.black45))
+                                              else if (cartTotalModel
+                                                      ?.cartTotalDTO?[index]
+                                                      .cupType ==
+                                                  3)
+                                                Text("일회용컵",
+                                                    style: TextStyle(
+                                                        color: Colors.black45))
+                                              else
+                                                Text(""),
+                                            ],
+                                          ),
+                                          Text(
+                                              "${cartTotalModel?.cartTotalDTO?[index].price}",
+                                              style: TextStyle(
+                                                  color: Colors.black45)),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              IconButton(
+                                                onPressed: () {
+                                                  if (itemCounts[index] > 1) {
+                                                    setState(() {
+                                                      itemCounts[index]--;
+                                                      itemTotalPrice[index] -=
+                                                          cartTotalModel
+                                                                  ?.cartTotalDTO?[
+                                                                      index]
+                                                                  .price ??
+                                                              0;
+                                                      updateTotalPrice();
+                                                    });
+                                                    int totalItemCount =
+                                                        itemCounts.fold(
+                                                            0,
+                                                            (acc, itemCount) =>
+                                                                acc +
+                                                                itemCount);
+                                                    if (totalItemCount > 20) {
+                                                      showAlertDialog(context);
+                                                    }
+                                                  }
+                                                },
+                                                icon: Icon(CupertinoIcons
+                                                    .minus_circle),
+                                                color: (itemCounts[index] > 1)
+                                                    ? Colors.black
+                                                    : Colors.grey,
+                                              ),
+                                              Text("${itemCounts[index]}"),
+                                              IconButton(
+                                                onPressed: () {
+                                                  int totalItemCount =
+                                                      itemCounts.fold(
+                                                          0,
+                                                          (acc, itemCount) =>
+                                                              acc + itemCount);
+                                                  if (totalItemCount < 20) {
+                                                    setState(() {
+                                                      itemCounts[index]++;
+                                                      itemTotalPrice[index] +=
+                                                          cartTotalModel
+                                                                  ?.cartTotalDTO?[
+                                                                      index]
+                                                                  .price ??
+                                                              0;
+                                                      updateTotalPrice();
+                                                    });
+                                                  } else {
+                                                    showAlertDialog(context);
+                                                  }
+                                                },
+                                                icon: Icon(
+                                                    CupertinoIcons.plus_circle),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              textTitle1(
+                                                  "${itemTotalPrice[index]}"),
+                                              SizedBox(width: 16),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0, right: 16),
-                        child: Row(
-                          children: [
-                            ClipOval(
-                              child: Image.network(
-                                "${widget.cartTotalList[index].picUrl}",
-                                width: 100,
-                                height: 100,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            SizedBox(width: gap_xl),
-                            SizedBox(
-                              width: 220,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  textTitle2(
-                                      "${widget.cartTotalList[index].name}"),
-                                  Text("${widget.cartTotalList[index].engName}",
-                                      style: TextStyle(color: Colors.black45)),
-                                  SizedBox(height: gap_m),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          if (widget.cartTotalList[index]
-                                                  .isIced ==
-                                              0)
-                                            Text("HOT  | ",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else if (widget.cartTotalList[index]
-                                                  .isIced ==
-                                              1)
-                                            Text("Iced  | ",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else
-                                            Text(""),
-                                          Text(
-                                              " ${widget.cartTotalList[index].size}  | ",
-                                              style: TextStyle(
-                                                  color: Colors.black45)),
-                                          if (widget.cartTotalList[index]
-                                                  .cupType ==
-                                              1)
-                                            Text("매장컵",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else if (widget.cartTotalList[index]
-                                                  .cupType ==
-                                              2)
-                                            Text("개인컵",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else if (widget.cartTotalList[index]
-                                                  .cupType ==
-                                              3)
-                                            Text("일회용컵",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else
-                                            Text(""),
-                                        ],
-                                      ),
-                                      Text(
-                                          "${widget.cartTotalList[index].price}",
-                                          style:
-                                              TextStyle(color: Colors.black45)),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          IconButton(
-                                            onPressed: () {
-                                              if (itemCounts[index] > 1) {
-                                                setState(() {
-                                                  itemCounts[index]--;
-                                                  itemTotalPrice[index] -=
-                                                      widget
-                                                          .cartTotalList[index]
-                                                          .price;
-                                                  ;
-                                                  updateTotalPrice();
-                                                });
-                                                int totalItemCount =
-                                                    itemCounts.fold(
-                                                        0,
-                                                        (acc, itemCount) =>
-                                                            acc + itemCount);
-                                                if (totalItemCount > 20) {
-                                                  showAlertDialog(context);
-                                                }
-                                              }
-                                            },
-                                            icon: Icon(
-                                                CupertinoIcons.minus_circle),
-                                            color: (itemCounts[index] > 1)
-                                                ? Colors.black
-                                                : Colors.grey,
-                                          ),
-                                          Text("${itemCounts[index]}"),
-                                          IconButton(
-                                            onPressed: () {
-                                              int totalItemCount =
-                                                  itemCounts.fold(
-                                                      0,
-                                                      (acc, itemCount) =>
-                                                          acc + itemCount);
-                                              if (totalItemCount < 20) {
-                                                setState(() {
-                                                  itemCounts[index]++;
-                                                  itemTotalPrice[index] +=
-                                                      widget
-                                                          .cartTotalList[index]
-                                                          .price;
-                                                  updateTotalPrice();
-                                                });
-                                              } else {
-                                                showAlertDialog(context);
-                                              }
-                                            },
-                                            icon: Icon(
-                                                CupertinoIcons.plus_circle),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          textTitle1(
-                                              "${itemTotalPrice[index]}"),
-                                          SizedBox(width: 16),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                    );
+                  },
                 );
               },
             ),
