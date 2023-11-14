@@ -342,7 +342,8 @@ class ProductDetailBottomSheetState extends State<ProductDetailBottomSheet> {
                     borderRadius: BorderRadius.circular(25),
                   ),
                 ),
-                onPressed: () => showDialog<String>(
+                onPressed: () =>
+                    showDialog<String>(
                       context: context,
                       builder: (context) => AlertDialog(
                         content: Container(
