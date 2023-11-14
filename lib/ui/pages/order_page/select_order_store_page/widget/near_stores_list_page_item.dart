@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/model/stroes.dart';
-import 'package:project_coffee/ui/pages/order_page/%20select_order_store_page/widget/stores_detail_bottom_sheet.dart';
+import 'package:project_coffee/ui/pages/order_page/select_order_store_page/widget/stores_detail_bottom_sheet.dart';
 
 class NearStoresListPageItem extends StatelessWidget {
   Stores stores;
@@ -16,7 +16,8 @@ class NearStoresListPageItem extends StatelessWidget {
         onTap: () {
           showModalBottomSheet(
             context: context,
-            isScrollControlled: true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
+            isScrollControlled:
+                true, // 이 옵션을 사용하여 BottomSheet가 화면의 90%까지 올라오게 합니다.
             builder: (context) {
               return FractionallySizedBox(
                 heightFactor: 0.95, // 높이를 90%로 설정
@@ -26,7 +27,7 @@ class NearStoresListPageItem extends StatelessWidget {
           );
         },
         child: Padding(
-          padding: const EdgeInsets.only(top: 5,bottom: 15, right: 16),
+          padding: const EdgeInsets.only(top: 5, bottom: 15, right: 16),
           child: Container(
             height: 75,
             color: Colors.white,
@@ -67,10 +68,8 @@ class NearStoresListPageItem extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         image: DecorationImage(
-            image: NetworkImage("${stores.storePicUrl}"),
-            fit: BoxFit.cover),
+            image: NetworkImage("${stores.storePicUrl}"), fit: BoxFit.cover),
       ),
     );
   }
 }
-

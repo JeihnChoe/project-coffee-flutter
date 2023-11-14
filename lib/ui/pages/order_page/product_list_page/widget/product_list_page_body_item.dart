@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:project_coffee/_core/constants/style.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
-import 'package:project_coffee/data/model/product.dart';
 import 'package:project_coffee/ui/pages/order_page/product_detail_page/product_detail_page.dart';
 
 import '../../../../../_core/constants/size.dart';
 
 class CategoryProductListPageBodyItem extends StatelessWidget {
   ProductListResDTO productListResDTO;
-  CategoryProductListPageBodyItem(this.productListResDTO,{super.key});
+  CategoryProductListPageBodyItem(this.productListResDTO, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +18,12 @@ class CategoryProductListPageBodyItem extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => productListResDTO != null ? ProductDetailPage(productListResDTO) : Center(child: CircularProgressIndicator()) ));
+                  builder: (context) => productListResDTO != null
+                      ? ProductDetailPage(productListResDTO)
+                      : Center(child: CircularProgressIndicator())));
         },
         child: Padding(
-          padding: const EdgeInsets.only(top: 5,bottom: 15, right: 16),
+          padding: const EdgeInsets.only(top: 5, bottom: 15, right: 16),
           child: Container(
             height: 80,
             color: Colors.white,
@@ -59,7 +60,6 @@ Widget _Product(ProductListResDTO product) {
   );
 }
 
-
 _image(ProductListResDTO product) {
   return Container(
     width: 100,
@@ -67,8 +67,7 @@ _image(ProductListResDTO product) {
     decoration: BoxDecoration(
       shape: BoxShape.circle,
       image: DecorationImage(
-          image: NetworkImage("${product.picUrl}"),
-          fit: BoxFit.cover),
+          image: NetworkImage("${product.picUrl}"), fit: BoxFit.cover),
     ),
   );
 }

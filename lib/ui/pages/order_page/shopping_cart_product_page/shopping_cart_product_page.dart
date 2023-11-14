@@ -8,36 +8,31 @@ import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/widget/shopping_cart_page_body.dart';
 import 'package:project_coffee/ui/widgets/custom_white_pop_button.dart';
 
-import 'shopping_cart_product_empty_page.dart';
-
 class ShoppingCartProductPage extends StatefulWidget {
   final List<CartTotalDTO> cartTotalList;
 
-  ShoppingCartProductPage(this.cartTotalList);
+  ShoppingCartProductPage(this.cartTotalList, {Key? key}) : super(key: key);
 
   @override
   State<ShoppingCartProductPage> createState() =>
-      _ShoppingBasketProductPageState();
+      _ShoppingBasketBeveragePageState();
 }
 
-class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
+class _ShoppingBasketBeveragePageState extends State<ShoppingCartProductPage> {
   List<bool> itemCheckedState = [];
   List<int> itemCounts = []; // 각 아이템의 수량을 나타내는 변수
   List<int> itemTotalPrice = []; // 각 아이템의 총 가격을 나타내는 변수
 
-  // 초기에 모든 아이템을 선택하지 않도록 false로 설정
   @override
   void initState() {
     super.initState();
+    // 초기에 모든 아이템을 선택하지 않도록 false로 설정
     itemCheckedState =
         List.generate(widget.cartTotalList.length, (index) => false);
     itemCounts = List.generate(widget.cartTotalList.length,
         (index) => widget.cartTotalList[index].quantity);
     itemTotalPrice = List.generate(widget.cartTotalList.length,
         (index) => widget.cartTotalList[index].sumPrice);
-
-    print('itemCounts: $itemCounts');
-    print('itemTotalPrice: $itemTotalPrice');
   }
 
   int getCheckedItemCount() {
@@ -68,16 +63,11 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
   }
 
   void removeItem(int index) {
-    if (index >= 0 && index < itemTotalPrice.length) {
-      setState(() {
-        itemTotalPrice.removeAt(index);
-        itemCounts.removeAt(index);
-        itemCheckedState.removeAt(index);
-      });
-
-      // 재조정된 인덱스로 상태 업데이트
-      updateTotalPrice();
-    }
+    setState(() {
+      itemTotalPrice.removeAt(index);
+      itemCounts.removeAt(index);
+      itemCheckedState.removeAt(index);
+    });
   }
 
   void removeAllItems() {
@@ -89,7 +79,7 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
   }
 
   void updateTotalPrice() {
-    int totalPrice = 0;
+    double totalPrice = 0;
     for (int i = 0; i < itemTotalPrice.length; i++) {
       if (itemCheckedState[i]) {
         totalPrice += itemTotalPrice[i];
@@ -175,7 +165,6 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
                                   i--) {
                                 if (itemCheckedState[i]) {
                                   removeItem(i);
-                                  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////삭제코드 쓰는곳
                                 }
                               }
                               updateTotalPrice();
@@ -188,27 +177,20 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
                             height: 15,
                             color: Colors.grey,
                           ),
-                          Consumer(
-                            builder: (context, ref, child) {
-                              return TextButton(
-                                onPressed: () {
-                                  // ref.read()
-                                  removeAllItems();
-
-                                  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////삭제코드 쓰는곳
-                                  // 여기서 페이지를 이동
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          ShoppingCartPageBody(cartTotalDTO: widget.cartTotalList),
-                                    ),
-                                  );
-                                },
-                                child: Text("전체삭제",
-                                    style: TextStyle(color: Colors.grey)),
+                          TextButton(
+                            onPressed: () {
+                              removeAllItems();
+                              // 여기서 페이지를 이동
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ShoppingCartPageBody(
+                                      cartTotalDTO: widget.cartTotalList),
+                                ),
                               );
                             },
+                            child: Text("전체삭제",
+                                style: TextStyle(color: Colors.grey)),
                           ),
                         ],
                       )
@@ -221,7 +203,7 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
           Container(height: gap_m, color: Colors.grey[200]),
           Expanded(
             child: ListView.builder(
-              itemCount: widget.cartTotalList.length,
+              itemCount: itemTotalPrice.length,
               itemBuilder: (context, index) {
                 return Container(
                   height: 200,
@@ -244,7 +226,6 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
                           IconButton(
                             onPressed: () {
                               removeItem(index);
-                              //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////삭제 기능 쓰는곳
                               updateTotalPrice();
                             },
                             icon: Icon(Icons.cancel_outlined),
@@ -272,7 +253,7 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
                                 children: [
                                   textTitle2(
                                       "${widget.cartTotalList[index].name}"),
-                                  Text("coffee",
+                                  Text("${widget.cartTotalList[index].engName}",
                                       style: TextStyle(color: Colors.black45)),
                                   SizedBox(height: gap_m),
                                   Row(
@@ -284,63 +265,21 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
                                           if (widget.cartTotalList[index]
                                                   .isIced ==
                                               0)
-                                            Text("HOT ",
+                                            Text("HOT  | ",
                                                 style: TextStyle(
                                                     color: Colors.black45))
                                           else if (widget.cartTotalList[index]
                                                   .isIced ==
                                               1)
-                                            Text("Iced ",
+                                            Text("Iced  | ",
                                                 style: TextStyle(
                                                     color: Colors.black45))
                                           else
                                             Text(""),
-                                          if (widget
-                                                  .cartTotalList[index].size ==
-                                              1)
-                                            Text("Short",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else if (widget
-                                                  .cartTotalList[index].size ==
-                                              2)
-                                            Text("Tall",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else if (widget
-                                                  .cartTotalList[index].size ==
-                                              3)
-                                            Text("Grande",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else if (widget
-                                                  .cartTotalList[index].size ==
-                                              4)
-                                            Text("Venti",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else if (widget
-                                                  .cartTotalList[index].size ==
-                                              5)
-                                            Text("Trenta",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else if (widget
-                                                  .cartTotalList[index].size ==
-                                              6)
-                                            Text("Solo",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else if (widget
-                                                  .cartTotalList[index].size ==
-                                              7)
-                                            Text("Doppio",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else
-                                            Text(
-                                              "",
-                                            ),
+                                          Text(
+                                              " ${widget.cartTotalList[index].size}  | ",
+                                              style: TextStyle(
+                                                  color: Colors.black45)),
                                           if (widget.cartTotalList[index]
                                                   .cupType ==
                                               1)
@@ -384,6 +323,7 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
                                                       widget
                                                           .cartTotalList[index]
                                                           .price;
+                                                  ;
                                                   updateTotalPrice();
                                                 });
                                                 int totalItemCount =

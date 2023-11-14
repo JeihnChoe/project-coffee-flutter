@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:line_icons/line_icon.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
+import 'package:project_coffee/data/store/session_store.dart';
+import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/shopping_cart_page_view_model.dart';
 
 import '../../shopping_cart_goods_page/shopping_cart_goods_empty_page.dart';
 import '../../shopping_cart_product_page/shopping_cart_product_empty_page.dart';
@@ -14,6 +15,10 @@ class ShoppingCartPageBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    SessionUser sessionUser = ref.read(sessionProvider);
+    String? jwt = sessionUser.jwt;
+    final cartTotalModel = ref.watch(shoppingCartListProvider(jwt!));
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -40,13 +45,11 @@ class ShoppingCartPageBody extends ConsumerWidget {
               child: TabBarView(
                 children: [
                   // 첫 번째 탭 페이지: 음료/푸드
-
-                  cartTotalDTO?.length == 0
-                      ? ShoppingCartProductEmptyPage()
-                      : ShoppingCartProductPage(cartTotalDTO!),
+                  cartTotalModel?.cartTotalDTO != null
+                      ? ShoppingCartProductPage(cartTotalModel!.cartTotalDTO!)
+                      : ShoppingCartProductEmptyPage(),
                   //
                   // 두 번째 탭 페이지: 상품
-                  //ShoppingCartProductPage(),
                   ShoppingCartGoodsEmptyPage(),
                 ],
               ),
