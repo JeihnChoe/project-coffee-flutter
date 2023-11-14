@@ -67,12 +67,16 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
   }
 
   void removeItem(int index) {
-    setState(() {
-      itemTotalPrice.removeAt(index);
-      itemCounts.removeAt(index);
-      itemCheckedState.removeAt(index);
+    if (index >= 0 && index < itemTotalPrice.length) {
+      setState(() {
+        itemTotalPrice.removeAt(index);
+        itemCounts.removeAt(index);
+        itemCheckedState.removeAt(index);
+      });
 
-    });
+      // 재조정된 인덱스로 상태 업데이트
+      updateTotalPrice();
+    }
   }
 
   void removeAllItems() {
@@ -189,7 +193,7 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
                                 onPressed: () {
                                   // ref.read()
                                   removeAllItems();
-                                  
+
                                   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////삭제코드 쓰는곳
                                   // 여기서 페이지를 이동
                                   Navigator.pushReplacement(
@@ -277,46 +281,89 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
                                       Row(
                                         children: [
                                           if (widget.cartTotalList[index]
-                                              .isIced ==
+                                                  .isIced ==
                                               0)
                                             Text("HOT ",
                                                 style: TextStyle(
                                                     color: Colors.black45))
-                                          else if(widget.cartTotalList[index]
-                                              .isIced ==
+                                          else if (widget.cartTotalList[index]
+                                                  .isIced ==
                                               1)
                                             Text("Iced ",
                                                 style: TextStyle(
                                                     color: Colors.black45))
                                           else
                                             Text(""),
-                                          if(widget.cartTotalList[index].size== 1)
-                                            Text("Short", style: TextStyle(color: Colors.black45))
-                                          else if(widget.cartTotalList[index].size== 2)
-                                            Text("Tall", style: TextStyle(color: Colors.black45))
-                                          else if(widget.cartTotalList[index].size== 3)
-                                            Text("Grande", style: TextStyle(color: Colors.black45))
-                                          else if(widget.cartTotalList[index].size== 4)
-                                            Text("Venti", style: TextStyle(color: Colors.black45))
-                                          else if(widget.cartTotalList[index].size== 5)
-                                            Text("Trenta", style: TextStyle(color: Colors.black45))
-                                          else if(widget.cartTotalList[index].size== 6)
-                                            Text("Solo", style: TextStyle(color: Colors.black45))
-                                          else if(widget.cartTotalList[index].size== 7)
-                                            Text("Doppio", style: TextStyle(color: Colors.black45))
+                                          if (widget
+                                                  .cartTotalList[index].size ==
+                                              1)
+                                            Text("Short",
+                                                style: TextStyle(
+                                                    color: Colors.black45))
+                                          else if (widget
+                                                  .cartTotalList[index].size ==
+                                              2)
+                                            Text("Tall",
+                                                style: TextStyle(
+                                                    color: Colors.black45))
+                                          else if (widget
+                                                  .cartTotalList[index].size ==
+                                              3)
+                                            Text("Grande",
+                                                style: TextStyle(
+                                                    color: Colors.black45))
+                                          else if (widget
+                                                  .cartTotalList[index].size ==
+                                              4)
+                                            Text("Venti",
+                                                style: TextStyle(
+                                                    color: Colors.black45))
+                                          else if (widget
+                                                  .cartTotalList[index].size ==
+                                              5)
+                                            Text("Trenta",
+                                                style: TextStyle(
+                                                    color: Colors.black45))
+                                          else if (widget
+                                                  .cartTotalList[index].size ==
+                                              6)
+                                            Text("Solo",
+                                                style: TextStyle(
+                                                    color: Colors.black45))
+                                          else if (widget
+                                                  .cartTotalList[index].size ==
+                                              7)
+                                            Text("Doppio",
+                                                style: TextStyle(
+                                                    color: Colors.black45))
                                           else
-                                            Text("",),
-                                          if(widget.cartTotalList[index].cupType == 1)
-                                            Text("매장컵", style: TextStyle(color: Colors.black45))
-                                          else if(widget.cartTotalList[index].cupType == 2)
-                                            Text("개인컵", style: TextStyle(color: Colors.black45))
-                                          else if(widget.cartTotalList[index].cupType == 3)
-                                              Text("일회용컵", style: TextStyle(color: Colors.black45))
-                                            else
-                                                Text(""),
+                                            Text(
+                                              "",
+                                            ),
+                                          if (widget.cartTotalList[index]
+                                                  .cupType ==
+                                              1)
+                                            Text("매장컵",
+                                                style: TextStyle(
+                                                    color: Colors.black45))
+                                          else if (widget.cartTotalList[index]
+                                                  .cupType ==
+                                              2)
+                                            Text("개인컵",
+                                                style: TextStyle(
+                                                    color: Colors.black45))
+                                          else if (widget.cartTotalList[index]
+                                                  .cupType ==
+                                              3)
+                                            Text("일회용컵",
+                                                style: TextStyle(
+                                                    color: Colors.black45))
+                                          else
+                                            Text(""),
                                         ],
                                       ),
-                                      Text("${widget.cartTotalList[index].price}",
+                                      Text(
+                                          "${widget.cartTotalList[index].price}",
                                           style:
                                               TextStyle(color: Colors.black45)),
                                     ],
@@ -332,7 +379,10 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
                                               if (itemCounts[index] > 1) {
                                                 setState(() {
                                                   itemCounts[index]--;
-                                                  itemTotalPrice[index] -= widget.cartTotalList[index].price;
+                                                  itemTotalPrice[index] -=
+                                                      widget
+                                                          .cartTotalList[index]
+                                                          .price;
                                                   updateTotalPrice();
                                                 });
                                                 int totalItemCount =
@@ -362,7 +412,10 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
                                               if (totalItemCount < 20) {
                                                 setState(() {
                                                   itemCounts[index]++;
-                                                  itemTotalPrice[index] += widget.cartTotalList[index].price;
+                                                  itemTotalPrice[index] +=
+                                                      widget
+                                                          .cartTotalList[index]
+                                                          .price;
                                                   updateTotalPrice();
                                                 });
                                               } else {

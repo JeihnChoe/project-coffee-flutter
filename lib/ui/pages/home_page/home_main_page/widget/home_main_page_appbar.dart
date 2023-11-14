@@ -32,7 +32,7 @@ class HomeMainPageAppBar extends StatelessWidget {
       ),
       actions: [
         Padding(
-          padding: const EdgeInsets.only(right: 16.0),
+          padding: const EdgeInsets.only(right: 30.0),
           child: IconButton(
             onPressed: () {},
             icon: Icon(
