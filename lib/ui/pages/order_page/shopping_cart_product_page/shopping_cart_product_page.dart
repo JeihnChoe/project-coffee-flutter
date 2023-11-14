@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
@@ -35,7 +36,7 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
         (index) => widget.cartTotalList[index].quantity);
     itemTotalPrice = List.generate(widget.cartTotalList.length,
         (index) => widget.cartTotalList[index].sumPrice);
-
+    Logger().d(widget.cartTotalList[0].size);
     print('itemCounts: $itemCounts');
     print('itemTotalPrice: $itemTotalPrice');
   }
@@ -284,63 +285,19 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
                                           if (widget.cartTotalList[index]
                                                   .isIced ==
                                               0)
-                                            Text("HOT ",
+                                            Text("HOT  | ",
                                                 style: TextStyle(
                                                     color: Colors.black45))
                                           else if (widget.cartTotalList[index]
                                                   .isIced ==
                                               1)
-                                            Text("Iced ",
+                                            Text("Iced  | ",
                                                 style: TextStyle(
                                                     color: Colors.black45))
                                           else
                                             Text(""),
-                                          if (widget
-                                                  .cartTotalList[index].size ==
-                                              1)
-                                            Text("Short",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else if (widget
-                                                  .cartTotalList[index].size ==
-                                              2)
-                                            Text("Tall",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else if (widget
-                                                  .cartTotalList[index].size ==
-                                              3)
-                                            Text("Grande",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else if (widget
-                                                  .cartTotalList[index].size ==
-                                              4)
-                                            Text("Venti",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else if (widget
-                                                  .cartTotalList[index].size ==
-                                              5)
-                                            Text("Trenta",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else if (widget
-                                                  .cartTotalList[index].size ==
-                                              6)
-                                            Text("Solo",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else if (widget
-                                                  .cartTotalList[index].size ==
-                                              7)
-                                            Text("Doppio",
-                                                style: TextStyle(
-                                                    color: Colors.black45))
-                                          else
-                                            Text(
-                                              "",
-                                            ),
+
+                                            Text(" ${widget.cartTotalList[index].size}  | ", style: TextStyle(color: Colors.black45)),
                                           if (widget.cartTotalList[index]
                                                   .cupType ==
                                               1)
