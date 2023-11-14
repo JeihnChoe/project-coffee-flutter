@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/data/model/category.dart';
+
+import 'package:project_coffee/data/model/promotion.dart';
+import 'package:project_coffee/ui/pages/home_page/promotion_list_page/promotion_list_page_view_model.dart';
 import 'package:project_coffee/ui/pages/main_page/main_page.dart';
+
+
+import '../../order_page/category_list_page/category_list_page_view_model.dart';
+import '../shop_page_view_model.dart';
 
 class ShopPageBody extends StatefulWidget {
   const ShopPageBody({Key? key}) : super(key: key);
@@ -16,17 +25,31 @@ class _ShopPageBodyState extends State<ShopPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: CustomScrollView(
-        slivers: [
-          ShopAppBar(),
-          ScreenPromotion(),
-          AllProducts(),
-          bestItems(context),
-          newProducts(context),
-        ],
-      ),
+    return Consumer(
+      builder:(context, ref, child) {
+        PromotionListModel? promotionModel = ref.watch(promotionListProvider);
+        List<Promotion> promotionList = [];
+        dynamic? categoryModel = ref.watch(CategoryListProvider);
+        List<Category> categoryList =  categoryModel?.categoryList ?? [];
+
+        final codeItems = categoryList.where((item) => item.code == 2).toList();
+        if (promotionModel != null) {
+          promotionList = promotionModel?.promotionList ?? [];
+
+        }
+        return Scaffold(
+          backgroundColor: Colors.white,
+          body: CustomScrollView(
+            slivers: [
+              ShopAppBar(),
+              ScreenPromotion(promotionList: promotionList),
+              AllProducts(categoryList: codeItems),
+              bestItems(context),
+              newProducts(context),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -119,6 +142,7 @@ class _ShopPageBodyState extends State<ShopPageBody> {
   }
 
   SliverToBoxAdapter bestItems(BuildContext context) {
+
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.only(left: 16.0, right: 16, top: 16),
@@ -208,7 +232,8 @@ class _ShopPageBodyState extends State<ShopPageBody> {
 }
 
 class AllProducts extends StatelessWidget {
-  const AllProducts({
+  List<Category> categoryList;
+  AllProducts({required this.categoryList,
     super.key,
   });
 
@@ -256,14 +281,14 @@ class AllProducts extends StatelessWidget {
                               ClipOval(
                                 child: Image(
                                   image: NetworkImage(
-                                      "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000000038]_20210430113202458.jpg"),
+                                      "${categoryList[index].picUrl}"),
                                   width: 90,
                                   height: 90,
                                   fit: BoxFit.cover,
                                 ),
                               ),
                               SizedBox(height: gap_s),
-                              textBody1("초콜릿/스낵"),
+                              textBody1("${categoryList[index].name}"),
                             ],
                           ),
                           SizedBox(width: gap_m),
@@ -282,7 +307,8 @@ class AllProducts extends StatelessWidget {
 }
 
 class ScreenPromotion extends StatelessWidget {
-  const ScreenPromotion({
+  List<Promotion> promotionList;
+  ScreenPromotion({required this.promotionList,
     super.key,
   });
 
@@ -293,7 +319,7 @@ class ScreenPromotion extends StatelessWidget {
         height: 200, // 이미지 높이 조절
         child: ListView.builder(
           scrollDirection: Axis.horizontal, // 가로 스크롤 활성화
-          itemCount: 3,
+          itemCount: promotionList.length,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.only(left: 15, right: 20),
@@ -308,7 +334,7 @@ class ScreenPromotion extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                   child: Image(
                     image: NetworkImage(
-                        "https://image.istarbucks.co.kr/upload/banner/FV9avW_20230927104456049.jpg"),
+                        "${promotionList[index].bigThumbnail}"),
                     width: 300, // 이미지 너비 조절
                     fit: BoxFit.fill,
                   ),
