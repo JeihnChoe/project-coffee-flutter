@@ -7,6 +7,7 @@ import 'package:project_coffee/ui/pages/home_page/login_page/login_page.dart';
 import 'package:project_coffee/ui/pages/order_page/%20select_order_store_page/select_order_store_list_page.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/shopping_cart_page.dart';
 import 'package:project_coffee/ui/pages/order_page/shopping_cart_page/shopping_cart_page_view_model.dart';
+import 'package:project_coffee/ui/pages/other_page/other_main_page/widget/other_main_page_body_item.dart';
 import 'package:project_coffee/ui/widgets/custom_tab_bar.dart';
 
 import 'category_list_page_app_bar.dart';
@@ -17,6 +18,7 @@ class CategoryListPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -64,6 +66,7 @@ class CategoryListPageBody extends StatelessWidget {
                 ),
                 child: Consumer(
                   builder: (context, ref, child) {
+
                     SessionUser? sessionUser = ref.read(sessionProvider);
                     String? jwt = sessionUser?.jwt;
 
@@ -78,6 +81,7 @@ class CategoryListPageBody extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
+
                               builder: (context) => ShoppingCartPage(
                                 cartTOtalDTO: cartTotalList,
                               ),
@@ -90,13 +94,16 @@ class CategoryListPageBody extends StatelessWidget {
                       return IconButton(
                         icon: Icon(CupertinoIcons.bag),
                         color: Colors.white,
+
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
+
                               builder: (context) => LoginPage(),
                             ),
                           );
+
                         },
                       );
                     }

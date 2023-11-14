@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/data/store/session_store.dart';
 import 'package:project_coffee/ui/pages/home_page/join_page/join_page.dart';
@@ -35,6 +36,19 @@ class OtherMainPageBody extends ConsumerWidget {
           OtherOrderSection(jwt: sessionUser.jwt),
           OtherShopSection(jwt: sessionUser.jwt),
           OtherCustomerServiceSection(jwt: sessionUser.jwt),
+          if(sessionUser!.jwt != null)
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                Divider(),
+                Center(child: TextButton(onPressed: () {
+                  ref.read(sessionProvider).logout();
+                },child: Text("로그아웃")),
+                )],
+            ),
+          )
+
+
         ],
       ),
     );

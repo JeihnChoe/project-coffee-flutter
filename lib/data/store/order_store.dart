@@ -16,6 +16,8 @@ class ProductStore {
     Logger().d("여기 오냐 ?");
     ResponseDTO responseDTO =
         await ProductRepository().fetchProductCartSave(jwt, productOrderReqDTO);
+    Logger().d("아니 여기 왜 폴스뜨냐 ? 분명 학원에서는 잘만 되던게");
+    Logger().d(responseDTO.success);
     if (responseDTO.success == true) {
       showModalBottomSheet(
         context: context,
