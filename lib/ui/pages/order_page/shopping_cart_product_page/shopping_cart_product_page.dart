@@ -71,6 +71,7 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
       itemTotalPrice.removeAt(index);
       itemCounts.removeAt(index);
       itemCheckedState.removeAt(index);
+
     });
   }
 
@@ -169,6 +170,7 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
                                   i--) {
                                 if (itemCheckedState[i]) {
                                   removeItem(i);
+                                  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////삭제코드 쓰는곳
                                 }
                               }
                               updateTotalPrice();
@@ -181,20 +183,27 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
                             height: 15,
                             color: Colors.grey,
                           ),
-                          TextButton(
-                            onPressed: () {
-                              removeAllItems();
-                              // 여기서 페이지를 이동
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      ShoppingCartProductEmptyPage(),
-                                ),
+                          Consumer(
+                            builder: (context, ref, child) {
+                              return TextButton(
+                                onPressed: () {
+                                  // ref.read()
+                                  removeAllItems();
+                                  
+                                  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////삭제코드 쓰는곳
+                                  // 여기서 페이지를 이동
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ShoppingCartProductEmptyPage(),
+                                    ),
+                                  );
+                                },
+                                child: Text("전체삭제",
+                                    style: TextStyle(color: Colors.grey)),
                               );
                             },
-                            child: Text("전체삭제",
-                                style: TextStyle(color: Colors.grey)),
                           ),
                         ],
                       )
@@ -230,6 +239,7 @@ class _ShoppingBasketProductPageState extends State<ShoppingCartProductPage> {
                           IconButton(
                             onPressed: () {
                               removeItem(index);
+                              //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////삭제 기능 쓰는곳
                               updateTotalPrice();
                             },
                             icon: Icon(Icons.cancel_outlined),

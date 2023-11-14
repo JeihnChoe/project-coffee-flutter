@@ -28,7 +28,7 @@ class CategoryListPageBody extends StatelessWidget {
             CategoryListPageAppBar(title: "Order"),
             SliverToBoxAdapter(
               child:
-                  CustomTabBar(contentTitle1: "전체 메뉴", contentTitle2: "나만의 메뉴"),
+              CustomTabBar(contentTitle1: "전체 메뉴", contentTitle2: "나만의 메뉴"),
             ),
             SliverFillRemaining(
               child: TabBarView(children: [
@@ -62,47 +62,56 @@ class CategoryListPageBody extends StatelessWidget {
                 decoration: ShapeDecoration(
                   color: Colors.black, // 배경색 설정
                   shape:
-                      RoundedRectangleBorder(), // 원 모양의 배경을 만듭니다. 원 모양이 아니라면 다른 모양을 선택할 수 있습니다.
+                  RoundedRectangleBorder(), // 원 모양의 배경을 만듭니다. 원 모양이 아니라면 다른 모양을 선택할 수 있습니다.
                 ),
                 child: Consumer(
                   builder: (context, ref, child) {
-                    SessionUser sessionUser = ref.read(sessionProvider);
-                    String? jwt = sessionUser.jwt;
-                    if(sessionUser.jwt != null){
-                      ShoppingCartListModel? model = ref.watch(shoppingCartListProvider(jwt!));
-                      List<CartTotalDTO> cartTotalList =
-                          model?.cartTotalDTO ?? [];
+
+                    SessionUser? sessionUser = ref.read(sessionProvider);
+                    String? jwt = sessionUser?.jwt;
+
+                    if (jwt != null) {
+                      ShoppingCartListModel? model = ref.watch(shoppingCartListProvider(jwt));
+                      List<CartTotalDTO> cartTotalList = model?.cartTotalDTO ?? [];
 
                       return IconButton(
                         icon: Icon(CupertinoIcons.bag),
-                        color: Colors.white, // 아이콘 색상 설정
+                        color: Colors.white,
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ShoppingCartPage(
-                                    cartTOtalDTO: cartTotalList)),
+
+                              builder: (context) => ShoppingCartPage(
+                                cartTOtalDTO: cartTotalList,
+                              ),
+                            ),
                           );
                         },
                       );
-                    }else{
+                    } else {
+                      // jwt가 null일 때 수행할 코드 또는 예외 처리
                       return IconButton(
                         icon: Icon(CupertinoIcons.bag),
-                        color: Colors.white, // 아이콘 색상 설정
+                        color: Colors.white,
+
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginPage()
-                          ),);
+
+                              builder: (context) => LoginPage(),
+                            ),
+                          );
+
                         },
                       );
                     }
                   },
                 ),
-              )
+              ),
             ],
-          )
+          ),
         ],
       ),
     );

@@ -3,6 +3,7 @@ import 'package:logger/logger.dart';
 import 'package:project_coffee/data/dto/order_request.dart';
 import 'package:project_coffee/data/dto/reponse_dto.dart';
 import 'package:project_coffee/data/repository/product_repostory.dart';
+import 'package:project_coffee/data/store/session_store.dart';
 import 'package:project_coffee/main.dart';
 
 //창고데이터
@@ -24,6 +25,20 @@ class ShoppingCartListViewModel extends StateNotifier<ShoppingCartListModel?> {
     Logger().d("쇼핑카드야 통신하자");
     state = ShoppingCartListModel(responseDTO.response);
   }
+  Future<void> notifyDelete(int cartId) async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+    String? jwt = sessionUser.jwt;
+    ResponseDTO responseDTO = await ProductRepository().fetchDelete(jwt!, cartId);
+    state = responseDTO.response;
+  }
+
+  Future<void> notifyDeleteAll() async {
+    SessionUser sessionUser = ref.read(sessionProvider);
+    String? jwt = sessionUser.jwt;
+    ResponseDTO responseDTO = await ProductRepository().fetchDeleteAll(jwt!);
+    state = responseDTO.response;
+  }
+
 }
 
 //창고관리자

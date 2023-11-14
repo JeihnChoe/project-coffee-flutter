@@ -143,4 +143,29 @@ class ProductRepository {
       throw Exception("뭐가 틀렸냐 하면은${e}");
     }
   }
+  Future<ResponseDTO> fetchDelete(String jwt, int id) async {
+    try {
+      // 통신
+      Response response = await dio.delete("/api/cartList/$id/delete", options: Options(headers: {"Authorization": "Bearer $jwt"}));
+      // 응답 받은 데이터 파싱
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(false, null,"실패 : ${e}");
+    }
+  }
+  Future<ResponseDTO> fetchDeleteAll(String jwt) async {
+    try {
+      // 통신
+      Response response = await dio.delete("/api/cartList/deleteAll", options: Options(headers: {"Authorization": "Bearer $jwt"}));
+      // 응답 받은 데이터 파싱
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(false, null,"실패 : ${e}");
+    }
+  }
+
 }
