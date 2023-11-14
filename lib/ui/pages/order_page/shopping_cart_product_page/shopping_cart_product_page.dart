@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:project_coffee/_core/constants/color.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
@@ -261,8 +262,10 @@ class _ShoppingBasketBeveragePageState extends State<ShoppingCartProductPage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
+
                                       textTitle2(
                                           "${cartTotalModel?.cartTotalDTO?[index].name}"),
+
                                       Text(
                                           "${cartTotalModel?.cartTotalDTO?[index].engName}",
                                           style:
