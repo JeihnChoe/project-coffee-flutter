@@ -69,6 +69,30 @@ class ProductRepository {
     }
   }
 
+  Future<ResponseDTO> fetchShopProductDetailList(int categoryId) async {
+    try {
+      Logger().d("이제 들어와라 한번쯤은");
+      Response<dynamic> response =
+      await dio.get("/api/product/${categoryId}/productlist");
+      Logger().d("이제 들어와라 한번쯤은 ${response.data}");
+      Logger().d(response.data);
+
+      if (response.data != null) {
+        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+        List<dynamic> mapList = responseDTO.response;
+
+        List<ProductListResDTO> productList =
+        mapList.map((e) => ProductListResDTO.fromJson(e)).toList();
+        responseDTO.response = productList;
+        return responseDTO;
+      } else {
+        throw Exception("이게 터지네");
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   Future<ResponseDTO> fetchProductCartSave(
       String jwt, ProductOrderReqDTO productOrderReqDTO) async {
     Options options = Options(headers: {
