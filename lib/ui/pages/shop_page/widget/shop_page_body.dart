@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_coffee/_core/constants/size.dart';
 import 'package:project_coffee/_core/constants/style.dart';
+import 'package:project_coffee/data/model/category.dart';
+import 'package:project_coffee/data/model/promotion.dart';
+import 'package:project_coffee/ui/pages/home_page/promotion_list_page/promotion_list_page_view_model.dart';
 import 'package:project_coffee/ui/pages/main_page/main_page.dart';
+
+import '../../order_page/category_list_page/category_list_page_view_model.dart';
 
 class ShopPageBody extends StatefulWidget {
   const ShopPageBody({Key? key}) : super(key: key);
@@ -16,17 +22,30 @@ class _ShopPageBodyState extends State<ShopPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: CustomScrollView(
-        slivers: [
-          ShopAppBar(),
-          ScreenPromotion(),
-          AllProducts(),
-          bestItems(context),
-          newProducts(context),
-        ],
-      ),
+    return Consumer(
+      builder: (context, ref, child) {
+        PromotionListModel? promotionModel = ref.watch(promotionListProvider);
+        List<Promotion> promotionList = [];
+        dynamic? categoryModel = ref.watch(CategoryListProvider);
+        List<Category> categoryList = categoryModel?.categoryList ?? [];
+
+        final codeItems = categoryList.where((item) => item.code == 2).toList();
+        if (promotionModel != null) {
+          promotionList = promotionModel?.promotionList ?? [];
+        }
+        return Scaffold(
+          backgroundColor: Colors.white,
+          body: CustomScrollView(
+            slivers: [
+              ShopAppBar(),
+              ScreenPromotion(promotionList: promotionList),
+              AllProducts(categoryList: codeItems),
+              bestItems(context),
+              newProducts(context),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -55,7 +74,7 @@ class _ShopPageBodyState extends State<ShopPageBody> {
               ),
               SizedBox(height: gap_s),
               Container(
-                height: 340, // 이미지 높이 조절
+                height: 400, // 이미지 높이 조절
                 child: PageView(
                   controller: _pageController, // 페이지 컨트롤러 지정
                   onPageChanged: (int page) {
@@ -72,18 +91,18 @@ class _ShopPageBodyState extends State<ShopPageBody> {
                           children: List.generate(2, (columnIndex) {
                             final imageIndex =
                                 pageIndex * 4 + rowIndex * 2 + columnIndex;
+                            final assetPath =
+                                'assets/shopNewProduct_${imageIndex + 1}.png'; // 동적으로 이미지 경로 생성
                             return Column(
                               children: [
                                 Image(
-                                  image: NetworkImage(
-                                      "https://image.istarbucks.co.kr/upload/store/skuimg/2022/09/[9300000004348]_20220921102420365.jpg"),
-                                  width: 150,
-                                  height: 130,
+                                  image: AssetImage(
+                                      assetPath), // assetName을 동적으로 설정
+                                  width: 170,
+                                  height: 180,
                                   fit: BoxFit.cover,
                                 ),
                                 SizedBox(height: gap_s),
-                                Text("Item $imageIndex"),
-                                SizedBox(height: gap_m),
                               ],
                             );
                           }),
@@ -143,7 +162,7 @@ class _ShopPageBodyState extends State<ShopPageBody> {
               ),
               SizedBox(height: gap_s),
               Container(
-                height: 340, // 이미지 높이 조절
+                height: 400, // 이미지 높이 조절
                 child: PageView(
                   controller: _pageController, // 페이지 컨트롤러 지정
                   onPageChanged: (int page) {
@@ -160,18 +179,18 @@ class _ShopPageBodyState extends State<ShopPageBody> {
                           children: List.generate(2, (columnIndex) {
                             final imageIndex =
                                 pageIndex * 4 + rowIndex * 2 + columnIndex;
+                            final assetPath =
+                                'assets/shopBestItem_${imageIndex + 1}.png'; // 동적으로 이미지 경로 생성
                             return Column(
                               children: [
                                 Image(
-                                  image: NetworkImage(
-                                      "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002950]_20210426150654756.jpg"),
-                                  width: 150,
-                                  height: 130,
+                                  image: AssetImage(
+                                      assetPath), // assetName을 동적으로 설정
+                                  width: 170,
+                                  height: 180,
                                   fit: BoxFit.cover,
                                 ),
                                 SizedBox(height: gap_s),
-                                Text("Item $imageIndex"),
-                                SizedBox(height: gap_m),
                               ],
                             );
                           }),
@@ -208,7 +227,9 @@ class _ShopPageBodyState extends State<ShopPageBody> {
 }
 
 class AllProducts extends StatelessWidget {
-  const AllProducts({
+  List<Category> categoryList;
+  AllProducts({
+    required this.categoryList,
     super.key,
   });
 
@@ -256,14 +277,14 @@ class AllProducts extends StatelessWidget {
                               ClipOval(
                                 child: Image(
                                   image: NetworkImage(
-                                      "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000000038]_20210430113202458.jpg"),
+                                      "${categoryList[index].picUrl}"),
                                   width: 90,
                                   height: 90,
                                   fit: BoxFit.cover,
                                 ),
                               ),
                               SizedBox(height: gap_s),
-                              textBody1("초콜릿/스낵"),
+                              textBody1("${categoryList[index].name}"),
                             ],
                           ),
                           SizedBox(width: gap_m),
@@ -282,7 +303,9 @@ class AllProducts extends StatelessWidget {
 }
 
 class ScreenPromotion extends StatelessWidget {
-  const ScreenPromotion({
+  List<Promotion> promotionList;
+  ScreenPromotion({
+    required this.promotionList,
     super.key,
   });
 
@@ -293,7 +316,7 @@ class ScreenPromotion extends StatelessWidget {
         height: 200, // 이미지 높이 조절
         child: ListView.builder(
           scrollDirection: Axis.horizontal, // 가로 스크롤 활성화
-          itemCount: 3,
+          itemCount: promotionList.length,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.only(left: 15, right: 20),
@@ -307,9 +330,9 @@ class ScreenPromotion extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: Image(
-                    image: NetworkImage(
-                        "https://image.istarbucks.co.kr/upload/banner/FV9avW_20230927104456049.jpg"),
-                    width: 300, // 이미지 너비 조절
+                    image:
+                        NetworkImage("${promotionList[index].smallThumbnail}"),
+                    width: 350, // 이미지 너비 조절
                     fit: BoxFit.fill,
                   ),
                 ),
