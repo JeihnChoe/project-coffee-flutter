@@ -1,8 +1,8 @@
-# project_coffee
+# 1. project_coffee
 
 A new Flutter project.
 
-## Getting Started
+## 1.1. Getting Started
 
 This project is a starting point for a Flutter application.
 
