@@ -35,20 +35,21 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  flutter_svg: ^2.0.6
-  flutter_lints: ^2.0.1
-  validators: ^3.0.0
-  intl: ^0.18.1
-  dio: ^5.2.0 # 서버와 통신하기 위해 필요한 라이브러리 입니다.
-  flutter_riverpod: ^2.3.5 # 상태관리 Riverpod 라이브러리 입니다.
-  logger: ^1.3.0 # 콘솔창에서 결과물을 쉽게 확인할 수 있도록 하는 Log 라이브러리입니다.
-  flutter_secure_storage: ^8.0.0 # 어플리케이션 Secure Storage를 쉽게 사용할 수 있도록 도와주는 라이브러리입니다.
-#  google_fonts: ^6.1.0   # bootpay랑 의존성 충돌
-  google_fonts: ^4.0.4
-  bottom_sheet: ^4.0.0
-  line_icons: ^2.0.3
+    flutter_svg: ^2.0.6
+    flutter_lints: ^2.0.1
+    validators: ^3.0.0
+    intl: ^0.18.1
+    dio: ^5.2.0 # 서버와 통신하기 위해 필요한 라이브러리 입니다.
+    flutter_riverpod: ^2.3.5 # 상태관리 Riverpod 라이브러리 입니다.
+    logger: ^1.3.0 # 콘솔창에서 결과물을 쉽게 확인할 수 있도록 하는 Log 라이브러리입니다.
+    flutter_secure_storage: ^8.0.0 # 어플리케이션 Secure Storage를 쉽게 사용할 수 있도록 도와주는 라이브러리입니다.
+    #  google_fonts: ^6.1.0   # bootpay랑 의존성 충돌
+    google_fonts: ^4.0.4
+    bottom_sheet: ^4.0.0
+    line_icons: ^2.0.3
+    url_launcher: ^6.2.1
   geolocator: ^10.1.0   #지도
-  url_launcher: ^6.2.1
+
   bootpay: ^4.7.3
 
 dev_dependencies:
